@@ -1,0 +1,111 @@
+/* Terminals are dark in every theme */
+.jx-term {
+  --jx-term-bg: #0d1117;
+  --jx-term-bar: #161b22;
+  --jx-term-fg: #e6edf3;
+  --jx-term-dim: #8b949e;
+  --jx-term-line: rgba(240, 246, 252, 0.1);
+  overflow: hidden;
+  border: 1px solid var(--jx-term-line);
+  border-radius: var(--jx-r-lg);
+  background: var(--jx-term-bg);
+  box-shadow: var(--jx-shadow-md);
+  color: var(--jx-term-fg);
+}
+
+.jx-term__bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 36px;
+  padding: 0 8px 0 12px;
+  border-bottom: 1px solid var(--jx-term-line);
+  background: var(--jx-term-bar);
+  user-select: none;
+}
+
+/* Leave room for the frame's floating settings button */
+.jx-widget:has(.jx-widget__float-settings) .jx-term__bar { padding-right: 40px; }
+
+.jx-term__dots { display: inline-flex; gap: 6px; }
+.jx-term__dots i { width: 11px; height: 11px; border-radius: 50%; background: #ff5f57; }
+.jx-term__dots i:nth-child(2) { background: #febc2e; }
+.jx-term__dots i:nth-child(3) { background: #28c840; }
+
+.jx-term__title { color: var(--jx-term-fg); font-size: 12.5px; font-weight: 600; opacity: 0.9; }
+
+.jx-term__shell {
+  padding: 1px 6px;
+  border-radius: var(--jx-r-xs);
+  background: rgba(240, 246, 252, 0.08);
+  color: var(--jx-term-dim);
+  font: 500 11px/1.5 var(--jx-font-mono);
+}
+
+.jx-term__spacer { flex: 1; }
+
+.jx-term__btn,
+.jx-term__copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: none;
+  border-radius: var(--jx-r-sm);
+  background: transparent;
+  color: var(--jx-term-dim);
+  cursor: pointer;
+  transition: background var(--jx-dur) var(--jx-ease), color var(--jx-dur) var(--jx-ease), opacity var(--jx-dur) var(--jx-ease);
+}
+
+.jx-term__btn svg,
+.jx-term__copy svg { pointer-events: none; }
+
+.jx-term__btn { height: 24px; padding: 0 8px; font: 500 11.5px/1 var(--jx-font-sans); }
+.jx-term__btn:hover,
+.jx-term__copy:hover { background: rgba(240, 246, 252, 0.1); color: var(--jx-term-fg); }
+.jx-term__btn:focus-visible,
+.jx-term__copy:focus-visible { outline: none; box-shadow: 0 0 0 2px rgba(45, 212, 191, 0.6); opacity: 1; }
+
+.jx-term__screen {
+  padding: 10px 0;
+  overflow-x: auto;
+  font: 400 13px/1.65 var(--jx-font-mono);
+}
+
+.jx-term__line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 24px;
+  padding: 0 10px 0 14px;
+}
+
+.jx-term__line code {
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  white-space: pre;
+}
+
+.jx-term__line.is-command:hover { background: rgba(240, 246, 252, 0.04); }
+.jx-term__prompt { color: #2dd4bf; font-weight: 700; user-select: none; }
+.jx-term__cmd { flex: 1; min-width: 0; }
+.jx-term__line.is-output { color: var(--jx-term-dim); padding-left: 32px; }
+
+.jx-term__copy { width: 24px; height: 24px; justify-content: center; opacity: 0; flex-shrink: 0; }
+.jx-term__line:hover .jx-term__copy,
+.jx-term__copy.is-copied { opacity: 1; }
+.jx-term__copy.is-copied { color: #3fb950; }
+
+.jx-term__empty {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--jx-term-dim);
+  font: inherit;
+  cursor: pointer;
+}
+
+.jx-term__empty:hover { color: var(--jx-term-fg); }

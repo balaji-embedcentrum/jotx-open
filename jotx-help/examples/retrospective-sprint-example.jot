@@ -1,0 +1,248 @@
+hdef jotx Sprint26Retrospective
+
+  type page
+  title Sprint 26 Retrospective
+  icon 🔄
+  author Scrum Master
+  created 2025-01-17
+  tags "retrospective", "sprint", "agile", "team", "scrum"
+
+  def table block_1
+    columns Key, Value
+    rows """Sprint | Sprint 26
+Facilitator | Mike Rodriguez - Scrum Master
+Date | 2025-01-17
+Participants | 8/9 team members (Alex OOO)
+Sprint Goal Met | Yes - 85%"""
+
+  def heading "Sprint 26 Retrospective - Q1 2025"
+
+  def callout "🎯 Sprint Goal: Launch API v2.0 to production and complete mobile app beta. Status: ✅ Achieved (85% velocity)"
+
+  def divider
+
+  def heading "Meeting Info"
+    level 2
+
+  def table block_6
+    def row
+      def header
+        text Sprint
+      def header
+        text Sprint 26 (Jan 6-19
+      def header
+        text 2025)
+    def row
+      def cell
+        def paragraph "Participants"
+      def cell
+        def paragraph "Sarah, Priya, James, Emma, David, Lisa, Tom, Carlos (Alex OOO)"
+    def row
+      def cell
+        def paragraph "Date"
+      def cell
+        def paragraph "Friday, Jan 17, 2025 - 3:00 PM"
+    def row
+      def cell
+        def paragraph "Duration"
+      def cell
+        def paragraph "60 minutes"
+    def row
+      def cell
+        def paragraph "Format"
+      def cell
+        def paragraph "Start-Stop-Continue + Action Items"
+
+  def heading "✅ What Went Well (Wins & Highlights)"
+    level 2
+
+  def list
+    items """**API v2.0 Launch Successful!** 🚀 - Zero downtime migration, excellent planning by backend team
+**Team Collaboration** - Cross-team pairing (backend + mobile) solved complex integration issue in 2 days
+**Documentation Improved** - All new API endpoints have comprehensive docs + examples
+**Test Coverage Up** - Went from 84% to 87%, closer to 90% goal
+**Fast Bug Fixes** - Production bug (P0) fixed in 4 hours, excellent response time
+**Security Audit Passed** - Zero critical issues, great prep work by Emma
+**New Engineers Ramping Up** - Maria and James contributing meaningfully already
+**Daily Standups Efficient** - Consistently under 15 minutes, staying focused"""
+
+  def quote "The API launch coordination was our best yet. Everyone knew their role and we executed flawlessly." - Sarah (Tech Lead)"
+
+  def heading "❌ What Didn't Go Well (Challenges & Problems)"
+    level 2
+
+  def list
+    items """**Scope Creep** - 4 unplanned stories added mid-sprint, disrupted focus
+**Mobile Performance Regression** - App load time increased from 2.1s to 3.2s, not caught in testing
+**Meeting Overload** - Too many adhoc meetings (14 unplanned meetings this sprint)
+**Deployment Pipeline Slow** - CI/CD builds taking 25 minutes (was 12 minutes last sprint)
+**Communication Gap** - Backend team wasn't aware of mobile team's API needs until Day 8
+**Test Data Issues** - Staging environment had stale data, wasted 3 hours debugging
+**Context Switching** - Support requests interrupting development work"""
+
+  def quote "The scope creep hurt us. We said yes to everything and it fragmented our focus." - Priya (Frontend Lead)"
+
+  def heading "💡 Ideas & Improvements (What to Try)"
+    level 2
+
+  def list
+    items """**Implement \"No Meeting Wednesday\"** - Dedicate one day per week to deep work
+**Stricter Scope Control** - Only add mid-sprint work if P0, require stakeholder approval
+**Performance Monitoring** - Add automated alerts for mobile app metrics (load time, crashes)
+**CI/CD Optimization** - Investigate build time increase, target <15 minutes
+**Weekly Cross-Team Sync** - Backend + Mobile leads meet Monday AM to align on needs
+**Staging Data Refresh** - Automate nightly refresh of staging data from production
+**Support Rotation** - Dedicate 1 engineer per week to handle support, reduce interruptions
+**Retro Action Item Dashboard** - Track completion of past retro items (currently ad-hoc)"""
+
+  def heading "📊 Sprint Metrics"
+    level 2
+
+  def table block_20
+    def row
+      def header
+        text Metric
+      def header
+        text Sprint 25
+      def header
+        text Sprint 26
+      def header
+        text Trend
+    def row
+      def cell
+        def paragraph "Velocity (Story Points)"
+      def cell
+        def paragraph "28 pts"
+      def cell
+        def paragraph "23 pts (goal: 27)"
+      def cell
+        def paragraph "↓ -18%"
+    def row
+      def cell
+        def paragraph "Stories Completed"
+      def cell
+        def paragraph "25/27 (92%)"
+      def cell
+        def paragraph "23/27 (85%)"
+      def cell
+        def paragraph "↓ -7%"
+    def row
+      def cell
+        def paragraph "Bugs Created"
+      def cell
+        def paragraph "8"
+      def cell
+        def paragraph "5"
+      def cell
+        def paragraph "↓ -38%"
+    def row
+      def cell
+        def paragraph "Bugs Fixed"
+      def cell
+        def paragraph "12"
+      def cell
+        def paragraph "15"
+      def cell
+        def paragraph "↑ +25%"
+    def row
+      def cell
+        def paragraph "Test Coverage"
+      def cell
+        def paragraph "84%"
+      def cell
+        def paragraph "87%"
+      def cell
+        def paragraph "↑ +3%"
+    def row
+      def cell
+        def paragraph "Team Happiness (1-10)"
+      def cell
+        def paragraph "8.0"
+      def cell
+        def paragraph "8.2"
+      def cell
+        def paragraph "↑ +2.5%"
+
+  def callout "⚠️ Note: Velocity dip due to 4 unplanned urgent stories. Normalized velocity would be ~27 points (on target)."
+    variant warning
+
+  def heading "🎯 Action Items (Commitments for Sprint 27)"
+    level 2
+
+  def checklist
+    def listitem "Implement \"No Meeting Wednesday\" starting next week - Owner: Mike"
+      checked "false"
+      priority high
+    def listitem "Set up performance monitoring alerts for mobile app - Owner: Priya"
+      checked "false"
+      priority critical
+    def listitem "Investigate & fix CI/CD build time (target <15 min) - Owner: DevOps Tom"
+      checked "false"
+      priority high
+    def listitem "Establish weekly Backend + Mobile sync (Mondays 9 AM) - Owner: Sarah"
+      checked "false"
+      priority high
+    def listitem "Automate staging data refresh (nightly job) - Owner: David"
+      checked "false"
+      priority medium
+    def listitem "Create support rotation schedule (1 engineer/week) - Owner: Mike"
+      checked "false"
+      priority medium
+    def listitem "Build retro action item dashboard in Notion - Owner: Emma"
+      checked "false"
+      priority low
+    def listitem "Document scope change approval process - Owner: Mike + Sarah"
+      checked "false"
+      priority medium
+
+  def heading "🙏 Appreciation & Shoutouts"
+    level 2
+
+  def list
+    items """**Backend Team (Sarah, David, Carlos)** - API v2.0 launch was textbook perfect. Planning, communication, execution all excellent.
+**Emma** - Security audit prep was thorough and professional. Caught issues before the auditors did.
+**Priya** - Took on extra mentorship for James while delivering her sprint commitments. Great team player.
+**Tom** - Stayed late Tuesday to fix production bug, saved us from major customer impact.
+**Maria** - New engineer (week 2!) but already contributing meaningfully. Fast learner."""
+
+  def heading "📝 Additional Notes"
+    level 2
+
+  def paragraph "Overall positive sprint despite velocity dip. API launch was a major milestone and team executed well under pressure. The performance regression is concerning but we have a plan to address it."
+
+  def paragraph "Team morale is high (8.2/10) which is great. Meeting overload is the #1 complaint - \"No Meeting Wednesday\" should help significantly."
+
+  def paragraph "Action items from Sprint 25 retro: 3/5 completed, 2 carried over (documentation templates, test automation). Need better tracking system (action item #7)."
+
+  def divider
+
+  def heading "📸 Retro Activity: Start-Stop-Continue"
+    level 2
+
+  def heading "START Doing"
+    level 3
+
+  def list
+    items """No Meeting Wednesdays
+Weekly cross-team syncs
+Support rotation"""
+
+  def heading "STOP Doing"
+    level 3
+
+  def list
+    items """Accepting scope changes without approval
+Unscheduled adhoc meetings
+Manual staging data setup"""
+
+  def heading "CONTINUE Doing"
+    level 3
+
+  def list
+    items """Efficient daily standups
+Cross-team pairing sessions
+Thorough documentation
+Security-first mindset"""
+
+  def callout "✅ Sprint 26 Retro Complete. 8 action items committed. Team is aligned and energized for Sprint 27!"
+    variant success

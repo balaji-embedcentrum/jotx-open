@@ -1,0 +1,284 @@
+hdef jotx UserStudyResearch
+
+  type page
+  title Mobile App Usability Study - Q1 2025
+  icon 📱
+  author UX Research Team
+  created 2025-01-20
+  tags "research", "user-study", "ux", "usability"
+
+  def table block_1
+    columns Key, Value
+    rows """Research Type | Moderated Usability Testing
+Date | 2025-01-15 to 2025-01-19
+Researcher | Dr. Maya Patel - Senior UX Researcher
+Status | Complete - Report Final
+Participants | 12"""
+
+  def heading "Mobile App Onboarding Usability Study"
+
+  def callout "🎯 Study Goal: Identify usability issues in new user onboarding flow that are causing 42% drop-off rate"
+
+  def divider
+
+  def heading "Research Question"
+    level 2
+
+  def paragraph "Why are 42% of new users abandoning our mobile app during the onboarding process (Steps 1-4)? What usability issues prevent users from completing account setup, and how can we improve the experience to increase completion rates to 80%+"
+
+  def heading "Hypothesis"
+    level 2
+
+  def list
+    listtype numbered
+    items """The onboarding flow is too long (current: 7 screens, 12 form fields)
+Password requirements are unclear and frustrating users
+Users don't understand the value proposition during onboarding
+Progress indicators are missing, causing uncertainty"""
+
+  def heading "Methodology"
+    level 2
+
+  def table block_10
+    def row
+      def header
+        text Aspect
+      def header
+        text Details
+    def row
+      def cell
+        def paragraph "Method"
+      def cell
+        def paragraph "Moderated remote usability testing via Zoom"
+    def row
+      def cell
+        def paragraph "Participants"
+      def cell
+        def paragraph "12 (6 iOS, 6 Android) - New users, never used app before"
+    def row
+      def cell
+        def paragraph "Demographics"
+      def cell
+        def paragraph "Age 25-55, 50% female, 50% male, varied tech proficiency"
+    def row
+      def cell
+        def paragraph "Duration"
+      def cell
+        def paragraph "45 min per session (30 min tasks, 15 min interview)"
+    def row
+      def cell
+        def paragraph "Tasks"
+      def cell
+        def paragraph "1) Download app, 2) Complete onboarding, 3) Explore key features"
+    def row
+      def cell
+        def paragraph "Tools"
+      def cell
+        def paragraph "Zoom (screen share), Lookback.io (recording), Miro (affinity mapping)"
+
+  def heading "Key Findings"
+    level 2
+
+  def mermaid block_16
+    src """graph TD
+    A[Start Onboarding] -->|100%| B[Screen 1: Welcome]
+    B -->|95%| C[Screen 2: Create Account]
+    C -->|78%| D[Screen 3: Password]
+    D -->|62%| E[Screen 4: Verification]
+    E -->|58%| F[Screen 5: Profile]
+    F -->|58%| G[Complete]
+    
+    style A fill:#20B2AA,color:#0a0a0a
+    style D fill:#ff6b6b,color:#fff
+    style G fill:#20B2AA,color:#0a0a0a"""
+
+  def callout "⚠️ Critical Issue: 22% drop-off at Screen 3 (Password) - Highest single-step abandonment"
+    variant warning
+
+  def heading "Finding 1: Password Complexity Frustration (CRITICAL)"
+    level 3
+
+  def paragraph "10 out of 12 participants (83%) struggled with password requirements. The current requirements (12+ chars, upper, lower, number, special char) were not clearly communicated upfront. Users discovered requirements only after failed attempts."
+
+  def quote "I tried 'password123' and it failed. Then 'Password123!' failed too. I don't know what it wants! This is so annoying, I'd just close the app." - Participant 7 (Female, 32, iOS)"
+
+  def list
+    items """Average: 3.2 failed password attempts per user
+Time spent on password screen: avg 2.8 minutes (should be < 30 seconds)
+8 participants verbalized frustration/confusion
+2 participants expressed intent to abandon app"""
+
+  def heading "Finding 2: Lack of Progress Indicators (HIGH)"
+    level 3
+
+  def paragraph "All 12 participants (100%) mentioned uncertainty about how many steps remained. Without a progress indicator, users felt anxious and unsure if they were close to completion."
+
+  def quote "Am I almost done? I don't know if this is step 2 of 3 or 2 of 20. That makes me want to quit." - Participant 4 (Male, 28, Android)"
+
+  def heading "Finding 3: Unclear Value Proposition (MEDIUM)"
+    level 3
+
+  def paragraph "7 participants (58%) couldn't articulate what the app does or why they'd use it after completing onboarding. The current flow focuses on data collection without explaining benefits."
+
+  def heading "Quantitative Data"
+    level 2
+
+  def table block_28
+    def row
+      def header
+        text Metric
+      def header
+        text Target
+      def header
+        text Actual
+      def header
+        text Status
+    def row
+      def cell
+        def paragraph "Task Completion Rate"
+      def cell
+        def paragraph "80%"
+      def cell
+        def paragraph "58%"
+      def cell
+        def paragraph "❌ Failed"
+    def row
+      def cell
+        def paragraph "Time to Complete"
+      def cell
+        def paragraph "< 3 min"
+      def cell
+        def paragraph "8.4 min avg"
+      def cell
+        def paragraph "❌ Failed"
+    def row
+      def cell
+        def paragraph "Error Rate"
+      def cell
+        def paragraph "< 1 error"
+      def cell
+        def paragraph "4.1 errors avg"
+      def cell
+        def paragraph "❌ Failed"
+    def row
+      def cell
+        def paragraph "User Satisfaction (SUS)"
+      def cell
+        def paragraph "> 70"
+      def cell
+        def paragraph "52"
+      def cell
+        def paragraph "❌ Failed"
+
+  def heading "Additional Insights"
+    level 2
+
+  def list
+    listtype numbered
+    items """Mobile keyboard obscures error messages on smaller screens (iPhone SE, small Android)
+Social login (Google/Apple) buttons are not prominent enough - only 3 participants noticed them
+Email verification step feels like a dead-end - users don't know what to do while waiting
+Welcome screen (Screen 1) is skipped by most - users tap 'Get Started' without reading
+iOS users expect Face/Touch ID setup during onboarding (it's currently deferred to Settings)"""
+
+  def heading "Recommendations"
+    level 2
+
+  def callout "💡 Priority: Implement P0 and P1 recommendations to achieve target 80% completion rate"
+    variant success
+
+  def table block_33
+    def row
+      def header
+        text Priority
+      def header
+        text Recommendation
+      def header
+        text Expected Impact
+    def row
+      def cell
+        def paragraph "P0"
+      def cell
+        def paragraph "Show password requirements BEFORE user types (not after failure)"
+      def cell
+        def paragraph "+15% completion rate"
+    def row
+      def cell
+        def paragraph "P0"
+      def cell
+        def paragraph "Add progress indicator (\"Step 2 of 5\")"
+      def cell
+        def paragraph "+8% completion rate"
+    def row
+      def cell
+        def paragraph "P0"
+      def cell
+        def paragraph "Reduce required fields from 12 to 5 (email, password, name only)"
+      def cell
+        def paragraph "+10% completion rate"
+    def row
+      def cell
+        def paragraph "P1"
+      def cell
+        def paragraph "Make social login (Google/Apple) more prominent"
+      def cell
+        def paragraph "+5% completion rate"
+    def row
+      def cell
+        def paragraph "P1"
+      def cell
+        def paragraph "Add value proposition on each screen (\"Why we need this\")"
+      def cell
+        def paragraph "+4% completion rate"
+    def row
+      def cell
+        def paragraph "P2"
+      def cell
+        def paragraph "Offer Face/Touch ID setup during onboarding"
+      def cell
+        def paragraph "+2% completion rate"
+
+  def callout "📊 Projected Result: Implementing P0 recommendations could increase completion from 58% to 83-91%"
+
+  def heading "Limitations"
+    level 2
+
+  def list
+    items """Sample size (n=12) is small - results should be validated with larger A/B test
+Moderated testing may not reflect natural user behavior (Hawthorne effect)
+Participants were recruited via user panel - may not perfectly match organic user base
+Study focused on onboarding only - did not test full app experience"""
+
+  def heading "Next Steps"
+    level 2
+
+  def checklist
+    def listitem "Share findings deck with Product and Engineering teams (Due: Jan 22)"
+      checked "true"
+      priority critical
+    def listitem "Create Figma prototypes for recommended changes (UX Design - Due: Jan 29)"
+      checked "false"
+      priority high
+    def listitem "Validate prototypes with 5 participants (Follow-up study - Due: Feb 5)"
+      checked "false"
+      priority high
+    def listitem "Implement P0 changes in Sprint 26 (Engineering - Target: Feb 15)"
+      checked "false"
+      priority high
+    def listitem "Run A/B test: Current vs New onboarding (2 weeks post-launch)"
+      checked "false"
+      priority medium
+
+  def heading "Participant Quotes"
+    level 2
+
+  def quote "I gave up. If this was a real situation, I'd just delete the app. Too much work to sign up." - Participant 11 (Male, 45, Android)"
+
+  def quote "The password thing is ridiculous. Just let me use Google login!" - Participant 3 (Female, 29, iOS)"
+
+  def quote "I don't even know what this app does yet, and you're asking for my birthday and phone number?" - Participant 6 (Male, 33, Android)"
+
+  def divider
+
+  def callout "✅ Study Impact: Product team fast-tracked onboarding redesign to Q1 roadmap based on these findings"
+    variant success

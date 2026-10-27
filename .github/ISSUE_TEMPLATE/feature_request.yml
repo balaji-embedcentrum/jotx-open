@@ -1,0 +1,17 @@
+name: Idea or new widget
+description: Suggest a block, a widget, or an improvement
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What would it help you do
+      description: The note you were writing, and what was missing.
+    validations:
+      required: true
+  - type: textarea
+    id: syntax
+    attributes:
+      label: How it could look in a .jot file
+      description: Optional. A sketch of the syntax you have in mind.
+      render: text

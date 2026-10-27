@@ -1,0 +1,96 @@
+.jx-habit { overflow-x: auto; }
+
+.jx-habit__grid { display: flex; flex-direction: column; gap: 4px; min-width: 420px; }
+
+.jx-habit__row:not([data-tone]) { --jx-tone: var(--jx-accent); }
+
+.jx-habit__row {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) repeat(7, 34px) 56px;
+  align-items: center;
+  gap: 4px;
+}
+
+.jx-habit__row--head {
+  color: var(--jx-fg-subtle);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.jx-habit__name {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+  padding-right: 8px;
+}
+
+.jx-habit__label {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--jx-fg);
+  font-size: 13.5px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.jx-habit__pct { color: var(--jx-fg-subtle); font-size: 11.5px; font-variant-numeric: tabular-nums; }
+
+.jx-habit__day {
+  padding: 3px 0;
+  border-radius: var(--jx-r-xs);
+  text-align: center;
+}
+
+.jx-habit__day.is-today { background: var(--jx-accent-soft); color: var(--jx-accent); }
+
+.jx-habit__cell-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 2px 0;
+  border-radius: var(--jx-r-sm);
+}
+
+.jx-habit__cell-wrap.is-today { background: var(--jx-accent-softer); }
+
+.jx-habit__cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1.5px solid var(--jx-line-strong);
+  border-radius: var(--jx-r-sm);
+  background: transparent;
+  color: var(--jx-on-accent);
+  cursor: pointer;
+  transition: background var(--jx-dur) var(--jx-ease), border-color var(--jx-dur) var(--jx-ease), transform var(--jx-dur) var(--jx-ease);
+}
+
+.jx-habit__cell svg { pointer-events: none; }
+.jx-habit__cell:hover:not(:disabled) { border-color: var(--jx-tone); transform: scale(1.06); }
+.jx-habit__cell:focus-visible { outline: none; box-shadow: var(--jx-ring); }
+.jx-habit__cell:disabled { cursor: default; }
+
+.jx-habit__cell.is-done {
+  border-color: var(--jx-tone);
+  background: var(--jx-tone);
+}
+
+.jx-habit__stat {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3px;
+  color: var(--jx-fg-subtle);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.jx-habit__row--head .jx-habit__stat { font-size: 11px; }
+.jx-habit__stat.is-active { color: var(--jx-c-amber); }

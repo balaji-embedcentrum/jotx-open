@@ -1,0 +1,839 @@
+/**
+ * Jotx Editor Styles
+ * Reading-first typography on top of the --jx-* design tokens (tokens.css).
+ */
+
+.jotx-editor {
+  width: 100%;
+  min-height: calc(100vh - var(--jotx-header-height, 52px));
+  padding: var(--jotx-editor-padding, 40px);
+  padding-bottom: 30vh; /* room to write at the bottom of long notes */
+}
+
+.jotx-editor-wrapper {
+  max-width: var(--jotx-editor-maxWidth, 900px);
+  margin: 0 auto;
+  position: relative;
+}
+
+.jotx-editor-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: var(--jx-fg-subtle);
+  font-size: 14px;
+}
+
+/* Tiptap Editor Content */
+.jotx-editor-content {
+  position: relative;
+  outline: none;
+  font-family: var(--jx-font-sans);
+  font-size: var(--jotx-editor-fontSize, 16px);
+  line-height: var(--jotx-editor-lineHeight, 1.7);
+  letter-spacing: -0.003em;
+  color: var(--jx-fg);
+  caret-color: var(--jx-accent);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "cv11", "ss01";
+}
+
+/* Placeholder (current empty line only) */
+.jotx-editor-content .is-empty::before,
+.jotx-editor-content .is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  color: var(--jx-fg-subtle);
+  pointer-events: none;
+}
+
+/* ---- Headings ---- */
+.jotx-editor-content h1,
+.jotx-editor-content h2,
+.jotx-editor-content h3,
+.jotx-editor-content h4 {
+  color: var(--jx-fg);
+  scroll-margin-top: 72px;
+}
+
+.jotx-editor-content h1 {
+  margin: 1.6em 0 0.45em;
+  font-size: 2em;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.jotx-editor-content h2 {
+  margin: 1.5em 0 0.4em;
+  font-size: 1.5em;
+  font-weight: 650;
+  line-height: 1.28;
+  letter-spacing: -0.02em;
+}
+
+.jotx-editor-content h3 {
+  margin: 1.3em 0 0.3em;
+  font-size: 1.22em;
+  font-weight: 620;
+  line-height: 1.35;
+  letter-spacing: -0.012em;
+}
+
+.jotx-editor-content h4 {
+  margin: 1.2em 0 0.25em;
+  font-size: 1.05em;
+  font-weight: 620;
+}
+
+.jotx-editor-content > h1:first-child,
+.jotx-editor-content > h2:first-child,
+.jotx-editor-content > h3:first-child {
+  margin-top: 0;
+}
+
+/* ---- Paragraph ---- */
+.jotx-editor-content p {
+  margin: 0.6em 0;
+  color: var(--jx-fg);
+}
+
+.jotx-editor-content p:first-child {
+  margin-top: 0;
+}
+
+.jotx-editor-content strong { font-weight: 650; }
+
+/* ---- Lists ---- */
+.jotx-editor-content ul,
+.jotx-editor-content ol {
+  /* Default list indent: one extra level in from paragraph baseline */
+  padding-left: 1.6em;
+  margin: 0.6em 0;
+  position: relative;
+  list-style-position: outside;
+}
+
+.jotx-editor-content ul {
+  list-style: disc;
+}
+
+.jotx-editor-content ol {
+  list-style: decimal;
+}
+
+.jotx-editor-content ul ul {
+  list-style: circle;
+}
+
+.jotx-editor-content ol ol {
+  list-style: lower-alpha;
+}
+
+.jotx-editor-content li::marker {
+  color: var(--jx-fg-subtle);
+}
+
+.jotx-editor-content ol > li::marker {
+  font-variant-numeric: tabular-nums;
+  font-weight: 550;
+}
+
+/* Nested lists spacing (no rails; indentation is the visual cue) */
+.jotx-editor-content ul ul,
+.jotx-editor-content ul ol,
+.jotx-editor-content ol ul,
+.jotx-editor-content ol ol {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+  padding-left: 1.5em;
+}
+
+.jotx-editor-content li {
+  margin: 0.2em 0;
+  padding-left: 0.15em;
+  color: var(--jx-fg);
+}
+
+.jotx-editor-content li p {
+  margin: 0;
+}
+
+/* ---- Task list (Checklist) ---- */
+.jotx-editor-content ul[data-type="taskList"] {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.6em 0;
+  position: relative;
+}
+
+/* CRITICAL: Force flexbox on task item to keep checkbox and text on same line */
+.jotx-editor-content ul[data-type="taskList"] > li,
+.ProseMirror ul[data-type="taskList"] > li,
+ul[data-type="taskList"]>li {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: flex-start !important;
+  gap: 0.6em;
+  padding: 0.1em 0;
+}
+
+/* Checkbox label - must be inline */
+.jotx-editor-content ul[data-type="taskList"] > li>label,
+.ProseMirror ul[data-type="taskList"] > li>label {
+  position: static !important;
+  margin: 0 !important;
+  padding: 0;
+  line-height: 1.5;
+  user-select: none;
+  display: inline-flex !important;
+  align-items: center;
+  flex-shrink: 0;
+  margin-top: 0.28em !important;
+}
+
+/* Custom checkbox */
+.jotx-editor-content ul[data-type="taskList"] > li>label input[type="checkbox"],
+.ProseMirror ul[data-type="taskList"] > li>label input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-grid;
+  place-content: center;
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  border: 1.5px solid var(--jx-line-strong);
+  border-radius: 5px;
+  background: var(--jx-bg);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--jx-dur) var(--jx-ease), border-color var(--jx-dur) var(--jx-ease), transform var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-editor-content ul[data-type="taskList"] > li>label input[type="checkbox"]::after,
+.ProseMirror ul[data-type="taskList"] > li>label input[type="checkbox"]::after {
+  content: "";
+  width: 9px;
+  height: 5px;
+  margin-top: -2px;
+  border-left: 2px solid var(--jx-on-accent);
+  border-bottom: 2px solid var(--jx-on-accent);
+  transform: rotate(-45deg) scale(0);
+  transition: transform var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-editor-content ul[data-type="taskList"] > li>label input[type="checkbox"]:hover,
+.ProseMirror ul[data-type="taskList"] > li>label input[type="checkbox"]:hover {
+  border-color: var(--jx-accent);
+}
+
+.jotx-editor-content ul[data-type="taskList"] > li>label input[type="checkbox"]:checked,
+.ProseMirror ul[data-type="taskList"] > li>label input[type="checkbox"]:checked {
+  border-color: var(--jx-accent);
+  background: var(--jx-accent);
+}
+
+.jotx-editor-content ul[data-type="taskList"] > li>label input[type="checkbox"]:checked::after,
+.ProseMirror ul[data-type="taskList"] > li>label input[type="checkbox"]:checked::after {
+  transform: rotate(-45deg) scale(1);
+}
+
+.jotx-editor-content ul[data-type="taskList"] > li>label input[type="checkbox"]:focus-visible,
+.ProseMirror ul[data-type="taskList"] > li>label input[type="checkbox"]:focus-visible {
+  outline: none;
+  box-shadow: var(--jx-ring);
+}
+
+/* Completed tasks fade back */
+.jotx-editor-content ul[data-type="taskList"] > li[data-checked="true"]>div,
+.ProseMirror ul[data-type="taskList"] > li[data-checked="true"]>div {
+  color: var(--jx-fg-subtle);
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in srgb, var(--jx-fg-subtle) 60%, transparent);
+}
+
+.jotx-editor-content ul[data-type="taskList"] > li[data-checked="true"]>div p {
+  color: inherit;
+}
+
+/* Content div - MUST BE INLINE to keep on same line as checkbox */
+.jotx-editor-content ul[data-type="taskList"] > li>div,
+.ProseMirror ul[data-type="taskList"] > li>div {
+  min-width: 0;
+  flex: 1 1 auto;
+  display: inline !important;
+  /* Changed from block to inline */
+  transition: color var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-editor-content ul[data-type="taskList"] > li>div>*,
+.ProseMirror ul[data-type="taskList"] > li>div>* {
+  margin: 0;
+  display: inline !important;
+}
+
+.jotx-editor-content ul[data-type="taskList"] > li p,
+.ProseMirror ul[data-type="taskList"] > li p {
+  margin: 0;
+  display: inline !important;
+  line-height: 1.6;
+}
+
+/* Nested task lists spacing (no rails) */
+.jotx-editor-content ul[data-type="taskList"] ul[data-type="taskList"] {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+  padding-left: 1.6em;
+  position: relative;
+}
+
+/* ---- Blockquote ---- */
+.jotx-editor-content blockquote {
+  position: relative;
+  margin: 1.1em 0;
+  padding: 0.15em 0 0.15em 1.1em;
+  color: var(--jx-fg-muted);
+  font-size: 1.04em;
+}
+
+.jotx-editor-content blockquote::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  bottom: 0.2em;
+  width: 3px;
+  border-radius: var(--jx-r-pill);
+  background: var(--jx-accent);
+}
+
+.jotx-editor-content blockquote p { color: inherit; }
+
+/* ---- Code Block ---- */
+.jotx-editor-content pre:not(.jx-widget pre) {
+  margin: 1.1em 0;
+  padding: 1em 1.15em;
+  overflow-x: auto;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-lg);
+  background: var(--jx-surface);
+  font-family: var(--jx-font-mono);
+  font-size: 0.86em;
+  line-height: 1.6;
+}
+
+.jotx-editor-content pre code {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--jx-fg);
+  font-size: inherit;
+}
+
+/* ---- Inline Code ---- */
+.jotx-editor-content code:not(.jx-widget code):not(pre code) {
+  padding: 0.12em 0.38em;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-xs);
+  background: var(--jx-surface);
+  color: color-mix(in srgb, var(--jx-accent) 55%, var(--jx-fg));
+  font-family: var(--jx-font-mono);
+  font-size: 0.86em;
+}
+
+/* ---- Horizontal Rule ---- */
+.jotx-editor-content hr {
+  height: 1px;
+  margin: 2.2em 0;
+  border: none;
+  background: linear-gradient(90deg, transparent, var(--jx-line-strong) 15%, var(--jx-line-strong) 85%, transparent);
+}
+
+.jotx-editor-content hr.ProseMirror-selectednode {
+  box-shadow: 0 0 0 3px var(--jx-accent-soft);
+}
+
+/* Selected atom blocks get a soft focus ring (only while editing) */
+.jotx-editor-content[contenteditable="true"] .ProseMirror-selectednode:not(.jx-widget):not(hr):not(li) {
+  outline: 2px solid color-mix(in srgb, var(--jx-accent) 55%, transparent);
+  outline-offset: 2px;
+  border-radius: var(--jx-r-md);
+}
+
+/* ---- Callout ---- */
+.jotx-editor-content div[data-type="callout"] {
+  --callout-tone: var(--jx-c-slate);
+  position: relative;
+  margin: 1.1em 0;
+  padding: 12px 16px 12px 18px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--callout-tone) 28%, var(--jx-line));
+  border-radius: var(--jx-r-lg);
+  background: color-mix(in srgb, var(--callout-tone) 8%, var(--jx-bg));
+}
+
+.jotx-editor-content div[data-type="callout"]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--callout-tone);
+}
+
+.jotx-editor-content div[data-type="callout"][data-variant="info"] { --callout-tone: var(--jx-c-blue); }
+.jotx-editor-content div[data-type="callout"][data-variant="warning"] { --callout-tone: var(--jx-c-amber); }
+.jotx-editor-content div[data-type="callout"][data-variant="success"] { --callout-tone: var(--jx-c-green); }
+.jotx-editor-content div[data-type="callout"][data-variant="danger"],
+.jotx-editor-content div[data-type="callout"][data-variant="error"] { --callout-tone: var(--jx-c-red); }
+.jotx-editor-content div[data-type="callout"][data-variant="note"] { --callout-tone: var(--jx-c-violet); }
+
+.jotx-editor-content div[data-type="callout"] p {
+  margin: 0;
+}
+
+.jotx-callout-toolbar {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-lg);
+  background: var(--jx-elevated);
+}
+
+.jotx-callout-toolbar-floating {
+  position: fixed;
+  z-index: 12000;
+  box-shadow: var(--jx-shadow-lg);
+  animation: jotx-slash-in 120ms var(--jx-ease);
+}
+
+.jotx-callout-chip {
+  --chip-tone: var(--jx-c-slate);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 10px;
+  border: none;
+  border-radius: var(--jx-r-md);
+  background: transparent;
+  color: var(--jx-fg-muted);
+  font: 600 11.5px/1 var(--jx-font-sans);
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.jotx-callout-chip::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--chip-tone);
+}
+
+.jotx-callout-chip[data-variant="info"] { --chip-tone: var(--jx-c-blue); }
+.jotx-callout-chip[data-variant="warning"] { --chip-tone: var(--jx-c-amber); }
+.jotx-callout-chip[data-variant="success"] { --chip-tone: var(--jx-c-green); }
+.jotx-callout-chip[data-variant="danger"] { --chip-tone: var(--jx-c-red); }
+
+.jotx-callout-chip:hover { background: var(--jx-hover); color: var(--jx-fg); }
+
+.jotx-callout-chip.active {
+  background: color-mix(in srgb, var(--chip-tone) 16%, transparent);
+  color: var(--jx-fg);
+}
+
+/* ---- Link card + Attach card ---- */
+.jotx-editor-content div[data-type="linkCard"],
+.jotx-editor-content div[data-type="attach"] {
+  margin: 1em 0;
+  padding: 10px 14px;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-lg);
+  background: var(--jx-surface);
+  transition: border-color var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-editor-content div[data-type="linkCard"]:hover,
+.jotx-editor-content div[data-type="attach"]:hover {
+  border-color: var(--jx-line-strong);
+}
+
+.jotx-editor-content div[data-type="linkCard"] p,
+.jotx-editor-content div[data-type="attach"] p {
+  margin: 0;
+}
+
+.jotx-editor-content div[data-type="linkCard"] {
+  border-left: 3px solid var(--jx-accent);
+}
+
+.jotx-editor-content div[data-type="attach"] {
+  border-left: 3px solid var(--jx-fg-subtle);
+}
+
+/* ---- Image ---- */
+.jotx-editor-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 1em 0;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-lg);
+}
+
+/* ---- Table ---- */
+.jotx-editor-content table {
+  width: 100%;
+  margin: 1.1em 0;
+  overflow: hidden;
+  border: 1px solid var(--jx-line);
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: var(--jx-r-lg);
+  background: var(--jx-bg);
+  font-size: 0.94em;
+}
+
+.jotx-editor-content th,
+.jotx-editor-content td {
+  padding: 9px 12px;
+  border-right: 1px solid var(--jx-line);
+  border-bottom: 1px solid var(--jx-line);
+  vertical-align: top;
+}
+
+.jotx-editor-content tr:last-child td {
+  border-bottom: none;
+}
+
+.jotx-editor-content th:last-child,
+.jotx-editor-content td:last-child {
+  border-right: none;
+}
+
+.jotx-editor-content tbody tr:hover td {
+  background: var(--jx-accent-softer);
+}
+
+.jotx-editor-content th {
+  background: var(--jx-surface);
+  color: var(--jx-fg-muted);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  text-align: left;
+}
+
+.jotx-editor-content th p,
+.jotx-editor-content td p {
+  margin: 0;
+}
+
+
+
+
+
+
+/* Table Cell Selection - Tiptap adds .selectedCell class */
+.jotx-editor-content .selectedCell,
+.jotx-editor-content td.selectedCell,
+.jotx-editor-content th.selectedCell,
+.ProseMirror .selectedCell {
+  background: var(--jx-accent-soft) !important;
+  outline: 2px solid var(--jx-accent);
+  outline-offset: -2px;
+}
+
+/* Improve table cell selection cursor */
+.jotx-editor-content table td,
+.jotx-editor-content table th {
+  cursor: cell;
+  user-select: text;
+}
+
+/* Column/Row resize handles */
+.jotx-editor-content .column-resize-handle {
+  position: absolute;
+  right: -2px;
+  top: 0;
+  bottom: -2px;
+  width: 4px;
+  background-color: var(--jx-accent);
+  pointer-events: auto;
+  cursor: col-resize;
+}
+
+.jotx-editor-content .tableWrapper {
+  overflow-x: auto;
+}
+
+.jotx-editor-content table.resize-cursor {
+  cursor: col-resize;
+}
+
+/* ---- Columns layout ---- */
+.jotx-editor-content .jx-columns {
+  display: flex;
+  gap: 28px;
+  margin: 1em 0;
+}
+
+.jotx-editor-content .jx-column {
+  position: relative;
+  min-width: 0;
+  padding: 2px 0;
+}
+
+.jotx-editor-content .jx-column > :first-child { margin-top: 0; }
+.jotx-editor-content .jx-column > :last-child { margin-bottom: 0; }
+
+/* Faint guides while editing so empty columns are discoverable */
+.jotx-editor-content[contenteditable="true"] .jx-column::after {
+  content: "";
+  position: absolute;
+  inset: -6px -12px;
+  border: 1px dashed transparent;
+  border-radius: var(--jx-r-md);
+  pointer-events: none;
+  transition: border-color var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-editor-content[contenteditable="true"] .jx-columns:hover .jx-column::after,
+.jotx-editor-content[contenteditable="true"] .jx-column:focus-within::after {
+  border-color: var(--jx-line);
+}
+
+@media (max-width: 640px) {
+  .jotx-editor-content .jx-columns { flex-direction: column; gap: 12px; }
+}
+
+/* ---- Links ---- */
+.jotx-editor-content a {
+  color: var(--jx-accent);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--jx-accent) 35%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-editor-content a:hover {
+  text-decoration-color: var(--jx-accent);
+}
+
+/* ---- Inline highlight ---- */
+.jotx-editor-content mark {
+  padding: 0.05em 0.2em;
+  border-radius: 0.25em;
+  background: color-mix(in srgb, var(--jx-c-amber) 32%, transparent);
+  color: inherit;
+}
+
+/* ---- Selection ---- */
+.jotx-editor-content ::selection {
+  background-color: color-mix(in srgb, var(--jx-accent) 28%, transparent);
+}
+
+/* Focus */
+.jotx-editor-content:focus {
+  outline: none;
+}
+
+/* Empty state */
+.jotx-editor-content:empty::before {
+  content: 'Start typing or press \'/\' for commands...';
+  color: var(--jx-fg-subtle);
+  pointer-events: none;
+}
+
+/* ---- Link Block ---- */
+.jotx-link-block {
+  margin: 0.5em 0;
+  padding: 8px 12px;
+  border-left: 3px solid var(--jx-accent);
+  border-radius: var(--jx-r-sm);
+  background-color: var(--jx-surface);
+  transition: background-color var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-link-block:hover {
+  background-color: var(--jx-surface-2);
+}
+
+.jotx-link-block-anchor {
+  color: var(--jx-accent);
+  text-decoration: none;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.jotx-link-block-anchor::before {
+  content: '🔗';
+  font-size: 1em;
+}
+
+.jotx-link-block-anchor:hover {
+  text-decoration: underline;
+}
+
+/* Template Picker Modal - command-palette style */
+.jotx-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 14vh;
+  background-color: color-mix(in srgb, var(--jx-bg) 40%, rgba(0, 0, 0, 0.45));
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  animation: jotx-modal-fade 140ms var(--jx-ease);
+}
+
+/* Unique keyframe names: global @keyframes collide across stylesheets */
+@keyframes jotx-modal-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.jotx-modal-content {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 480px;
+  max-height: 520px;
+  overflow: hidden;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-xl);
+  background-color: color-mix(in srgb, var(--jx-elevated) 94%, transparent);
+  box-shadow: var(--jx-shadow-lg);
+  backdrop-filter: saturate(160%) blur(16px);
+  -webkit-backdrop-filter: saturate(160%) blur(16px);
+  font-family: var(--jx-font-sans);
+  animation: jotx-modal-in 160ms var(--jx-ease);
+}
+
+@keyframes jotx-modal-in {
+  from {
+    transform: translateY(-6px) scale(0.98);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.jotx-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 12px 12px 18px;
+  border-bottom: 1px solid var(--jx-line);
+}
+
+.jotx-modal-header h3 {
+  margin: 0;
+  color: var(--jx-fg);
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.jotx-modal-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: var(--jx-r-sm);
+  background: none;
+  color: var(--jx-fg-subtle);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background var(--jx-dur) var(--jx-ease), color var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-modal-close:hover {
+  background: var(--jx-hover);
+  color: var(--jx-fg);
+}
+
+.jotx-template-list {
+  flex: 1;
+  padding: 6px;
+  overflow-y: auto;
+}
+
+.jotx-template-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin: 1px 0;
+  padding: 8px 10px;
+  border: none;
+  border-radius: var(--jx-r-md);
+  background: transparent;
+  color: var(--jx-fg);
+  font: 500 13.5px/1.3 var(--jx-font-sans);
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-template-item:hover {
+  background: var(--jx-hover);
+}
+
+.jotx-template-item:active {
+  background: var(--jx-press);
+}
+
+.jotx-template-item:focus-visible {
+  outline: none;
+  box-shadow: var(--jx-ring);
+}
+
+.jotx-template-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-md);
+  background: var(--jx-bg);
+  font-size: 15px;
+  line-height: 1;
+  transition: background var(--jx-dur) var(--jx-ease), border-color var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-template-item:hover .jotx-template-icon {
+  border-color: color-mix(in srgb, var(--jx-accent) 45%, transparent);
+  background: var(--jx-accent-soft);
+}
+
+.jotx-template-name {
+  color: var(--jx-fg);
+  font-weight: 500;
+}

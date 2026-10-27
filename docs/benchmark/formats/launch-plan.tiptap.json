@@ -1,0 +1,929 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 1,
+        "blockId": "h_title"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Atlas 2.0 Launch Plan"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "attrs": {
+        "blockId": "p_lead"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Everything the team needs to ship Atlas 2.0 on "
+        },
+        {
+          "type": "text",
+          "text": "December 1",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": ": scope, owners, risks, and the path from beta to general availability."
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "attrs": {
+        "blockId": "props"
+      },
+      "content": [
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableHeader",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Key",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableHeader",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Value",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "attrs": {
+            "blockId": "ess2v5qy"
+          },
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "blockId": "d6dvihko"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "blockId": "z8d340y8"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Owner"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "blockId": "sdz347r4"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "blockId": "zimky63l"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Priya Raman"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "attrs": {
+            "blockId": "r02eafzr"
+          },
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "blockId": "tg7wuv33"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "blockId": "4ati0r20"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Status"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "blockId": "vyhvquil"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "blockId": "q60n4tri"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "On track"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "attrs": {
+            "blockId": "ljchwp39"
+          },
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "blockId": "6wi6lw4w"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "blockId": "f7pp1pim"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Target date"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "blockId": "wswfk04k"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "blockId": "ajo07oy3"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "2026-12-01"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "callout",
+      "attrs": {
+        "variant": "info",
+        "blockId": "c_scope"
+      },
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Scope is frozen as of "
+            },
+            {
+              "type": "text",
+              "text": "October 20",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "text": ". New requests go to the 2.1 backlog."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2,
+        "blockId": "h_goals"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Goals"
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "attrs": {
+        "blockId": "l_goals"
+      },
+      "content": [
+        {
+          "type": "listItem",
+          "attrs": {
+            "blockId": "g1"
+          },
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Cut cold-start time from 2.4s to under "
+                },
+                {
+                  "type": "text",
+                  "text": "800ms",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "attrs": {
+            "blockId": "g2"
+          },
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Ship offline sync to every paid workspace"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "attrs": {
+            "blockId": "g3"
+          },
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Reach 99.95% API availability for 30 days before GA"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2,
+        "blockId": "h_status"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Workstreams"
+        }
+      ]
+    },
+    {
+      "type": "progress",
+      "attrs": {
+        "blockId": "progress_ws",
+        "title": "Workstream progress",
+        "items": "Sync engine | 82\nDesktop app | 64\nMigration tooling | 7 | 12\nDocs & onboarding | 40"
+      }
+    },
+    {
+      "type": "kanban",
+      "attrs": {
+        "blockId": "board",
+        "title": "Launch board",
+        "board": "[Todo]\nPricing page copy\nStatus page alerts\n[In progress]\nOffline conflict resolver\nMigration dry run\n[Review]\nSSO for enterprise\n[Done]\nLoad test at 5x traffic"
+      }
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2,
+        "blockId": "h_timeline"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Timeline"
+        }
+      ]
+    },
+    {
+      "type": "timeline",
+      "attrs": {
+        "blockId": "tl",
+        "title": "Milestones",
+        "events": "2026-09-15 | Private beta | done | 40 design partners\n2026-10-20 | Scope freeze | done\n2026-11-10 | Public beta | active | Feature flags on for 20% of workspaces\n2026-12-01 | General availability | planned\n2027-01-15 | 2.1 release | planned"
+      }
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2,
+        "blockId": "h_arch"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Architecture"
+        }
+      ]
+    },
+    {
+      "type": "mermaid",
+      "attrs": {
+        "title": "Sync flow",
+        "src": "flowchart LR\n  Client[Desktop client] --> Queue[(Change queue)]\n  Queue --> Resolver{Conflict resolver}\n  Resolver -->|clean| Store[(Primary store)]\n  Resolver -->|conflict| Review[Manual review]",
+        "showSource": false,
+        "blockId": "arch"
+      }
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": "bash",
+        "blockId": "migrate_cmd"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "atlas migrate --workspace acme --dry-run\natlas migrate --workspace acme --apply"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2,
+        "blockId": "h_metrics"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Beta metrics"
+        }
+      ]
+    },
+    {
+      "type": "chart",
+      "attrs": {
+        "title": "Weekly active workspaces",
+        "chartType": "bar",
+        "json": "{\"labels\": [\"W1\", \"W2\", \"W3\", \"W4\"], \"datasets\": [{\"label\": \"Workspaces\", \"data\": [120, 210, 340, 480]}]}",
+        "showSource": false,
+        "blockId": "weekly"
+      }
+    },
+    {
+      "type": "table",
+      "attrs": {
+        "blockId": "risks"
+      },
+      "content": [
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableHeader",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Risk",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableHeader",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Impact",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableHeader",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Owner",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableHeader",
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Mitigation",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "attrs": {
+            "blockId": "r1"
+          },
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "blockId": "r1c1"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "blockId": "r1p1"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Sync data loss"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "blockId": "r1c2"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "blockId": "r1p2"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "High"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "blockId": "r1c3"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "blockId": "r1p3"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Marco"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "blockId": "r1c4"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "blockId": "r1p4"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Write-ahead log + nightly restore drill"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "attrs": {
+            "blockId": "r2"
+          },
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "blockId": "r2c1"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "blockId": "r2p1"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Migration timeouts"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "blockId": "r2c2"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "blockId": "r2p2"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Medium"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "blockId": "r2c3"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "blockId": "r2p3"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Lena"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "blockId": "r2c4"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "blockId": "r2p4"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Batch by workspace size"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "attrs": {
+            "blockId": "r3"
+          },
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "blockId": "r3c1"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "blockId": "r3p1"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Pricing confusion"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "blockId": "r3c2"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "blockId": "r3p2"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Low"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "blockId": "r3c3"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "blockId": "r3p3"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Priya"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "blockId": "r3c4"
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "attrs": {
+                    "blockId": "r3p4"
+                  },
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Comparison table on pricing page"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2,
+        "blockId": "h_decisions"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Decisions"
+        }
+      ]
+    },
+    {
+      "type": "decision",
+      "attrs": {
+        "blockId": "adr_sync",
+        "title": "Use CRDTs for offline sync",
+        "status": "accepted",
+        "date": "2026-08-04",
+        "context": "Last-write-wins lost edits in 3% of beta sessions.",
+        "decision": "Adopt CRDT-based merge for documents and comments.",
+        "consequences": "Larger payloads (~15%), but no silent data loss."
+      }
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2,
+        "blockId": "h_checklist"
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Launch checklist"
+        }
+      ]
+    },
+    {
+      "type": "taskList",
+      "attrs": {
+        "blockId": "launch_tasks"
+      },
+      "content": [
+        {
+          "type": "taskItem",
+          "attrs": {
+            "checked": true,
+            "blockId": "t1"
+          },
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Security review signed off"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "taskItem",
+          "attrs": {
+            "checked": true,
+            "blockId": "t2"
+          },
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Load test at 5x expected traffic"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "taskItem",
+          "attrs": {
+            "checked": false,
+            "blockId": "t3"
+          },
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Support playbook published"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "taskItem",
+          "attrs": {
+            "checked": false,
+            "blockId": "t4"
+          },
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Press kit and launch post ready"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

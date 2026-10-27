@@ -1,0 +1,187 @@
+/**
+ * jotx design tokens
+ *
+ * Single source of truth for color, type, radius, elevation and motion.
+ * Hosts set the --jotx-* palette (VS Code derives it from the active theme,
+ * web hosts from their own theme); everything here falls back to VS Code
+ * theme variables and finally to neutral defaults, so components only ever
+ * read --jx-* tokens.
+ */
+
+/* .jx-scope: a themed island (e.g. an embed on someone else's page) recomputes every token from its own --jotx-* palette */
+:root,
+.jx-scope {
+  /* ---- Surfaces & text ---- */
+  --jx-bg: var(--jotx-background, var(--vscode-editor-background, hsl(var(--background, 0 0% 100%))));
+  --jx-fg: var(--jotx-text, var(--vscode-editor-foreground, hsl(var(--foreground, 215 19% 14%))));
+  --jx-surface: var(--jotx-backgroundSecondary, color-mix(in srgb, var(--jx-fg) 4%, var(--jx-bg)));
+  --jx-surface-2: var(--jotx-backgroundTertiary, color-mix(in srgb, var(--jx-fg) 7.5%, var(--jx-bg)));
+  --jx-elevated: color-mix(in srgb, var(--jx-fg) 2.5%, var(--jx-bg));
+  --jx-fg-muted: var(--jotx-textSecondary, color-mix(in srgb, var(--jx-fg) 68%, var(--jx-bg)));
+  --jx-fg-subtle: var(--jotx-textMuted, color-mix(in srgb, var(--jx-fg) 45%, var(--jx-bg)));
+  --jx-line: var(--jotx-border, color-mix(in srgb, var(--jx-fg) 12%, var(--jx-bg)));
+  --jx-line-strong: var(--jotx-borderHover, color-mix(in srgb, var(--jx-fg) 22%, var(--jx-bg)));
+  --jx-hover: color-mix(in srgb, var(--jx-fg) 6%, transparent);
+  --jx-press: color-mix(in srgb, var(--jx-fg) 10%, transparent);
+
+  /* ---- Brand accent ---- */
+  --jx-accent: var(--jotx-primary, #14b8a6);
+  --jx-accent-strong: var(--jotx-primaryHover, #0d9488);
+  --jx-accent-soft: color-mix(in srgb, var(--jx-accent) 14%, transparent);
+  --jx-accent-softer: color-mix(in srgb, var(--jx-accent) 7%, transparent);
+  --jx-on-accent: #ffffff;
+  --jx-ring: 0 0 0 3px color-mix(in srgb, var(--jx-accent) 32%, transparent);
+
+  /* ---- Status ---- */
+  --jx-success: var(--jotx-success, #16a34a);
+  --jx-warning: var(--jotx-warning, #d97706);
+  --jx-danger: var(--jotx-error, #dc2626);
+  --jx-info: var(--jotx-info, #2563eb);
+
+  /* ---- Categorical palette (widgets, charts, tags) ---- */
+  --jx-c-teal: #14b8a6;
+  --jx-c-blue: #3b82f6;
+  --jx-c-violet: #8b5cf6;
+  --jx-c-pink: #ec4899;
+  --jx-c-amber: #f59e0b;
+  --jx-c-green: #22c55e;
+  --jx-c-red: #ef4444;
+  --jx-c-slate: #64748b;
+
+  /* ---- Typography ---- */
+  --jx-font-sans: var(--jotx-editor-fontFamily, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, "Helvetica Neue", sans-serif);
+  --jx-font-mono: var(--vscode-editor-font-family, ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace);
+  --jx-text-xs: 11px;
+  --jx-text-sm: 12.5px;
+  --jx-text-md: 13.5px;
+
+  /* ---- Shape ---- */
+  --jx-r-xs: 4px;
+  --jx-r-sm: 6px;
+  --jx-r-md: 8px;
+  --jx-r-lg: 12px;
+  --jx-r-xl: 16px;
+  --jx-r-pill: 999px;
+
+  /* ---- Elevation ---- */
+  --jx-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --jx-shadow-md: 0 1px 2px rgba(15, 23, 42, 0.06), 0 6px 16px -6px rgba(15, 23, 42, 0.16);
+  --jx-shadow-lg: 0 2px 6px rgba(15, 23, 42, 0.08), 0 24px 48px -16px rgba(15, 23, 42, 0.32);
+
+  /* ---- Motion ---- */
+  --jx-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --jx-dur: 140ms;
+}
+
+/* Deeper shadows read better on dark themes */
+body.vscode-dark,
+body.vscode-high-contrast,
+.dark,
+.jx-scope[data-theme="dark"] {
+  --jx-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --jx-shadow-md: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 20px -6px rgba(0, 0, 0, 0.5);
+  --jx-shadow-lg: 0 2px 8px rgba(0, 0, 0, 0.35), 0 28px 56px -16px rgba(0, 0, 0, 0.7);
+  /* Dark themes use a light accent, so text on it must be dark */
+  --jx-on-accent: #042f2e;
+}
+
+/* ---- Shared primitives ---- */
+
+.jx-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: var(--jx-r-sm);
+  background: transparent;
+  color: var(--jx-fg-muted);
+  cursor: pointer;
+  transition: background var(--jx-dur) var(--jx-ease), color var(--jx-dur) var(--jx-ease);
+}
+
+.jx-icon-btn svg { pointer-events: none; }
+.jx-icon-btn:hover { background: var(--jx-hover); color: var(--jx-fg); }
+.jx-icon-btn:active { background: var(--jx-press); }
+.jx-icon-btn.is-active { background: var(--jx-accent-soft); color: var(--jx-accent); }
+.jx-icon-btn:focus-visible { outline: none; box-shadow: var(--jx-ring); }
+.jx-icon-btn:disabled { opacity: 0.4; cursor: default; }
+
+.jx-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 12px;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-sm);
+  background: var(--jx-bg);
+  color: var(--jx-fg);
+  font: 500 var(--jx-text-sm)/1 var(--jx-font-sans);
+  cursor: pointer;
+  transition: background var(--jx-dur) var(--jx-ease), border-color var(--jx-dur) var(--jx-ease), transform var(--jx-dur) var(--jx-ease);
+}
+
+.jx-btn svg { pointer-events: none; }
+.jx-btn:hover { background: var(--jx-surface); border-color: var(--jx-line-strong); }
+.jx-btn:active { transform: translateY(0.5px); }
+.jx-btn:focus-visible { outline: none; box-shadow: var(--jx-ring); }
+.jx-btn--primary { background: var(--jx-accent); border-color: transparent; color: var(--jx-on-accent); }
+.jx-btn--primary:hover { background: var(--jx-accent-strong); border-color: transparent; }
+.jx-btn--ghost { background: transparent; border-color: transparent; color: var(--jx-fg-muted); }
+.jx-btn--ghost:hover { background: var(--jx-hover); border-color: transparent; color: var(--jx-fg); }
+
+.jx-input {
+  width: 100%;
+  min-width: 0;
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-sm);
+  background: var(--jx-bg);
+  color: var(--jx-fg);
+  font: 400 var(--jx-text-md)/1.4 var(--jx-font-sans);
+  transition: border-color var(--jx-dur) var(--jx-ease), box-shadow var(--jx-dur) var(--jx-ease);
+}
+
+.jx-input::placeholder { color: var(--jx-fg-subtle); }
+.jx-input:hover { border-color: var(--jx-line-strong); }
+.jx-input:focus { outline: none; border-color: var(--jx-accent); box-shadow: var(--jx-ring); }
+select.jx-input { padding-right: 6px; cursor: pointer; }
+.jx-textarea { height: auto; padding: 8px 10px; resize: vertical; line-height: 1.55; }
+.jx-mono { font-family: var(--jx-font-mono); font-size: 12.5px; }
+
+.jx-kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border: 1px solid var(--jx-line);
+  border-bottom-width: 2px;
+  border-radius: var(--jx-r-xs);
+  background: var(--jx-surface);
+  color: var(--jx-fg-muted);
+  font: 600 10.5px/1 var(--jx-font-sans);
+}
+
+.jx-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: var(--jx-r-pill);
+  background: var(--jx-surface-2);
+  color: var(--jx-fg-muted);
+  font: 600 var(--jx-text-xs)/1 var(--jx-font-sans);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --jx-dur: 0ms; }
+}

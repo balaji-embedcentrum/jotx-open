@@ -1,0 +1,30 @@
+/**
+ * Main CSS - Imports Tailwind and global styles
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global resets and base styles */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom utilities */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}

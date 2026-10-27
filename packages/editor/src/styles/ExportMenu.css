@@ -1,0 +1,65 @@
+/* Export Menu Styles */
+.jotx-export-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.jotx-export-dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    background: var(--jx-elevated);
+    border: 1px solid var(--jx-line);
+    border-radius: var(--jx-r-lg);
+    padding: 4px;
+    min-width: 200px;
+    box-shadow: var(--jx-shadow-lg);
+    font-family: var(--jx-font-sans);
+    z-index: 1000;
+}
+
+.jotx-export-header {
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--jx-fg-subtle);
+}
+
+.jotx-export-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-radius: var(--jx-r-md);
+    color: var(--jx-fg);
+    cursor: pointer;
+    font-size: 13px;
+    transition: background-color 0.15s ease;
+}
+
+.jotx-export-item:hover {
+    background: var(--jx-hover);
+}
+
+.jotx-export-item svg {
+    flex-shrink: 0;
+    color: var(--jx-fg-subtle);
+}
+
+.jotx-export-item span:first-of-type {
+    flex: 1;
+}
+
+.jotx-export-badge {
+    font-size: 10px;
+    padding: 2px 6px;
+    background: var(--vscode-badge-background);
+    color: var(--vscode-badge-foreground);
+    border-radius: 10px;
+    font-weight: 500;
+}

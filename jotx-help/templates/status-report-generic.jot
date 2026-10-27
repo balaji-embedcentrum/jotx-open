@@ -1,0 +1,143 @@
+hdef jotx StatusReportGeneric
+
+  type page
+  title Status Report Template
+  icon 📊
+  author ""
+  created 2025-01-01
+  tags "status", "report", "update", "progress"
+
+  def table block_1
+    columns Key, Value
+    rows """Period | 
+Author | 
+Status | On Track"""
+
+  def heading "[Status Report - Period]"
+
+  def divider
+
+  def heading "Executive Summary"
+    level 2
+
+  def paragraph "[Brief 2-3 sentence overview of progress, status, and key highlights]"
+
+  def heading "Overall Status"
+    level 2
+
+  def table block_7
+    def row
+      def header
+        text Metric
+      def header
+        text Status
+    def row
+      def cell
+        def paragraph "Timeline"
+      def cell
+        def paragraph "[On Track / At Risk / Delayed]"
+    def row
+      def cell
+        def paragraph "Budget"
+      def cell
+        def paragraph "[On Track / Over / Under]"
+    def row
+      def cell
+        def paragraph "Quality"
+      def cell
+        def paragraph "[Good / Needs Attention]"
+    def row
+      def cell
+        def paragraph "Team Morale"
+      def cell
+        def paragraph "[High / Medium / Low]"
+
+  def heading "Key Accomplishments"
+    level 2
+
+  def list
+    items """[Major accomplishment 1]
+[Major accomplishment 2]
+[Major accomplishment 3]"""
+
+  def heading "Progress on Goals"
+    level 2
+
+  def table block_14
+    def row
+      def header
+        text Goal
+      def header
+        text Progress
+      def header
+        text Status
+    def row
+      def cell
+        def paragraph "[Goal 1]"
+      def cell
+        def paragraph "[X%]"
+      def cell
+        def paragraph "[On Track/At Risk]"
+    def row
+      def cell
+        def paragraph "[Goal 2]"
+      def cell
+        def paragraph "[X%]"
+      def cell
+        def paragraph "[On Track/At Risk]"
+
+  def heading "Challenges & Risks"
+    level 2
+
+  def list
+    items """[Challenge 1: Description and impact]
+[Challenge 2: Description and impact]"""
+
+  def heading "Blockers"
+    level 2
+
+  def paragraph "[Any blockers that need escalation or support]"
+
+  def list
+    items """[Blocker 1: What's blocking and what's needed]
+[Blocker 2: What's blocking and what's needed]"""
+
+  def heading "Metrics & KPIs"
+    level 2
+
+  def table block_21
+    def row
+      def header
+        text Metric
+      def header
+        text Target
+      def header
+        text Actual
+    def row
+      def cell
+        def paragraph "[Metric 1]"
+      def cell
+        def paragraph "[Target]"
+      def cell
+        def paragraph "[Actual]"
+    def row
+      def cell
+        def paragraph "[Metric 2]"
+      def cell
+        def paragraph "[Target]"
+      def cell
+        def paragraph "[Actual]"
+
+  def heading "Next Period Priorities"
+    level 2
+
+  def list
+    listtype numbered
+    items """[Priority 1 for next period]
+[Priority 2 for next period]
+[Priority 3 for next period]"""
+
+  def heading "Support Needed"
+    level 2
+
+  def paragraph "[What help, resources, or decisions are needed from stakeholders]"

@@ -1,0 +1,123 @@
+/**
+ * OutlineRail - "On this page" navigation pinned beside the note, like a docs site.
+ * Tracks the heading in view and reading progress. Only shown when there is
+ * room next to the page and the note has enough headings to be worth it.
+ */
+
+import React, { useEffect, useRef, useState } from 'react'
+import type { Editor } from '@tiptap/react'
+import '../styles/OutlineRail.css'
+
+interface OutlineItem {
+  pos: number
+  level: number
+  text: string
+}
+
+const RAIL_WIDTH = 220
+const GAP = 28
+
+function collect(editor: Editor): OutlineItem[] {
+  const out: OutlineItem[] = []
+  editor.state.doc.descendants((node, pos) => {
+    if (node.type.name === 'heading') {
+      const level = Number(node.attrs.level) || 1
+      const text = node.textContent.trim()
+      if (level <= 3 && text) out.push({ pos, level, text })
+      return false
+    }
+    return true
+  })
+  return out
+}
+
+function scrollParent(el: HTMLElement | null): HTMLElement | null {
+  let node = el?.parentElement || null
+  while (node) {
+    const oy = getComputedStyle(node).overflowY
+    if ((oy === 'auto' || oy === 'scroll') && node.scrollHeight > node.clientHeight) return node
+    node = node.parentElement
+  }
+  return null
+}
+
+export function OutlineRail({ editor }: { editor: Editor }) {
+  const [items, setItems] = useState<OutlineItem[]>(() => collect(editor))
+  const [active, setActive] = useState(0)
+  const [progress, setProgress] = useState(0)
+  const [left, setLeft] = useState<number | null>(null)
+  const railRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const refresh = () => setItems(collect(editor))
+    editor.on('update', refresh)
+    return () => { editor.off('update', refresh) }
+  }, [editor])
+
+  useEffect(() => {
+    const content = editor.view.dom as HTMLElement
+    const scroller = scrollParent(content)
+    const target: HTMLElement | Window = scroller || window
+
+    const measure = () => {
+      // Place the rail just right of the page, or hide it if there isn't room
+      const wrapper = content.closest('.jotx-editor-wrapper') as HTMLElement | null
+      const rect = (wrapper || content).getBoundingClientRect()
+      const x = rect.right + GAP
+      setLeft(x + RAIL_WIDTH + 16 <= window.innerWidth ? x : null)
+
+      const top = scroller ? scroller.scrollTop : window.scrollY
+      const height = scroller ? scroller.scrollHeight - scroller.clientHeight : document.documentElement.scrollHeight - window.innerHeight
+      setProgress(height > 0 ? Math.min(1, Math.max(0, top / height)) : 1)
+
+      // Active = last heading whose top has passed the upper third of the viewport
+      const viewTop = scroller ? scroller.getBoundingClientRect().top : 0
+      let current = 0
+      items.forEach((item, i) => {
+        const dom = editor.view.nodeDOM(item.pos) as HTMLElement | null
+        if (dom && dom.getBoundingClientRect().top - viewTop < 140) current = i
+      })
+      setActive(current)
+    }
+
+    measure()
+    target.addEventListener('scroll', measure, { passive: true })
+    window.addEventListener('resize', measure)
+    return () => {
+      target.removeEventListener('scroll', measure)
+      window.removeEventListener('resize', measure)
+    }
+  }, [editor, items])
+
+  if (items.length < 3 || left === null) return null
+
+  const minLevel = Math.min(...items.map(i => i.level))
+
+  const jump = (pos: number) => {
+    const dom = editor.view.nodeDOM(pos) as HTMLElement | null
+    dom?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  return (
+    <nav ref={railRef} className="jx-outline" style={{ left, width: RAIL_WIDTH }} aria-label="On this page">
+      <div className="jx-outline__head">
+        <span>On this page</span>
+        <span className="jx-outline__pct">{Math.round(progress * 100)}%</span>
+      </div>
+      <div className="jx-outline__bar"><div style={{ width: `${progress * 100}%` }} /></div>
+      <div className="jx-outline__list">
+        {items.map((item, i) => (
+          <button
+            key={`${item.pos}-${i}`}
+            type="button"
+            className={`jx-outline__item jx-outline__item--l${item.level - minLevel + 1}${i === active ? ' is-active' : ''}`}
+            onClick={() => jump(item.pos)}
+            title={item.text}
+          >
+            {item.text}
+          </button>
+        ))}
+      </div>
+    </nav>
+  )
+}

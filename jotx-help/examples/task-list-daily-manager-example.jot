@@ -1,0 +1,176 @@
+hdef jotx DailyTaskManager
+
+  type page
+  title Daily Task Manager - January 15, 2025
+  icon ✓
+  author Alex Rivera
+  created 2025-01-15
+  tags "tasks", "daily", "productivity", "work"
+
+  def table block_1
+    columns Key, Value
+    rows """Date | 2025-01-15
+Owner | Alex Rivera - Product Manager
+Status | 75% Complete
+Focus Time | 9:00 AM - 11:00 AM (Deep Work)"""
+
+  def heading "Daily Task Manager - Wednesday, Jan 15"
+
+  def callout "🎯 Today's Focus: Ship Q1 roadmap deck & finalize sprint planning"
+
+  def divider
+
+  def heading "🔥 High Priority (Must Do Today)"
+    level 2
+
+  def checklist
+    def listitem "Finalize Q1 roadmap deck for exec review (Due: 2 PM)"
+      checked "true"
+      priority critical
+    def listitem "Sprint planning prep: Groom backlog (20 stories)"
+      checked "true"
+      priority critical
+    def listitem "Review and approve 3 design mockups from Sarah"
+      checked "false"
+      priority high
+    def listitem "Send customer feedback summary to engineering team"
+      checked "false"
+      priority high
+    def listitem "1:1 with Jake (Engineering Lead) - 30 min"
+      checked "true"
+      priority high
+
+  def heading "📌 Medium Priority (Should Do)"
+    level 2
+
+  def checklist
+    def listitem "Update Jira tickets with latest specs"
+      checked "false"
+      priority medium
+    def listitem "Review PRD feedback from stakeholders"
+      checked "true"
+      priority medium
+    def listitem "Schedule user interviews for next week (5 participants)"
+      checked "false"
+      priority medium
+    def listitem "Update product roadmap Notion page"
+      checked "false"
+      priority medium
+    def listitem "Respond to Slack messages (< 15 messages pending)"
+      checked "true"
+      priority medium
+
+  def heading "📋 Low Priority (Nice to Have)"
+    level 2
+
+  def checklist
+    def listitem "Read competitive analysis report from marketing"
+      checked "false"
+      priority low
+    def listitem "Clean up old notes in Confluence"
+      checked "false"
+      priority low
+    def listitem "Watch webinar recording: Product Analytics Best Practices"
+      checked "false"
+      priority low
+
+  def heading "⏸️ Blocked / Waiting On"
+    level 2
+
+  def table block_12
+    def row
+      def header
+        text Task
+      def header
+        text Blocked By
+      def header
+        text Action
+    def row
+      def cell
+        def paragraph "API spec review"
+      def cell
+        def paragraph "Waiting on Tech Lead (Mike)"
+      def cell
+        def paragraph "Follow up Thursday AM"
+    def row
+      def cell
+        def paragraph "Budget approval for user research"
+      def cell
+        def paragraph "Finance review in progress"
+      def cell
+        def paragraph "Ping Emma (CFO) tomorrow"
+
+  def heading "✅ Completed Today (7 tasks)"
+    level 2
+
+  def checklist
+    def listitem "Morning standup with team"
+      checked "true"
+    def listitem "Coffee chat with new PM hire (onboarding)"
+      checked "true"
+    def listitem "Finalized Q1 roadmap deck (45 slides, ready for exec review)"
+      checked "true"
+    def listitem "Sprint planning prep: Groomed 20 stories, estimated points"
+      checked "true"
+    def listitem "1:1 with Jake - Discussed API dependencies, aligned on timeline"
+      checked "true"
+    def listitem "Reviewed PRD feedback - Incorporated 8 suggestions"
+      checked "true"
+    def listitem "Responded to urgent Slack messages (12 messages)"
+      checked "true"
+
+  def heading "📅 Tomorrow's Preview"
+    level 2
+
+  def list
+    items """9:00 AM - Exec review: Present Q1 roadmap deck
+11:00 AM - Sprint planning with engineering team
+2:00 PM - Customer call: Discovery session
+4:00 PM - Weekly team sync"""
+
+  def heading "💡 Notes & Ideas"
+    level 2
+
+  def paragraph "Great progress today! Q1 roadmap is solid - exec team will love the data-driven approach. Sprint planning is set up for success with groomed backlog."
+
+  def quote "Jake mentioned concern about API performance under load - need to add load testing to next sprint. Follow up with Mike on tech spec."
+
+  def list
+    items """Idea: Consider adding analytics dashboard feature to Q2 roadmap
+Note: Sarah's designs are excellent - team is ready to start implementation
+Reminder: Schedule team offsite for February (check with Emma on budget)"""
+
+  def divider
+
+  def heading "⏱️ Time Tracking"
+    level 2
+
+  def table block_23
+    def row
+      def header
+        text Activity
+      def header
+        text Time Spent
+    def row
+      def cell
+        def paragraph "Deep Work (roadmap, planning)"
+      def cell
+        def paragraph "3.5 hours"
+    def row
+      def cell
+        def paragraph "Meetings (1:1s, standups)"
+      def cell
+        def paragraph "2 hours"
+    def row
+      def cell
+        def paragraph "Communication (Slack, email)"
+      def cell
+        def paragraph "1.5 hours"
+    def row
+      def cell
+        def paragraph "Admin/Other"
+      def cell
+        def paragraph "1 hour"
+
+  def callout "🎉 Productive day! 7/12 high-priority tasks complete (58%). On track for sprint goals."
+    variant success

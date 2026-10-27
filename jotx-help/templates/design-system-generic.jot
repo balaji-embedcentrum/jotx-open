@@ -1,0 +1,190 @@
+hdef jotx DesignSystemGeneric
+
+  type page
+  title Design System Documentation
+  icon 🎨
+  author ""
+  created 2025-01-01
+  tags "design-system", "ui", "components", "style-guide"
+
+  def heading "[Design System Name]"
+
+  def paragraph "[Brief description of your design system and its purpose]"
+
+  def divider
+
+  def heading "Design Principles"
+    level 2
+
+  def list
+    listtype numbered
+    items """[Principle 1: e.g., Clarity over Cleverness]
+[Principle 2: e.g., Consistent and Predictable]
+[Principle 3: e.g., Accessible by Default]"""
+
+  def heading "Color Palette"
+    level 2
+
+  def heading "Brand Colors"
+    level 3
+
+  def table block_9
+    def row
+      def header
+        text Color Name
+      def header
+        text Hex Code
+      def header
+        text Usage
+    def row
+      def cell
+        def paragraph "Primary"
+      def cell
+        def paragraph "#[hex]"
+      def cell
+        def paragraph "[Primary actions, links]"
+    def row
+      def cell
+        def paragraph "Secondary"
+      def cell
+        def paragraph "#[hex]"
+      def cell
+        def paragraph "[Secondary actions]"
+
+  def heading "Semantic Colors"
+    level 3
+
+  def table block_11
+    def row
+      def header
+        text Type
+      def header
+        text Hex
+      def header
+        text Usage
+    def row
+      def cell
+        def paragraph "Success"
+      def cell
+        def paragraph "#[hex]"
+      def cell
+        def paragraph "[Success states, confirmations]"
+    def row
+      def cell
+        def paragraph "Warning"
+      def cell
+        def paragraph "#[hex]"
+      def cell
+        def paragraph "[Caution, alerts]"
+    def row
+      def cell
+        def paragraph "Error"
+      def cell
+        def paragraph "#[hex]"
+      def cell
+        def paragraph "[Errors, destructive actions]"
+
+  def heading "Typography"
+    level 2
+
+  def table block_13
+    def row
+      def header
+        text Style
+      def header
+        text Font
+      def header
+        text Size/Weight
+      def header
+        text Usage
+    def row
+      def cell
+        def paragraph "Heading 1"
+      def cell
+        def paragraph "[Font name]"
+      def cell
+        def paragraph "[size]/[weight]"
+      def cell
+        def paragraph "[Page titles]"
+    def row
+      def cell
+        def paragraph "Body"
+      def cell
+        def paragraph "[Font name]"
+      def cell
+        def paragraph "[size]/[weight]"
+      def cell
+        def paragraph "[Body text]"
+
+  def heading "Spacing & Layout"
+    level 2
+
+  def paragraph "[Define your spacing system: 4px, 8px, 16px, 24px, etc.]"
+
+  def heading "Components"
+    level 2
+
+  def heading "Button"
+    level 3
+
+  def paragraph "[Description of button component, variants, and usage]"
+
+  def table block_19
+    def row
+      def header
+        text Variant
+      def header
+        text Use Case
+      def header
+        text Example
+    def row
+      def cell
+        def paragraph "Primary"
+      def cell
+        def paragraph "[Main CTAs]"
+      def cell
+        def paragraph "[Visual example or code]"
+    def row
+      def cell
+        def paragraph "Secondary"
+      def cell
+        def paragraph "[Less emphasis]"
+      def cell
+        def paragraph "[Example]"
+
+  def heading "Input Field"
+    level 3
+
+  def paragraph "[Description, states (default, focus, error, disabled)]"
+
+  def heading "[Additional Components]"
+    level 3
+
+  def paragraph "[Add more components as needed: Cards, Modals, Navigation, etc.]"
+
+  def heading "Accessibility Guidelines"
+    level 2
+
+  def list
+    items """Color contrast: WCAG AA minimum (4.5:1 for text)
+Keyboard navigation: All interactive elements accessible
+Screen reader support: Proper ARIA labels
+Focus indicators: Clear visual focus states"""
+
+  def heading "Usage Examples"
+    level 2
+
+  def code
+    language html
+    text """<!-- Example of using components -->
+<button class="btn btn-primary">
+  Primary Action
+</button>"""
+
+  def heading "Resources"
+    level 2
+
+  def list
+    items """Figma Library: [Link]
+Code Repository: [Link]
+Design Tokens: [Link]"""

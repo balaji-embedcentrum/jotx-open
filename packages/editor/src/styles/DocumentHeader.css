@@ -1,0 +1,292 @@
+/**
+ * Document Header - slim, translucent app bar built on --jx-* tokens
+ */
+
+.jotx-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 52px;
+  padding: 0 16px 0 20px;
+  border-bottom: 1px solid var(--jx-line);
+  background-color: color-mix(in srgb, var(--jx-bg) 86%, transparent);
+  backdrop-filter: saturate(160%) blur(12px);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
+  font-family: var(--jx-font-sans);
+}
+
+.jotx-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.jotx-header-right {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* ---- Brand ---- */
+.jotx-header-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding-right: 10px;
+  border-right: 1px solid var(--jx-line);
+}
+
+.jotx-header-logo-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--jx-fg);
+  font-size: 15px;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+}
+
+.jotx-header-logo-text::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  background:
+    linear-gradient(135deg, transparent 42%, rgba(255, 255, 255, 0.85) 42% 58%, transparent 58%),
+    linear-gradient(45deg, transparent 42%, rgba(255, 255, 255, 0.85) 42% 58%, transparent 58%),
+    linear-gradient(135deg, #2dd4bf, #0d9488);
+  box-shadow: 0 1px 2px rgba(13, 148, 136, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+/* ---- Type selector ---- */
+.jotx-header-type-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.jotx-header-type-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 8px 0 9px;
+  border: 1px solid transparent;
+  border-radius: var(--jx-r-pill);
+  background: var(--jx-surface);
+  color: var(--jx-fg-muted);
+  font: 550 12.5px/1 var(--jx-font-sans);
+  cursor: pointer;
+  transition: background var(--jx-dur) var(--jx-ease), color var(--jx-dur) var(--jx-ease), border-color var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-header-type-button:hover {
+  border-color: var(--jx-line);
+  background: var(--jx-surface-2);
+  color: var(--jx-fg);
+}
+
+.jotx-header-type-button:focus-visible { outline: none; box-shadow: var(--jx-ring); }
+
+.jotx-header-type-icon { color: var(--jx-accent); width: 14px; height: 14px; }
+
+.jotx-header-type-label {
+  font-size: 12.5px;
+  font-weight: 550;
+}
+
+.jotx-header-type-chevron {
+  opacity: 0.55;
+}
+
+/* ---- Dropdown Menu ---- */
+.jotx-header-type-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 9999;
+  width: 220px;
+  overflow: hidden;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-lg);
+  background: var(--jx-elevated);
+  box-shadow: var(--jx-shadow-lg);
+  animation: jotx-header-pop 140ms var(--jx-ease);
+}
+
+@keyframes jotx-header-pop {
+  from { opacity: 0; transform: translateY(-4px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.jotx-type-menu-header {
+  padding: 10px 12px 4px;
+  color: var(--jx-fg-subtle);
+  font-size: 10.5px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.jotx-type-menu-list {
+  max-height: 360px;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+.jotx-type-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 7px 9px;
+  border: none;
+  border-radius: var(--jx-r-md);
+  background: transparent;
+  color: var(--jx-fg);
+  font: 450 13px/1.2 var(--jx-font-sans);
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-type-menu-item svg { color: var(--jx-fg-subtle); }
+
+.jotx-type-menu-item:hover {
+  background: var(--jx-hover);
+}
+
+.jotx-type-menu-item.active {
+  background: var(--jx-accent-soft);
+  color: var(--jx-fg);
+  font-weight: 600;
+}
+
+.jotx-type-menu-item.active svg { color: var(--jx-accent); }
+
+/* ---- Title ---- */
+.jotx-header-title-container {
+  flex: 1;
+  min-width: 0;
+}
+
+.jotx-header-title {
+  display: inline-block;
+  max-width: 100%;
+  margin: 0;
+  padding: 4px 8px;
+  overflow: hidden;
+  border-radius: var(--jx-r-sm);
+  color: var(--jx-fg);
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: text;
+  transition: background var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-header-title:hover {
+  background: var(--jx-hover);
+}
+
+.jotx-header-title-input {
+  width: 100%;
+  max-width: 520px;
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid var(--jx-accent);
+  border-radius: var(--jx-r-sm);
+  outline: none;
+  box-shadow: var(--jx-ring);
+  background-color: var(--jx-bg);
+  color: var(--jx-fg);
+  font: 600 14.5px/1 var(--jx-font-sans);
+  letter-spacing: -0.01em;
+}
+
+/* ---- Buttons ---- */
+.jotx-header-button,
+.jotx-header-graph-btn,
+.jotx-header-help-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: var(--jx-r-md);
+  background-color: transparent;
+  color: var(--jx-fg-muted);
+  cursor: pointer;
+  transition: background var(--jx-dur) var(--jx-ease), color var(--jx-dur) var(--jx-ease), transform var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-header-button svg,
+.jotx-header-graph-btn svg,
+.jotx-header-help-btn svg {
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+.jotx-header-button:hover:not(:disabled),
+.jotx-header-graph-btn:hover,
+.jotx-header-help-btn:hover {
+  background-color: var(--jx-hover);
+  color: var(--jx-fg);
+}
+
+.jotx-header-button:focus-visible,
+.jotx-header-graph-btn:focus-visible,
+.jotx-header-help-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--jx-ring);
+}
+
+.jotx-header-button:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.jotx-header-button.active {
+  background: var(--jx-accent-soft);
+  color: var(--jx-accent);
+}
+
+.jotx-header-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .jotx-header {
+    padding: 0 10px;
+    gap: 8px;
+  }
+
+  .jotx-header-type-label {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .jotx-header-logo {
+    display: none;
+  }
+}
+
+/* ── Lock / Preview toggle button ────────────────────────────────────── */
+.jotx-header-lock-btn.active {
+  background: var(--jx-accent-soft);
+  color: var(--jx-accent);
+}

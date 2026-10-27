@@ -1,0 +1,214 @@
+/* Button Styles */
+
+.button-wrapper {
+    display: block;
+    margin: 1em 0;
+    font-family: var(--jx-font-sans);
+}
+
+/* Alignment */
+.button-align-left {
+    text-align: left;
+}
+
+.button-align-center {
+    text-align: center;
+}
+
+.button-align-right {
+    text-align: right;
+}
+
+.button-selected .jotx-button {
+    box-shadow: var(--jx-ring);
+}
+
+/* Base Button */
+.jotx-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 38px;
+    padding: 0 18px;
+    border: 1px solid transparent;
+    border-radius: var(--jx-r-md);
+    font-family: inherit;
+    font-size: 0.94em;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    line-height: 1.2;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background var(--jx-dur) var(--jx-ease), border-color var(--jx-dur) var(--jx-ease), color var(--jx-dur) var(--jx-ease), box-shadow var(--jx-dur) var(--jx-ease), transform var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-button svg {
+    pointer-events: none;
+}
+
+.jotx-button:hover {
+    transform: translateY(-1px);
+}
+
+.jotx-button:active {
+    transform: translateY(0);
+}
+
+.jotx-button:focus-visible {
+    outline: none;
+    box-shadow: var(--jx-ring);
+}
+
+/* Primary - brand accent */
+.jotx-button-primary {
+    background: var(--jx-accent);
+    color: var(--jx-on-accent);
+    box-shadow: 0 1px 2px color-mix(in srgb, var(--jx-accent) 35%, transparent);
+}
+
+.jotx-button-primary:hover {
+    background: var(--jx-accent-strong);
+    box-shadow: 0 6px 16px -6px color-mix(in srgb, var(--jx-accent) 60%, transparent);
+}
+
+/* Secondary - neutral surface */
+.jotx-button-secondary {
+    border-color: var(--jx-line);
+    background: var(--jx-surface);
+    color: var(--jx-fg);
+}
+
+.jotx-button-secondary:hover {
+    border-color: var(--jx-line-strong);
+    background: var(--jx-surface-2);
+}
+
+/* Outline */
+.jotx-button-outline {
+    border-color: color-mix(in srgb, var(--jx-accent) 55%, transparent);
+    background: transparent;
+    color: var(--jx-accent);
+}
+
+.jotx-button-outline:hover {
+    border-color: var(--jx-accent);
+    background: var(--jx-accent-softer);
+}
+
+/* Ghost */
+.jotx-button-ghost {
+    background: transparent;
+    color: var(--jx-fg-muted);
+}
+
+.jotx-button-ghost:hover {
+    background: var(--jx-hover);
+    color: var(--jx-fg);
+}
+
+/* Button with edit icon container */
+.button-with-edit {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.button-edit-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: var(--jx-r-sm);
+    color: var(--jx-fg-subtle);
+    font-size: 13px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity var(--jx-dur) var(--jx-ease), background var(--jx-dur) var(--jx-ease), color var(--jx-dur) var(--jx-ease);
+}
+
+.button-wrapper:hover .button-edit-icon,
+.button-edit-icon:focus-visible {
+    opacity: 1;
+}
+
+.button-edit-icon:hover {
+    background: var(--jx-hover);
+    color: var(--jx-fg);
+}
+
+/* Button Edit Form */
+.button-edit-form {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 300px;
+    padding: 14px;
+    border: 1px solid var(--jx-line);
+    border-radius: var(--jx-r-lg);
+    background: var(--jx-elevated);
+    box-shadow: var(--jx-shadow-md);
+    text-align: left;
+    animation: jx-reveal 160ms var(--jx-ease);
+}
+
+.button-edit-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.button-edit-row label {
+    flex: 0 0 48px;
+    color: var(--jx-fg-subtle);
+    font-size: var(--jx-text-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.button-edit-row input,
+.button-edit-row select {
+    flex: 1;
+    min-width: 0;
+    height: 30px;
+    padding: 0 10px;
+    border: 1px solid var(--jx-line);
+    border-radius: var(--jx-r-sm);
+    background: var(--jx-bg);
+    color: var(--jx-fg);
+    font: 400 var(--jx-text-md)/1.4 var(--jx-font-sans);
+    caret-color: var(--jx-accent);
+    transition: border-color var(--jx-dur) var(--jx-ease), box-shadow var(--jx-dur) var(--jx-ease);
+}
+
+.button-edit-row input:hover,
+.button-edit-row select:hover {
+    border-color: var(--jx-line-strong);
+}
+
+.button-edit-row input:focus,
+.button-edit-row select:focus {
+    outline: none;
+    border-color: var(--jx-accent);
+    box-shadow: var(--jx-ring);
+}
+
+.button-edit-done {
+    align-self: flex-end;
+    height: 28px;
+    margin-top: 4px;
+    padding: 0 14px;
+    border: none;
+    border-radius: var(--jx-r-sm);
+    background: var(--jx-accent);
+    color: var(--jx-on-accent);
+    font: 600 var(--jx-text-sm)/1 var(--jx-font-sans);
+    cursor: pointer;
+    transition: background var(--jx-dur) var(--jx-ease);
+}
+
+.button-edit-done:hover {
+    background: var(--jx-accent-strong);
+}

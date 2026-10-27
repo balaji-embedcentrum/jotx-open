@@ -1,0 +1,195 @@
+/**
+ * Rich blocks: diagram, chart, math, code and code reference.
+ * Shared "editorial figure" shell: soft surface, hairline border, small muted
+ * label, controls revealed on hover / focus / selection only.
+ */
+
+.jotx-mermaid,
+.jotx-chart,
+.jotx-math,
+.jotx-codeblock {
+  position: relative;
+  margin: 1.4em 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--jx-line) 70%, transparent);
+  border-radius: var(--jx-r-lg);
+  background: var(--jx-surface);
+  font-family: var(--jx-font-sans);
+  transition: border-color var(--jx-dur) var(--jx-ease), box-shadow var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-mermaid:hover,
+.jotx-chart:hover,
+.jotx-math:hover,
+.jotx-codeblock:hover {
+  border-color: var(--jx-line);
+  box-shadow: var(--jx-shadow-sm);
+}
+
+/* Selected: accent ring (beats the editor's generic selected-node outline) */
+.jotx-editor-content.jotx-editor-content .ProseMirror-selectednode:is(.jotx-mermaid, .jotx-chart, .jotx-math, .jotx-codeblock),
+.jotx-chart[data-selected="true"] {
+  outline: none;
+  border-color: var(--jx-accent);
+  border-radius: var(--jx-r-lg);
+  box-shadow: var(--jx-ring);
+}
+
+/* ---- Header ---- */
+.jotx-mermaid-header,
+.jotx-chart-header,
+.jotx-math-header,
+.jotx-codeblock-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 38px;
+  margin: 0;
+  padding: 6px 8px 0 14px;
+  border: 0;
+  background: transparent;
+}
+
+.jotx-mermaid-label,
+.jotx-chart-title,
+.jotx-math-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  color: var(--jx-fg-subtle);
+  font: 650 10.5px/1 var(--jx-font-sans);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.jotx-mermaid-label svg,
+.jotx-chart-title svg,
+.jotx-math-title svg {
+  color: var(--jx-accent);
+}
+
+/* Title reads as a caption; the empty placeholder only appears on hover/focus */
+.jotx-block-title-input {
+  flex: 1;
+  min-width: 0;
+  height: 26px;
+  margin: 0 4px;
+  padding: 0 8px;
+  border: 1px solid transparent;
+  border-radius: var(--jx-r-sm);
+  outline: none;
+  background: transparent;
+  color: var(--jx-fg-muted);
+  font: 500 12.5px/1 var(--jx-font-sans);
+  transition: background var(--jx-dur) var(--jx-ease), border-color var(--jx-dur) var(--jx-ease), box-shadow var(--jx-dur) var(--jx-ease), opacity var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-block-title-input::placeholder {
+  color: var(--jx-fg-subtle);
+  opacity: 0.8;
+}
+
+.jotx-block-title-input:placeholder-shown {
+  opacity: 0;
+}
+
+.jotx-mermaid:hover .jotx-block-title-input,
+.jotx-chart:hover .jotx-block-title-input,
+.jotx-math:hover .jotx-block-title-input,
+.jotx-block-title-input:focus {
+  opacity: 1;
+}
+
+.jotx-block-title-input:hover {
+  background: var(--jx-hover);
+}
+
+.jotx-block-title-input:focus {
+  border-color: var(--jx-accent);
+  background: var(--jx-bg);
+  box-shadow: var(--jx-ring);
+  color: var(--jx-fg);
+}
+
+/* ---- Controls (revealed on hover / focus / selection) ---- */
+.jotx-mermaid-controls,
+.jotx-chart-type,
+.jotx-chart-settings,
+.jotx-math-actions,
+.jotx-codeblock-actions {
+  opacity: 0;
+  transition: opacity var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-mermaid-controls,
+.jotx-math-actions,
+.jotx-codeblock-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: auto;
+}
+
+:is(.jotx-mermaid, .jotx-chart, .jotx-math, .jotx-codeblock):is(:hover, :focus-within, .ProseMirror-selectednode, [data-selected="true"])
+  :is(.jotx-mermaid-controls, .jotx-chart-type, .jotx-chart-settings, .jotx-math-actions, .jotx-codeblock-actions) {
+  opacity: 1;
+}
+
+.jotx-mermaid-iconbtn,
+.jotx-mermaid-copybtn,
+.jotx-chart-type-btn,
+.jotx-chart-settings,
+.jotx-math-iconbtn,
+.jotx-codeblock-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: var(--jx-r-sm);
+  background: transparent;
+  color: var(--jx-fg-muted);
+  cursor: pointer;
+  transform: none;
+  box-shadow: none;
+  transition: background var(--jx-dur) var(--jx-ease), color var(--jx-dur) var(--jx-ease);
+}
+
+:is(.jotx-mermaid-iconbtn, .jotx-mermaid-copybtn, .jotx-chart-type-btn, .jotx-chart-settings, .jotx-math-iconbtn, .jotx-codeblock-btn) svg {
+  width: 15px;
+  height: 15px;
+  pointer-events: none;
+}
+
+:is(.jotx-mermaid-iconbtn, .jotx-mermaid-copybtn, .jotx-chart-type-btn, .jotx-chart-settings, .jotx-math-iconbtn, .jotx-codeblock-btn):hover {
+  background: var(--jx-hover);
+  color: var(--jx-fg);
+  transform: none;
+  box-shadow: none;
+}
+
+:is(.jotx-mermaid-iconbtn, .jotx-mermaid-copybtn, .jotx-chart-type-btn, .jotx-chart-settings, .jotx-math-iconbtn, .jotx-codeblock-btn):active {
+  background: var(--jx-press);
+}
+
+:is(.jotx-mermaid-iconbtn, .jotx-mermaid-copybtn, .jotx-chart-type-btn, .jotx-chart-settings, .jotx-math-iconbtn, .jotx-codeblock-btn):focus-visible {
+  outline: none;
+  box-shadow: var(--jx-ring);
+}
+
+/* ---- Errors ---- */
+.jotx-mermaid-error,
+.jotx-chart-error {
+  margin: 8px 12px 0;
+  padding: 8px 10px;
+  border-radius: var(--jx-r-sm);
+  background: color-mix(in srgb, var(--jx-danger) 10%, transparent);
+  color: var(--jx-danger);
+  font: 500 12.5px/1.45 var(--jx-font-sans);
+}
+

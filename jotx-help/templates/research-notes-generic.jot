@@ -1,0 +1,127 @@
+hdef jotx ResearchNotesGeneric
+
+  type page
+  title Research Notes Template
+  icon 🔬
+  author ""
+  created 2025-01-01
+  tags "research", "notes", "study"
+
+  def table block_1
+    columns Key, Value
+    rows """Research Type | 
+Date | 
+Researcher | 
+Status | In Progress"""
+
+  def heading "[Research Topic/Title]"
+
+  def divider
+
+  def heading "Research Question"
+    level 2
+
+  def paragraph "[What are you trying to learn or understand?]"
+
+  def heading "Hypothesis/Assumptions"
+    level 2
+
+  def list
+    items """[Assumption or hypothesis 1]
+[Assumption or hypothesis 2]"""
+
+  def heading "Methodology"
+    level 2
+
+  def paragraph "[How did you conduct this research? What methods did you use?]"
+
+  def list
+    items """Method: [Interviews, surveys, observations, etc.]
+Sample Size: [Number of participants/data points]
+Duration: [Time period]
+Tools: [Tools or platforms used]"""
+
+  def heading "Key Findings"
+    level 2
+
+  def heading "Finding 1: [Title]"
+    level 3
+
+  def paragraph "[Description of the finding]"
+
+  def quote "[Supporting quote or data point]"
+
+  def heading "Finding 2: [Title]"
+    level 3
+
+  def paragraph "[Description]"
+
+  def heading "Finding 3: [Title]"
+    level 3
+
+  def paragraph "[Description]"
+
+  def heading "Data & Evidence"
+    level 2
+
+  def paragraph "[Raw data, statistics, or observations]"
+
+  def table block_21
+    def row
+      def header
+        text Metric
+      def header
+        text Value
+      def header
+        text Notes
+    def row
+      def cell
+        def paragraph "[Data point 1]"
+      def cell
+        def paragraph "[Value]"
+      def cell
+        def paragraph "[Context]"
+
+  def heading "Insights & Analysis"
+    level 2
+
+  def paragraph "[What do these findings mean? What patterns or themes emerged?]"
+
+  def list
+    listtype numbered
+    items """[Insight 1]
+[Insight 2]
+[Insight 3]"""
+
+  def heading "Recommendations"
+    level 2
+
+  def paragraph "[Based on your findings, what actions should be taken?]"
+
+  def list
+    items """[Recommendation 1]
+[Recommendation 2]
+[Recommendation 3]"""
+
+  def heading "Limitations"
+    level 2
+
+  def paragraph "[What are the limitations of this research? What should be considered when interpreting results?]"
+
+  def heading "Next Steps"
+    level 2
+
+  def checklist
+    def listitem "[Follow-up research or action needed]"
+      checked "false"
+    def listitem "[Additional data to collect]"
+      checked "false"
+    def listitem "[Share findings with stakeholders]"
+      checked "false"
+
+  def heading "References & Sources"
+    level 2
+
+  def list
+    items """[Source 1]
+[Source 2]"""

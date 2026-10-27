@@ -1,0 +1,53 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES2020",
+    "outDir": "out",
+    "lib": [
+      "ES2020",
+      "DOM"
+    ],
+    "jsx": "react-jsx",
+    "sourceMap": true,
+    "rootDir": "src",
+    "strict": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@jotx-labs/editor": [
+        "../editor/dist"
+      ],
+      "@jotx-labs/editor/*": [
+        "../editor/dist/*"
+      ],
+      "@jotx-labs/core": [
+        "../core/dist"
+      ],
+      "@jotx-labs/core/*": [
+        "../core/dist/*"
+      ],
+      "@jotx-labs/standard-lib": [
+        "../standard-lib/dist"
+      ],
+      "@jotx-labs/standard-lib/*": [
+        "../standard-lib/dist/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    ".vscode-test",
+    "out",
+    "tailwind.config.ts",
+    "postcss.config.js",
+    "webpack.config.js",
+    "src/**/*.old.ts"
+  ]
+}

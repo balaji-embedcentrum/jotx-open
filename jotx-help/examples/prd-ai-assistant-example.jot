@@ -1,0 +1,374 @@
+hdef jotx AIAssistantPRD
+
+  type page
+  title AI-Powered Writing Assistant Feature
+  icon ✨
+  author Sarah Martinez - Product Lead
+  created 2025-01-15
+  tags "product", "requirements", "prd", "ai", "feature"
+
+  def table block_1
+    columns Key, Value
+    rows """Status | Approved
+Product Owner | Sarah Martinez
+Target Release | Q2 2025 - v2.5
+Priority | P0 - Strategic
+Estimated Effort | 8 weeks"""
+
+  def heading "AI-Powered Writing Assistant"
+
+  def paragraph "Intelligent writing assistant that helps users draft, refine, and improve their notes with AI-powered suggestions in real-time."
+
+  def divider
+
+  def heading "Executive Summary"
+    level 2
+
+  def paragraph "We're building an AI writing assistant to help users overcome writer's block, improve content quality, and increase productivity. Early research shows 68% of users struggle with starting documents and 52% spend excessive time on editing. This feature will differentiate us from competitors and drive premium subscription growth."
+
+  def callout "💡 Vision: Make every user a better writer with AI assistance that feels like having an expert editor at your side."
+
+  def table block_8
+    def row
+      def header
+        text Expected Impact
+      def header
+        text Value
+    def row
+      def cell
+        def paragraph "Premium Conversions"
+      def cell
+        def paragraph "+35% (from 8% to 11%)"
+    def row
+      def cell
+        def paragraph "User Engagement"
+      def cell
+        def paragraph "+50% daily active users"
+    def row
+      def cell
+        def paragraph "Content Created"
+      def cell
+        def paragraph "+2x documents per user"
+
+  def heading "Problem Statement"
+    level 2
+
+  def paragraph "User research (n=1,247) reveals three critical pain points preventing users from maximizing productivity:"
+
+  def list
+    items """Writer's block: 68% struggle to start new documents, staring at blank pages
+Quality concerns: 52% spend 30+ minutes editing and revising
+Research overhead: 41% switch to Google 5+ times per document for information"""
+
+  def callout "⚠️ Competitive Threat: Notion AI and Google Workspace AI are rapidly gaining market share. We risk losing 15% of users if we don't match capabilities."
+    variant warning
+
+  def heading "Goals & Success Metrics"
+    level 2
+
+  def heading "Primary Goals"
+    level 3
+
+  def list
+    listtype numbered
+    items """Increase premium subscription conversion rate from 8% to 11%
+Reduce time-to-first-word from 3.2 minutes to under 30 seconds
+Increase user satisfaction score (CSAT) from 4.1 to 4.6+"""
+
+  def heading "Success Metrics"
+    level 3
+
+  def table block_17
+    def row
+      def header
+        text Metric
+      def header
+        text Current
+      def header
+        text Target (3 months post-launch)
+    def row
+      def cell
+        def paragraph "Premium Conversion Rate"
+      def cell
+        def paragraph "8%"
+      def cell
+        def paragraph "11%"
+    def row
+      def cell
+        def paragraph "Daily Active Users"
+      def cell
+        def paragraph "45k"
+      def cell
+        def paragraph "68k"
+    def row
+      def cell
+        def paragraph "AI Feature Usage"
+      def cell
+        def paragraph "0%"
+      def cell
+        def paragraph "40%+ of active users"
+    def row
+      def cell
+        def paragraph "Time to First Word"
+      def cell
+        def paragraph "3.2 min"
+      def cell
+        def paragraph "< 30 sec"
+    def row
+      def cell
+        def paragraph "CSAT Score"
+      def cell
+        def paragraph "4.1/5"
+      def cell
+        def paragraph "4.6/5"
+
+  def heading "Target Users"
+    level 2
+
+  def heading "Primary Persona: Emily - Content Creator"
+    level 3
+
+  def paragraph "Emily, 28, freelance content writer and blogger. Creates 10-15 articles per week. Struggles with writer's block and tight deadlines."
+
+  def list
+    items """Demographics: 25-35, remote worker, tech-savvy
+Goals: Write faster, improve quality, meet deadlines consistently
+Pain points: Blank page anxiety, self-doubt, time pressure
+Tech savviness: Advanced - comfortable with AI tools"""
+
+  def heading "Secondary Persona: Marcus - Product Manager"
+    level 3
+
+  def paragraph "Marcus, 34, PM at a SaaS company. Writes PRDs, specs, and updates. Needs clear, professional communication."
+
+  def list
+    items """Demographics: 30-45, corporate environment, busy schedule
+Goals: Communicate clearly, save time, maintain consistency
+Pain points: Too many meetings, limited writing time, imposter syndrome
+Tech savviness: Intermediate - uses productivity tools actively"""
+
+  def heading "User Stories & Use Cases"
+    level 2
+
+  def list
+    listtype numbered
+    items """As Emily, I want AI to suggest an opening paragraph, so I can overcome blank page anxiety
+As Emily, I want to expand bullet points into full paragraphs, so I can write faster
+As Marcus, I want to improve tone and clarity of my writing, so stakeholders understand better
+As Marcus, I want to generate summaries of long documents, so I can save time
+As both, I want to fix grammar and spelling automatically, so I appear professional"""
+
+  def heading "Requirements"
+    level 2
+
+  def heading "Must Have (P0) - Launch Blockers"
+    level 3
+
+  def list
+    items """⚡ AI Command Palette: Cmd/Ctrl+K to trigger AI actions anywhere
+✍️ Continue Writing: AI suggests next sentences based on context
+✨ Improve Selection: Rewrite selected text for clarity/tone
+📝 Expand Bullets: Convert bullet points to full paragraphs
+📋 Summarize: Generate TL;DR of selected text
+🔤 Fix Grammar & Spelling: Auto-correct with AI
+⚙️ Settings: Model selection (GPT-4, Claude), tone preferences
+🔐 Privacy: All data encrypted, opt-in only, GDPR compliant"""
+
+  def heading "Should Have (P1) - Post-Launch (2 weeks)"
+    level 3
+
+  def list
+    items """🌍 Translate: Convert text to 12+ languages
+🎯 Change Tone: Professional, casual, persuasive, friendly
+💡 Generate Ideas: Brainstorm related topics or next sections
+📊 Custom Prompts: Save and reuse personal AI commands"""
+
+  def heading "Could Have (P2) - Future Iteration"
+    level 3
+
+  def list
+    items """🗣️ Voice to Text: Dictate and AI cleans up transcription
+🔗 Research Assistant: AI fetches and cites web sources
+👥 Team Templates: Share AI prompts across workspace"""
+
+  def heading "User Experience"
+    level 2
+
+  def paragraph "The AI assistant is accessible via a floating action button or Cmd/Ctrl+K command palette. Users select text or place cursor, trigger AI action, and see real-time streaming responses. Accepted suggestions are inserted seamlessly."
+
+  def mermaid block_36
+    src """sequenceDiagram
+    participant User
+    participant Editor
+    participant AI
+    
+    User->>Editor: Presses Cmd+K
+    Editor->>User: Shows AI Command Palette
+    User->>Editor: Selects \"Continue Writing\"
+    Editor->>AI: Send context (last 500 chars)
+    AI->>Editor: Stream response (SSE)
+    Editor->>User: Display suggestion (typewriter effect)
+    User->>Editor: Accepts or Rejects
+    Editor->>Editor: Insert at cursor or discard"""
+
+  def callout "🎨 Design Principle: AI should feel like a helpful collaborator, not a replacement. Users maintain full control and can edit/reject any suggestion."
+
+  def heading "Out of Scope"
+    level 2
+
+  def paragraph "Explicitly NOT included in v2.5 release:"
+
+  def list
+    items """❌ Image generation (Midjourney, DALL-E integration)
+❌ Multi-user collaborative AI (team editing with AI)
+❌ AI chat interface (separate from document editing)
+❌ Training on user data (all models are pre-trained)"""
+
+  def heading "Technical Considerations"
+    level 2
+
+  def list
+    items """Platform: Web (React), Desktop (Electron), Mobile (React Native) - phase 2
+AI Provider: OpenAI GPT-4 Turbo (primary), Anthropic Claude 3 (backup)
+Performance: Streaming responses (SSE), < 2 second latency
+Rate Limits: 50 AI requests/hour for free, unlimited for premium
+Cost: $0.02 per request (avg), target $1.50/user/month
+Security: End-to-end encryption, no data retention, SOC 2 compliant"""
+
+  def heading "Risks & Assumptions"
+    level 2
+
+  def heading "Risks"
+    level 3
+
+  def table block_45
+    def row
+      def header
+        text Risk
+      def header
+        text Likelihood
+      def header
+        text Mitigation
+    def row
+      def cell
+        def paragraph "AI cost spirals above budget"
+      def cell
+        def paragraph "High"
+      def cell
+        def paragraph "Implement rate limiting, monitor per-user costs daily"
+    def row
+      def cell
+        def paragraph "Users distrust AI-generated content"
+      def cell
+        def paragraph "Medium"
+      def cell
+        def paragraph "Clear labeling, easy editing, emphasize human control"
+    def row
+      def cell
+        def paragraph "OpenAI API downtime affects service"
+      def cell
+        def paragraph "Medium"
+      def cell
+        def paragraph "Fallback to Claude API, graceful degradation messaging"
+    def row
+      def cell
+        def paragraph "Regulatory changes (EU AI Act)"
+      def cell
+        def paragraph "Low"
+      def cell
+        def paragraph "Legal review, privacy-first design, compliance monitoring"
+
+  def heading "Assumptions"
+    level 3
+
+  def list
+    items """Users want AI assistance and are comfortable with the technology
+OpenAI API remains stable and cost-effective
+35% conversion lift is achievable based on competitor benchmarks
+Engineering can deliver streaming SSE within performance budget"""
+
+  def heading "Timeline & Milestones"
+    level 2
+
+  def table block_49
+    def row
+      def header
+        text Milestone
+      def header
+        text Target Date
+      def header
+        text Owner
+    def row
+      def cell
+        def paragraph "PRD Approval"
+      def cell
+        def paragraph "Week 1 (Jan 15)"
+      def cell
+        def paragraph "Sarah"
+    def row
+      def cell
+        def paragraph "Design & Prototyping"
+      def cell
+        def paragraph "Week 2-3"
+      def cell
+        def paragraph "Design Team"
+    def row
+      def cell
+        def paragraph "Backend API Development"
+      def cell
+        def paragraph "Week 3-6"
+      def cell
+        def paragraph "Backend Team"
+    def row
+      def cell
+        def paragraph "Frontend Integration"
+      def cell
+        def paragraph "Week 4-7"
+      def cell
+        def paragraph "Frontend Team"
+    def row
+      def cell
+        def paragraph "Beta Testing (100 users)"
+      def cell
+        def paragraph "Week 7"
+      def cell
+        def paragraph "QA + Sarah"
+    def row
+      def cell
+        def paragraph "Launch (Premium only)"
+      def cell
+        def paragraph "Week 8 (Mar 10)"
+      def cell
+        def paragraph "Sarah + Marketing"
+
+  def heading "Go-to-Market Strategy"
+    level 2
+
+  def list
+    items """📣 Launch campaign: \"Your AI Writing Partner\" with video demos
+💎 Premium-only for first month, then limited free tier (5 requests/day)
+📧 Email sequence to active users highlighting key use cases
+🎁 Early adopter bonus: 50% off premium for 3 months
+📱 Social proof: Case studies from beta users"""
+
+  def heading "Open Questions"
+    level 2
+
+  def checklist
+    def listitem "Do we need AI disclosure on every generated suggestion? (Legal review pending)"
+      checked "false"
+      priority high
+    def listitem "Should we allow users to opt-out of all AI features via settings?"
+      checked "false"
+      priority high
+    def listitem "What's our plan if OpenAI increases API pricing by 50%?"
+      checked "false"
+      priority medium
+    def listitem "Do we localize AI suggestions for non-English languages in v2.5?"
+      checked "false"
+      priority low
+
+  def divider
+
+  def callout "✅ Status: Approved by Executive Team (Jan 15, 2025). Engineering kickoff scheduled for Jan 20."
+    variant success

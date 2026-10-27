@@ -1,0 +1,41 @@
+{
+  "name": "@jotx-labs/core",
+  "version": "3.1.0",
+  "files": [
+    "dist"
+  ],
+  "description": "jotx core - modular parser, blocks, and document system",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "jotx": "./dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "parser",
+    "blocks",
+    "documents",
+    "notes",
+    "jotx"
+  ],
+  "author": "Jotx Labs",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.0.0",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@jotx-labs/registry": "file:../registry",
+    "@types/marked": "^6.0.0",
+    "marked": "^15.0.12"
+  }
+}

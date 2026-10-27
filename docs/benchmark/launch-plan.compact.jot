@@ -1,0 +1,105 @@
+hdef jotx launch_plan
+
+  title Atlas 2.0 Launch Plan
+  type roadmap
+
+  def heading "Atlas 2.0 Launch Plan"
+
+  def paragraph "Everything the team needs to ship Atlas 2.0 on **December 1**: scope, owners, risks, and the path from beta to general availability."
+
+  def table props
+    columns Key, Value
+    rows """Owner | Priya Raman
+Status | On track
+Target date | 2026-12-01"""
+
+  def callout "Scope is frozen as of **October 20**. New requests go to the 2.1 backlog."
+
+  def heading "Goals"
+    level 2
+
+  def list
+    items """Cut cold-start time from 2.4s to under **800ms**
+Ship offline sync to every paid workspace
+Reach 99.95% API availability for 30 days before GA"""
+
+  def heading "Workstreams"
+    level 2
+
+  def progress "Workstream progress"
+    items """Sync engine | 82
+Desktop app | 64
+Migration tooling | 7 | 12
+Docs & onboarding | 40"""
+
+  def kanban "Launch board"
+    board """[Todo]
+Pricing page copy
+Status page alerts
+[In progress]
+Offline conflict resolver
+Migration dry run
+[Review]
+SSO for enterprise
+[Done]
+Load test at 5x traffic"""
+
+  def heading "Timeline"
+    level 2
+
+  def timeline "Milestones"
+    events """2026-09-15 | Private beta | done | 40 design partners
+2026-10-20 | Scope freeze | done
+2026-11-10 | Public beta | active | Feature flags on for 20% of workspaces
+2026-12-01 | General availability | planned
+2027-01-15 | 2.1 release | planned"""
+
+  def heading "Architecture"
+    level 2
+
+  def mermaid arch "Sync flow"
+    src """flowchart LR
+  Client[Desktop client] --> Queue[(Change queue)]
+  Queue --> Resolver{Conflict resolver}
+  Resolver -->|clean| Store[(Primary store)]
+  Resolver -->|conflict| Review[Manual review]"""
+
+  def code
+    language bash
+    text """atlas migrate --workspace acme --dry-run
+atlas migrate --workspace acme --apply"""
+
+  def heading "Beta metrics"
+    level 2
+
+  def chart weekly "Weekly active workspaces"
+    data """Label | Workspaces
+W1 | 120
+W2 | 210
+W3 | 340
+W4 | 480"""
+
+  def table risks
+    columns Risk, Impact, Owner, Mitigation
+    rows """Sync data loss | High | Marco | Write-ahead log + nightly restore drill
+Migration timeouts | Medium | Lena | Batch by workspace size
+Pricing confusion | Low | Priya | Comparison table on pricing page"""
+
+  def heading "Decisions"
+    level 2
+
+  def decision "Use CRDTs for offline sync"
+    status accepted
+    date 2026-08-04
+    context Last-write-wins lost edits in 3% of beta sessions.
+    decision Adopt CRDT-based merge for documents and comments.
+    consequences Larger payloads (~15%), but no silent data loss.
+
+  def heading "Launch checklist"
+    level 2
+
+  def checklist
+    items """[x] Security review signed off
+[x] Load test at 5x expected traffic
+[ ] Support playbook published
+[ ] Press kit and launch post ready"""

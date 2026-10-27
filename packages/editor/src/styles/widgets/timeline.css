@@ -1,0 +1,89 @@
+.jx-timeline { margin: 0; padding: 0; list-style: none; }
+
+.jx-timeline__item:not([data-tone]) { --jx-tone: var(--jx-c-slate); }
+
+.jx-timeline__item {
+  display: flex;
+  gap: 14px;
+}
+
+.jx-timeline__rail {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 14px;
+  flex-shrink: 0;
+}
+
+.jx-timeline__rail::after {
+  content: '';
+  position: absolute;
+  top: 18px;
+  bottom: -4px;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--jx-line);
+}
+
+.jx-timeline__item:last-child .jx-timeline__rail::after { display: none; }
+.jx-timeline__item.is-done .jx-timeline__rail::after { background: color-mix(in srgb, var(--jx-c-green) 40%, var(--jx-line)); }
+
+.jx-timeline__dot {
+  position: relative;
+  z-index: 1;
+  width: 12px;
+  height: 12px;
+  margin-top: 5px;
+  border: 2px solid var(--jx-tone);
+  border-radius: 50%;
+  background: var(--jx-bg);
+}
+
+.jx-timeline__item.is-done .jx-timeline__dot,
+.jx-timeline__item.is-blocked .jx-timeline__dot { background: var(--jx-tone); }
+
+.jx-timeline__item.is-active .jx-timeline__dot {
+  background: var(--jx-tone);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--jx-tone) 55%, transparent);
+  animation: jx-timeline-pulse 1.8s ease-out infinite;
+}
+
+.jx-timeline__content { min-width: 0; padding-bottom: 18px; }
+.jx-timeline__item:last-child .jx-timeline__content { padding-bottom: 0; }
+
+.jx-timeline__meta { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; }
+
+.jx-timeline__date {
+  color: var(--jx-fg-muted);
+  font-size: 12px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.jx-timeline__status {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  padding: 0 7px;
+  border-radius: var(--jx-r-pill);
+  background: color-mix(in srgb, var(--jx-tone) 14%, transparent);
+  color: color-mix(in srgb, var(--jx-tone) 80%, var(--jx-fg));
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.jx-timeline__title { color: var(--jx-fg); font-size: 14px; font-weight: 600; line-height: 1.4; }
+.jx-timeline__item.is-planned .jx-timeline__title { color: var(--jx-fg-muted); }
+
+.jx-timeline__detail { margin-top: 2px; color: var(--jx-fg-muted); font-size: 13px; line-height: 1.5; }
+
+@keyframes jx-timeline-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--jx-tone) 55%, transparent); }
+  70% { box-shadow: 0 0 0 7px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jx-timeline__item.is-active .jx-timeline__dot { animation: none; }
+}

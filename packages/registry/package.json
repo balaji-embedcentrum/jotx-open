@@ -1,0 +1,25 @@
+{
+  "name": "@jotx-labs/registry",
+  "version": "3.1.0",
+  "files": [
+    "dist"
+  ],
+  "description": "Block definition registry for jotx 3.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "keywords": [
+    "jotx",
+    "registry",
+    "plugin"
+  ],
+  "author": "Jotx Labs",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {}
+}

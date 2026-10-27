@@ -1,0 +1,31 @@
+{
+  "name": "@jotx-labs/adapters",
+  "version": "3.1.0",
+  "files": [
+    "dist"
+  ],
+  "description": "jotx adapters - Platform and editor adapters",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@jotx-labs/core": "file:../core"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "vscode": "*"
+  },
+  "license": "Apache-2.0"
+}

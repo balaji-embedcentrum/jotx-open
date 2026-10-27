@@ -1,0 +1,156 @@
+/* ButtonStrip Container Styles */
+.buttonstrip-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 1em 0;
+    border-radius: var(--jx-r-lg);
+    font-family: var(--jx-font-sans);
+}
+
+.buttonstrip-wrapper.buttonstrip-selected {
+    box-shadow: 0 0 0 4px var(--jx-bg), 0 0 0 6px color-mix(in srgb, var(--jx-accent) 45%, transparent);
+}
+
+/* Grid container for buttons - EXACTLY 3 COLUMNS */
+.buttonstrip-container {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 10px;
+    width: 100%;
+    /* Ensure grid applies to children */
+    align-items: stretch;
+}
+
+/* CRITICAL: Make NodeViewContent and button wrappers work with CSS Grid */
+.buttonstrip-content {
+    display: contents;
+}
+
+/* The buttons are wrapped in NodeViewWrapper divs - use display:contents to ignore them */
+.buttonstrip-content>div {
+    display: contents;
+}
+
+.buttonstrip-wrapper .button-wrapper {
+    display: flex !important;
+    width: auto !important;
+    height: 100%;
+    margin: 0 !important;
+}
+
+/* Make button fill the wrapper */
+.buttonstrip-wrapper .jotx-button {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 100% !important;
+    height: 100%;
+    min-height: 44px;
+    text-align: center;
+}
+
+
+/* EDIT MODE STYLES */
+.buttonstrip-edit-ui {
+    margin-bottom: 12px;
+    padding: 14px;
+    border: 1px solid var(--jx-line);
+    border-radius: var(--jx-r-lg);
+    background: var(--jx-elevated);
+    box-shadow: var(--jx-shadow-md);
+    animation: jx-reveal 160ms var(--jx-ease);
+}
+
+.buttonstrip-edit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+}
+
+.buttonstrip-edit-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+    border: 1px solid var(--jx-line);
+    border-radius: var(--jx-r-md);
+    background: var(--jx-surface);
+}
+
+.buttonstrip-edit-column h4 {
+    margin: 0;
+    color: var(--jx-fg-subtle);
+    font-size: var(--jx-text-xs);
+    font-weight: 650;
+    letter-spacing: 0.06em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.buttonstrip-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.buttonstrip-form-group label {
+    color: var(--jx-fg-subtle);
+    font-size: var(--jx-text-xs);
+    font-weight: 600;
+}
+
+.buttonstrip-form-group input,
+.buttonstrip-form-group select {
+    height: 28px;
+    padding: 0 8px;
+    border: 1px solid var(--jx-line);
+    border-radius: var(--jx-r-sm);
+    background: var(--jx-bg);
+    color: var(--jx-fg);
+    font: 400 var(--jx-text-sm)/1.4 var(--jx-font-sans);
+    caret-color: var(--jx-accent);
+    transition: border-color var(--jx-dur) var(--jx-ease), box-shadow var(--jx-dur) var(--jx-ease);
+}
+
+.buttonstrip-form-group input:hover,
+.buttonstrip-form-group select:hover {
+    border-color: var(--jx-line-strong);
+}
+
+.buttonstrip-form-group input:focus,
+.buttonstrip-form-group select:focus {
+    outline: none;
+    border-color: var(--jx-accent);
+    box-shadow: var(--jx-ring);
+}
+
+.buttonstrip-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+
+.buttonstrip-done-btn {
+    height: 28px;
+    padding: 0 14px;
+    border: none;
+    border-radius: var(--jx-r-sm);
+    background: var(--jx-accent);
+    color: var(--jx-on-accent);
+    font: 600 var(--jx-text-sm)/1 var(--jx-font-sans);
+    cursor: pointer;
+    transition: background var(--jx-dur) var(--jx-ease);
+}
+
+.buttonstrip-done-btn:hover {
+    background: var(--jx-accent-strong);
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+
+    .buttonstrip-container,
+    .buttonstrip-edit-grid {
+        grid-template-columns: 1fr;
+    }
+}

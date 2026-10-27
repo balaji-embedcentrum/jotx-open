@@ -1,0 +1,145 @@
+.jotx-datetime-node {
+  margin: 0.6em 0;
+}
+
+.jotx-datetime-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 14px 0 11px;
+  border: 1px solid color-mix(in srgb, var(--jx-line) 80%, transparent);
+  border-radius: var(--jx-r-pill);
+  background: var(--jx-surface);
+  color: var(--jx-fg);
+  font-family: var(--jx-font-sans);
+  cursor: pointer;
+  transition: border-color var(--jx-dur) var(--jx-ease), box-shadow var(--jx-dur) var(--jx-ease), background var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-datetime-pill svg {
+  width: 15px;
+  height: 15px;
+  color: var(--jx-accent);
+  pointer-events: none;
+}
+
+.jotx-datetime-pill:hover {
+  border-color: var(--jx-line-strong);
+  box-shadow: var(--jx-shadow-sm);
+}
+
+.jotx-datetime-pill:focus-visible {
+  outline: none;
+  box-shadow: var(--jx-ring);
+}
+
+.jotx-datetime-text {
+  color: var(--jx-fg);
+  font-size: 13px;
+  font-weight: 550;
+  font-variant-numeric: tabular-nums;
+}
+
+.jotx-datetime-popover {
+  width: 340px;
+  max-width: 100%;
+  margin-top: 8px;
+  padding: 10px 14px;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-lg);
+  background: var(--jx-elevated);
+  box-shadow: var(--jx-shadow-lg);
+  font-family: var(--jx-font-sans);
+  animation: jotx-datetime-in 140ms var(--jx-ease);
+}
+
+@keyframes jotx-datetime-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.jotx-datetime-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 6px 0;
+}
+
+.jotx-datetime-label {
+  min-width: 56px;
+  color: var(--jx-fg-subtle);
+  font-size: 10.5px;
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.jotx-datetime-select,
+.jotx-datetime-input {
+  flex: 1 1 auto;
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-sm);
+  outline: none;
+  background: var(--jx-bg);
+  color: var(--jx-fg);
+  font: 400 13px/1 var(--jx-font-sans);
+  color-scheme: light;
+  transition: border-color var(--jx-dur) var(--jx-ease), box-shadow var(--jx-dur) var(--jx-ease);
+}
+
+/* Native date/time pickers follow the theme */
+body.vscode-dark .jotx-datetime-select,
+body.vscode-dark .jotx-datetime-input,
+body.vscode-high-contrast .jotx-datetime-input,
+.dark .jotx-datetime-input,
+.jx-scope[data-theme="dark"] .jotx-datetime-select,
+.jx-scope[data-theme="dark"] .jotx-datetime-input {
+  color-scheme: dark;
+}
+
+.jotx-datetime-select:hover,
+.jotx-datetime-input:hover {
+  border-color: var(--jx-line-strong);
+}
+
+.jotx-datetime-select:focus,
+.jotx-datetime-input:focus {
+  border-color: var(--jx-accent);
+  box-shadow: var(--jx-ring);
+}
+
+.jotx-datetime-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.jotx-datetime-btn {
+  height: 28px;
+  padding: 0 12px;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-sm);
+  background: var(--jx-bg);
+  color: var(--jx-fg);
+  font: 550 12.5px/1 var(--jx-font-sans);
+  cursor: pointer;
+}
+
+.jotx-datetime-btn:hover {
+  background: var(--jx-surface);
+}
+
+.jotx-datetime-btn-primary {
+  border-color: transparent;
+  background: var(--jx-accent);
+  color: var(--jx-on-accent);
+}
+
+.jotx-datetime-btn-primary:hover {
+  background: var(--jx-accent-strong);
+}

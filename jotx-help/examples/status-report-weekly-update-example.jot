@@ -1,0 +1,306 @@
+hdef jotx WeeklyStatusUpdate
+
+  type page
+  title Engineering Team - Weekly Status Update
+  icon 📈
+  author Engineering Leadership
+  created 2025-01-19
+  tags "status", "weekly", "engineering", "update"
+
+  def table block_1
+    columns Key, Value
+    rows """Period | Week of January 13-19, 2025
+Author | Sarah Kim - VP Engineering
+Status | On Track with Minor Risks
+Team Size | 23 engineers (3 teams)"""
+
+  def heading "Engineering Weekly Update - Week 3, Q1 2025"
+
+  def callout "🎯 Week Highlight: Launched API v2.0 to production, achieving 99.8% uptime. Customer-facing features on schedule for Feb 1 release."
+
+  def divider
+
+  def heading "Executive Summary"
+    level 2
+
+  def paragraph "Strong week with major milestone achieved (API v2.0 launch). All three teams made significant progress on Q1 objectives. One emerging risk around mobile app performance that needs attention next week. Overall: 85% sprint velocity, on track for Q1 delivery."
+
+  def heading "Overall Status"
+    level 2
+
+  def table block_8
+    def row
+      def header
+        text Dimension
+      def header
+        text Status
+      def header
+        text Notes
+    def row
+      def cell
+        def paragraph "Timeline"
+      def cell
+        def callout "✅ On Track"
+          variant success
+      def cell
+        def paragraph "Sprint 26 at 85% velocity, all Q1 milestones green"
+    def row
+      def cell
+        def paragraph "Quality"
+      def cell
+        def callout "✅ Good"
+          variant success
+      def cell
+        def paragraph "Bug count down 15%, test coverage at 87%"
+    def row
+      def cell
+        def paragraph "Performance"
+      def cell
+        def callout "⚠️ At Risk"
+          variant warning
+      def cell
+        def paragraph "Mobile app load time increased to 3.2s (target: <2s)"
+    def row
+      def cell
+        def paragraph "Team Health"
+      def cell
+        def callout "✅ High"
+          variant success
+      def cell
+        def paragraph "Team morale survey: 8.2/10, no turnover risk"
+
+  def heading "Key Accomplishments This Week"
+    level 2
+
+  def list
+    items """🚀 **Launched API v2.0 to production** - Zero downtime migration, 15% faster response times
+✅ **Completed 23/27 sprint stories** (85% velocity) - On pace for Q1 commitments
+🔒 **Security audit passed** - Zero critical vulnerabilities, 2 medium issues addressed
+📱 **iOS app beta shipped** to 100 internal users - Collecting feedback
+⚡ **Database optimization** - Query performance improved 40% (avg 120ms → 72ms)
+👥 **Onboarded 2 new engineers** - Maria (Backend) and James (Frontend) ramping up"""
+
+  def heading "Progress on Q1 Objectives"
+    level 2
+
+  def table block_19
+    def row
+      def header
+        text Objective
+      def header
+        text Owner
+      def header
+        text Progress
+      def header
+        text Status
+    def row
+      def cell
+        def paragraph "API v2.0 Launch"
+      def cell
+        def paragraph "Backend Team"
+      def cell
+        def paragraph "100%"
+      def cell
+        def paragraph "✅ Complete"
+    def row
+      def cell
+        def paragraph "Mobile App Redesign"
+      def cell
+        def paragraph "Mobile Team"
+      def cell
+        def paragraph "65%"
+      def cell
+        def paragraph "🟢 On Track"
+    def row
+      def cell
+        def paragraph "Real-Time Notifications"
+      def cell
+        def paragraph "Platform Team"
+      def cell
+        def paragraph "80%"
+      def cell
+        def paragraph "🟢 On Track"
+    def row
+      def cell
+        def paragraph "Test Automation (90% coverage)"
+      def cell
+        def paragraph "QA + All Teams"
+      def cell
+        def paragraph "87%"
+      def cell
+        def paragraph "🟡 Slight Delay"
+    def row
+      def cell
+        def paragraph "Performance: <200ms P99"
+      def cell
+        def paragraph "Platform Team"
+      def cell
+        def paragraph "70%"
+      def cell
+        def paragraph "🟡 At Risk"
+
+  def heading "Team-by-Team Highlights"
+    level 2
+
+  def heading "Backend Team (8 engineers)"
+    level 3
+
+  def list
+    items """API v2.0 launch was flawless - great work by Alex and team
+Database migrations completed without incident
+Starting work on GraphQL API next week"""
+
+  def heading "Mobile Team (7 engineers)"
+    level 3
+
+  def list
+    items """iOS beta shipped, Android beta targeting next week
+Performance concern: App load time regression (see Risks)
+New navigation redesign getting positive feedback"""
+
+  def heading "Platform Team (8 engineers)"
+    level 3
+
+  def list
+    items """WebSocket infrastructure 90% complete
+Redis Pub/Sub working well in staging
+Load testing scheduled for next week"""
+
+  def heading "Challenges & Risks"
+    level 2
+
+  def callout "⚠️ Risk #1 (Medium): Mobile app performance degradation"
+    variant warning
+
+  def paragraph "iOS app load time increased from 2.1s to 3.2s after recent changes. Root cause under investigation - likely related to image loading logic. Impact: Could affect user experience and App Store ratings."
+
+  def list
+    items """**Mitigation**: Priya leading investigation, targeting fix by Wed Jan 22
+**Backup plan**: Roll back last 3 commits if needed
+**Help needed**: None yet, will escalate if not resolved by Thu"""
+
+  def callout "⚠️ Risk #2 (Low): Test automation lagging behind development"
+
+  def paragraph "Test coverage at 87%, targeting 90% by end of Q1. Gap growing slightly as new features ship faster than test creation."
+
+  def list
+    items """**Mitigation**: Allocated 20% of each engineer's time to test writing
+**Tracking**: Weekly coverage reports in team dashboards"""
+
+  def heading "Blockers"
+    level 2
+
+  def paragraph "One blocker requiring leadership support:"
+
+  def table block_41
+    def row
+      def header
+        text Blocker
+      def header
+        text Impact
+      def header
+        text Action Needed
+    def row
+      def cell
+        def paragraph "AWS infrastructure approval pending"
+      def cell
+        def paragraph "Blocking load testing (Platform Team)"
+      def cell
+        def paragraph "Need CFO approval for $8k/month Redis cluster"
+
+  def heading "Metrics & KPIs"
+    level 2
+
+  def table block_43
+    def row
+      def header
+        text Metric
+      def header
+        text Target
+      def header
+        text Actual
+      def header
+        text Trend
+    def row
+      def cell
+        def paragraph "Sprint Velocity"
+      def cell
+        def paragraph "90%"
+      def cell
+        def paragraph "85%"
+      def cell
+        def paragraph "↓ (was 92%)"
+    def row
+      def cell
+        def paragraph "Bug Count"
+      def cell
+        def paragraph "< 50"
+      def cell
+        def paragraph "42"
+      def cell
+        def paragraph "↓ (was 49)"
+    def row
+      def cell
+        def paragraph "Test Coverage"
+      def cell
+        def paragraph "90%"
+      def cell
+        def paragraph "87%"
+      def cell
+        def paragraph "↑ (was 84%)"
+    def row
+      def cell
+        def paragraph "API P99 Latency"
+      def cell
+        def paragraph "< 200ms"
+      def cell
+        def paragraph "165ms"
+      def cell
+        def paragraph "↓ (was 210ms)"
+    def row
+      def cell
+        def paragraph "Uptime"
+      def cell
+        def paragraph "99.9%"
+      def cell
+        def paragraph "99.8%"
+      def cell
+        def paragraph "→ (stable)"
+
+  def heading "Next Week Priorities (Week 4)"
+    level 2
+
+  def list
+    listtype numbered
+    items """**Fix mobile app performance** (Top priority) - Target 3.2s → <2s
+**Android beta launch** - Ship to 100 internal users by Friday
+**WebSocket load testing** - Validate 100k concurrent connections
+**GraphQL API kickoff** - Backend team starts implementation
+**Security: Implement rate limiting** - Prevent API abuse"""
+
+  def heading "Support Needed from Leadership"
+    level 2
+
+  def checklist
+    def listitem "AWS infrastructure approval ($8k/month Redis cluster) - Needed by Tue"
+      checked "false"
+      priority high
+    def listitem "Hiring: Interview 2 backend engineer candidates this week"
+      checked "false"
+      priority medium
+    def listitem "Decision: Should we prioritize GraphQL API or continue REST v2 enhancements?"
+      checked "false"
+      priority medium
+
+  def divider
+
+  def heading "Team Shoutouts 🎉"
+    level 2
+
+  def list
+    items """**Alex & Backend Team** - Flawless API v2.0 launch, excellent planning and execution
+**Emma (QA)** - Security audit prep was thorough, caught 3 issues before audit
+**Priya** - Great mentorship of new engineer James, ramping him up quickly"""
+
+  def callout "✅ Strong week overall. API v2.0 launch is a major milestone. Team is energized and focused on Q1 goals."
+    variant success

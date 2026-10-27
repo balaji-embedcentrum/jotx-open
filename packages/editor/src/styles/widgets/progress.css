@@ -1,0 +1,43 @@
+.jx-progress { display: flex; flex-direction: column; gap: 14px; }
+
+.jx-progress__summary { display: flex; align-items: baseline; gap: 8px; font-size: 12.5px; }
+.jx-progress__summary-value {
+  color: var(--jx-fg);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.jx-progress__row:not([data-tone]) { --jx-tone: var(--jx-accent); }
+
+.jx-progress__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.jx-progress__label { color: var(--jx-fg); font-weight: 500; }
+.jx-progress__value { color: var(--jx-fg-muted); font-variant-numeric: tabular-nums; }
+.jx-progress__row.is-done .jx-progress__value { color: var(--jx-success); font-weight: 600; }
+
+.jx-progress__track {
+  position: relative;
+  height: 8px;
+  overflow: hidden;
+  border-radius: var(--jx-r-pill);
+  background: var(--jx-surface-2);
+  touch-action: none;
+}
+
+.jx-progress__track.is-editable { cursor: ew-resize; }
+.jx-progress__track.is-editable:hover { box-shadow: 0 0 0 3px color-mix(in srgb, var(--jx-tone) 18%, transparent); }
+
+.jx-progress__fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--jx-tone) 75%, white), var(--jx-tone));
+  transition: width 220ms var(--jx-ease);
+}

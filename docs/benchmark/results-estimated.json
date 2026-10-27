@@ -1,0 +1,53 @@
+{
+  "tokenizer": "@anthropic-ai/tokenizer (legacy Claude tokenizer — estimate)",
+  "jot": {
+    "bytes": 4415,
+    "lines": 177,
+    "tokens": 1164
+  },
+  "htmlFull": {
+    "bytes": 12048,
+    "lines": 176,
+    "tokens": 4240
+  },
+  "htmlBody": {
+    "bytes": 6223,
+    "lines": 108,
+    "tokens": 2041
+  },
+  "primer": {
+    "bytes": 20750,
+    "lines": 836,
+    "tokens": 5163
+  },
+  "edits": [
+    {
+      "name": "Move a Kanban card (In progress → Review)",
+      "jot": 18,
+      "html": 122,
+      "jotHunks": 1,
+      "htmlHunks": 1
+    },
+    {
+      "name": "Update a progress bar (Desktop app 64% → 75%)",
+      "jot": 8,
+      "html": 76,
+      "jotHunks": 1,
+      "htmlHunks": 2
+    },
+    {
+      "name": "Tick a checklist item",
+      "jot": 24,
+      "html": 24,
+      "jotHunks": 1,
+      "htmlHunks": 1
+    },
+    {
+      "name": "Add a timeline milestone",
+      "jot": 39,
+      "html": 80,
+      "jotHunks": 1,
+      "htmlHunks": 1
+    }
+  ]
+}

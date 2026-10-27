@@ -1,0 +1,35 @@
+{
+  "name": "jotx-monorepo",
+  "version": "3.1.0",
+  "private": true,
+  "description": "jotx - Quick notes for developers",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/balaji-embedcentrum/jotx-open.git"
+  },
+  "author": "Jotx Labs",
+  "license": "Apache-2.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "sync-versions": "node scripts/sync-versions.js",
+    "build:core": "cd packages/core && npm run build",
+    "build:registry": "cd packages/registry && npm run build",
+    "build:standard-lib": "cd packages/standard-lib && npm run build",
+    "build:react-renderer": "cd packages/react-renderer && npm run build",
+    "build:editor": "cd packages/editor && npm run build",
+    "build:adapters": "cd packages/adapters && npm run build",
+    "build:language": "cd packages/language && npm run build",
+    "build:extension": "cd packages/vscode-extension && npm run compile",
+    "build:cli": "cd packages/cli && npm run build",
+    "build:embed": "cd packages/embed && npm run build",
+    "build:site": "npm run build:embed && node scripts/build-site.js",
+    "build": "npm run build:registry && npm run build:core && npm run build:standard-lib && npm run build:adapters && npm run build:react-renderer && npm run build:editor && npm run build:language && npm run build:cli && npm run build:extension",
+    "test": "cd packages/core && npm test && cd ../adapters && npm test",
+    "package": "npm run sync-versions && cd packages/vscode-extension && npm run package",
+    "publish:all": "./scripts/publish-all.sh",
+    "clean": "rm -rf packages/*/dist packages/*/out"
+  },
+  "devDependencies": {}
+}

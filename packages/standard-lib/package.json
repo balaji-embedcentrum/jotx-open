@@ -1,0 +1,27 @@
+{
+  "name": "@jotx-labs/standard-lib",
+  "version": "3.1.0",
+  "files": [
+    "dist"
+  ],
+  "description": "Standard library of blocks for jotx (Heading, Paragraph, List, etc.)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "keywords": [
+    "jotx",
+    "standard-lib",
+    "blocks"
+  ],
+  "author": "Jotx Labs",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@jotx-labs/registry": "file:../registry"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

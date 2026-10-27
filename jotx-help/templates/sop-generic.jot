@@ -1,0 +1,145 @@
+hdef jotx SOPGeneric
+
+  type page
+  title Standard Operating Procedure Template
+  icon 📖
+  author ""
+  created 2025-01-01
+  tags "process", "sop", "procedure", "operations"
+
+  def table block_1
+    columns Key, Value
+    rows """Version | 1.0
+Owner | 
+Last Updated | 
+Review Cycle | Quarterly"""
+
+  def heading "SOP: [Process Name]"
+
+  def divider
+
+  def heading "1. Purpose"
+    level 2
+
+  def paragraph "[Clearly state why this SOP exists. What problem does it solve? What objective does it achieve?]"
+
+  def heading "2. Scope"
+    level 2
+
+  def paragraph "[Define what is covered and what is not covered by this SOP]"
+
+  def list
+    items """Applies to: [departments, roles, or systems]
+Does not apply to: [exclusions or exceptions]"""
+
+  def heading "3. Definitions & Acronyms"
+    level 2
+
+  def table block_10
+    rows """ | 
+[Term 1] | [Definition]
+[Term 2] | [Definition]"""
+
+  def heading "4. Roles & Responsibilities"
+    level 2
+
+  def table block_12
+    rows """ | 
+[Role 1] | [List of specific duties]
+[Role 2] | [List of specific duties]"""
+
+  def heading "5. Prerequisites"
+    level 2
+
+  def paragraph "Before starting this procedure, ensure:"
+
+  def checklist
+    def listitem "[Required tool, system, or approval]"
+    def listitem "[Training or certification completed]"
+    def listitem "[Access permissions granted]"
+
+  def heading "6. Procedure Steps"
+    level 2
+
+  def heading "Step 6.1: [Major Step Name]"
+    level 3
+
+  def list
+    listtype numbered
+    items """Action: [Describe the action clearly]
+Responsible: [Who performs this]
+Expected Outcome: [What should result]
+Duration: [Estimated time]"""
+
+  def callout "⚠️ Critical Note: [Any important warnings or considerations for this step]"
+    variant warning
+
+  def heading "Step 6.2: [Second Major Step]"
+    level 3
+
+  def list
+    listtype numbered
+    items """Action: [Describe the action]
+Responsible: [Who performs this]
+Expected Outcome: [What should result]"""
+
+  def heading "Step 6.3: [Third Major Step]"
+    level 3
+
+  def list
+    listtype numbered
+    items """Action: [Describe the action]
+Responsible: [Who performs this]"""
+
+  def heading "7. Quality Control"
+    level 2
+
+  def paragraph "[How is quality verified? What are the checkpoints?]"
+
+  def list
+    items """Checkpoint 1: [What to verify]
+Checkpoint 2: [What to verify]
+Final review by: [Role]"""
+
+  def heading "8. Success Criteria / KPIs"
+    level 2
+
+  def table block_28
+    rows """ | 
+[KPI 1] | [Target value]
+[KPI 2] | [Target value]"""
+
+  def heading "9. Troubleshooting"
+    level 2
+
+  def table block_30
+    rows """ |  | 
+[Common issue 1] | [Why it happens] | [How to fix]
+[Common issue 2] | [Why it happens] | [How to fix]"""
+
+  def heading "10. Related Documents"
+    level 2
+
+  def list
+    items """[Related SOP or policy document]
+[Training materials or guides]
+[Forms or templates used]"""
+
+  def heading "11. Revision History"
+    level 2
+
+  def table block_34
+    rows """ |  |  | 
+1.0 |  | Initial draft | """
+
+  def heading "12. Approvals"
+    level 2
+
+  def paragraph "This SOP has been reviewed and approved by:"
+
+  def table block_37
+    rows """ |  | 
+ | [Approver 1 Title] | 
+ | [Approver 2 Title] | """
+
+  def paragraph

@@ -1,0 +1,493 @@
+[
+  {
+    "_type": "block",
+    "_key": "k1",
+    "style": "h1",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "k2",
+        "text": "Atlas 2.0 Launch Plan",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "k3",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "k4",
+        "text": "Everything the team needs to ship Atlas 2.0 on ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "k5",
+        "text": "December 1",
+        "marks": [
+          "strong"
+        ]
+      },
+      {
+        "_type": "span",
+        "_key": "k6",
+        "text": ": scope, owners, risks, and the path from beta to general availability.",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "table",
+    "_key": "k7",
+    "rows": [
+      {
+        "_key": "k8",
+        "_type": "tableRow",
+        "cells": [
+          "Key",
+          "Value"
+        ]
+      },
+      {
+        "_key": "k9",
+        "_type": "tableRow",
+        "cells": [
+          "Owner",
+          "Priya Raman"
+        ]
+      },
+      {
+        "_key": "ka",
+        "_type": "tableRow",
+        "cells": [
+          "Status",
+          "On track"
+        ]
+      },
+      {
+        "_key": "kb",
+        "_type": "tableRow",
+        "cells": [
+          "Target date",
+          "2026-12-01"
+        ]
+      }
+    ]
+  },
+  {
+    "_type": "callout",
+    "_key": "kc",
+    "tone": "info",
+    "body": [
+      {
+        "_type": "block",
+        "_key": "kd",
+        "style": "normal",
+        "markDefs": [],
+        "children": [
+          {
+            "_type": "span",
+            "_key": "ke",
+            "text": "Scope is frozen as of ",
+            "marks": []
+          },
+          {
+            "_type": "span",
+            "_key": "kf",
+            "text": "October 20",
+            "marks": [
+              "strong"
+            ]
+          },
+          {
+            "_type": "span",
+            "_key": "kg",
+            "text": ". New requests go to the 2.1 backlog.",
+            "marks": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "kh",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "ki",
+        "text": "Goals",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "kj",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "kk",
+        "text": "Cut cold-start time from 2.4s to under ",
+        "marks": []
+      },
+      {
+        "_type": "span",
+        "_key": "kl",
+        "text": "800ms",
+        "marks": [
+          "strong"
+        ]
+      }
+    ],
+    "listItem": "bullet",
+    "level": 1
+  },
+  {
+    "_type": "block",
+    "_key": "km",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "kn",
+        "text": "Ship offline sync to every paid workspace",
+        "marks": []
+      }
+    ],
+    "listItem": "bullet",
+    "level": 1
+  },
+  {
+    "_type": "block",
+    "_key": "ko",
+    "style": "normal",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "kp",
+        "text": "Reach 99.95% API availability for 30 days before GA",
+        "marks": []
+      }
+    ],
+    "listItem": "bullet",
+    "level": 1
+  },
+  {
+    "_type": "block",
+    "_key": "kq",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "kr",
+        "text": "Workstreams",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "progress",
+    "_key": "ks",
+    "title": "Workstream progress",
+    "items": [
+      {
+        "_key": "kt",
+        "label": "Sync engine",
+        "value": 82
+      },
+      {
+        "_key": "ku",
+        "label": "Desktop app",
+        "value": 64
+      },
+      {
+        "_key": "kv",
+        "label": "Migration tooling",
+        "value": 7,
+        "max": 12
+      },
+      {
+        "_key": "kw",
+        "label": "Docs & onboarding",
+        "value": 40
+      }
+    ]
+  },
+  {
+    "_type": "kanban",
+    "_key": "kx",
+    "title": "Launch board",
+    "columns": [
+      {
+        "_key": "ky",
+        "title": "Todo",
+        "cards": [
+          "Pricing page copy",
+          "Status page alerts"
+        ]
+      },
+      {
+        "_key": "kz",
+        "title": "In progress",
+        "cards": [
+          "Offline conflict resolver",
+          "Migration dry run"
+        ]
+      },
+      {
+        "_key": "k10",
+        "title": "Review",
+        "cards": [
+          "SSO for enterprise"
+        ]
+      },
+      {
+        "_key": "k11",
+        "title": "Done",
+        "cards": [
+          "Load test at 5x traffic"
+        ]
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "k12",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "k13",
+        "text": "Timeline",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "timeline",
+    "_key": "k14",
+    "title": "Milestones",
+    "events": [
+      {
+        "_key": "k15",
+        "date": "2026-09-15",
+        "title": "Private beta",
+        "status": "done",
+        "detail": "40 design partners"
+      },
+      {
+        "_key": "k16",
+        "date": "2026-10-20",
+        "title": "Scope freeze",
+        "status": "done"
+      },
+      {
+        "_key": "k17",
+        "date": "2026-11-10",
+        "title": "Public beta",
+        "status": "active",
+        "detail": "Feature flags on for 20% of workspaces"
+      },
+      {
+        "_key": "k18",
+        "date": "2026-12-01",
+        "title": "General availability",
+        "status": "planned"
+      },
+      {
+        "_key": "k19",
+        "date": "2027-01-15",
+        "title": "2.1 release",
+        "status": "planned"
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "k1a",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "k1b",
+        "text": "Architecture",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "mermaid",
+    "_key": "k1c",
+    "title": "Sync flow",
+    "code": "flowchart LR\n  Client[Desktop client] --> Queue[(Change queue)]\n  Queue --> Resolver{Conflict resolver}\n  Resolver -->|clean| Store[(Primary store)]\n  Resolver -->|conflict| Review[Manual review]"
+  },
+  {
+    "_type": "code",
+    "_key": "k1d",
+    "language": "bash",
+    "code": "atlas migrate --workspace acme --dry-run\natlas migrate --workspace acme --apply"
+  },
+  {
+    "_type": "block",
+    "_key": "k1e",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "k1f",
+        "text": "Beta metrics",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "chart",
+    "_key": "k1g",
+    "title": "Weekly active workspaces",
+    "chartType": "bar",
+    "labels": [
+      "W1",
+      "W2",
+      "W3",
+      "W4"
+    ],
+    "datasets": [
+      {
+        "_key": "k1h",
+        "label": "Workspaces",
+        "data": [
+          120,
+          210,
+          340,
+          480
+        ]
+      }
+    ]
+  },
+  {
+    "_type": "table",
+    "_key": "k1i",
+    "rows": [
+      {
+        "_key": "k1j",
+        "_type": "tableRow",
+        "cells": [
+          "Risk",
+          "Impact",
+          "Owner",
+          "Mitigation"
+        ]
+      },
+      {
+        "_key": "k1k",
+        "_type": "tableRow",
+        "cells": [
+          "Sync data loss",
+          "High",
+          "Marco",
+          "Write-ahead log + nightly restore drill"
+        ]
+      },
+      {
+        "_key": "k1l",
+        "_type": "tableRow",
+        "cells": [
+          "Migration timeouts",
+          "Medium",
+          "Lena",
+          "Batch by workspace size"
+        ]
+      },
+      {
+        "_key": "k1m",
+        "_type": "tableRow",
+        "cells": [
+          "Pricing confusion",
+          "Low",
+          "Priya",
+          "Comparison table on pricing page"
+        ]
+      }
+    ]
+  },
+  {
+    "_type": "block",
+    "_key": "k1n",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "k1o",
+        "text": "Decisions",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "decision",
+    "_key": "k1p",
+    "title": "Use CRDTs for offline sync",
+    "status": "accepted",
+    "date": "2026-08-04",
+    "context": "Last-write-wins lost edits in 3% of beta sessions.",
+    "decision": "Adopt CRDT-based merge for documents and comments.",
+    "consequences": "Larger payloads (~15%), but no silent data loss."
+  },
+  {
+    "_type": "block",
+    "_key": "k1q",
+    "style": "h2",
+    "markDefs": [],
+    "children": [
+      {
+        "_type": "span",
+        "_key": "k1r",
+        "text": "Launch checklist",
+        "marks": []
+      }
+    ]
+  },
+  {
+    "_type": "checklist",
+    "_key": "k1s",
+    "items": [
+      {
+        "_key": "k1t",
+        "text": "Security review signed off",
+        "done": false
+      },
+      {
+        "_key": "k1u",
+        "text": "Load test at 5x expected traffic",
+        "done": false
+      },
+      {
+        "_key": "k1v",
+        "text": "Support playbook published",
+        "done": false
+      },
+      {
+        "_key": "k1w",
+        "text": "Press kit and launch post ready",
+        "done": false
+      }
+    ]
+  }
+]

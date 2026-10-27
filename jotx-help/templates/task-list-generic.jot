@@ -1,0 +1,80 @@
+hdef jotx TaskListGeneric
+
+  type page
+  title Task List Template
+  icon ✓
+  author ""
+  created 2025-01-01
+  tags "tasks", "todo", "checklist", "productivity"
+
+  def table block_1
+    columns Key, Value
+    rows """Date | 
+Owner | 
+Status | In Progress"""
+
+  def heading "[Task List Title]"
+
+  def paragraph "[Brief description or context for this task list]"
+
+  def divider
+
+  def heading "High Priority"
+    level 2
+
+  def checklist
+    def listitem "[Critical task that must be done today]"
+      checked "false"
+      priority critical
+    def listitem "[Important task with deadline]"
+      checked "false"
+      priority high
+    def listitem "[High priority task]"
+      checked "false"
+      priority high
+
+  def heading "Medium Priority"
+    level 2
+
+  def checklist
+    def listitem "[Important but not urgent task]"
+      checked "false"
+      priority medium
+    def listitem "[Regular task to complete]"
+      checked "false"
+      priority medium
+    def listitem "[Task that can wait if needed]"
+      checked "false"
+      priority medium
+
+  def heading "Low Priority"
+    level 2
+
+  def checklist
+    def listitem "[Nice to have task]"
+      checked "false"
+      priority low
+    def listitem "[Future task or idea]"
+      checked "false"
+      priority low
+
+  def heading "Blocked / Waiting"
+    level 2
+
+  def list
+    items """[Task blocked by: reason or dependency]
+[Waiting on: person or information]"""
+
+  def heading "Completed Today"
+    level 2
+
+  def checklist
+    def listitem "[Completed task 1]"
+      checked "true"
+    def listitem "[Completed task 2]"
+      checked "true"
+
+  def heading "Notes & Ideas"
+    level 2
+
+  def paragraph "[Quick notes, ideas, or things to remember]"

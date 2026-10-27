@@ -1,0 +1,109 @@
+/* Diagram block — shell, header and controls live in RichBlocks.css */
+
+.jotx-mermaid-editor {
+  position: relative;
+}
+
+/* Source editor (beats the editor's generic <pre> rule) */
+.jotx-editor-content .jotx-mermaid .jotx-mermaid-code,
+.jotx-mermaid-code {
+  margin: 8px 12px 0;
+  padding: 10px 12px;
+  overflow: auto;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-md);
+  background: var(--jx-bg);
+  color: var(--jx-fg);
+  font-family: var(--jx-font-mono);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+.jotx-mermaid-textarea {
+  display: block;
+  width: 100%;
+  min-height: 140px;
+  padding: 0;
+  resize: vertical;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--jx-fg);
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* Canvas: the diagram sits directly on the block's soft surface */
+.jotx-mermaid-preview {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 200px;
+  padding: 16px 20px 20px;
+  overflow: auto;
+  outline: none;
+  transition: box-shadow var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-mermaid-preview.jotx-mermaid-focused {
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--jx-accent) 40%, transparent);
+}
+
+.jotx-mermaid-svg {
+  display: block;
+  /* auto margins center the diagram without clipping when it overflows */
+  margin: 0 auto;
+  will-change: transform;
+  flex-shrink: 0;
+}
+
+.jotx-mermaid-svg svg {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: none;
+  min-width: fit-content;
+}
+
+.jotx-mermaid-preview .jotx-mermaid-error {
+  margin: 0 0 8px;
+}
+
+/* ── Preview Mode: frameless, no chrome ──────────────────────────────── */
+.jotx-mermaid--preview {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+.jotx-mermaid--preview .jotx-mermaid-editor {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.jotx-mermaid-svg-preview {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.jotx-mermaid-svg-preview svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.jotx-mermaid--preview .jotx-mermaid-error {
+  margin: 0;
+  padding: 4px 0;
+  background: transparent;
+  color: var(--jx-danger);
+  font-size: 0.85em;
+}

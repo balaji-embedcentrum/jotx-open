@@ -1,0 +1,1129 @@
+{
+  "children": [
+    {
+      "object": "block",
+      "type": "heading_1",
+      "heading_1": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Atlas 2.0 Launch Plan"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "paragraph",
+      "paragraph": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Everything the team needs to ship Atlas 2.0 on "
+            }
+          },
+          {
+            "type": "text",
+            "text": {
+              "content": "December 1"
+            },
+            "annotations": {
+              "bold": true
+            }
+          },
+          {
+            "type": "text",
+            "text": {
+              "content": ": scope, owners, risks, and the path from beta to general availability."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "table",
+      "table": {
+        "table_width": 2,
+        "has_column_header": true,
+        "has_row_header": false,
+        "children": [
+          {
+            "object": "block",
+            "type": "table_row",
+            "table_row": {
+              "cells": [
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Key"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Value"
+                    }
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "object": "block",
+            "type": "table_row",
+            "table_row": {
+              "cells": [
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Owner"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Priya Raman"
+                    }
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "object": "block",
+            "type": "table_row",
+            "table_row": {
+              "cells": [
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Status"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "On track"
+                    }
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "object": "block",
+            "type": "table_row",
+            "table_row": {
+              "cells": [
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Target date"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "2026-12-01"
+                    }
+                  }
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "callout",
+      "callout": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Scope is frozen as of "
+            }
+          },
+          {
+            "type": "text",
+            "text": {
+              "content": "October 20"
+            },
+            "annotations": {
+              "bold": true
+            }
+          },
+          {
+            "type": "text",
+            "text": {
+              "content": ". New requests go to the 2.1 backlog."
+            }
+          }
+        ],
+        "icon": {
+          "type": "emoji",
+          "emoji": "ℹ️"
+        }
+      }
+    },
+    {
+      "object": "block",
+      "type": "heading_2",
+      "heading_2": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Goals"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "bulleted_list_item",
+      "bulleted_list_item": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Cut cold-start time from 2.4s to under "
+            }
+          },
+          {
+            "type": "text",
+            "text": {
+              "content": "800ms"
+            },
+            "annotations": {
+              "bold": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "bulleted_list_item",
+      "bulleted_list_item": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Ship offline sync to every paid workspace"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "bulleted_list_item",
+      "bulleted_list_item": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Reach 99.95% API availability for 30 days before GA"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "heading_2",
+      "heading_2": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Workstreams"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "paragraph",
+      "paragraph": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Workstream progress"
+            },
+            "annotations": {
+              "bold": true
+            }
+          },
+          {
+            "type": "text",
+            "text": {
+              "content": " (61% overall)"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "table",
+      "table": {
+        "table_width": 2,
+        "has_column_header": true,
+        "has_row_header": false,
+        "children": [
+          {
+            "object": "block",
+            "type": "table_row",
+            "table_row": {
+              "cells": [
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Workstream"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Progress"
+                    }
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "object": "block",
+            "type": "table_row",
+            "table_row": {
+              "cells": [
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Sync engine"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "82%"
+                    }
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "object": "block",
+            "type": "table_row",
+            "table_row": {
+              "cells": [
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Desktop app"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "64%"
+                    }
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "object": "block",
+            "type": "table_row",
+            "table_row": {
+              "cells": [
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Migration tooling"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "7 / 12"
+                    }
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "object": "block",
+            "type": "table_row",
+            "table_row": {
+              "cells": [
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Docs & onboarding"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "40%"
+                    }
+                  }
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "paragraph",
+      "paragraph": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Launch board"
+            },
+            "annotations": {
+              "bold": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "table",
+      "table": {
+        "table_width": 4,
+        "has_column_header": true,
+        "has_row_header": false,
+        "children": [
+          {
+            "object": "block",
+            "type": "table_row",
+            "table_row": {
+              "cells": [
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Todo"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "In progress"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Review"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Done"
+                    }
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "object": "block",
+            "type": "table_row",
+            "table_row": {
+              "cells": [
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Pricing page copy"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Offline conflict resolver"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "SSO for enterprise"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Load test at 5x traffic"
+                    }
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "object": "block",
+            "type": "table_row",
+            "table_row": {
+              "cells": [
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Status page alerts"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Migration dry run"
+                    }
+                  }
+                ],
+                [],
+                []
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "heading_2",
+      "heading_2": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Timeline"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "bulleted_list_item",
+      "bulleted_list_item": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "2026-09-15 · Private beta"
+            },
+            "annotations": {
+              "bold": true
+            }
+          },
+          {
+            "type": "text",
+            "text": {
+              "content": " (done) — 40 design partners"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "bulleted_list_item",
+      "bulleted_list_item": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "2026-10-20 · Scope freeze"
+            },
+            "annotations": {
+              "bold": true
+            }
+          },
+          {
+            "type": "text",
+            "text": {
+              "content": " (done)"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "bulleted_list_item",
+      "bulleted_list_item": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "2026-11-10 · Public beta"
+            },
+            "annotations": {
+              "bold": true
+            }
+          },
+          {
+            "type": "text",
+            "text": {
+              "content": " (active) — Feature flags on for 20% of workspaces"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "bulleted_list_item",
+      "bulleted_list_item": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "2026-12-01 · General availability"
+            },
+            "annotations": {
+              "bold": true
+            }
+          },
+          {
+            "type": "text",
+            "text": {
+              "content": " (planned)"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "bulleted_list_item",
+      "bulleted_list_item": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "2027-01-15 · 2.1 release"
+            },
+            "annotations": {
+              "bold": true
+            }
+          },
+          {
+            "type": "text",
+            "text": {
+              "content": " (planned)"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "heading_2",
+      "heading_2": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Architecture"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "code",
+      "code": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "flowchart LR\n  Client[Desktop client] --> Queue[(Change queue)]\n  Queue --> Resolver{Conflict resolver}\n  Resolver -->|clean| Store[(Primary store)]\n  Resolver -->|conflict| Review[Manual review]"
+            }
+          }
+        ],
+        "language": "mermaid",
+        "caption": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Sync flow"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "code",
+      "code": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "atlas migrate --workspace acme --dry-run\natlas migrate --workspace acme --apply"
+            }
+          }
+        ],
+        "language": "bash"
+      }
+    },
+    {
+      "object": "block",
+      "type": "heading_2",
+      "heading_2": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Beta metrics"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "paragraph",
+      "paragraph": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Weekly active workspaces:"
+            },
+            "annotations": {
+              "bold": true
+            }
+          },
+          {
+            "type": "text",
+            "text": {
+              "content": " W1 120 · W2 210 · W3 340 · W4 480"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "table",
+      "table": {
+        "table_width": 4,
+        "has_column_header": true,
+        "has_row_header": false,
+        "children": [
+          {
+            "object": "block",
+            "type": "table_row",
+            "table_row": {
+              "cells": [
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Risk"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Impact"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Owner"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Mitigation"
+                    }
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "object": "block",
+            "type": "table_row",
+            "table_row": {
+              "cells": [
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Sync data loss"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "High"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Marco"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Write-ahead log + nightly restore drill"
+                    }
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "object": "block",
+            "type": "table_row",
+            "table_row": {
+              "cells": [
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Migration timeouts"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Medium"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Lena"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Batch by workspace size"
+                    }
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "object": "block",
+            "type": "table_row",
+            "table_row": {
+              "cells": [
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Pricing confusion"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Low"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Priya"
+                    }
+                  }
+                ],
+                [
+                  {
+                    "type": "text",
+                    "text": {
+                      "content": "Comparison table on pricing page"
+                    }
+                  }
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "heading_2",
+      "heading_2": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Decisions"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "callout",
+      "callout": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Use CRDTs for offline sync"
+            },
+            "annotations": {
+              "bold": true
+            }
+          },
+          {
+            "type": "text",
+            "text": {
+              "content": " — accepted, 2026-08-04"
+            }
+          }
+        ],
+        "icon": {
+          "type": "emoji",
+          "emoji": "⚖️"
+        },
+        "children": [
+          {
+            "object": "block",
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Context:"
+                  },
+                  "annotations": {
+                    "bold": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": {
+                    "content": " Last-write-wins lost edits in 3% of beta sessions."
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "object": "block",
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Decision:"
+                  },
+                  "annotations": {
+                    "bold": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": {
+                    "content": " Adopt CRDT-based merge for documents and comments."
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "object": "block",
+            "type": "bulleted_list_item",
+            "bulleted_list_item": {
+              "rich_text": [
+                {
+                  "type": "text",
+                  "text": {
+                    "content": "Consequences:"
+                  },
+                  "annotations": {
+                    "bold": true
+                  }
+                },
+                {
+                  "type": "text",
+                  "text": {
+                    "content": " Larger payloads (~15%), but no silent data loss."
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "heading_2",
+      "heading_2": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Launch checklist"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "object": "block",
+      "type": "to_do",
+      "to_do": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Security review signed off"
+            }
+          }
+        ],
+        "checked": false
+      }
+    },
+    {
+      "object": "block",
+      "type": "to_do",
+      "to_do": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Load test at 5x expected traffic"
+            }
+          }
+        ],
+        "checked": false
+      }
+    },
+    {
+      "object": "block",
+      "type": "to_do",
+      "to_do": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Support playbook published"
+            }
+          }
+        ],
+        "checked": false
+      }
+    },
+    {
+      "object": "block",
+      "type": "to_do",
+      "to_do": {
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Press kit and launch post ready"
+            }
+          }
+        ],
+        "checked": false
+      }
+    }
+  ]
+}

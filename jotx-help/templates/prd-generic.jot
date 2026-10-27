@@ -1,0 +1,219 @@
+hdef jotx PRDGeneric
+
+  type page
+  title Product Requirements Document Template
+  icon 📋
+  author ""
+  created 2025-01-01
+  tags "product", "requirements", "prd", "planning"
+
+  def table block_1
+    columns Key, Value
+    rows """Status | Draft
+Product Owner | 
+Target Release | 
+Priority | """
+
+  def heading "[Product/Feature Name]"
+
+  def paragraph "[One-line description of the product or feature]"
+
+  def divider
+
+  def heading "Executive Summary"
+    level 2
+
+  def paragraph "[Brief overview: What are we building? Why? What's the expected impact?]"
+
+  def callout "💡 Vision: [State the product vision or desired outcome in one sentence]"
+
+  def heading "Problem Statement"
+    level 2
+
+  def paragraph "[What problem are we solving? Who experiences this problem? How do we know it's a real problem?]"
+
+  def list
+    items """User pain point: [description]
+Current workaround: [what users do today]
+Impact of not solving: [business/user cost]"""
+
+  def heading "Goals & Success Metrics"
+    level 2
+
+  def heading "Primary Goals"
+    level 3
+
+  def list
+    listtype numbered
+    items """[Goal 1: e.g., Increase user engagement]
+[Goal 2: e.g., Reduce support tickets]
+[Goal 3: e.g., Drive revenue growth]"""
+
+  def heading "Success Metrics"
+    level 3
+
+  def table block_15
+    def row
+      def header
+        text Metric
+      def header
+        text Current
+      def header
+        text Target
+    def row
+      def cell
+        def paragraph "[Metric 1]"
+      def cell
+        def paragraph "[Baseline]"
+      def cell
+        def paragraph "[Goal]"
+    def row
+      def cell
+        def paragraph "[Metric 2]"
+      def cell
+        def paragraph "[Baseline]"
+      def cell
+        def paragraph "[Goal]"
+
+  def heading "Target Users"
+    level 2
+
+  def heading "Primary Persona"
+    level 3
+
+  def paragraph "[Name/Title of persona] - [Brief description of who they are, their goals, and behaviors]"
+
+  def list
+    items """Demographics: [age, location, role]
+Goals: [what they want to achieve]
+Pain points: [current frustrations]
+Tech savviness: [beginner/intermediate/advanced]"""
+
+  def heading "Secondary Persona(s)"
+    level 3
+
+  def paragraph "[Brief description of additional user segments]"
+
+  def heading "User Stories & Use Cases"
+    level 2
+
+  def list
+    listtype numbered
+    items """As a [persona], I want to [action], so that [benefit]
+As a [persona], I want to [action], so that [benefit]
+As a [persona], I want to [action], so that [benefit]"""
+
+  def heading "Requirements"
+    level 2
+
+  def heading "Must Have (P0)"
+    level 3
+
+  def list
+    items """[Requirement 1 - critical for launch]
+[Requirement 2 - critical for launch]"""
+
+  def heading "Should Have (P1)"
+    level 3
+
+  def list
+    items """[Requirement - important but can be deferred]
+[Requirement - important but can be deferred]"""
+
+  def heading "Could Have (P2)"
+    level 3
+
+  def list
+    items """[Requirement - nice to have, future iteration]
+[Requirement - nice to have, future iteration]"""
+
+  def heading "User Experience"
+    level 2
+
+  def paragraph "[Describe the user journey or key interactions. Include wireframes or mockups if available.]"
+
+  def image
+    src attachments/mockup.png
+    alt Wireframe or mockup
+    width 800
+    align center
+    caption Figure 1: [Description of mockup]
+
+  def heading "Out of Scope"
+    level 2
+
+  def paragraph "[Explicitly state what we are NOT building in this release]"
+
+  def list
+    items """[Feature or capability not included]
+[Feature or capability not included]"""
+
+  def heading "Technical Considerations"
+    level 2
+
+  def list
+    items """Platform: [Web/iOS/Android/All]
+Dependencies: [Existing systems or services required]
+Performance: [Load times, response times]
+Security: [Data protection, compliance requirements]"""
+
+  def heading "Risks & Assumptions"
+    level 2
+
+  def heading "Risks"
+    level 3
+
+  def list
+    items """[Risk 1] - Mitigation: [strategy]
+[Risk 2] - Mitigation: [strategy]"""
+
+  def heading "Assumptions"
+    level 3
+
+  def list
+    items """[Assumption about user behavior, technical feasibility, etc.]
+[Assumption about user behavior, technical feasibility, etc.]"""
+
+  def heading "Timeline & Milestones"
+    level 2
+
+  def table block_45
+    def row
+      def header
+        text Milestone
+      def header
+        text Target Date
+    def row
+      def cell
+        def paragraph "Kickoff & Design"
+      def cell
+        def paragraph "[Date]"
+    def row
+      def cell
+        def paragraph "Development Complete"
+      def cell
+        def paragraph "[Date]"
+    def row
+      def cell
+        def paragraph "Beta Testing"
+      def cell
+        def paragraph "[Date]"
+    def row
+      def cell
+        def paragraph "Launch"
+      def cell
+        def paragraph "[Date]"
+
+  def heading "Open Questions"
+    level 2
+
+  def list
+    items """[Question 1 that needs resolution]
+[Question 2 that needs resolution]"""
+
+  def divider
+
+  def heading "Appendix"
+    level 2
+
+  def paragraph "[Research findings, user feedback, competitive analysis, etc.]"

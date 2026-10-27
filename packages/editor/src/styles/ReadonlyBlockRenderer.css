@@ -1,0 +1,325 @@
+/* Readonly block renderer - embedded, non-editable preview of another block */
+.readonly-block-renderer {
+    position: relative;
+    margin: 0;
+    padding: 4px 16px 8px;
+    font-family: var(--jx-font-sans);
+}
+
+.readonly-block-loading {
+    padding: 12px 16px;
+    color: var(--jx-fg-subtle);
+    font-size: 13px;
+}
+
+/* Make readonly content truly uneditable - block all user interaction */
+.readonly-block-renderer .readonly-block-content {
+    pointer-events: none;
+    user-select: none;
+    cursor: default;
+}
+
+/* Allow interaction with specific elements like buttons */
+.readonly-block-renderer .edit-source-btn,
+.readonly-block-renderer .readonly-block-header {
+    pointer-events: auto;
+    user-select: auto;
+    cursor: pointer;
+}
+
+/* Prevent focus outline on readonly content */
+.readonly-block-renderer .ProseMirror {
+    outline: none;
+    cursor: default;
+    caret-color: transparent;
+}
+
+/* Block contenteditable behavior */
+.readonly-block-renderer [contenteditable="true"] {
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Scoped so it never overrides the jotx link header button of the same name */
+.readonly-block-renderer .edit-source-btn {
+    height: 26px;
+    margin-top: 8px;
+    padding: 0 10px;
+    border: 1px solid var(--jx-line);
+    border-radius: var(--jx-r-sm);
+    background: var(--jx-bg);
+    color: var(--jx-fg-muted);
+    font: 500 var(--jx-text-sm)/1 var(--jx-font-sans);
+    cursor: pointer;
+    transition: background var(--jx-dur) var(--jx-ease), color var(--jx-dur) var(--jx-ease);
+}
+
+.readonly-block-renderer .edit-source-btn:hover {
+    background: var(--jx-surface);
+    color: var(--jx-fg);
+}
+
+/* ---- Legacy per-type readonly cards (shared look) ---- */
+.readonly-document,
+.readonly-mermaid,
+.readonly-code,
+.readonly-math,
+.readonly-chart,
+.readonly-heading,
+.readonly-paragraph,
+.readonly-table,
+.readonly-checklist,
+.readonly-image,
+.readonly-generic {
+    padding: 14px 16px;
+    border: 1px solid var(--jx-line);
+    border-radius: var(--jx-r-lg);
+    background: var(--jx-bg);
+    color: var(--jx-fg);
+}
+
+.readonly-mermaid-header,
+.readonly-code-header,
+.readonly-math-header,
+.readonly-chart-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.readonly-mermaid-header {
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--jx-line);
+}
+
+/* Document block */
+.document-title {
+    margin-bottom: 6px;
+    color: var(--jx-fg);
+    font-size: 17px;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+}
+
+.document-meta {
+    margin-bottom: 12px;
+    color: var(--jx-fg-subtle);
+    font-size: 13px;
+}
+
+.document-properties {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.property-row {
+    display: flex;
+    gap: 8px;
+    font-size: 13px;
+}
+
+.property-key {
+    min-width: 100px;
+    color: var(--jx-fg-subtle);
+}
+
+.property-value {
+    color: var(--jx-fg);
+}
+
+/* Mermaid */
+.readonly-mermaid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.readonly-mermaid-svg {
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+    overflow: auto;
+    border-radius: var(--jx-r-md);
+    background: var(--jx-surface);
+}
+
+.readonly-mermaid-svg svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.readonly-mermaid-error {
+    padding: 10px 12px;
+    border: 1px solid color-mix(in srgb, var(--jx-danger) 30%, var(--jx-line));
+    border-radius: var(--jx-r-md);
+    background: color-mix(in srgb, var(--jx-danger) 8%, var(--jx-bg));
+    color: var(--jx-danger);
+    font-size: 13px;
+}
+
+.readonly-mermaid-source {
+    font-size: 13px;
+}
+
+.readonly-mermaid-source details {
+    margin-top: 8px;
+}
+
+.readonly-mermaid-source summary {
+    padding: 4px 0;
+    color: var(--jx-fg-subtle);
+    cursor: pointer;
+}
+
+/* Code-like panes */
+.readonly-mermaid-source pre,
+.readonly-code-block,
+.math-source pre,
+.chart-json,
+.generic-content {
+    margin: 8px 0 0;
+    padding: 12px;
+    overflow-x: auto;
+    border: 1px solid var(--jx-line);
+    border-radius: var(--jx-r-md);
+    background: var(--jx-surface);
+    font-family: var(--jx-font-mono);
+    font-size: 12.5px;
+}
+
+.readonly-mermaid-source pre,
+.chart-json {
+    max-height: 200px;
+}
+
+.readonly-code-block code {
+    color: var(--jx-fg);
+    font-family: var(--jx-font-mono);
+    font-size: 13px;
+}
+
+/* Heading block */
+.heading-content {
+    color: var(--jx-fg);
+    font-weight: 650;
+    letter-spacing: -0.015em;
+}
+
+.heading-level-1 { font-size: 24px; }
+.heading-level-2 { font-size: 20px; }
+.heading-level-3 { font-size: 18px; }
+.heading-level-4 { font-size: 16px; }
+.heading-level-5 { font-size: 14px; }
+.heading-level-6 { font-size: 13px; }
+
+/* Paragraph block */
+.paragraph-content {
+    color: var(--jx-fg);
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+/* Callout block */
+.readonly-callout {
+    --callout-tone: var(--jx-c-blue);
+    padding: 14px 16px;
+    border: 1px solid color-mix(in srgb, var(--callout-tone) 28%, var(--jx-line));
+    border-left: 3px solid var(--callout-tone);
+    border-radius: var(--jx-r-lg);
+    background: color-mix(in srgb, var(--callout-tone) 8%, var(--jx-bg));
+}
+
+.callout-info { --callout-tone: var(--jx-c-blue); }
+.callout-warning { --callout-tone: var(--jx-c-amber); }
+.callout-error { --callout-tone: var(--jx-c-red); }
+
+.callout-header {
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.callout-content {
+    color: var(--jx-fg);
+    font-size: 14px;
+}
+
+/* Table and checklist */
+.table-header,
+.checklist-header,
+.image-header,
+.generic-header {
+    margin-bottom: 8px;
+    color: var(--jx-fg);
+    font-weight: 600;
+}
+
+.table-columns,
+.checklist-content {
+    color: var(--jx-fg);
+    font-size: 14px;
+}
+
+/* Tiptap table styles for ReadonlyBlockRenderer */
+.readonly-block-renderer table {
+    width: 100%;
+    margin: 8px 0;
+    overflow: hidden;
+    border: 1px solid var(--jx-line);
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: var(--jx-r-md);
+    table-layout: fixed;
+}
+
+.readonly-block-renderer th,
+.readonly-block-renderer td {
+    padding: 8px 12px;
+    border-right: 1px solid var(--jx-line);
+    border-bottom: 1px solid var(--jx-line);
+    background: var(--jx-bg);
+    color: var(--jx-fg);
+    text-align: left;
+    vertical-align: top;
+}
+
+.readonly-block-renderer tr:last-child td {
+    border-bottom: none;
+}
+
+.readonly-block-renderer th:last-child,
+.readonly-block-renderer td:last-child {
+    border-right: none;
+}
+
+.readonly-block-renderer th {
+    background: var(--jx-surface);
+    color: var(--jx-fg-muted);
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.readonly-block-renderer tr:hover td {
+    background: var(--jx-accent-softer);
+}
+
+/* Image block */
+.readonly-image-preview {
+    max-width: 100%;
+    max-height: 300px;
+    margin-bottom: 8px;
+    border-radius: var(--jx-r-md);
+    object-fit: contain;
+}
+
+/* Generic block */
+.generic-label {
+    margin-bottom: 4px;
+    color: var(--jx-fg);
+    font-size: 14px;
+}
+
+.generic-content {
+    color: var(--jx-fg-muted);
+}

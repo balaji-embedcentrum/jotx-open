@@ -1,0 +1,94 @@
+.jx-timer:not([data-tone]) { --jx-tone: var(--jx-c-teal); }
+
+.jx-timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 2px 0;
+}
+
+.jx-timer__modes {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: var(--jx-r-pill);
+  background: var(--jx-surface-2);
+}
+
+.jx-timer__mode {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 26px;
+  padding: 0 12px;
+  border: none;
+  border-radius: var(--jx-r-pill);
+  background: transparent;
+  color: var(--jx-fg-muted);
+  font: 600 12px/1 var(--jx-font-sans);
+  cursor: pointer;
+  transition: background var(--jx-dur) var(--jx-ease), color var(--jx-dur) var(--jx-ease);
+}
+
+.jx-timer__mode svg { pointer-events: none; }
+.jx-timer__mode:hover { color: var(--jx-fg); }
+.jx-timer__mode:focus-visible { outline: none; box-shadow: var(--jx-ring); }
+.jx-timer__mode.is-active { background: var(--jx-bg); color: var(--jx-tone); box-shadow: var(--jx-shadow-sm); }
+
+.jx-timer__dial { position: relative; width: 168px; height: 168px; }
+
+.jx-timer__ring { width: 100%; height: 100%; transform: rotate(-90deg); }
+
+.jx-timer__ring-track {
+  fill: none;
+  stroke: var(--jx-surface-2);
+  stroke-width: 7;
+}
+
+.jx-timer__ring-fill {
+  fill: none;
+  stroke: var(--jx-tone);
+  stroke-width: 7;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 260ms linear, stroke var(--jx-dur) var(--jx-ease);
+}
+
+.jx-timer__readout {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.jx-timer__time {
+  color: var(--jx-fg);
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.jx-timer__state {
+  color: var(--jx-fg-subtle);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.jx-timer__controls { display: flex; align-items: center; gap: 6px; }
+.jx-timer__primary { min-width: 96px; justify-content: center; background: var(--jx-tone); }
+.jx-timer__primary:hover { background: color-mix(in srgb, var(--jx-tone) 85%, black); }
+
+.jx-timer.is-pulse .jx-timer__dial { animation: jx-timer-pulse 800ms var(--jx-ease) 2; }
+
+@keyframes jx-timer-pulse {
+  0% { transform: scale(1); filter: drop-shadow(0 0 0 transparent); }
+  45% { transform: scale(1.05); filter: drop-shadow(0 0 14px color-mix(in srgb, var(--jx-tone) 60%, transparent)); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 0 transparent); }
+}

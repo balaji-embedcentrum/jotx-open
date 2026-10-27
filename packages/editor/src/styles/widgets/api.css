@@ -1,0 +1,114 @@
+.jx-api {
+  overflow: hidden;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-lg);
+  background: var(--jx-bg);
+  box-shadow: var(--jx-shadow-sm);
+}
+
+.jx-api__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px 10px 12px;
+}
+
+.jx-widget:has(.jx-widget__float-settings) .jx-api__head { padding-right: 42px; }
+
+.jx-api__method {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: var(--jx-r-xs);
+  background: color-mix(in srgb, var(--jx-tone) 15%, transparent);
+  color: color-mix(in srgb, var(--jx-tone) 82%, var(--jx-fg));
+  font: 700 11px/1 var(--jx-font-mono);
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+
+.jx-api__path {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--jx-fg);
+  font: 500 13.5px/1.4 var(--jx-font-mono);
+  overflow-wrap: anywhere;
+}
+
+.jx-api__param {
+  padding: 0 2px;
+  border-radius: 3px;
+  background: var(--jx-accent-soft);
+  color: var(--jx-accent);
+}
+
+.jx-api__copy { opacity: 0; }
+.jx-api__head:hover .jx-api__copy,
+.jx-api__copy:focus-visible { opacity: 1; }
+
+.jx-api__summary {
+  padding: 0 14px 12px;
+  color: var(--jx-fg-muted);
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+.jx-api__panes { border-top: 1px solid var(--jx-line); }
+.jx-api__pane + .jx-api__pane { border-top: 1px solid var(--jx-line); }
+
+.jx-api__pane-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 6px 4px 6px;
+  background: var(--jx-surface);
+}
+
+.jx-api__pane-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 26px;
+  padding: 0 6px;
+  border: none;
+  border-radius: var(--jx-r-sm);
+  background: transparent;
+  color: var(--jx-fg-muted);
+  font: 600 11px/1 var(--jx-font-sans);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.jx-api__pane-toggle svg { pointer-events: none; }
+.jx-api__pane-toggle:hover { background: var(--jx-hover); color: var(--jx-fg); }
+.jx-api__pane-toggle:focus-visible { outline: none; box-shadow: var(--jx-ring); }
+
+.jx-api__chevron { transition: transform var(--jx-dur) var(--jx-ease); }
+.jx-api__pane.is-open .jx-api__chevron { transform: rotate(90deg); }
+
+.jx-api__code {
+  margin: 0;
+  padding: 10px 14px 12px;
+  overflow-x: auto;
+  border: none;
+  border-radius: 0;
+  background: var(--jx-surface);
+  color: var(--jx-fg);
+  font: 400 12.5px/1.6 var(--jx-font-mono);
+}
+
+.jx-api__code code {
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  white-space: pre;
+}

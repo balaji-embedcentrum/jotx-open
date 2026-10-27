@@ -1,0 +1,218 @@
+hdef jotx TechnicalSpecGeneric
+
+  type page
+  title Technical Spec Template
+  icon 📐
+  author ""
+  created 2025-01-01
+  tags "technical", "spec", "rfc", "design"
+
+  def table block_1
+    columns Key, Value
+    rows """Status | Draft
+Author | 
+Reviewers | 
+Target Release | """
+
+  def heading "[Feature/System Name]"
+
+  def paragraph "[One sentence overview of what this spec covers]"
+
+  def divider
+
+  def heading "Overview"
+    level 2
+
+  def paragraph "[Provide a high-level summary. What problem are we solving? Why is this important?]"
+
+  def callout "💡 Goal: [State the primary objective or desired outcome]"
+
+  def heading "Background & Context"
+    level 2
+
+  def paragraph "[Explain the current situation, existing systems, and why this change is needed]"
+
+  def list
+    items """Current system/approach: [description]
+Limitations: [what doesn't work]
+Business driver: [why now]"""
+
+  def heading "Requirements"
+    level 2
+
+  def heading "Functional Requirements"
+    level 3
+
+  def list
+    listtype numbered
+    items """[REQ-1] The system must...
+[REQ-2] The system must...
+[REQ-3] Users should be able to..."""
+
+  def heading "Non-Functional Requirements"
+    level 3
+
+  def list
+    items """Performance: [e.g., response time < 200ms]
+Scalability: [e.g., support 10k concurrent users]
+Security: [e.g., encryption at rest and in transit]
+Reliability: [e.g., 99.9% uptime]"""
+
+  def heading "Proposed Solution"
+    level 2
+
+  def paragraph "[Describe your proposed approach at a high level]"
+
+  def heading "Architecture Overview"
+    level 3
+
+  def paragraph "[Describe the system architecture. Use diagrams where helpful]"
+
+  def code
+    language plaintext
+    text "[Optional: Add architecture diagram or component description]"
+
+  def heading "Key Components"
+    level 3
+
+  def table block_22
+    def row
+      def header
+        text Component
+      def header
+        text Responsibility
+      def header
+        text Technology
+    def row
+      def cell
+        def paragraph "[Component 1]"
+      def cell
+        def paragraph "[What it does]"
+      def cell
+        def paragraph "[Tech stack]"
+    def row
+      def cell
+        def paragraph "[Component 2]"
+      def cell
+        def paragraph "[What it does]"
+      def cell
+        def paragraph "[Tech stack]"
+
+  def heading "Data Model"
+    level 2
+
+  def paragraph "[Define key data structures, entities, or database schemas]"
+
+  def code
+    language json
+    text """{
+  "entity": {
+    "field1": "type",
+    "field2": "type"
+  }
+}"""
+
+  def heading "API Design"
+    level 2
+
+  def paragraph "[Define API endpoints, request/response formats, or interface contracts]"
+
+  def code
+    language bash
+    text """GET /api/resource
+POST /api/resource
+PUT /api/resource/:id
+DELETE /api/resource/:id"""
+
+  def heading "Alternatives Considered"
+    level 2
+
+  def paragraph "[Document other approaches you evaluated and why they were not chosen]"
+
+  def list
+    items """Alternative 1: [description] - Rejected because [reason]
+Alternative 2: [description] - Rejected because [reason]"""
+
+  def heading "Security Considerations"
+    level 2
+
+  def list
+    items """Authentication: [how users are authenticated]
+Authorization: [how permissions are managed]
+Data protection: [encryption, PII handling]
+Threat model: [potential security risks]"""
+
+  def heading "Testing Strategy"
+    level 2
+
+  def list
+    items """Unit tests: [coverage goals]
+Integration tests: [key scenarios]
+Performance tests: [load testing approach]
+Security tests: [penetration testing, vulnerability scans]"""
+
+  def heading "Rollout Plan"
+    level 2
+
+  def heading "Phases"
+    level 3
+
+  def list
+    listtype numbered
+    items """Phase 1: [milestone] - [date]
+Phase 2: [milestone] - [date]
+Phase 3: [milestone] - [date]"""
+
+  def heading "Rollback Strategy"
+    level 3
+
+  def paragraph "[How will we rollback if something goes wrong?]"
+
+  def heading "Monitoring & Observability"
+    level 2
+
+  def list
+    items """Metrics: [what we'll measure]
+Logs: [what we'll log]
+Alerts: [when we'll be notified]
+Dashboards: [what we'll visualize]"""
+
+  def heading "Risks & Mitigation"
+    level 2
+
+  def table block_44
+    def row
+      def header
+        text Risk
+      def header
+        text Impact
+      def header
+        text Mitigation
+    def row
+      def cell
+        def paragraph "[Risk 1]"
+      def cell
+        def paragraph "[High/Medium/Low]"
+      def cell
+        def paragraph "[How we'll address it]"
+    def row
+      def cell
+        def paragraph "[Risk 2]"
+      def cell
+        def paragraph "[High/Medium/Low]"
+      def cell
+        def paragraph "[How we'll address it]"
+
+  def heading "Open Questions"
+    level 2
+
+  def list
+    items """[Question 1 that needs to be answered]
+[Question 2 that needs to be answered]"""
+
+  def divider
+
+  def heading "Appendix"
+    level 2
+
+  def paragraph "[Additional technical details, research, or references]"

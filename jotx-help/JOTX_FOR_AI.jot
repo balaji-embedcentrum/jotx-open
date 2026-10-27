@@ -1,0 +1,405 @@
+hdef jotx jotx_for_ai
+
+  title jotx for AI
+  type documentation
+
+  def heading "jotx syntax for AI models"
+
+  def paragraph "A .jot file is plain text: a header, then blocks. Write the **compact** syntax shown here. jotx also reads the older classic syntax, so either is valid."
+
+  def heading "File structure"
+    level 2
+
+  def code
+    language jotx
+    text """hdef jotx release_plan
+  title Release plan
+  type roadmap
+
+def heading "Shipping 3.1"
+
+def paragraph "Plain text with **bold**, *italic*, `code`, ==highlight== and [links](https://jotx.dev).""""
+
+  def list
+    items """Indent with exactly 2 spaces. A block's properties and child blocks are indented under its def line.
+The quoted value after the keyword is the block's main value: the text of a heading, paragraph, quote, callout or list item, or the title of a widget, table, chart, diagram, section or toggle.
+One property per line: name, a space, the value. Quote a value only when it contains special characters (" or # after a space) or is a number that must stay text.
+Multi-line values go between triple quotes. Inside them, use one item per line.
+No line may start with "-". Lists use items with one item per line.
+Property names are lowercase letters only (no digits, dashes or camelCase).
+Block ids are optional. Give an id only to blocks other notes link to: table, chart, mermaid, math, card, button, link, jotxlink. Ids must be unique in the file.
+Leave out defaults: heading level 1, list bulleted, checklist item unchecked, callout info, chart bar."""
+
+  def callout "Classic syntax (still valid) puts every value on its own line and gives every block an id. Do not mix styles within one file."
+
+  def code
+    language jotx
+    text """def heading goals
+  text "Goals"
+  level 2"""
+
+  def heading "Text"
+    level 2
+
+  def code
+    language jotx
+    text """def heading "Goals"
+  level 2
+
+def paragraph "One paragraph per block."
+
+def quote "Simplicity is a prerequisite for reliability."
+
+def callout "Scope is frozen."
+  variant warning"""
+
+  def paragraph "Callout variants: info, warning, success, danger. Heading levels: 1, 2, 3."
+
+  def heading "Lists and checklists"
+    level 2
+
+  def code
+    language jotx
+    text """"def list
+  items """Cut cold start below 800ms
+Ship offline sync"""
+
+def list
+  listtype numbered
+  items """Install
+Configure
+Run"""
+
+def checklist
+  items """[x] Security review
+[ ] Launch post"""""""
+
+  def paragraph "For nested lists, use list items as blocks:"
+
+  def code
+    language jotx
+    text """"def list
+  def listitem "Parent item"
+    def list
+      items """Child item"""""""
+
+  def heading "Tables"
+    level 2
+
+  def paragraph "One row per line, cells separated by |. Write a literal | as \|. Use columns for the header row."
+
+  def code
+    language jotx
+    text """"def table risks "Risks"
+  columns Risk, Impact, Owner
+  rows """Data loss | High | Marco
+Timeouts | Medium | Lena"""""""
+
+  def heading "Code, math and diagrams"
+    level 2
+
+  def code
+    language jotx
+    text """"def code
+  language bash
+  text """npm install
+npm run build"""
+
+def codereference
+  path src/index.ts
+  lines 10-24
+
+def math energy "Mass–energy"
+  src E = mc^2
+
+def mermaid flow "Sync flow"
+  src """flowchart LR
+  A[Client] --> B[(Queue)]"""""""
+
+  def heading "Charts"
+    level 2
+
+  def paragraph "First line names the series; each following line is a label and its values. charttype: bar (default), line, pie, doughnut, radar, polar."
+
+  def code
+    language jotx
+    text """"def chart weekly "Weekly active workspaces"
+  data """Label | Workspaces
+W1 | 120
+W2 | 210
+W3 | 340"""""""
+
+  def heading "Media and links"
+    level 2
+
+  def code
+    language jotx
+    text """def image
+  src attachments/diagram.png
+  alt Architecture diagram
+  caption The sync pipeline
+
+def video
+  src https://www.youtube.com/watch?v=dQw4w9WgXcQ
+
+def attach
+  path attachments/spec.pdf
+  text Specification (PDF)
+
+def link
+  url https://jotx.dev
+  text jotx website"""
+
+  def heading "Layout"
+    level 2
+
+  def code
+    language jotx
+    text """def section "Background"
+  def paragraph "Sections and toggles hold other blocks."
+
+def toggle "Details"
+  def paragraph "Hidden until opened."
+
+def columns
+  def column
+    def paragraph "Left"
+  def column
+    width 2
+    def paragraph "Right, twice as wide"
+
+def divider"""
+
+  def heading "Navigation, links and dates"
+    level 2
+
+  def code
+    language jotx
+    text """def gridcard
+  layout 2x2
+  def card docs
+    title Docs
+    icon 📄
+    link docs/index.jot
+
+def button next
+  label Next chapter
+  link chapter-2.jot
+
+def jotxlink
+  reftype doc
+  refid architecture
+
+def datetime
+  value 2026-12-01T09:00
+  mode datetime"""
+
+  def heading "Widgets"
+    level 2
+
+  def paragraph "Widgets have no child blocks. Their data is multi-line text, one item per line, with fields separated by |."
+
+  def heading "kanban"
+    level 3
+
+  def code
+    language jotx
+    text """"def kanban "Sprint 12"
+  board """[Todo]
+Write docs
+[Done]
+Ship widgets"""""""
+
+  def heading "progress"
+    level 3
+
+  def code
+    language jotx
+    text """"def progress "Release 3.1"
+  items """Design | 80
+Docs | 3 | 10"""""""
+
+  def heading "habit"
+    level 3
+
+  def code
+    language jotx
+    text """"def habit "This week"
+  habits """Exercise | 1010100
+Read | 1111000"""""""
+
+  def heading "countdown"
+    level 3
+
+  def code
+    language jotx
+    text """def countdown "Launch"
+  target 2026-12-01T09:00"""
+
+  def heading "timer"
+    level 3
+
+  def code
+    language jotx
+    text """def timer "Focus"
+  minutes 25
+  breakminutes 5"""
+
+  def heading "rating"
+    level 3
+
+  def code
+    language jotx
+    text """def rating "Developer experience"
+  value 4
+  max 5"""
+
+  def heading "matrix"
+    level 3
+
+  def code
+    language jotx
+    text """"def matrix "Priorities"
+  dofirst """Fix data loss"""
+  schedule """Write docs"""
+  delegate """Reply to partners"""
+  eliminate """Tidy old notes"""""""
+
+  def heading "proscons"
+    level 3
+
+  def code
+    language jotx
+    text """"def proscons "Adopt SQLite?"
+  pros """Zero ops
+Fast"""
+  cons """Migration effort"""""""
+
+  def heading "decision"
+    level 3
+
+  def code
+    language jotx
+    text """def decision "Use CRDTs for sync"
+  status accepted
+  date 2026-08-04
+  context Last-write-wins lost edits.
+  decision Adopt CRDT merge.
+  consequences Larger payloads, no data loss."""
+
+  def heading "toc"
+    level 3
+
+  def code
+    language jotx
+    text """def toc "Contents"
+  depth 2"""
+
+  def heading "steps"
+    level 3
+
+  def code
+    language jotx
+    text """"def steps "Set up"
+  steps """[x] Install | From the marketplace
+[ ] Create a note | jotx: Create New Note"""""""
+
+  def heading "timeline"
+    level 3
+
+  def code
+    language jotx
+    text """"def timeline "Roadmap"
+  events """2026-10-27 | Widgets | done
+2026-12-01 | Launch | planned | Public release"""""""
+
+  def heading "animation"
+    level 3
+
+  def code
+    language jotx
+    text """"def animation "Request lifecycle"
+  steps """Browser | User clicks Save
+API | Request routed
+Database | Write committed"""
+  speed 1.6""""
+
+  def heading "terminal"
+    level 3
+
+  def code
+    language jotx
+    text """"def terminal "Getting started"
+  shell zsh
+  commands """$ npm install
+added 120 packages
+$ npm run build"""""""
+
+  def heading "api"
+    level 3
+
+  def code
+    language jotx
+    text """"def api
+  method POST
+  path /api/v1/notes/{id}/blocks
+  summary Append a block
+  request """{"type": "kanban"}"""""""
+
+  def heading "filetree"
+    level 3
+
+  def code
+    language jotx
+    text """"def filetree "jotx"
+  tree """packages/
+  core/  // parser
+  editor/
+README.md"""""""
+
+  def heading "diff"
+    level 3
+
+  def code
+    language jotx
+    text """"def diff "Fix"
+  language typescript
+  before """const a = 1"""
+  after """const a = 2"""""""
+
+  def heading "palette"
+    level 3
+
+  def code
+    language jotx
+    text """"def palette "Brand"
+  colors """Teal | #14b8a6
+Ink | #0f172a"""""""
+
+  def heading "badges"
+    level 3
+
+  def code
+    language jotx
+    text """"def badges
+  items """build | passing | green
+version | 3.1.0 | blue"""""""
+
+  def heading "shortcuts"
+    level 3
+
+  def code
+    language jotx
+    text """"def shortcuts "Editor keys"
+  items """Cmd+K | Insert link
+/ | Block menu"""""""
+
+  def heading "Checklist before you answer"
+    level 2
+
+  def list
+    items """The file starts with hdef jotx <id> and a title.
+Every def line uses a keyword from this guide.
+Main values are quoted on the def line; nothing starts with "-".
+Ids only where something links to the block, and unique.
+2-space indentation throughout."""

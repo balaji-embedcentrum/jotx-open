@@ -1,0 +1,323 @@
+hdef jotx ChangelogV2Example
+
+  type page
+  title Changelog - Atlas Design System v2.0
+  icon 📝
+  author Product Team
+  created 2025-01-20
+  tags "changelog", "release", "design-system", "v2"
+
+  def table block_1
+    columns Key, Value
+    rows """Product | Atlas Design System
+Latest Version | v2.0.0
+Release Date | 2025-01-20
+Type | Major Release"""
+
+  def heading "Atlas Design System - Changelog"
+
+  def paragraph "Complete version history and release notes for Atlas Design System. Follow semantic versioning (MAJOR.MINOR.PATCH)."
+
+  def callout "🎉 Latest Release: v2.0.0 (January 20, 2025) - Major overhaul with new components, dark mode, and accessibility improvements"
+
+  def divider
+
+  def heading "v2.0.0 - January 20, 2025 (Major Release)"
+    level 2
+
+  def callout "🚀 MAJOR RELEASE: Complete redesign with 15 new components, dark mode support, and WCAG 2.1 AAA compliance"
+    variant success
+
+  def heading "🚀 New Features"
+    level 3
+
+  def list
+    items """**Dark Mode Support** - System-wide dark mode with automatic OS detection and manual toggle
+**15 New Components** - DataTable, CommandPalette, FileUpload, Drawer, Timeline, Stepper, Avatar, Badge, Breadcrumb, Pagination, Progress, Skeleton, Tabs, Toast, Tooltip
+**Design Tokens System** - 200+ design tokens for colors, spacing, typography, and shadows
+**Component Playground** - Interactive Storybook for all components with live code editing
+**Figma Plugin** - Auto-sync design tokens from Figma to code
+**Accessibility Inspector** - Built-in a11y checker with automated WCAG compliance reporting
+**Multi-Framework Support** - React, Vue, Svelte, and Web Components
+**CLI Tool** - `atlas-cli` for scaffolding components and managing tokens"""
+
+  def heading "✨ Improvements"
+    level 3
+
+  def list
+    items """**Button Component** - Added 5 new variants (ghost, link, destructive), improved focus states, better disabled styling
+**Form Components** - Enhanced validation, better error messages, inline hints, field grouping
+**Modal/Dialog** - Improved animations (200ms → 150ms), better focus trap, customizable sizes
+**Typography** - New font stack (Inter → Geist Sans), improved line heights, better responsive scaling
+**Colors** - Expanded palette from 10 to 25 semantic colors, improved contrast ratios (WCAG AAA)
+**Performance** - Bundle size reduced 40% (320KB → 192KB), lazy loading for large components
+**Documentation** - Comprehensive guides, 50+ live examples, migration path from v1.x
+**Testing** - 95% test coverage, visual regression testing with Chromatic"""
+
+  def heading "🐛 Bug Fixes"
+    level 3
+
+  def list
+    items """Fixed Dropdown not closing on outside click in Safari (#234)
+Fixed Select component z-index issues in nested modals (#189)
+Fixed DatePicker keyboard navigation (arrow keys) (#278)
+Fixed Input component placeholder text color in dark mode (#312)
+Fixed Card component border rendering on Retina displays (#145)
+Fixed Checkbox indeterminate state not persisting (#401)
+Fixed Toast notifications stacking incorrectly on mobile (#356)
+Fixed Table scrolling performance with 1000+ rows (#423)"""
+
+  def heading "⚠️ Breaking Changes"
+    level 3
+
+  def callout "⚠️ This is a major version with breaking changes. Please review migration guide carefully."
+    variant warning
+
+  def list
+    items """**CSS Class Naming** - Changed from `.atlas-` to `.ads-` prefix for all components. **Migration**: Run `atlas-cli migrate v1-to-v2` to auto-update.
+**Button API** - Removed `size=\"tiny\"` (use `size=\"sm\"`), renamed `variant=\"primary\"` to `variant=\"default\"`. **Migration**: Update all Button imports.
+**Color Tokens** - Renamed `$color-blue-500` → `$color-primary-500`. **Migration**: Update CSS variables or use token migration tool.
+**Form Components** - `onChange` now returns event object instead of value directly. **Migration**: Change `onChange={setValue}` to `onChange={(e) => setValue(e.target.value)}`.
+**Removed Components** - Deprecated `LegacyCard` and `OldAlert` (replaced by new Card and Alert). **Migration**: Use new components with updated props.
+**Icons Package** - Now separate package `@atlas/icons` (was bundled). **Migration**: `npm install @atlas/icons` and update imports."""
+
+  def heading "🔒 Security"
+    level 3
+
+  def list
+    items """Fixed XSS vulnerability in RichTextEditor sanitization (CVE-2025-001)
+Updated dependencies: React 18.2.0 → 18.3.1 (security patches)
+Improved Content Security Policy (CSP) compliance - no inline styles"""
+
+  def heading "📚 Documentation"
+    level 3
+
+  def list
+    items """New documentation site: docs.atlasdesign.com (Next.js + MDX)
+Added 50+ component examples with live code sandbox
+Comprehensive migration guide (v1.x → v2.0)
+Accessibility guidelines for each component
+Video tutorials for getting started (5 videos, 30 min total)"""
+
+  def heading "🗑️ Deprecated (Will be removed in v3.0)"
+    level 3
+
+  def list
+    items """`OldModal` component - Use new `Dialog` component instead
+`LegacyGrid` layout - Use CSS Grid or new `Grid` component
+Utility classes `.u-*` - Use Tailwind CSS utilities"""
+
+  def divider
+
+  def heading "v1.8.3 - December 1, 2024 (Patch)"
+    level 2
+
+  def heading "🐛 Bug Fixes"
+    level 3
+
+  def list
+    items """Fixed DatePicker timezone issues (#289)
+Fixed Select component dropdown position on scroll (#301)
+Fixed Button ripple effect in Firefox (#267)"""
+
+  def heading "✨ Improvements"
+    level 3
+
+  def list
+    items """Improved TypeScript type definitions for Modal props
+Better error messages for invalid prop combinations"""
+
+  def divider
+
+  def heading "v1.8.0 - November 15, 2024 (Minor Release)"
+    level 2
+
+  def heading "🚀 New Features"
+    level 3
+
+  def list
+    items """Added `CommandPalette` component (beta)
+Added `FileUpload` component with drag-and-drop
+Added accessibility audit tool"""
+
+  def heading "✨ Improvements"
+    level 3
+
+  def list
+    items """Modal now supports nested modals
+Improved Select component keyboard navigation
+Form validation now supports async validators"""
+
+  def heading "🐛 Bug Fixes"
+    level 3
+
+  def list
+    items """Fixed Dropdown menu positioning in scrollable containers (#245)
+Fixed Input component autofill styling (#256)
+Fixed Table sorting with null values (#223)"""
+
+  def divider
+
+  def heading "v1.7.2 - October 20, 2024 (Patch)"
+    level 2
+
+  def heading "🐛 Bug Fixes"
+    level 3
+
+  def list
+    items """Fixed Checkbox indeterminate state rendering (#198)
+Fixed Radio button focus ring color (#205)
+Fixed Toast z-index below modal (#212)"""
+
+  def divider
+
+  def heading "Version History Quick Reference"
+    level 2
+
+  def table block_43
+    def row
+      def header
+        text Version
+      def header
+        text Release Date
+      def header
+        text Type
+      def header
+        text Highlights
+      def header
+        text Status
+    def row
+      def cell
+        def paragraph "v2.0.0"
+      def cell
+        def paragraph "2025-01-20"
+      def cell
+        def paragraph "Major"
+      def cell
+        def paragraph "Dark mode, 15 new components, a11y"
+      def cell
+        def paragraph "✅ Latest"
+    def row
+      def cell
+        def paragraph "v1.8.3"
+      def cell
+        def paragraph "2024-12-01"
+      def cell
+        def paragraph "Patch"
+      def cell
+        def paragraph "Bug fixes, TypeScript improvements"
+      def cell
+        def paragraph "🟢 Stable"
+    def row
+      def cell
+        def paragraph "v1.8.0"
+      def cell
+        def paragraph "2024-11-15"
+      def cell
+        def paragraph "Minor"
+      def cell
+        def paragraph "CommandPalette, FileUpload, a11y audit"
+      def cell
+        def paragraph "🟢 Stable"
+    def row
+      def cell
+        def paragraph "v1.7.2"
+      def cell
+        def paragraph "2024-10-20"
+      def cell
+        def paragraph "Patch"
+      def cell
+        def paragraph "Checkbox, Radio, Toast fixes"
+      def cell
+        def paragraph "🟢 Stable"
+    def row
+      def cell
+        def paragraph "v1.7.0"
+      def cell
+        def paragraph "2024-09-10"
+      def cell
+        def paragraph "Minor"
+      def cell
+        def paragraph "New form components, improved docs"
+      def cell
+        def paragraph "📦 Archived"
+
+  def divider
+
+  def heading "📦 Installation & Upgrade"
+    level 2
+
+  def heading "New Installation"
+    level 3
+
+  def code
+    language bash
+    text npm install @atlas/design-system@2.0.0\nnpm install @atlas/icons@2.0.0
+
+  def heading "Upgrade from v1.x"
+    level 3
+
+  def code
+    language bash
+    text "# Install migration CLI\nnpm install -g @atlas/cli\n\n# Run automated migration\natlas-cli migrate v1-to-v2\n\n# Review changes and test\nnpm test\n\n# Update dependencies\nnpm install @atlas/design-system@latest @atlas/icons@latest"
+
+  def heading "Migration Guide"
+    level 3
+
+  def paragraph "Comprehensive migration guide available at: docs.atlasdesign.com/migration/v1-to-v2"
+
+  def list
+    items """Step-by-step instructions for each breaking change
+Automated codemod scripts for common patterns
+Before/after examples for all changed components
+Estimated migration time: 2-4 hours for typical project"""
+
+  def divider
+
+  def heading "📊 Release Statistics"
+    level 2
+
+  def table block_55
+    def row
+      def header
+        text Metric
+      def header
+        text Value
+    def row
+      def cell
+        def paragraph "Development Time"
+      def cell
+        def paragraph "6 months (Jul 2024 - Jan 2025)"
+    def row
+      def cell
+        def paragraph "Contributors"
+      def cell
+        def paragraph "23 developers, 8 designers"
+    def row
+      def cell
+        def paragraph "Commits"
+      def cell
+        def paragraph "847 commits"
+    def row
+      def cell
+        def paragraph "Issues Closed"
+      def cell
+        def paragraph "156 issues"
+    def row
+      def cell
+        def paragraph "Test Coverage"
+      def cell
+        def paragraph "95% (up from 78%)"
+    def row
+      def cell
+        def paragraph "Bundle Size"
+      def cell
+        def paragraph "192 KB (40% reduction)"
+    def row
+      def cell
+        def paragraph "Components"
+      def cell
+        def paragraph "45 components (30 in v1.x)"
+
+  def callout "🎉 Thank you to all contributors and early adopters! Atlas Design System v2.0 is our most significant release yet."
+    variant success

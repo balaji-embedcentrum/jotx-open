@@ -1,0 +1,77 @@
+hdef jotx ArticleGenericTemplate
+
+  type page
+  title Article Template
+  icon 📝
+  author ""
+  created 2025-01-01
+  tags "article", "template", "writing"
+
+  def heading "[Article Title]"
+
+  def paragraph "[Brief introduction or hook that captures the reader's attention. Explain what this article is about and why it matters.]"
+
+  def divider
+
+  def heading "Overview"
+    level 2
+
+  def paragraph "[Provide context and background. What problem are you addressing? Who is this for?]"
+
+  def callout "💡 Key Takeaway: [Summarize the main point or benefit readers will gain]"
+
+  def heading "Section 1: [Topic]"
+    level 2
+
+  def paragraph "[Main content for this section. Provide detailed explanation, examples, or analysis.]"
+
+  def list
+    items """Key point 1
+Key point 2
+Key point 3"""
+
+  def heading "Section 2: [Topic]"
+    level 2
+
+  def paragraph "[Continue with additional sections as needed. Break complex topics into digestible parts.]"
+
+  def code
+    language plaintext
+    text "[If relevant, include code examples or technical details]"
+
+  def heading "Section 3: [Topic]"
+    level 2
+
+  def paragraph "[Add more sections following the same pattern.]"
+
+  def image
+    src attachments/image.png
+    alt "[Image description]"
+    width 800
+    align center
+    caption "[Optional: Add a caption explaining the image]"
+
+  def heading "Conclusion"
+    level 2
+
+  def paragraph "[Summarize the key points. What should readers remember? What action should they take?]"
+
+  def callout "✅ Next Steps: [Actionable advice or recommendations for readers]"
+    variant success
+
+  def divider
+
+  def heading "Additional Resources"
+    level 2
+
+  def list
+    items """Resource 1: [Link or reference]
+Resource 2: [Link or reference]
+Resource 3: [Link or reference]"""
+
+  def table block_22
+    columns Key, Value
+    rows """Status | Draft
+Word Count | 0
+Target Audience | 
+Publication Date | """

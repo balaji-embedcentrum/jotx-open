@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Build every package and the extension
+        run: npm run build
+      - name: Build the web embed
+        run: npm run build:embed
+      - name: Test
+        run: npm test
+      - name: Validate every shipped .jot file
+        run: |
+          find jotx-help site docs -name '*.jot' -print0 |
+            xargs -0 -n1 node packages/cli/dist/cli.js validate > /dev/null

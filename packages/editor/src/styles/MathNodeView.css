@@ -1,0 +1,65 @@
+/* Math block — shell, header and controls live in RichBlocks.css */
+
+/* Keep the rendered formula readable while the node is selected */
+.ProseMirror-selectednode .jotx-math-preview,
+.ProseMirror-selectednode .jotx-math-preview * {
+  color: var(--jx-fg) !important;
+  background: transparent !important;
+}
+
+/* Override the global ::selection rule inside rendered math */
+.jotx-math-preview ::selection,
+.jotx-math-preview *::selection {
+  background: color-mix(in srgb, var(--jx-accent) 25%, transparent) !important;
+  color: var(--jx-fg) !important;
+}
+
+.jotx-math-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 6px 12px 12px;
+}
+
+.jotx-math-input {
+  min-height: 150px;
+  padding: 10px 12px;
+  resize: vertical;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-md);
+  outline: none;
+  background: var(--jx-bg);
+  color: var(--jx-fg);
+  font-family: var(--jx-font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  tab-size: 2;
+  transition: border-color var(--jx-dur) var(--jx-ease), box-shadow var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-math-input:focus {
+  border-color: var(--jx-accent);
+  box-shadow: var(--jx-ring);
+  color: var(--jx-fg);
+  background: var(--jx-bg);
+}
+
+/* Rendered formula: centered, figure-like */
+.jotx-math-preview {
+  min-height: 0;
+  padding: 14px 8px 10px;
+  overflow: auto;
+  resize: vertical;
+  border: none;
+  border-radius: var(--jx-r-md);
+  background: transparent;
+  color: var(--jx-fg);
+  font-size: 1.08em;
+  text-align: center;
+}
+
+.jotx-math-empty {
+  color: var(--jx-fg-subtle);
+  font-size: 13px;
+}

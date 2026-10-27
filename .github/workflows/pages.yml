@@ -1,0 +1,58 @@
+# Builds the website (site/ rendered by <jotx-doc>) and publishes it to GitHub Pages.
+# One-time setup: Settings → Pages → Source: GitHub Actions.
+name: Website
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - 'jotx-help/**'
+      - 'packages/**'
+      - 'branding/**'
+      - 'scripts/build-site.js'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Build packages
+        run: |
+          npm run build:registry
+          npm run build:core
+          npm run build:standard-lib
+          npm run build:adapters
+          npm run build:react-renderer
+          npm run build:editor
+      - name: Build site
+        run: npm run build:site
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

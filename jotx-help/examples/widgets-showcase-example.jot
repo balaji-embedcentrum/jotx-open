@@ -1,0 +1,166 @@
+hdef jotx widgets_showcase
+
+  title Widgets Showcase
+  type dashboard
+
+  def heading "jotx Widgets"
+
+  def paragraph "Every widget below is plain text in this file — open it with the **Text Editor** to see the syntax. Type `/` anywhere and search for a widget by name to insert one."
+
+  def toc "Contents"
+    depth "2"
+
+  def heading "Productivity"
+    level 2
+
+  def kanban "Sprint 12"
+    board """[Backlog]
+Offline sync for mobile
+Keyboard-first command palette
+[In progress]
+Widget framework
+Modern theme tokens
+[Review]
+Columns layout
+[Done]
+Tokenizer fix for # in strings"""
+
+  def columns
+    def column
+      def progress "Release 3.0"
+        items """Design | 90
+Editor | 70
+Docs | 4 | 10"""
+    def column
+      def countdown "Public launch"
+        target 2026-12-01T09:00
+
+  def habit "This week"
+    habits """Deep work | 1101100
+Exercise | 1010100
+Read 20 pages | 1111000
+No phone after 10pm | 0110000"""
+
+  def timer "Focus session"
+    minutes "25"
+    breakminutes "5"
+
+  def rating "Developer experience"
+    value "4"
+    max "5"
+
+  def heading "Planning & Docs"
+    level 2
+
+  def matrix "This week's priorities"
+    dofirst """Fix data-loss bug in sync
+Prepare launch checklist"""
+    schedule """Write architecture docs
+Plan Q1 roadmap"""
+    delegate Reply to partner emails
+    eliminate Reorganize old notes
+
+  def proscons "Move search to SQLite FTS?"
+    pros """Single file, zero ops
+Fast prefix search
+Works offline"""
+    cons Migration effort for existing indexes
+
+  def decision "Derive jotx colors from the VS Code theme"
+    status accepted
+    date 2026-10-27
+    context Hard-coded light/dark palettes clashed with custom VS Code themes and broke high-contrast modes.
+    decision Surfaces and text come from --vscode-* variables via color-mix(); only the teal brand accent and status hues stay fixed.
+    consequences jotx matches any theme automatically. Components must read --jx-* tokens instead of raw colors.
+
+  def steps "Set up a jotx workspace"
+    steps """[x] Install the extension | Search for "jotx" in the VS Code marketplace
+[x] Create a note | Cmd+Shift+P → jotx: Create New Note
+[ ] Add a widget | Type / and search for "kanban"
+[ ] Link notes together | Use [[note-name]] to create a jotx link"""
+
+  def timeline "Roadmap"
+    events """2026-06-01 | Block editor 2.0 | done | Tiptap 3 migration
+2026-09-15 | Knowledge graph | done
+2026-10-27 | Widgets & new UI | active | 19 widgets, columns, theme tokens
+2026-12-01 | Public launch | planned
+2027-02-01 | Sync & sharing | planned"""
+
+  def animation "How a save travels"
+    steps """Editor | You edit a block
+Extension | Tiptap JSON becomes jot blocks
+Serializer | Written in compact syntax
+Disk | Saved as plain text, ready for git"""
+    speed 1.6
+
+  def heading "Developer"
+    level 2
+
+  def terminal "Getting started"
+    shell zsh
+    commands """$ git clone https://github.com/balaji-embedcentrum/jotx-open.git
+$ cd jotx && npm install
+added 1204 packages in 18s
+$ npm run build"""
+
+  def api
+    method POST
+    path /api/v1/notes/{noteId}/blocks
+    summary Append a block to a note
+    request "{"type": "kanban", "properties": {"title": "Sprint 12"}}"
+    response "{"id": "blk_8f2a", "type": "kanban", "createdAt": "2026-10-27T10:00:00Z"}"
+
+  def filetree "jotx"
+    tree """packages/
+  core/
+    src/
+      parser/  // .jot tokenizer + parser
+      types/
+  editor/
+    src/
+      widgets/  // one file per widget
+        kinds/
+        index.ts
+      styles/
+        tokens.css
+  vscode-extension/
+package.json
+README.md"""
+
+  def diff "Keep # inside quoted values"
+    language typescript
+    before """const commentMatch = value.match(/\s+#/);
+if (commentMatch) {
+  value = value.substring(0, commentMatch.index).trim();
+}"""
+    after """const isQuoted = value.startsWith('"') && value.endsWith('"');
+const commentMatch = isQuoted ? null : value.match(/\s+#/);
+if (commentMatch) {
+  value = value.substring(0, commentMatch.index).trim();
+}"""
+
+  def palette "jotx brand"
+    colors """Teal 400 | #2dd4bf
+Teal 600 | #0d9488
+Ink | #0f172a
+Mist | #e2e8f0
+Amber | #f59e0b
+Violet | #8b5cf6"""
+
+  def badges
+    items """build | passing | green
+version | v2.5.0 | blue
+coverage | 87% | green
+license | Apache-2.0 | slate
+status | beta | amber"""
+
+  def shortcuts "Editor shortcuts"
+    items """/ | Open the block & widget menu
+Cmd+B | Bold
+Cmd+I | Italic
+Cmd+K | Insert link
+Cmd+F | Find in note
+Cmd+Shift+V | Toggle text editor
+g g | Jump to top"""
+
+  def callout "Widgets store everything as readable properties, so they diff cleanly in git and are easy for AI assistants to generate."

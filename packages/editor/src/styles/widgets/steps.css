@@ -1,0 +1,92 @@
+.jx-steps { display: flex; flex-direction: column; gap: 12px; }
+
+.jx-steps__summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--jx-fg-muted);
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.jx-steps__meter {
+  flex: 1;
+  max-width: 160px;
+  height: 4px;
+  overflow: hidden;
+  border-radius: var(--jx-r-pill);
+  background: var(--jx-surface-2);
+}
+
+.jx-steps__meter > div {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--jx-success);
+  transition: width 220ms var(--jx-ease);
+}
+
+.jx-steps__list { margin: 0; padding: 0; list-style: none; }
+
+.jx-steps__item {
+  position: relative;
+  display: flex;
+  gap: 12px;
+  padding-bottom: 14px;
+}
+
+.jx-steps__item:last-child { padding-bottom: 0; }
+
+/* Connector line between markers */
+.jx-steps__item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  bottom: 2px;
+  left: 12px;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--jx-line);
+}
+
+.jx-steps__item.is-done:not(:last-child)::before { background: color-mix(in srgb, var(--jx-success) 45%, var(--jx-line)); }
+
+.jx-steps__marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 1.5px solid var(--jx-line-strong);
+  border-radius: 50%;
+  background: var(--jx-bg);
+  color: var(--jx-fg-muted);
+  font: 600 12px/1 var(--jx-font-sans);
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: background var(--jx-dur) var(--jx-ease), border-color var(--jx-dur) var(--jx-ease), color var(--jx-dur) var(--jx-ease);
+}
+
+.jx-steps__marker svg { pointer-events: none; }
+.jx-steps__marker:disabled { cursor: default; }
+.jx-steps__marker:not(:disabled):hover { border-color: var(--jx-accent); color: var(--jx-accent); }
+.jx-steps__marker:focus-visible { outline: none; box-shadow: var(--jx-ring); }
+
+.jx-steps__item.is-done .jx-steps__marker {
+  border-color: var(--jx-success);
+  background: var(--jx-success);
+  color: #fff;
+}
+
+.jx-steps__content { min-width: 0; padding-top: 3px; }
+.jx-steps__title { color: var(--jx-fg); font-size: 14px; font-weight: 550; line-height: 1.4; }
+.jx-steps__item.is-done .jx-steps__title { color: var(--jx-fg-muted); text-decoration: line-through; text-decoration-color: var(--jx-fg-subtle); }
+
+.jx-steps__detail {
+  margin-top: 2px;
+  color: var(--jx-fg-muted);
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}

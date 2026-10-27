@@ -1,0 +1,342 @@
+{
+  "time": 1793000000000,
+  "version": "2.30.7",
+  "blocks": [
+    {
+      "id": "h_title",
+      "type": "header",
+      "data": {
+        "text": "Atlas 2.0 Launch Plan",
+        "level": 1
+      }
+    },
+    {
+      "id": "p_lead",
+      "type": "paragraph",
+      "data": {
+        "text": "Everything the team needs to ship Atlas 2.0 on <b>December 1</b>: scope, owners, risks, and the path from beta to general availability."
+      }
+    },
+    {
+      "id": "props",
+      "type": "table",
+      "data": {
+        "withHeadings": true,
+        "content": [
+          [
+            "Key",
+            "Value"
+          ],
+          [
+            "Owner",
+            "Priya Raman"
+          ],
+          [
+            "Status",
+            "On track"
+          ],
+          [
+            "Target date",
+            "2026-12-01"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "c_scope",
+      "type": "warning",
+      "data": {
+        "title": "info",
+        "message": "Scope is frozen as of <b>October 20</b>. New requests go to the 2.1 backlog."
+      }
+    },
+    {
+      "id": "h_goals",
+      "type": "header",
+      "data": {
+        "text": "Goals",
+        "level": 2
+      }
+    },
+    {
+      "id": "l_goals",
+      "type": "list",
+      "data": {
+        "style": "unordered",
+        "meta": {},
+        "items": [
+          {
+            "content": "Cut cold-start time from 2.4s to under <b>800ms</b>",
+            "meta": {},
+            "items": []
+          },
+          {
+            "content": "Ship offline sync to every paid workspace",
+            "meta": {},
+            "items": []
+          },
+          {
+            "content": "Reach 99.95% API availability for 30 days before GA",
+            "meta": {},
+            "items": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "h_status",
+      "type": "header",
+      "data": {
+        "text": "Workstreams",
+        "level": 2
+      }
+    },
+    {
+      "id": "progress_ws",
+      "type": "progress",
+      "data": {
+        "title": "Workstream progress",
+        "items": [
+          {
+            "label": "Sync engine",
+            "value": 82
+          },
+          {
+            "label": "Desktop app",
+            "value": 64
+          },
+          {
+            "label": "Migration tooling",
+            "value": 7,
+            "max": 12
+          },
+          {
+            "label": "Docs & onboarding",
+            "value": 40
+          }
+        ]
+      }
+    },
+    {
+      "id": "board",
+      "type": "kanban",
+      "data": {
+        "title": "Launch board",
+        "columns": [
+          {
+            "title": "Todo",
+            "cards": [
+              "Pricing page copy",
+              "Status page alerts"
+            ]
+          },
+          {
+            "title": "In progress",
+            "cards": [
+              "Offline conflict resolver",
+              "Migration dry run"
+            ]
+          },
+          {
+            "title": "Review",
+            "cards": [
+              "SSO for enterprise"
+            ]
+          },
+          {
+            "title": "Done",
+            "cards": [
+              "Load test at 5x traffic"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "h_timeline",
+      "type": "header",
+      "data": {
+        "text": "Timeline",
+        "level": 2
+      }
+    },
+    {
+      "id": "tl",
+      "type": "timeline",
+      "data": {
+        "title": "Milestones",
+        "events": [
+          {
+            "date": "2026-09-15",
+            "title": "Private beta",
+            "status": "done",
+            "detail": "40 design partners"
+          },
+          {
+            "date": "2026-10-20",
+            "title": "Scope freeze",
+            "status": "done"
+          },
+          {
+            "date": "2026-11-10",
+            "title": "Public beta",
+            "status": "active",
+            "detail": "Feature flags on for 20% of workspaces"
+          },
+          {
+            "date": "2026-12-01",
+            "title": "General availability",
+            "status": "planned"
+          },
+          {
+            "date": "2027-01-15",
+            "title": "2.1 release",
+            "status": "planned"
+          }
+        ]
+      }
+    },
+    {
+      "id": "h_arch",
+      "type": "header",
+      "data": {
+        "text": "Architecture",
+        "level": 2
+      }
+    },
+    {
+      "id": "arch",
+      "type": "mermaid",
+      "data": {
+        "title": "Sync flow",
+        "code": "flowchart LR\n  Client[Desktop client] --> Queue[(Change queue)]\n  Queue --> Resolver{Conflict resolver}\n  Resolver -->|clean| Store[(Primary store)]\n  Resolver -->|conflict| Review[Manual review]"
+      }
+    },
+    {
+      "id": "migrate_cmd",
+      "type": "code",
+      "data": {
+        "code": "atlas migrate --workspace acme --dry-run\natlas migrate --workspace acme --apply",
+        "language": "bash"
+      }
+    },
+    {
+      "id": "h_metrics",
+      "type": "header",
+      "data": {
+        "text": "Beta metrics",
+        "level": 2
+      }
+    },
+    {
+      "id": "weekly",
+      "type": "chart",
+      "data": {
+        "title": "Weekly active workspaces",
+        "type": "bar",
+        "labels": [
+          "W1",
+          "W2",
+          "W3",
+          "W4"
+        ],
+        "datasets": [
+          {
+            "label": "Workspaces",
+            "data": [
+              120,
+              210,
+              340,
+              480
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "risks",
+      "type": "table",
+      "data": {
+        "withHeadings": true,
+        "content": [
+          [
+            "Risk",
+            "Impact",
+            "Owner",
+            "Mitigation"
+          ],
+          [
+            "Sync data loss",
+            "High",
+            "Marco",
+            "Write-ahead log + nightly restore drill"
+          ],
+          [
+            "Migration timeouts",
+            "Medium",
+            "Lena",
+            "Batch by workspace size"
+          ],
+          [
+            "Pricing confusion",
+            "Low",
+            "Priya",
+            "Comparison table on pricing page"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "h_decisions",
+      "type": "header",
+      "data": {
+        "text": "Decisions",
+        "level": 2
+      }
+    },
+    {
+      "id": "adr_sync",
+      "type": "decision",
+      "data": {
+        "title": "Use CRDTs for offline sync",
+        "status": "accepted",
+        "date": "2026-08-04",
+        "context": "Last-write-wins lost edits in 3% of beta sessions.",
+        "decision": "Adopt CRDT-based merge for documents and comments.",
+        "consequences": "Larger payloads (~15%), but no silent data loss."
+      }
+    },
+    {
+      "id": "h_checklist",
+      "type": "header",
+      "data": {
+        "text": "Launch checklist",
+        "level": 2
+      }
+    },
+    {
+      "id": "launch_tasks",
+      "type": "checklist",
+      "data": {
+        "items": [
+          {
+            "text": "Security review signed off",
+            "checked": false
+          },
+          {
+            "text": "Load test at 5x expected traffic",
+            "checked": false
+          },
+          {
+            "text": "Support playbook published",
+            "checked": false
+          },
+          {
+            "text": "Press kit and launch post ready",
+            "checked": false
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,273 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "jotx",
+  "scopeName": "source.jotx",
+  "fileTypes": [
+    "jot",
+    "meet",
+    "jotx"
+  ],
+  "patterns": [
+    {
+      "include": "#comment"
+    },
+    {
+      "include": "#hdef"
+    },
+    {
+      "include": "#def"
+    },
+    {
+      "include": "#ref"
+    },
+    {
+      "include": "#multiline"
+    },
+    {
+      "include": "#property"
+    }
+  ],
+  "repository": {
+    "comment": {
+      "name": "comment.line.number-sign.jotx",
+      "match": "^\\s*#.*$"
+    },
+    "hdef": {
+      "match": "^\\s*(hdef)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s+([A-Za-z0-9_\\-]+)",
+      "captures": {
+        "1": {
+          "name": "keyword.control.document.jotx"
+        },
+        "2": {
+          "name": "storage.type.document.jotx"
+        },
+        "3": {
+          "name": "entity.name.namespace.jotx"
+        }
+      }
+    },
+    "def": {
+      "patterns": [
+        {
+          "match": "^\\s*(def)\\s+(codereference|buttonstrip|attachment|floatimage|properties|animation|checklist|countdown|paragraph|shortcuts|blockref|datetime|decision|filetree|gridcard|jotxlink|linkcard|listitem|progress|proscons|taskitem|terminal|timeline|callout|columns|divider|heading|mermaid|palette|section|attach|badges|button|column|header|kanban|matrix|rating|toggle|chart|habit|image|quote|steps|table|timer|video|card|cell|code|diff|item|link|list|math|prop|api|row|toc)\\b(?:\\s+([A-Za-z0-9_\\-#]+))?(?:\\s+(\".*\"))?\\s*$",
+          "captures": {
+            "1": {
+              "name": "keyword.control.def.jotx"
+            },
+            "2": {
+              "name": "entity.name.type.block.jotx"
+            },
+            "3": {
+              "name": "variable.other.constant.id.jotx"
+            },
+            "4": {
+              "name": "string.quoted.double.jotx",
+              "patterns": [
+                {
+                  "include": "#inline"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "match": "^\\s*(def)\\s+([A-Za-z_][A-Za-z0-9_]*)(?:\\s+([A-Za-z0-9_\\-#]+))?(?:\\s+(\".*\"))?\\s*$",
+          "captures": {
+            "1": {
+              "name": "keyword.control.def.jotx"
+            },
+            "2": {
+              "name": "invalid.illegal.unknown-block.jotx"
+            },
+            "3": {
+              "name": "variable.other.constant.id.jotx"
+            },
+            "4": {
+              "name": "string.quoted.double.jotx",
+              "patterns": [
+                {
+                  "include": "#inline"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "ref": {
+      "match": "^\\s*(ref)\\s+([A-Za-z_]+)\\s+([A-Za-z0-9_\\-#]+)",
+      "captures": {
+        "1": {
+          "name": "keyword.control.ref.jotx"
+        },
+        "2": {
+          "name": "storage.type.jotx"
+        },
+        "3": {
+          "name": "variable.other.constant.id.jotx"
+        }
+      }
+    },
+    "multiline": {
+      "begin": "^\\s*([a-zA-Z_]+)\\s+(\"{3,})",
+      "beginCaptures": {
+        "1": {
+          "name": "variable.other.property.jotx"
+        },
+        "2": {
+          "name": "punctuation.definition.string.begin.jotx"
+        }
+      },
+      "end": "(\\2)(?!\")",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.string.end.jotx"
+        }
+      },
+      "contentName": "string.quoted.triple.jotx",
+      "patterns": [
+        {
+          "name": "markup.heading.section.jotx",
+          "match": "(?:^|(?<=\"\"\"))\\s*\\[(?![ xX]\\])[^\\]\\n]+\\]\\s*$"
+        },
+        {
+          "name": "constant.language.checkbox.jotx",
+          "match": "(?:^|(?<=\"\"\"))\\s*\\[[ xX]\\]"
+        },
+        {
+          "name": "keyword.operator.prompt.jotx",
+          "match": "(?:^|(?<=\"\"\"))\\s*\\$(?=\\s)"
+        },
+        {
+          "name": "punctuation.definition.list.jotx",
+          "match": "(?:^|(?<=\"\"\"))\\s*[-*](?=\\s)"
+        },
+        {
+          "name": "punctuation.separator.cell.jotx",
+          "match": "\\s\\|\\s|\\s\\|$"
+        },
+        {
+          "name": "constant.other.color.jotx",
+          "match": "#[0-9a-fA-F]{3,8}\\b"
+        },
+        {
+          "name": "comment.line.note.jotx",
+          "match": "\\s//\\s.*$"
+        },
+        {
+          "name": "markup.bold.jotx",
+          "match": "\\*\\*[^*\\n]+\\*\\*"
+        },
+        {
+          "name": "markup.italic.jotx",
+          "match": "(?<!\\*)\\*[^*\\n]+\\*(?!\\*)"
+        },
+        {
+          "name": "markup.inline.raw.jotx",
+          "match": "`[^`\\n]+`"
+        },
+        {
+          "name": "markup.underline.link.jotx",
+          "match": "\\[\\[[^\\]\\n]+\\]\\]|\\[[^\\]\\n]+\\]\\([^)\\n]+\\)"
+        },
+        {
+          "name": "constant.numeric.date.jotx",
+          "match": "\\b\\d{4}-\\d{2}-\\d{2}(?:T\\d{2}:\\d{2}(?::\\d{2})?)?\\b"
+        }
+      ]
+    },
+    "property": {
+      "patterns": [
+        {
+          "match": "^\\s*([a-zA-Z_]+)\\s+(true|false)\\s*$",
+          "captures": {
+            "1": {
+              "name": "variable.other.property.jotx"
+            },
+            "2": {
+              "name": "constant.language.boolean.jotx"
+            }
+          }
+        },
+        {
+          "match": "^\\s*([a-zA-Z_]+)\\s+(-?\\d+(?:\\.\\d+)?)\\s*$",
+          "captures": {
+            "1": {
+              "name": "variable.other.property.jotx"
+            },
+            "2": {
+              "name": "constant.numeric.jotx"
+            }
+          }
+        },
+        {
+          "match": "^\\s*([a-zA-Z_]+)\\s+([a-zA-Z_][\\w-]*)\\s*$",
+          "captures": {
+            "1": {
+              "name": "variable.other.property.jotx"
+            },
+            "2": {
+              "name": "support.constant.enum.jotx"
+            }
+          }
+        },
+        {
+          "match": "^\\s*([a-zA-Z_]+)\\s+(\".*\")\\s*$",
+          "captures": {
+            "1": {
+              "name": "variable.other.property.jotx"
+            },
+            "2": {
+              "name": "string.quoted.double.jotx",
+              "patterns": [
+                {
+                  "include": "#inline"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "match": "^\\s*([a-zA-Z_]+)\\s+(.+)$",
+          "captures": {
+            "1": {
+              "name": "variable.other.property.jotx"
+            },
+            "2": {
+              "name": "string.unquoted.jotx",
+              "patterns": [
+                {
+                  "include": "#inline"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "inline": {
+      "patterns": [
+        {
+          "name": "constant.other.color.jotx",
+          "match": "#[0-9a-fA-F]{3,8}\\b"
+        },
+        {
+          "name": "markup.bold.jotx",
+          "match": "\\*\\*[^*\\n]+\\*\\*"
+        },
+        {
+          "name": "markup.italic.jotx",
+          "match": "(?<!\\*)\\*[^*\\n]+\\*(?!\\*)"
+        },
+        {
+          "name": "markup.inline.raw.jotx",
+          "match": "`[^`\\n]+`"
+        },
+        {
+          "name": "markup.underline.link.jotx",
+          "match": "\\[\\[[^\\]\\n]+\\]\\]|\\[[^\\]\\n]+\\]\\([^)\\n]+\\)"
+        }
+      ]
+    }
+  }
+}

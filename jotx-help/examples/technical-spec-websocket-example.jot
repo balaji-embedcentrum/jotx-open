@@ -1,0 +1,371 @@
+hdef jotx WebSocketRealTimeSpec
+
+  type page
+  title RFC-2025-001: Real-Time WebSocket Notification System
+  icon ⚡
+  author Alex Chen
+  created 2025-01-10
+  tags "technical", "spec", "rfc", "websocket", "real-time"
+
+  def table block_1
+    columns Key, Value
+    rows """Status | In Review
+Author | Alex Chen
+Reviewers | Sarah (Backend), Mike (Frontend), Emma (DevOps)
+Target Release | Q1 2025 - Sprint 26
+Priority | P0 - Critical"""
+
+  def heading "Real-Time WebSocket Notification System"
+
+  def paragraph "Design for a scalable, real-time notification delivery system using WebSockets to replace polling-based notifications."
+
+  def divider
+
+  def heading "Overview"
+    level 2
+
+  def paragraph "Our current notification system uses HTTP polling every 30 seconds, causing unnecessary server load and delayed notifications. This spec proposes a WebSocket-based push notification system to enable instant delivery and reduce backend costs by 60%."
+
+  def callout "💡 Goal: Deliver notifications to users in under 500ms with support for 100k concurrent connections"
+
+  def heading "Background & Context"
+    level 2
+
+  def paragraph "Current system limitations and business drivers:"
+
+  def list
+    items """Current approach: HTTP polling every 30 seconds per client
+Limitations: Average 15-second notification delay, 2M requests/hour to /api/notifications
+Business driver: User complaints about delayed messages, $12k/month in unnecessary API costs
+Market pressure: Competitors offer instant notifications"""
+
+  def callout "⚠️ Impact: 23% of users report missing time-sensitive notifications due to delays"
+    variant warning
+
+  def heading "Requirements"
+    level 2
+
+  def heading "Functional Requirements"
+    level 3
+
+  def list
+    listtype numbered
+    items """[REQ-1] The system must deliver notifications to connected users within 500ms
+[REQ-2] The system must support 100k concurrent WebSocket connections
+[REQ-3] Users must automatically reconnect on connection drop with exponential backoff
+[REQ-4] The system must gracefully handle offline users and queue notifications
+[REQ-5] The system must support notification types: message, alert, system, activity"""
+
+  def heading "Non-Functional Requirements"
+    level 3
+
+  def list
+    items """Performance: P99 latency < 500ms, P50 < 200ms
+Scalability: Support 100k concurrent connections per cluster
+Reliability: 99.95% uptime SLA, zero message loss
+Security: WSS (TLS 1.3), JWT token auth, rate limiting
+Cost: Reduce infrastructure costs by 60% vs polling"""
+
+  def heading "Proposed Solution"
+    level 2
+
+  def paragraph "Implement a horizontally scalable WebSocket server cluster using Socket.IO with Redis Pub/Sub for inter-server communication. Clients connect via sticky sessions with automatic reconnection and fallback to long-polling."
+
+  def heading "Architecture Overview"
+    level 3
+
+  def mermaid block_20
+    src """graph TB
+    Client[Web Client] -->|WSS Connection| LB[Load Balancer<br/>Sticky Sessions]
+    LB --> WS1[WebSocket Server 1<br/>Socket.IO]
+    LB --> WS2[WebSocket Server 2<br/>Socket.IO]
+    LB --> WS3[WebSocket Server N<br/>Socket.IO]
+    
+    WS1 --> Redis[Redis Pub/Sub<br/>Message Bus]
+    WS2 --> Redis
+    WS3 --> Redis
+    
+    API[Backend API] -->|Publish Event| Redis
+    Redis -->|Subscribe| WS1
+    Redis -->|Subscribe| WS2
+    Redis -->|Subscribe| WS3
+    
+    WS1 --> PG[(PostgreSQL<br/>Notification History)]
+    API --> PG
+    
+    style Redis fill:#20B2AA,color:#0a0a0a
+    style LB fill:#20B2AA,color:#0a0a0a"""
+
+  def heading "Key Components"
+    level 3
+
+  def table block_22
+    def row
+      def header
+        text Component
+      def header
+        text Responsibility
+      def header
+        text Technology
+    def row
+      def cell
+        def paragraph "WebSocket Server"
+      def cell
+        def paragraph "Maintain client connections, route messages"
+      def cell
+        def paragraph "Node.js, Socket.IO 4.x"
+    def row
+      def cell
+        def paragraph "Redis Pub/Sub"
+      def cell
+        def paragraph "Broadcast events across server instances"
+      def cell
+        def paragraph "Redis 7.x"
+    def row
+      def cell
+        def paragraph "Load Balancer"
+      def cell
+        def paragraph "Distribute connections, sticky sessions"
+      def cell
+        def paragraph "AWS ALB"
+    def row
+      def cell
+        def paragraph "Notification API"
+      def cell
+        def paragraph "Publish events, store history"
+      def cell
+        def paragraph "Python FastAPI"
+    def row
+      def cell
+        def paragraph "Storage"
+      def cell
+        def paragraph "Persist notification history (30 days)"
+      def cell
+        def paragraph "PostgreSQL"
+
+  def heading "Data Model"
+    level 2
+
+  def code
+    language typescript
+    text """// Client → Server (Authenticate)
+interface AuthMessage {
+  type: 'auth';
+  token: string; // JWT
+}
+
+// Server → Client (Notification)
+interface Notification {
+  id: string;
+  userId: string;
+  type: 'message' | 'alert' | 'system' | 'activity';
+  title: string;
+  body: string;
+  data?: Record<string, any>;
+  timestamp: string; // ISO 8601
+  read: boolean;
+}
+
+// Server → Client (Acknowledgement)
+interface AckMessage {
+  type: 'ack';
+  notificationId: string;
+  status: 'delivered' | 'error';
+}"""
+
+  def heading "WebSocket Protocol"
+    level 2
+
+  def paragraph "Connection flow and message exchange:"
+
+  def mermaid block_27
+    src """sequenceDiagram
+    participant C as Client
+    participant WS as WebSocket Server
+    participant R as Redis
+    participant API as Backend API
+    
+    C->>WS: Connect (WSS)
+    WS->>C: Connection Established
+    C->>WS: Auth (JWT Token)
+    WS->>WS: Validate Token
+    WS->>C: Auth Success
+    WS->>R: Subscribe to user:{userId}
+    
+    API->>R: Publish notification to user:{userId}
+    R->>WS: Receive notification
+    WS->>C: Push notification
+    C->>WS: ACK received
+    WS->>API: Update delivery status"""
+
+  def heading "API Design"
+    level 2
+
+  def paragraph "WebSocket events and REST API endpoints:"
+
+  def code
+    language plaintext
+    text """WebSocket Events:
+- Client → Server:
+  * 'auth' - Authenticate with JWT
+  * 'ack' - Acknowledge notification receipt
+  * 'mark_read' - Mark notification as read
+
+- Server → Client:
+  * 'notification' - New notification
+  * 'auth_success' - Authentication successful
+  * 'auth_error' - Authentication failed
+  * 'reconnect' - Server requests reconnect
+
+REST API (Fallback):
+POST   /api/notifications/send       - Publish notification
+GET    /api/notifications/history    - Fetch history
+PATCH  /api/notifications/:id/read   - Mark as read"""
+
+  def heading "Alternatives Considered"
+    level 2
+
+  def list
+    items """Server-Sent Events (SSE) - Rejected: One-way only, no bidirectional ack
+Long Polling - Rejected: Higher latency (2-5s), more server resources
+Firebase Cloud Messaging - Rejected: Vendor lock-in, mobile-focused
+GraphQL Subscriptions - Rejected: Overkill for simple notifications"""
+
+  def heading "Security Considerations"
+    level 2
+
+  def list
+    items """Authentication: JWT tokens validated on WebSocket connect, 15-min expiry
+Authorization: Users can only receive notifications intended for them
+Transport: WSS (TLS 1.3) for all connections
+Rate limiting: Max 100 events/minute per user, 1000 connections/IP
+DDoS protection: Cloudflare + connection throttling"""
+
+  def heading "Testing Strategy"
+    level 2
+
+  def list
+    items """Unit tests: 90% coverage for event handlers, auth, message routing
+Integration tests: End-to-end notification flow, reconnection scenarios
+Load tests: 100k concurrent connections, 10k messages/sec with k6
+Chaos tests: Random server kills, network partitions, Redis failover"""
+
+  def heading "Rollout Plan"
+    level 2
+
+  def heading "Phases"
+    level 3
+
+  def list
+    listtype numbered
+    items """Phase 1: Deploy WebSocket servers (3 instances) - Week 1
+Phase 2: Canary release to 5% of users - Week 2
+Phase 3: Gradual rollout to 25%, 50%, 100% - Week 3-4
+Phase 4: Deprecate polling API - Week 5"""
+
+  def heading "Rollback Strategy"
+    level 3
+
+  def paragraph "If error rate > 1% or P99 latency > 2s, immediately route 100% traffic back to polling API. Feature flag: `websocket_notifications` controlled via LaunchDarkly."
+
+  def heading "Monitoring & Observability"
+    level 2
+
+  def list
+    items """Metrics: Connection count, message latency P50/P99, error rate, reconnection rate
+Logs: Connection events, auth failures, message delivery, errors
+Alerts: Error rate > 0.5%, latency P99 > 1s, connection count > 90k
+Dashboards: Grafana with real-time connection heatmap, throughput, error trends"""
+
+  def heading "Risks & Mitigation"
+    level 2
+
+  def table block_45
+    def row
+      def header
+        text Risk
+      def header
+        text Impact
+      def header
+        text Mitigation
+    def row
+      def cell
+        def paragraph "Redis single point of failure"
+      def cell
+        def paragraph "High"
+      def cell
+        def paragraph "Redis Sentinel for auto-failover, fallback to polling"
+    def row
+      def cell
+        def paragraph "WebSocket connection storms on deploy"
+      def cell
+        def paragraph "Medium"
+      def cell
+        def paragraph "Exponential backoff, connection jitter, rate limiting"
+    def row
+      def cell
+        def paragraph "Mobile browser WebSocket support"
+      def cell
+        def paragraph "Low"
+      def cell
+        def paragraph "Socket.IO auto-fallback to long-polling"
+    def row
+      def cell
+        def paragraph "Message ordering not guaranteed"
+      def cell
+        def paragraph "Medium"
+      def cell
+        def paragraph "Add sequence numbers, client-side reordering"
+
+  def heading "Open Questions"
+    level 2
+
+  def list
+    items """Should we persist undelivered notifications beyond 7 days for offline users?
+Do we need message deduplication if user connects from multiple tabs?
+Should we prioritize critical notifications over others?"""
+
+  def divider
+
+  def heading "Success Metrics"
+    level 2
+
+  def table block_50
+    def row
+      def header
+        text Metric
+      def header
+        text Current
+      def header
+        text Target
+    def row
+      def cell
+        def paragraph "Notification Latency (P99)"
+      def cell
+        def paragraph "15 seconds"
+      def cell
+        def paragraph "< 500ms"
+    def row
+      def cell
+        def paragraph "API Requests/Hour"
+      def cell
+        def paragraph "2M"
+      def cell
+        def paragraph "< 100k"
+    def row
+      def cell
+        def paragraph "Infrastructure Cost"
+      def cell
+        def paragraph "$12k/month"
+      def cell
+        def paragraph "< $5k/month"
+    def row
+      def cell
+        def paragraph "User Satisfaction"
+      def cell
+        def paragraph "3.2/5"
+      def cell
+        def paragraph "> 4.5/5"
+
+  def callout "✅ Approved by: Sarah (Backend Lead), Mike (Frontend Lead), Emma (DevOps) - Ready for implementation"
+    variant success

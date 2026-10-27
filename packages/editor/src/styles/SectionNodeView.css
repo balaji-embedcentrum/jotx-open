@@ -1,0 +1,106 @@
+/* Section Node - Collapsible section with title */
+.jotx-section {
+  margin: 1.1em 0;
+  overflow: hidden;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-lg);
+  background: var(--jx-bg);
+  box-shadow: var(--jx-shadow-sm);
+  font-family: var(--jx-font-sans);
+  transition: border-color var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-section:hover {
+  border-color: var(--jx-line-strong);
+}
+
+.jotx-section:focus-within {
+  border-color: color-mix(in srgb, var(--jx-accent) 45%, var(--jx-line));
+}
+
+.jotx-section-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 6px 10px 6px 8px;
+  border-bottom: 1px solid var(--jx-line);
+  background: var(--jx-surface);
+  cursor: pointer;
+}
+
+.jotx-section.is-collapsed .jotx-section-header {
+  border-bottom: none;
+}
+
+.jotx-section-chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--jx-r-sm);
+  background: var(--jx-accent-soft);
+  color: var(--jx-accent);
+  cursor: pointer;
+  transition: background var(--jx-dur) var(--jx-ease), color var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-section-chevron svg {
+  pointer-events: none;
+}
+
+.jotx-section-chevron:hover {
+  background: color-mix(in srgb, var(--jx-accent) 24%, transparent);
+}
+
+.jotx-section-chevron:focus-visible {
+  outline: none;
+  box-shadow: var(--jx-ring);
+}
+
+.jotx-section-title {
+  flex: 1;
+  min-width: 0;
+  padding: 4px 6px;
+  border: none;
+  border-radius: var(--jx-r-sm);
+  outline: none;
+  background: transparent;
+  color: var(--jx-fg);
+  font: 650 15px/1.4 var(--jx-font-sans);
+  letter-spacing: -0.01em;
+  transition: background var(--jx-dur) var(--jx-ease), box-shadow var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-section-title::placeholder {
+  color: var(--jx-fg-subtle);
+}
+
+.jotx-section-title:hover {
+  background: var(--jx-hover);
+}
+
+.jotx-section-title:focus {
+  background: var(--jx-bg);
+  box-shadow: inset 0 0 0 1px var(--jx-accent), var(--jx-ring);
+}
+
+.jotx-section-content {
+  padding: 14px 18px 16px;
+}
+
+.jotx-section-content-inner > *:first-child {
+  margin-top: 0;
+}
+
+.jotx-section-content-inner > *:last-child {
+  margin-bottom: 0;
+}
+
+.jotx-section.is-collapsed .jotx-section-content {
+  display: none;
+}

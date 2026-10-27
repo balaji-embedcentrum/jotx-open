@@ -1,0 +1,99 @@
+hdef jotx ChangelogGeneric
+
+  type page
+  title Changelog Template
+  icon 📝
+  author ""
+  created 2025-01-01
+  tags "changelog", "release", "version", "updates"
+
+  def table block_1
+    columns Key, Value
+    rows """Product | 
+Version | 
+Release Date | """
+
+  def heading "Changelog"
+
+  def paragraph "[Product/Project name] - Version history and release notes"
+
+  def divider
+
+  def heading "[Version X.Y.Z] - [Release Date]"
+    level 2
+
+  def heading "🚀 New Features"
+    level 3
+
+  def list
+    items """[New feature 1] - Brief description
+[New feature 2] - Brief description"""
+
+  def heading "✨ Improvements"
+    level 3
+
+  def list
+    items """[Improvement 1] - What was enhanced
+[Improvement 2] - What was enhanced"""
+
+  def heading "🐛 Bug Fixes"
+    level 3
+
+  def list
+    items """[Bug fix 1] - What was fixed
+[Bug fix 2] - What was fixed"""
+
+  def heading "⚠️ Breaking Changes"
+    level 3
+
+  def paragraph "[If any breaking changes, list them here with migration instructions]"
+
+  def list
+    items "[Breaking change 1] - How to migrate"
+
+  def heading "🔒 Security"
+    level 3
+
+  def list
+    items "[Security update 1] - Description"
+
+  def heading "📚 Documentation"
+    level 3
+
+  def list
+    items "[Documentation update 1]"
+
+  def heading "🗑️ Deprecated"
+    level 3
+
+  def list
+    items "[Deprecated feature 1] - Reason and replacement"
+
+  def divider
+
+  def heading "[Version X.Y.Z-1] - [Previous Release Date]"
+    level 2
+
+  def heading "🚀 New Features"
+    level 3
+
+  def list
+    items "[Previous version features...]"
+
+  def heading "🐛 Bug Fixes"
+    level 3
+
+  def list
+    items "[Previous version fixes...]"
+
+  def divider
+
+  def heading "Version History Quick Reference"
+    level 2
+
+  def table block_29
+    rows """ |  |  | 
+[X.Y.Z] | [Date] | [Key features] | Latest
+[X.Y.Z-1] | [Date] | [Key features] | Stable"""
+
+  def paragraph

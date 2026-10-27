@@ -1,0 +1,67 @@
+/* Code block — shell, header and controls live in RichBlocks.css */
+
+.jotx-codeblock-header {
+  justify-content: space-between;
+  padding: 6px 6px 0 12px;
+}
+
+.jotx-codeblock-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+}
+
+.jotx-codeblock-langLabel {
+  display: inline-flex;
+  align-items: center;
+  color: var(--jx-fg-subtle);
+}
+
+.jotx-codeblock-select {
+  height: 24px;
+  padding: 0 4px;
+  border: 1px solid transparent;
+  border-radius: var(--jx-r-sm);
+  outline: none;
+  background: transparent;
+  color: var(--jx-fg-muted);
+  font: 550 12px/1 var(--jx-font-sans);
+  cursor: pointer;
+  transition: background var(--jx-dur) var(--jx-ease), color var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-codeblock-select:hover {
+  background: var(--jx-hover);
+  color: var(--jx-fg);
+}
+
+.jotx-codeblock-select:focus-visible {
+  box-shadow: var(--jx-ring);
+}
+
+/* Code (beats the editor's generic <pre>/<code> rules) */
+.jotx-editor-content .jotx-codeblock .jotx-codeblock-pre,
+.jotx-codeblock-pre {
+  margin: 0;
+  padding: 4px 16px 14px;
+  overflow-x: auto;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  font-family: var(--jx-font-mono);
+  font-size: 0.86em;
+  line-height: 1.65;
+  tab-size: 2;
+}
+
+.jotx-editor-content .jotx-codeblock .jotx-codeblock-pre code,
+.jotx-codeblock-pre code {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  color: var(--jx-fg);
+  font-family: inherit;
+  font-size: inherit;
+}

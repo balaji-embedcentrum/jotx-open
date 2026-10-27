@@ -1,0 +1,40 @@
+.jx-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 2px 0;
+}
+
+.jx-widget:has(.jx-widget__float-settings) .jx-badges { padding-right: 36px; }
+
+.jx-badge:not([data-tone]):not([style]) { --jx-tone: var(--jx-c-slate); }
+
+.jx-badge {
+  display: inline-flex;
+  align-items: stretch;
+  height: 22px;
+  overflow: hidden;
+  border-radius: var(--jx-r-sm);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--jx-tone) 35%, var(--jx-line));
+  font: 600 11.5px/22px var(--jx-font-sans);
+  white-space: nowrap;
+}
+
+.jx-badge__label {
+  padding: 0 8px;
+  background: var(--jx-surface-2);
+  color: var(--jx-fg-muted);
+}
+
+.jx-badge__message {
+  padding: 0 8px;
+  /* Slightly deepened so white text stays readable on light tones like amber */
+  background: color-mix(in srgb, var(--jx-tone) 86%, #000);
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.jx-badge.is-single .jx-badge__label {
+  background: color-mix(in srgb, var(--jx-tone) 16%, transparent);
+  color: color-mix(in srgb, var(--jx-tone) 80%, var(--jx-fg));
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jotx viewer</title>
+  <meta name="description" content="Open any .jot file in the browser: a link, a file from your computer, or pasted text.">
+  <link rel="icon" href="assets/logo-jotx.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="embed/jotx.min.js" defer></script>
+</head>
+<body>
+  <header class="bar">
+    <a class="brand" href="./"><img src="assets/logo-jotx.svg" alt="" width="22" height="22"> jotx</a>
+    <nav>
+      <a href="view.html?src=examples/widgets-showcase-example.jot">Examples</a>
+      <a href="view.html" aria-current="page">Viewer</a>
+      <a href="https://github.com/balaji-embedcentrum/jotx-open">GitHub</a>
+    </nav>
+  </header>
+
+  <section class="open" aria-label="Open a document">
+    <form id="open-url" class="open-row">
+      <label for="src" class="sr">Link to a .jot file</label>
+      <input id="src" name="src" type="text" placeholder="Link to a .jot file, e.g. examples/meeting-sprint-planning-example.jot" autocomplete="off">
+      <button type="submit">Open</button>
+    </form>
+    <div class="open-row">
+      <label for="example" class="sr">Example</label>
+      <select id="example">
+        <option value="">Choose an example…</option>
+      </select>
+      <label class="file-btn" for="file">Open a file<input id="file" type="file" accept=".jot,.jotx,.meet,text/plain" hidden></label>
+      <button type="button" id="paste-toggle" class="ghost">Paste text</button>
+    </div>
+    <div id="paste" class="paste" hidden>
+      <label for="paste-text" class="sr">jot text</label>
+      <textarea id="paste-text" rows="8" spellcheck="false" placeholder='def heading "Hello"&#10;&#10;def paragraph "Paste jot here."'></textarea>
+      <button type="button" id="paste-render">Render</button>
+    </div>
+    <p class="hint">Files dropped or pasted here stay in your browser; nothing is uploaded. Links to other sites work when that site allows it (GitHub raw links do).</p>
+  </section>
+
+  <main id="drop">
+    <jotx-doc id="doc"></jotx-doc>
+  </main>
+
+  <script>
+    // Example list (copied into the site at build time)
+    const EXAMPLES = [
+      ['Widgets showcase', 'examples/widgets-showcase-example.jot'],
+      ['jotx for humans (guide)', 'examples/JOTX_FOR_HUMANS.jot'],
+      ['jotx for AI (syntax)', 'examples/JOTX_FOR_AI.jot'],
+      ['Sprint planning meeting', 'examples/meeting-sprint-planning-example.jot'],
+      ['Product requirements', 'examples/prd-ai-assistant-example.jot'],
+      ['Technical spec', 'examples/technical-spec-websocket-example.jot'],
+      ['Weekly status report', 'examples/status-report-weekly-update-example.jot'],
+      ['Sprint retrospective', 'examples/retrospective-sprint-example.jot'],
+      ['User research study', 'examples/research-user-study-example.jot'],
+      ['Design system', 'examples/design-system-example.jot'],
+      ['Release notes', 'examples/changelog-release-notes-example.jot'],
+      ['Tech blog article', 'examples/article-techblog-example.jot'],
+      ['Onboarding SOP', 'examples/sop-customer-onboarding-example.jot'],
+      ['Project brief', 'examples/project-brief-website-redesign-example.jot'],
+      ['Daily task list', 'examples/task-list-daily-manager-example.jot']
+    ]
+    const doc = document.getElementById('doc')
+    const srcInput = document.getElementById('src')
+    const select = document.getElementById('example')
+    for (const [label, path] of EXAMPLES) select.add(new Option(label, path))
+
+    function show(src, push = true) {
+      if (!src) return
+      srcInput.value = src
+      select.value = EXAMPLES.some(e => e[1] === src) ? src : ''
+      doc.setAttribute('src', src)
+      const url = new URL(location.href)
+      url.searchParams.set('src', src)
+      if (push) history.pushState({ src }, '', url)
+    }
+
+    function showText(text, name) {
+      history.replaceState(null, '', location.pathname)
+      srcInput.value = ''
+      select.value = ''
+      doc.setText(text)
+      if (name) document.title = `${name} · jotx viewer`
+    }
+
+    document.getElementById('open-url').addEventListener('submit', e => { e.preventDefault(); show(srcInput.value.trim()) })
+    select.addEventListener('change', () => show(select.value))
+    document.getElementById('file').addEventListener('change', async e => {
+      const file = e.target.files[0]
+      if (file) showText(await file.text(), file.name)
+    })
+    document.getElementById('paste-toggle').addEventListener('click', () => {
+      const box = document.getElementById('paste')
+      box.hidden = !box.hidden
+      if (!box.hidden) document.getElementById('paste-text').focus()
+    })
+    document.getElementById('paste-render').addEventListener('click', () => showText(document.getElementById('paste-text').value, 'Pasted note'))
+
+    // Drag and drop a .jot file anywhere on the document area
+    const drop = document.getElementById('drop')
+    drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('is-drop') })
+    drop.addEventListener('dragleave', () => drop.classList.remove('is-drop'))
+    drop.addEventListener('drop', async e => {
+      e.preventDefault(); drop.classList.remove('is-drop')
+      const file = e.dataTransfer.files[0]
+      if (file) showText(await file.text(), file.name)
+    })
+
+    // Links between notes open here and update the address
+    doc.addEventListener('jotx:navigate', e => {
+      e.preventDefault()
+      const target = new URL(e.detail.url)
+      const here = new URL('.', location.href)
+      show(target.href.startsWith(here.href) ? target.href.slice(here.href.length) : target.href)
+    })
+    doc.addEventListener('jotx:load', e => { document.title = `${e.detail.title || 'Untitled'} · jotx viewer` })
+    window.addEventListener('popstate', () => show(new URLSearchParams(location.search).get('src'), false))
+
+    show(new URLSearchParams(location.search).get('src') || 'examples/widgets-showcase-example.jot', false)
+  </script>
+</body>
+</html>

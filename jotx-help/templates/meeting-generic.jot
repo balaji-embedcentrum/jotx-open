@@ -1,0 +1,106 @@
+hdef jotx MeetingGenericTemplate
+
+  type meeting
+  title "[Meeting Title]"
+  icon 👥
+  author ""
+  created 2025-01-01
+  tags "meeting", "template", "notes"
+
+  def table block_1
+    columns Key, Value
+    rows """Meeting Type | 
+Date | 
+Duration | 
+Location | """
+
+  def heading "Attendees"
+    level 2
+
+  def list
+    items """[Name] - [Role]
+[Name] - [Role]
+[Name] - [Role]"""
+
+  def heading "Agenda"
+    level 2
+
+  def list
+    listtype numbered
+    items """[Topic 1] - [Duration]
+[Topic 2] - [Duration]
+[Topic 3] - [Duration]
+[Topic 4] - [Duration]"""
+
+  def divider
+
+  def heading "Discussion Notes"
+    level 2
+
+  def heading "[Topic 1]"
+    level 3
+
+  def paragraph "[Key discussion points, decisions, or insights for this topic.]"
+
+  def list
+    items """Point 1
+Point 2
+Point 3"""
+
+  def heading "[Topic 2]"
+    level 3
+
+  def paragraph "[Continue with additional topics as needed.]"
+
+  def heading "[Topic 3]"
+    level 3
+
+  def paragraph "[Add more sections for each agenda item.]"
+
+  def divider
+
+  def heading "Key Decisions"
+    level 2
+
+  def callout "Decision 1: [What was decided and who approved it]"
+    variant success
+
+  def callout "Decision 2: [What was decided and who approved it]"
+    variant success
+
+  def divider
+
+  def heading "Action Items"
+    level 2
+
+  def checklist
+    def listitem "[Action item description] - [Owner name]"
+      checked "false"
+      priority high
+    def listitem "[Action item description] - [Owner name]"
+      checked "false"
+      priority medium
+    def listitem "[Action item description] - [Owner name]"
+      checked "false"
+      priority medium
+    def listitem "[Action item description] - [Owner name]"
+      checked "false"
+      priority low
+
+  def divider
+
+  def heading "Questions & Parking Lot"
+    level 2
+
+  def list
+    items """[Question or topic to revisit later]
+[Question or topic to revisit later]"""
+
+  def divider
+
+  def heading "Next Steps"
+    level 2
+
+  def paragraph "[Summarize what happens next, next meeting date, or follow-up actions.]"
+
+  def callout "📅 Next Meeting: [Date and time]"

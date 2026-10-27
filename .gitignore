@@ -1,0 +1,34 @@
+# build
+dist/
+out/
+build/
+node_modules/
+*.vsix
+
+# editor
+.vscode/
+
+# logs
+npm-debug.log
+yarn-error.log
+
+# os
+.DS_Store
+Thumbs.db
+
+# artifacts in src (should be clean now, but just in case)
+packages/*/src/**/*.js
+packages/*/src/**/*.js.map
+packages/*/src/**/*.d.ts
+packages/*/src/**/*.d.ts.map
+!packages/cli/src/cli.ts
+!packages/editor/src/types/*.d.ts
+!packages/embed/src/env.d.ts
+packages/vscode-extension/vsix-check/
+
+# GitHub Pages build
+_site/
+
+# packaged artifacts
+*.tgz
+*.log

@@ -1,0 +1,207 @@
+hdef jotx TechBlogArticleExample
+
+  type page
+  title Building a Modern Web Editor with Tiptap
+  icon ⚡
+  author Engineering Team
+  created 2025-01-01
+  tags "tech", "tutorial", "web development", "tiptap"
+
+  def heading "Building a Modern Web Editor with Tiptap"
+
+  def paragraph "Rich text editors are the backbone of modern content creation platforms. In this article, we'll explore how to build a production-ready WYSIWYG editor using Tiptap, a headless editor framework built on ProseMirror."
+
+  def callout "💡 What You'll Learn: Set up Tiptap, create custom extensions, handle file uploads, and implement collaborative editing features."
+
+  def divider
+
+  def heading "Why Tiptap?"
+    level 2
+
+  def paragraph "Tiptap stands out in the crowded editor space for several reasons. It's framework-agnostic, highly extensible, and provides a clean API for building custom editing experiences."
+
+  def list
+    items """Headless architecture - full control over UI
+ProseMirror foundation - battle-tested and performant
+Rich extension ecosystem
+TypeScript support out of the box
+Built-in collaborative editing support"""
+
+  def heading "Getting Started"
+    level 2
+
+  def paragraph "First, let's install the necessary packages. We'll use React for this example, but the concepts apply to any framework."
+
+  def code
+    language bash
+    text npm install @tiptap/react @tiptap/pm @tiptap/starter-kit
+
+  def paragraph "Next, create a basic editor component:"
+
+  def code
+    language typescript
+    text """import { useEditor, EditorContent } from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit'
+
+export function Editor() {
+  const editor = useEditor({
+    extensions: [StarterKit],
+    content: '<p>Start typing...</p>',
+  })
+
+  return <EditorContent editor={editor} />
+}"""
+
+  def callout "✅ That's it! You now have a working editor with basic formatting capabilities."
+    variant success
+
+  def heading "Creating Custom Extensions"
+    level 2
+
+  def paragraph "The real power of Tiptap comes from custom extensions. Let's build a custom node for displaying code snippets with syntax highlighting."
+
+  def code
+    language typescript
+    text """import { Node } from '@tiptap/core'
+import { ReactNodeViewRenderer } from '@tiptap/react'
+import CodeBlockComponent from './CodeBlockComponent'
+
+export const CodeBlock = Node.create({
+  name: 'codeBlock',
+  group: 'block',
+  content: 'text*',
+  marks: '',
+  code: true,
+
+  addAttributes() {
+    return {
+      language: {
+        default: 'javascript',
+        parseHTML: element => element.getAttribute('data-language'),
+        renderHTML: attributes => ({
+          'data-language': attributes.language,
+        }),
+      },
+    }
+  },
+
+  parseHTML() {
+    return [{ tag: 'pre' }]
+  },
+
+  renderHTML({ HTMLAttributes }) {
+    return ['pre', HTMLAttributes, ['code', {}, 0]]
+  },
+
+  addNodeView() {
+    return ReactNodeViewRenderer(CodeBlockComponent)
+  },
+})"""
+
+  def heading "Handling File Uploads"
+    level 2
+
+  def paragraph "Image uploads are a common requirement. Here's how to handle drag-and-drop image uploads with proper error handling."
+
+  def mermaid block_19
+    src """sequenceDiagram
+    participant User
+    participant Editor
+    participant Storage
+    participant Server
+    
+    User->>Editor: Drag & drop image
+    Editor->>Editor: Validate file (type, size)
+    Editor->>Storage: Upload to storage
+    Storage->>Server: Store file
+    Server->>Storage: Return URL
+    Storage->>Editor: Success + URL
+    Editor->>Editor: Insert image node
+    Editor->>User: Display image"""
+
+  def code
+    language typescript
+    text """const handleImageUpload = async (file: File) => {
+  // Validate file
+  if (!file.type.startsWith('image/')) {
+    throw new Error('Invalid file type')
+  }
+  
+  if (file.size > 5 * 1024 * 1024) {
+    throw new Error('File too large (max 5MB)')
+  }
+  
+  // Upload to storage
+  const formData = new FormData()
+  formData.append('file', file)
+  
+  const response = await fetch('/api/upload', {
+    method: 'POST',
+    body: formData,
+  })
+  
+  const { url } = await response.json()
+  return url
+}"""
+
+  def heading "Real-Time Collaboration"
+    level 2
+
+  def paragraph "Tiptap supports collaborative editing out of the box using Yjs. Here's a minimal setup for real-time collaboration."
+
+  def code
+    language typescript
+    text """import { useEditor } from '@tiptap/react'
+import Collaboration from '@tiptap/extension-collaboration'
+import * as Y from 'yjs'
+import { WebrtcProvider } from 'y-webrtc'
+
+const ydoc = new Y.Doc()
+const provider = new WebrtcProvider('room-name', ydoc)
+
+const editor = useEditor({
+  extensions: [
+    StarterKit.configure({
+      history: false, // Important: disable history for collab
+    }),
+    Collaboration.configure({
+      document: ydoc,
+    }),
+  ],
+})"""
+
+  def callout "⚠️ Production Tip: WebRTC is great for demos, but use a proper WebSocket server (like y-websocket) for production deployments."
+    variant warning
+
+  def heading "Performance Optimization"
+    level 2
+
+  def paragraph "For large documents, performance matters. Here are key optimizations:"
+
+  def table block_27
+    rows """ |  | 
+Lazy loading | High | Load content on scroll
+Debounce updates | Medium | Wait 300ms before saving
+Virtual scrolling | High | Render only visible nodes
+Memoization | Medium | Cache rendered components"""
+
+  def heading "Conclusion"
+    level 2
+
+  def paragraph "We've covered the essentials of building a modern editor with Tiptap - from basic setup to advanced features like collaboration and performance optimization. The modular architecture makes it easy to start simple and add complexity as needed."
+
+  def callout "✅ Next Steps: Explore the Tiptap documentation, experiment with custom extensions, and join the community Discord for support."
+    variant success
+
+  def divider
+
+  def heading "Resources"
+    level 2
+
+  def list
+    items """Tiptap Documentation: https://tiptap.dev
+ProseMirror Guide: https://prosemirror.net/docs/guide/
+Example Repository: https://github.com/example/tiptap-demo
+Community Discord: https://discord.gg/tiptap"""
+
+  def paragraph

@@ -1,0 +1,243 @@
+/* Node picker - command-palette style modal for choosing a note or block.
+   Generic class names (.loading, .close-btn, .node-label...) are scoped to the dialog
+   so they never leak into other components. */
+
+.node-picker-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 12vh;
+    background: color-mix(in srgb, var(--jx-bg) 40%, rgba(0, 0, 0, 0.45));
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    animation: jotx-picker-fade 140ms var(--jx-ease);
+}
+
+.node-picker-dialog {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    max-width: calc(100vw - 24px);
+    max-height: 72vh;
+    overflow: hidden;
+    border: 1px solid var(--jx-line);
+    border-radius: var(--jx-r-xl);
+    background: color-mix(in srgb, var(--jx-elevated) 94%, transparent);
+    box-shadow: var(--jx-shadow-lg);
+    backdrop-filter: saturate(160%) blur(16px);
+    -webkit-backdrop-filter: saturate(160%) blur(16px);
+    color: var(--jx-fg);
+    font-family: var(--jx-font-sans);
+    animation: jotx-picker-in 160ms var(--jx-ease);
+}
+
+@keyframes jotx-picker-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes jotx-picker-in {
+    from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.node-picker-dialog .node-picker-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 14px 10px 18px;
+}
+
+.node-picker-dialog .node-picker-header h2 {
+    margin: 0;
+    color: var(--jx-fg);
+    font-size: 15px;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+}
+
+.node-picker-dialog .close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: none;
+    border-radius: var(--jx-r-sm);
+    background: none;
+    color: var(--jx-fg-subtle);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background var(--jx-dur) var(--jx-ease), color var(--jx-dur) var(--jx-ease);
+}
+
+.node-picker-dialog .close-btn:hover {
+    background: var(--jx-hover);
+    color: var(--jx-fg);
+}
+
+.node-picker-dialog .node-picker-search {
+    padding: 0 14px 10px;
+}
+
+.node-picker-dialog .node-picker-search input {
+    width: 100%;
+    height: 38px;
+    padding: 0 12px;
+    border: 1px solid var(--jx-line);
+    border-radius: var(--jx-r-md);
+    background: var(--jx-bg);
+    color: var(--jx-fg);
+    font: 400 14px/1.4 var(--jx-font-sans);
+    transition: border-color var(--jx-dur) var(--jx-ease), box-shadow var(--jx-dur) var(--jx-ease);
+}
+
+.node-picker-dialog .node-picker-search input::placeholder {
+    color: var(--jx-fg-subtle);
+}
+
+.node-picker-dialog .node-picker-search input:focus {
+    outline: none;
+    border-color: var(--jx-accent);
+    box-shadow: var(--jx-ring);
+}
+
+/* Segmented tabs */
+.node-picker-dialog .node-picker-tabs {
+    display: flex;
+    gap: 2px;
+    margin: 0 14px 8px;
+    padding: 3px;
+    border-radius: var(--jx-r-md);
+    background: var(--jx-surface-2);
+}
+
+.node-picker-dialog .node-picker-tabs button {
+    flex: 1;
+    height: 28px;
+    padding: 0 12px;
+    border: none;
+    border-radius: var(--jx-r-sm);
+    background: none;
+    color: var(--jx-fg-muted);
+    font: 550 13px/1 var(--jx-font-sans);
+    cursor: pointer;
+    transition: background var(--jx-dur) var(--jx-ease), color var(--jx-dur) var(--jx-ease), box-shadow var(--jx-dur) var(--jx-ease);
+}
+
+.node-picker-dialog .node-picker-tabs button:hover {
+    color: var(--jx-fg);
+}
+
+.node-picker-dialog .node-picker-tabs button.active {
+    background: var(--jx-bg);
+    box-shadow: var(--jx-shadow-sm);
+    color: var(--jx-fg);
+}
+
+.node-picker-dialog .node-picker-content {
+    flex: 1;
+    min-height: 280px;
+    overflow-y: auto;
+    border-top: 1px solid var(--jx-line);
+}
+
+.node-picker-dialog .node-list {
+    padding: 6px;
+}
+
+.node-picker-dialog .node-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px;
+    border-radius: var(--jx-r-md);
+    cursor: pointer;
+    transition: background var(--jx-dur) var(--jx-ease);
+}
+
+.node-picker-dialog .node-item:hover {
+    background: var(--jx-hover);
+}
+
+.node-picker-dialog .node-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border: 1px solid var(--jx-line);
+    border-radius: var(--jx-r-md);
+    background: var(--jx-bg);
+    font-size: 16px;
+    line-height: 1;
+}
+
+.node-picker-dialog .node-item:hover .node-icon {
+    border-color: color-mix(in srgb, var(--jx-accent) 45%, transparent);
+    background: var(--jx-accent-soft);
+}
+
+.node-picker-dialog .node-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.node-picker-dialog .node-label {
+    overflow: hidden;
+    color: var(--jx-fg);
+    font-size: 13.5px;
+    font-weight: 550;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.node-picker-dialog .node-meta {
+    margin-top: 2px;
+    overflow: hidden;
+    color: var(--jx-fg-subtle);
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.node-picker-dialog .loading,
+.node-picker-dialog .empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    color: var(--jx-fg-subtle);
+    font-size: 13.5px;
+}
+
+.node-picker-dialog .node-picker-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 14px;
+    border-top: 1px solid var(--jx-line);
+    background: var(--jx-surface);
+}
+
+.node-picker-dialog .cancel-btn {
+    height: 30px;
+    padding: 0 14px;
+    border: 1px solid var(--jx-line);
+    border-radius: var(--jx-r-md);
+    background: var(--jx-bg);
+    color: var(--jx-fg);
+    font: 550 13px/1 var(--jx-font-sans);
+    cursor: pointer;
+    transition: background var(--jx-dur) var(--jx-ease), border-color var(--jx-dur) var(--jx-ease);
+}
+
+.node-picker-dialog .cancel-btn:hover {
+    border-color: var(--jx-line-strong);
+    background: var(--jx-surface-2);
+}

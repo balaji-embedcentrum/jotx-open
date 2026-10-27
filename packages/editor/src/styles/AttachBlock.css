@@ -1,0 +1,42 @@
+/* Attachment: compact file card that opens the file on click */
+.jotx-attach-block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0.9em 0;
+  padding: 8px 14px 8px 8px;
+  border: 1px solid color-mix(in srgb, var(--jx-line) 80%, transparent);
+  border-radius: var(--jx-r-lg);
+  background: var(--jx-surface);
+  color: var(--jx-fg);
+  cursor: pointer;
+  transition: border-color var(--jx-dur) var(--jx-ease), box-shadow var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-attach-block:hover {
+  border-color: var(--jx-line-strong);
+  box-shadow: var(--jx-shadow-sm);
+}
+
+.jotx-attach-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--jx-r-md);
+  background: var(--jx-accent-soft);
+  color: var(--jx-accent);
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.jotx-attach-content {
+  flex: 1;
+  min-width: 0;
+  font-weight: 500;
+}
+
+.jotx-attach-content p {
+  margin: 0;
+}

@@ -1,0 +1,176 @@
+hdef jotx launch_plan
+
+  title "Atlas 2.0 Launch Plan"
+  type roadmap
+
+  def heading h_title
+    text "Atlas 2.0 Launch Plan"
+    level 1
+
+  def paragraph p_lead
+    text "Everything the team needs to ship Atlas 2.0 on **December 1**: scope, owners, risks, and the path from beta to general availability."
+
+  def properties props
+    def property pr1
+      key "Owner"
+      value "Priya Raman"
+      type text
+    def property pr2
+      key "Status"
+      value "On track"
+      type text
+    def property pr3
+      key "Target date"
+      value "2026-12-01"
+      type date
+
+  def callout c_scope
+    variant info
+    text "Scope is frozen as of **October 20**. New requests go to the 2.1 backlog."
+
+  def heading h_goals
+    text "Goals"
+    level 2
+
+  def list l_goals
+    listtype bulleted
+    def listitem g1
+      text "Cut cold-start time from 2.4s to under **800ms**"
+    def listitem g2
+      text "Ship offline sync to every paid workspace"
+    def listitem g3
+      text "Reach 99.95% API availability for 30 days before GA"
+
+  def heading h_status
+    text "Workstreams"
+    level 2
+
+  def progress progress_ws
+    title "Workstream progress"
+    items """Sync engine | 82
+Desktop app | 64
+Migration tooling | 7 | 12
+Docs & onboarding | 40"""
+
+  def kanban board
+    title "Launch board"
+    board """[Todo]
+Pricing page copy
+Status page alerts
+[In progress]
+Offline conflict resolver
+Migration dry run
+[Review]
+SSO for enterprise
+[Done]
+Load test at 5x traffic"""
+
+  def heading h_timeline
+    text "Timeline"
+    level 2
+
+  def timeline tl
+    title "Milestones"
+    events """2026-09-15 | Private beta | done | 40 design partners
+2026-10-20 | Scope freeze | done
+2026-11-10 | Public beta | active | Feature flags on for 20% of workspaces
+2026-12-01 | General availability | planned
+2027-01-15 | 2.1 release | planned"""
+
+  def heading h_arch
+    text "Architecture"
+    level 2
+
+  def mermaid arch
+    title "Sync flow"
+    src """flowchart LR
+  Client[Desktop client] --> Queue[(Change queue)]
+  Queue --> Resolver{Conflict resolver}
+  Resolver -->|clean| Store[(Primary store)]
+  Resolver -->|conflict| Review[Manual review]"""
+
+  def code migrate_cmd
+    language "bash"
+    text """atlas migrate --workspace acme --dry-run
+atlas migrate --workspace acme --apply"""
+
+  def heading h_metrics
+    text "Beta metrics"
+    level 2
+
+  def chart weekly
+    title "Weekly active workspaces"
+    charttype bar
+    json """{"labels": ["W1", "W2", "W3", "W4"], "datasets": [{"label": "Workspaces", "data": [120, 210, 340, 480]}]}"""
+
+  def table risks
+    columns "Risk, Impact, Owner, Mitigation"
+    def row r1
+      def cell r1c1
+        def paragraph r1p1
+          text "Sync data loss"
+      def cell r1c2
+        def paragraph r1p2
+          text "High"
+      def cell r1c3
+        def paragraph r1p3
+          text "Marco"
+      def cell r1c4
+        def paragraph r1p4
+          text "Write-ahead log + nightly restore drill"
+    def row r2
+      def cell r2c1
+        def paragraph r2p1
+          text "Migration timeouts"
+      def cell r2c2
+        def paragraph r2p2
+          text "Medium"
+      def cell r2c3
+        def paragraph r2p3
+          text "Lena"
+      def cell r2c4
+        def paragraph r2p4
+          text "Batch by workspace size"
+    def row r3
+      def cell r3c1
+        def paragraph r3p1
+          text "Pricing confusion"
+      def cell r3c2
+        def paragraph r3p2
+          text "Low"
+      def cell r3c3
+        def paragraph r3p3
+          text "Priya"
+      def cell r3c4
+        def paragraph r3p4
+          text "Comparison table on pricing page"
+
+  def heading h_decisions
+    text "Decisions"
+    level 2
+
+  def decision adr_sync
+    title "Use CRDTs for offline sync"
+    status "accepted"
+    date "2026-08-04"
+    context "Last-write-wins lost edits in 3% of beta sessions."
+    decision "Adopt CRDT-based merge for documents and comments."
+    consequences "Larger payloads (~15%), but no silent data loss."
+
+  def heading h_checklist
+    text "Launch checklist"
+    level 2
+
+  def checklist launch_tasks
+    def taskitem t1
+      checked "true"
+      text "Security review signed off"
+    def taskitem t2
+      checked "true"
+      text "Load test at 5x expected traffic"
+    def taskitem t3
+      checked "false"
+      text "Support playbook published"
+    def taskitem t4
+      checked "false"
+      text "Press kit and launch post ready"

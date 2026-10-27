@@ -1,0 +1,202 @@
+/* jotx link - embedded reference to another note or block */
+.jotxlink-node-wrapper {
+    margin: 1em 0;
+    font-family: var(--jx-font-sans);
+}
+
+.jotxlink-box {
+    overflow: hidden;
+    border: 1px solid var(--jx-line);
+    border-radius: var(--jx-r-lg);
+    background: var(--jx-bg);
+    color: var(--jx-fg);
+    transition: border-color var(--jx-dur) var(--jx-ease), box-shadow var(--jx-dur) var(--jx-ease);
+}
+
+.jotxlink-box:hover {
+    border-color: var(--jx-line-strong);
+    box-shadow: var(--jx-shadow-sm);
+}
+
+.jotxlink-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background var(--jx-dur) var(--jx-ease);
+}
+
+.jotxlink-header:hover {
+    background: var(--jx-surface);
+}
+
+.toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    padding: 0;
+    border: none;
+    border-radius: var(--jx-r-xs);
+    background: none;
+    color: var(--jx-fg-subtle);
+    cursor: pointer;
+    transition: color var(--jx-dur) var(--jx-ease);
+}
+
+.toggle-btn svg {
+    pointer-events: none;
+}
+
+.jotxlink-header:hover .toggle-btn {
+    color: var(--jx-fg);
+}
+
+.type-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    border-radius: var(--jx-r-sm);
+    background: var(--jx-accent-soft);
+    font-size: 15px;
+    line-height: 1;
+}
+
+.jotxlink-box .node-label {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--jx-fg);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.jotxlink-box .node-meta {
+    flex-shrink: 0;
+    padding: 2px 8px;
+    border-radius: var(--jx-r-pill);
+    background: var(--jx-surface-2);
+    color: var(--jx-fg-muted);
+    font-size: var(--jx-text-xs);
+    font-weight: 600;
+}
+
+.edit-source-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 26px;
+    padding: 0 10px;
+    border: 1px solid var(--jx-line);
+    border-radius: var(--jx-r-sm);
+    background: var(--jx-bg);
+    color: var(--jx-fg-muted);
+    font: 500 var(--jx-text-sm)/1 var(--jx-font-sans);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity var(--jx-dur) var(--jx-ease), background var(--jx-dur) var(--jx-ease), color var(--jx-dur) var(--jx-ease);
+}
+
+.edit-source-btn svg {
+    pointer-events: none;
+}
+
+.jotxlink-header:hover .edit-source-btn,
+.edit-source-btn:focus-visible {
+    opacity: 1;
+}
+
+.edit-source-btn:hover {
+    border-color: var(--jx-line-strong);
+    color: var(--jx-fg);
+}
+
+.jotxlink-content {
+    padding: 0;
+    border-top: 1px solid var(--jx-line);
+    /* Ensure proper text color is inherited immediately */
+    background: var(--jx-bg);
+    color: var(--jx-fg);
+}
+
+/* Old styles - kept for backwards compatibility */
+.jotxlink-empty {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    border: 1px dashed var(--jx-line-strong);
+    border-radius: var(--jx-r-lg);
+    background: var(--jx-surface);
+}
+
+.jotxlink-empty-icon {
+    flex-shrink: 0;
+    color: var(--jx-fg-subtle);
+}
+
+.jotxlink-empty-inputs {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.jotxlink-input {
+    width: 100%;
+    height: 30px;
+    padding: 0 10px;
+    border: 1px solid var(--jx-line);
+    border-radius: var(--jx-r-sm);
+    background: var(--jx-bg);
+    color: var(--jx-fg);
+    font: 400 var(--jx-text-md)/1.4 var(--jx-font-sans);
+    transition: border-color var(--jx-dur) var(--jx-ease), box-shadow var(--jx-dur) var(--jx-ease);
+}
+
+.jotxlink-input:focus {
+    outline: none;
+    border-color: var(--jx-accent);
+    box-shadow: var(--jx-ring);
+}
+
+/* Document metadata view for linked documents */
+.jotxlink-document-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px 16px;
+}
+
+.jotxlink-document-meta .meta-row {
+    display: flex;
+    gap: 12px;
+    font-size: 13px;
+}
+
+.jotxlink-document-meta .meta-label {
+    flex-shrink: 0;
+    min-width: 80px;
+    color: var(--jx-fg-subtle);
+}
+
+.jotxlink-document-meta .meta-value {
+    color: var(--jx-fg);
+    word-break: break-all;
+}
+
+.jotxlink-empty-note {
+    padding: 12px 16px;
+    color: var(--jx-fg-subtle);
+    font-size: 13px;
+}

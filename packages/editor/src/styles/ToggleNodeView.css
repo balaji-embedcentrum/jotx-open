@@ -1,0 +1,87 @@
+/* Toggle - lightweight disclosure block (Notion-style) */
+.jotx-toggle {
+  margin: 0.6em 0;
+  padding: 2px 0;
+  border-radius: var(--jx-r-md);
+  font-family: var(--jx-font-sans);
+}
+
+.jotx-toggle-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: -4px;
+}
+
+.jotx-toggle-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--jx-r-sm);
+  background: transparent;
+  color: var(--jx-fg-subtle);
+  cursor: pointer;
+  transition: background var(--jx-dur) var(--jx-ease), color var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-toggle-chevron svg {
+  pointer-events: none;
+}
+
+.jotx-toggle-chevron:hover {
+  background: var(--jx-hover);
+  color: var(--jx-fg);
+}
+
+.jotx-toggle-chevron:focus-visible {
+  outline: none;
+  box-shadow: var(--jx-ring);
+}
+
+.jotx-toggle-title {
+  flex: 1;
+  min-width: 0;
+  padding: 3px 6px;
+  border: none;
+  border-radius: var(--jx-r-sm);
+  outline: none;
+  background: transparent;
+  color: var(--jx-fg);
+  font: 600 1em/1.5 var(--jx-font-sans);
+  letter-spacing: -0.005em;
+  transition: background var(--jx-dur) var(--jx-ease), box-shadow var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-toggle-title::placeholder {
+  color: var(--jx-fg-subtle);
+}
+
+.jotx-toggle-title:hover {
+  background: var(--jx-hover);
+}
+
+.jotx-toggle-title:focus {
+  background: var(--jx-bg);
+  box-shadow: inset 0 0 0 1px var(--jx-accent), var(--jx-ring);
+}
+
+/* Content is indented under the chevron with a faint guide line */
+.jotx-toggle-content {
+  position: relative;
+  margin: 2px 0 0 9px;
+  padding: 2px 0 2px 21px;
+  border-left: 1px solid var(--jx-line);
+}
+
+.jotx-toggle-content-inner > *:first-child {
+  margin-top: 0;
+}
+
+.jotx-toggle-content-inner > *:last-child {
+  margin-bottom: 0;
+}

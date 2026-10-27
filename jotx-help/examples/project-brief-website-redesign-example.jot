@@ -1,0 +1,465 @@
+hdef jotx WebsiteRedesignBrief
+
+  type page
+  title Website Redesign Project
+  icon 🎨
+  author Marketing Team
+  created 2025-01-15
+  tags "project", "planning", "website", "redesign"
+
+  def table block_1
+    columns Key, Value
+    rows """Project Status | In Progress - Design Phase
+Project Owner | Emma Chen - Head of Marketing
+Start Date | 2025-01-15
+Target Completion | 2025-04-01
+Budget | $85,000
+Priority | P0 - Strategic"""
+
+  def heading "Company Website Redesign Project"
+
+  def paragraph "Complete redesign of our corporate website to improve user experience, increase conversions, and reflect our new brand identity."
+
+  def callout "🎯 Goal: Increase lead generation by 40% and reduce bounce rate from 68% to under 45% within 3 months of launch"
+
+  def divider
+
+  def heading "Project Overview"
+    level 2
+
+  def paragraph "Our current website was built in 2019 and no longer reflects our evolved brand positioning, product offerings, or user needs. Analytics show declining engagement (bounce rate 68%, avg session 1.2 min) and we're losing potential customers to competitors with modern, fast websites. This redesign will modernize our digital presence, improve SEO performance, and create a conversion-optimized experience."
+
+  def heading "Problem Statement"
+    level 2
+
+  def list
+    items """Current site: 68% bounce rate, 1.2 min average session (industry avg: 45%, 3min)
+Lead conversion rate has declined from 3.2% to 1.8% over past 18 months
+Mobile experience poor (PageSpeed score: 32/100 mobile, 58/100 desktop)
+Brand inconsistency: Site doesn't reflect new brand identity launched Q4 2024
+SEO issues: 40% traffic decline due to Core Web Vitals failures
+Competitor analysis: We lag 2-3 years behind in UX/design"""
+
+  def heading "Objectives & Goals"
+    level 2
+
+  def list
+    listtype numbered
+    items """Increase organic traffic by 50% through improved SEO and Core Web Vitals
+Boost lead conversion rate from 1.8% to 3.5%
+Reduce bounce rate from 68% to under 45%
+Achieve PageSpeed scores 90+ (mobile) and 95+ (desktop)
+Establish design system for consistent brand experience
+Enable marketing team to update content without dev support"""
+
+  def heading "Success Metrics"
+    level 2
+
+  def table block_13
+    def row
+      def header
+        text Metric
+      def header
+        text Current
+      def header
+        text Target (3 months post-launch)
+    def row
+      def cell
+        def paragraph "Lead Conversion Rate"
+      def cell
+        def paragraph "1.8%"
+      def cell
+        def paragraph "3.5%"
+    def row
+      def cell
+        def paragraph "Bounce Rate"
+      def cell
+        def paragraph "68%"
+      def cell
+        def paragraph "< 45%"
+    def row
+      def cell
+        def paragraph "Organic Traffic"
+      def cell
+        def paragraph "25k/month"
+      def cell
+        def paragraph "37.5k/month (+50%)"
+    def row
+      def cell
+        def paragraph "PageSpeed (Mobile)"
+      def cell
+        def paragraph "32/100"
+      def cell
+        def paragraph "90+/100"
+    def row
+      def cell
+        def paragraph "Avg Session Duration"
+      def cell
+        def paragraph "1.2 min"
+      def cell
+        def paragraph "3+ min"
+
+  def heading "Scope"
+    level 2
+
+  def heading "In Scope - Phase 1 (MVP Launch April 1)"
+    level 3
+
+  def list
+    items """✅ Complete visual redesign (all 12 core pages)
+✅ New component-based design system
+✅ Mobile-first responsive implementation
+✅ Performance optimization (Core Web Vitals)
+✅ SEO improvements (metadata, schema, sitemap)
+✅ New CMS integration (Webflow or Contentful)
+✅ Contact form improvements + Salesforce integration
+✅ Analytics setup (GA4, Hotjar)"""
+
+  def heading "Out of Scope (Phase 2 - Post-Launch)"
+    level 3
+
+  def list
+    items """❌ Blog redesign (existing blog remains, address in Q2)
+❌ Customer portal/login area
+❌ E-commerce functionality
+❌ Multi-language support
+❌ Video production (using existing assets)"""
+
+  def heading "Target Audience"
+    level 2
+
+  def paragraph "Primary: B2B decision makers (VP/Director level) researching solutions"
+
+  def list
+    items """Persona 1: Sarah, VP of Operations (45-55, evaluating enterprise software)
+Persona 2: Marcus, IT Director (35-45, technical evaluation, security-focused)
+Persona 3: Emily, Product Manager (28-38, researching tools, comparison shopping)"""
+
+  def heading "Key Stakeholders"
+    level 2
+
+  def table block_28
+    def row
+      def header
+        text Stakeholder
+      def header
+        text Role & Interest
+    def row
+      def cell
+        def paragraph "Emma Chen (Sponsor)"
+      def cell
+        def paragraph "Head of Marketing - Project sponsor, final approvals"
+    def row
+      def cell
+        def paragraph "CEO (David Kim)"
+      def cell
+        def paragraph "Sign-off on messaging, brand alignment"
+    def row
+      def cell
+        def paragraph "Sales Team"
+      def cell
+        def paragraph "Lead quality/quantity, demo requests"
+    def row
+      def cell
+        def paragraph "Product Marketing"
+      def cell
+        def paragraph "Messaging, positioning, content accuracy"
+    def row
+      def cell
+        def paragraph "IT/Security"
+      def cell
+        def paragraph "Hosting, SSL, compliance requirements"
+
+  def heading "Project Team"
+    level 2
+
+  def table block_30
+    def row
+      def header
+        text Role
+      def header
+        text Name
+      def header
+        text Allocation
+    def row
+      def cell
+        def paragraph "Project Lead"
+      def cell
+        def paragraph "Emma Chen"
+      def cell
+        def paragraph "25%"
+    def row
+      def cell
+        def paragraph "UX/UI Designer"
+      def cell
+        def paragraph "Alex Rivera (Agency)"
+      def cell
+        def paragraph "100%"
+    def row
+      def cell
+        def paragraph "Frontend Developer"
+      def cell
+        def paragraph "Priya Sharma"
+      def cell
+        def paragraph "75%"
+    def row
+      def cell
+        def paragraph "Content Strategist"
+      def cell
+        def paragraph "James Wilson"
+      def cell
+        def paragraph "50%"
+    def row
+      def cell
+        def paragraph "SEO Specialist"
+      def cell
+        def paragraph "Sofia Martinez"
+      def cell
+        def paragraph "25%"
+
+  def heading "Timeline & Milestones"
+    level 2
+
+  def mermaid block_32
+    src """gantt
+    title Website Redesign Timeline
+    dateFormat YYYY-MM-DD
+    section Discovery
+    User Research            :done, 2025-01-15, 1w
+    Competitive Analysis     :done, 2025-01-15, 1w
+    section Design
+    Wireframes               :active, 2025-01-22, 2w
+    Visual Design            :2025-02-05, 2w
+    Design System            :2025-02-05, 2w
+    Stakeholder Review       :milestone, 2025-02-19, 0d
+    section Development
+    CMS Setup                :2025-02-19, 1w
+    Frontend Build           :2025-02-26, 3w
+    Content Migration        :2025-03-05, 2w
+    section Testing
+    QA & Bug Fixes           :2025-03-19, 1w
+    Performance Optimization :2025-03-19, 1w
+    UAT                      :2025-03-26, 5d
+    section Launch
+    Soft Launch (Beta)       :milestone, 2025-03-31, 0d
+    Full Launch              :milestone, 2025-04-01, 0d"""
+
+  def table block_33
+    def row
+      def header
+        text Phase
+      def header
+        text Key Deliverables
+    def row
+      def cell
+        def paragraph "✅ Discovery (Week 1-2)"
+      def cell
+        def paragraph "Research findings, competitor analysis, content audit"
+    def row
+      def cell
+        def paragraph "🎨 Design (Week 3-6)"
+      def cell
+        def paragraph "Wireframes, mockups, design system, prototypes"
+    def row
+      def cell
+        def paragraph "💻 Development (Week 7-10)"
+      def cell
+        def paragraph "CMS, frontend build, content migration, integrations"
+    def row
+      def cell
+        def paragraph "🧪 Testing (Week 11)"
+      def cell
+        def paragraph "QA, performance tuning, UAT, fixes"
+    def row
+      def cell
+        def paragraph "🚀 Launch (Week 12)"
+      def cell
+        def paragraph "Beta launch, full launch, monitoring"
+
+  def heading "Budget & Resources"
+    level 2
+
+  def table block_35
+    def row
+      def header
+        text Category
+      def header
+        text Amount
+      def header
+        text Notes
+    def row
+      def cell
+        def paragraph "Design Agency"
+      def cell
+        def paragraph "$35,000"
+      def cell
+        def paragraph "UX/UI, brand application"
+    def row
+      def cell
+        def paragraph "Development"
+      def cell
+        def paragraph "$30,000"
+      def cell
+        def paragraph "Internal team (Priya 75% * 12 weeks)"
+    def row
+      def cell
+        def paragraph "CMS License"
+      def cell
+        def paragraph "$6,000"
+      def cell
+        def paragraph "Webflow Enterprise (annual)"
+    def row
+      def cell
+        def paragraph "Tools & Services"
+      def cell
+        def paragraph "$8,000"
+      def cell
+        def paragraph "Hosting, CDN, stock photos, fonts"
+    def row
+      def cell
+        def paragraph "Contingency (10%)"
+      def cell
+        def paragraph "$6,000"
+      def cell
+        def paragraph "Scope changes, unexpected issues"
+    def row
+      def cell
+        def paragraph "Total"
+      def cell
+        def paragraph "$85,000"
+      def cell
+        def paragraph
+
+  def heading "Risks & Mitigation"
+    level 2
+
+  def table block_37
+    def row
+      def header
+        text Risk
+      def header
+        text Impact
+      def header
+        text Probability
+      def header
+        text Mitigation
+    def row
+      def cell
+        def paragraph "Scope creep"
+      def cell
+        def paragraph "High"
+      def cell
+        def paragraph "Medium"
+      def cell
+        def paragraph "Strict change control, phase 2 backlog"
+    def row
+      def cell
+        def paragraph "Design revisions delay timeline"
+      def cell
+        def paragraph "Medium"
+      def cell
+        def paragraph "High"
+      def cell
+        def paragraph "Max 2 revision rounds, clear approval process"
+    def row
+      def cell
+        def paragraph "Content not ready on time"
+      def cell
+        def paragraph "High"
+      def cell
+        def paragraph "Medium"
+      def cell
+        def paragraph "Start content work Week 1, use placeholders if needed"
+    def row
+      def cell
+        def paragraph "Performance targets not met"
+      def cell
+        def paragraph "Medium"
+      def cell
+        def paragraph "Low"
+      def cell
+        def paragraph "Build with performance in mind, regular testing"
+    def row
+      def cell
+        def paragraph "Stakeholder disagreement"
+      def cell
+        def paragraph "High"
+      def cell
+        def paragraph "Low"
+      def cell
+        def paragraph "Emma has final decision authority, weekly reviews"
+
+  def heading "Dependencies"
+    level 2
+
+  def list
+    items """✅ Brand guidelines finalized (completed Q4 2024)
+⏳ Content audit and copy deck (Due: Week 2 - James)
+⏳ Photography assets (Due: Week 4 - External vendor)
+⏳ IT approval for CMS/hosting (Due: Week 3 - IT team)
+⏳ Salesforce API access for form integration (Due: Week 6 - IT)"""
+
+  def heading "Communication Plan"
+    level 2
+
+  def table block_41
+    def row
+      def header
+        text Audience
+      def header
+        text Frequency
+      def header
+        text Method
+    def row
+      def cell
+        def paragraph "Project Team"
+      def cell
+        def paragraph "Daily"
+      def cell
+        def paragraph "Slack standups"
+    def row
+      def cell
+        def paragraph "Stakeholders"
+      def cell
+        def paragraph "Weekly"
+      def cell
+        def paragraph "Friday status emails + dashboard"
+    def row
+      def cell
+        def paragraph "Executive Team"
+      def cell
+        def paragraph "Bi-weekly"
+      def cell
+        def paragraph "15-min review meeting"
+    def row
+      def cell
+        def paragraph "Company-wide"
+      def cell
+        def paragraph "At milestones"
+      def cell
+        def paragraph "All-hands announcements"
+
+  def heading "Next Steps (This Week)"
+    level 2
+
+  def checklist
+    def listitem "Complete competitive analysis report (Sofia - Due Friday)"
+      checked "true"
+      priority high
+    def listitem "Finalize wireframes for Homepage, Product, Pricing pages (Alex - Due Wed)"
+      checked "false"
+      priority critical
+    def listitem "Content audit spreadsheet complete (James - Due Thu)"
+      checked "false"
+      priority high
+    def listitem "Schedule stakeholder review for Week 6 (Emma - Due Mon)"
+      checked "false"
+      priority medium
+    def listitem "IT meeting for CMS/hosting approval (Priya + Emma - Due Tue)"
+      checked "false"
+      priority high
+
+  def divider
+
+  def callout "✅ Status Update: Week 2 complete. Discovery phase finished on schedule. Design kickoff successful. All major stakeholders aligned. Ready to proceed to wireframing."
+    variant success

@@ -1,0 +1,311 @@
+{
+  "name": "jotx",
+  "displayName": "jotx",
+  "description": "Notes that live in your repo. A beautiful block editor for VS Code with 19 live widgets \u2014 Kanban, timelines, diffs, terminals and more \u2014 stored as git-friendly, AI-friendly text.",
+  "version": "3.1.0",
+  "license": "Apache-2.0",
+  "publisher": "balaji-embedcentrum",
+  "homepage": "https://jotx.dev",
+  "bugs": {
+    "url": "https://github.com/balaji-embedcentrum/jotx-open/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/balaji-embedcentrum/jotx-open.git"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Visualization"
+  ],
+  "keywords": [
+    "notes",
+    "productivity",
+    "markdown",
+    "tasks",
+    "meeting-notes",
+    "knowledge-base",
+    "pkm",
+    "developer",
+    "ai",
+    "jotx",
+    "kanban",
+    "widgets",
+    "block-editor",
+    "documentation",
+    "markdown-alternative"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "icon": "media/logo-jotx.png",
+  "galleryBanner": {
+    "color": "#0f172a",
+    "theme": "dark"
+  },
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "jotx-note",
+        "aliases": [
+          "jotx Note"
+        ],
+        "extensions": [
+          ".jot",
+          ".meet",
+          ".jotx"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "jotx-note",
+        "scopeName": "source.jotx",
+        "path": "./syntaxes/jotx.tmLanguage.json"
+      }
+    ],
+    "customEditors": [
+      {
+        "viewType": "jotx.noteEditor",
+        "displayName": "jotx Editor",
+        "selector": [
+          {
+            "filenamePattern": "*.jot"
+          },
+          {
+            "filenamePattern": "*.meet"
+          },
+          {
+            "filenamePattern": "*.jotx"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "commands": [
+      {
+        "command": "jotx.openWithJotx",
+        "title": "Open with jotx Editor",
+        "category": "jotx"
+      },
+      {
+        "command": "jotx.showGraph",
+        "title": "Show Graph View",
+        "category": "jotx",
+        "icon": "$(graph)"
+      },
+      {
+        "command": "jotx.showLocalGraph",
+        "title": "Show Local Graph",
+        "category": "jotx",
+        "icon": "$(git-branch)"
+      },
+      {
+        "command": "jotx.showLocalGraphForFile",
+        "title": "Show Graph View",
+        "category": "jotx",
+        "icon": "$(graph)"
+      },
+      {
+        "command": "jotx.createNote",
+        "title": "Create New Note",
+        "category": "jotx"
+      },
+      {
+        "command": "jotx.showLogs",
+        "title": "Show Output Logs",
+        "category": "jotx"
+      },
+      {
+        "command": "jotx.openHelp",
+        "title": "Open Help Files",
+        "category": "jotx",
+        "icon": "$(question)"
+      },
+      {
+        "command": "jotx.exportToMarkdown",
+        "title": "jotx: Export to Markdown",
+        "category": "jotx",
+        "icon": "$(export)"
+      },
+      {
+        "command": "jotx.importFromMarkdown",
+        "title": "jotx: Import from Markdown",
+        "category": "jotx",
+        "icon": "$(file-add)"
+      },
+      {
+        "command": "jotx.convertToCompactSyntax",
+        "title": "Convert File to Compact Syntax",
+        "category": "jotx"
+      },
+      {
+        "command": "jotx.convertToClassicSyntax",
+        "title": "Convert File to Classic Syntax",
+        "category": "jotx"
+      },
+      {
+        "command": "jotx.convertWorkspaceSyntax",
+        "title": "Convert Workspace Syntax\u2026",
+        "category": "jotx"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        {
+          "when": "resourceExtname == .jot || resourceExtname == .jotx",
+          "command": "jotx.showGraph",
+          "group": "navigation"
+        }
+      ],
+      "explorer/context": [
+        {
+          "when": "resourceExtname == .jot || resourceExtname == .jotx",
+          "command": "jotx.showLocalGraphForFile",
+          "group": "navigation"
+        },
+        {
+          "when": "resourceExtname == .jot || resourceExtname == .jotx",
+          "command": "jotx.exportToMarkdown",
+          "group": "jotx@1"
+        },
+        {
+          "when": "resourceExtname == .md || resourceExtname == .markdown",
+          "command": "jotx.importFromMarkdown",
+          "group": "jotx@2"
+        },
+        {
+          "command": "jotx.convertToCompactSyntax",
+          "when": "resourceExtname == .jot",
+          "group": "jotx@5"
+        },
+        {
+          "command": "jotx.convertToClassicSyntax",
+          "when": "resourceExtname == .jot",
+          "group": "jotx@6"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "jotx.showGraph"
+        },
+        {
+          "command": "jotx.showLocalGraph",
+          "when": "false"
+        },
+        {
+          "command": "jotx.showLocalGraphForFile",
+          "when": "false"
+        },
+        {
+          "command": "jotx.showLocalGraphForUri",
+          "when": "false"
+        },
+        {
+          "command": "jotx.openWithJotx"
+        },
+        {
+          "command": "jotx.createNote"
+        },
+        {
+          "command": "jotx.showLogs"
+        },
+        {
+          "command": "jotx.openHelp"
+        },
+        {
+          "command": "jotx.exportToMarkdown"
+        },
+        {
+          "command": "jotx.importFromMarkdown"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Jotx",
+      "properties": {
+        "jotx.spellCheck.enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable spell checking in the editor"
+        },
+        "jotx.nodeManager.excludeFolders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "jotx-help",
+            "node_modules",
+            ".git"
+          ],
+          "description": "Folders to exclude from NodeManager indexing (relative to workspace root)"
+        },
+        "jotx.syntax": {
+          "type": "string",
+          "enum": [
+            "preserve",
+            "compact",
+            "classic"
+          ],
+          "default": "preserve",
+          "enumDescriptions": [
+            "Keep each file's current syntax; new files use compact",
+            "Always save in compact syntax (smaller files, fewer AI tokens)",
+            "Always save in classic syntax (readable by jotx 3.0 and earlier)"
+          ],
+          "description": "Which .jot syntax jotx writes when it saves a file. jotx reads both."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "generate:icon": "node ./scripts/generate-icon.mjs",
+    "build": "npm run generate:icon && webpack --mode production && rm -rf out/jotx-help && cp -r ../../jotx-help out/",
+    "compile": "webpack",
+    "watch": "webpack --mode development --watch",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19",
+    "@types/node": "^20.19.27",
+    "@types/react": "^18.3.23",
+    "@types/react-dom": "^18.3.7",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.22.0",
+    "autoprefixer": "^10.4.21",
+    "css-loader": "^7.1.2",
+    "postcss": "^8.5.6",
+    "postcss-loader": "^8.1.1",
+    "sharp": "^0.34.5",
+    "style-loader": "^4.0.0",
+    "tailwindcss": "^3.4.17",
+    "tailwindcss-animate": "^1.0.7",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.0.0",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "@jotx-labs/adapters": "file:../adapters",
+    "@jotx-labs/core": "file:../core",
+    "@jotx-labs/editor": "file:../editor",
+    "@jotx-labs/language": "file:../language",
+    "@jotx-labs/registry": "file:../registry",
+    "@jotx-labs/standard-lib": "file:../standard-lib",
+    "d3": "^7.9.0",
+    "docx": "^9.5.1",
+    "encoding": "^0.1.13",
+    "graphology": "^0.26.0",
+    "katex": "^0.16.11",
+    "nspell": "^2.1.5",
+    "puppeteer-core": "^24.34.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

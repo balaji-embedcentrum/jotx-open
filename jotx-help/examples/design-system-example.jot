@@ -1,0 +1,351 @@
+hdef jotx AtlasDesignSystem
+
+  type page
+  title Atlas Design System v2.0
+  icon 🌟
+  author Design Team
+  created 2025-01-15
+  tags "design-system", "ui", "components", "atlas"
+
+  def table block_1
+    columns Key, Value
+    rows """Version | 2.0.0
+Last Updated | 2025-01-15
+Maintainers | Design Ops Team
+Figma Library | figma.com/atlas-ds"""
+
+  def heading "Atlas Design System"
+
+  def paragraph "Atlas is our unified design system powering all product experiences across web, iOS, and Android. It ensures consistency, accessibility, and efficiency in building user interfaces."
+
+  def callout "🎯 Mission: Enable teams to build beautiful, accessible experiences 10x faster"
+
+  def divider
+
+  def heading "Design Principles"
+    level 2
+
+  def list
+    listtype numbered
+    items """**Clarity over Cleverness** - Simple, understandable interfaces trump novelty
+**Consistent & Predictable** - Users should never be surprised by UI behavior
+**Accessible by Default** - WCAG 2.1 AA compliance is non-negotiable
+**Responsive & Adaptive** - Works beautifully on any screen size
+**Performance First** - Fast loading, smooth animations, no jank"""
+
+  def heading "Color Palette"
+    level 2
+
+  def heading "Brand Colors"
+    level 3
+
+  def table block_10
+    def row
+      def header
+        text Color
+      def header
+        text Hex
+      def header
+        text CSS Variable
+      def header
+        text Usage
+    def row
+      def cell
+        def paragraph "Primary (Cobalt)"
+      def cell
+        def paragraph "#2563EB"
+      def cell
+        def paragraph "--color-primary"
+      def cell
+        def paragraph "Primary actions, links, focus states"
+    def row
+      def cell
+        def paragraph "Secondary (Slate)"
+      def cell
+        def paragraph "#64748B"
+      def cell
+        def paragraph "--color-secondary"
+      def cell
+        def paragraph "Secondary actions, less emphasis"
+    def row
+      def cell
+        def paragraph "Accent (Amber)"
+      def cell
+        def paragraph "#F59E0B"
+      def cell
+        def paragraph "--color-accent"
+      def cell
+        def paragraph "Highlights, badges, special features"
+
+  def heading "Semantic Colors"
+    level 3
+
+  def table block_18
+    def row
+      def header
+        text Type
+      def header
+        text Hex
+      def header
+        text Usage & Contrast
+    def row
+      def cell
+        def paragraph "Success"
+      def cell
+        def paragraph "#10B981"
+      def cell
+        def paragraph "Success states, confirmations (WCAG AA: 4.51:1)"
+    def row
+      def cell
+        def paragraph "Warning"
+      def cell
+        def paragraph "#F59E0B"
+      def cell
+        def paragraph "Caution, important alerts (WCAG AA: 4.72:1)"
+    def row
+      def cell
+        def paragraph "Error"
+      def cell
+        def paragraph "#EF4444"
+      def cell
+        def paragraph "Errors, destructive actions (WCAG AA: 4.58:1)"
+    def row
+      def cell
+        def paragraph "Info"
+      def cell
+        def paragraph "#3B82F6"
+      def cell
+        def paragraph "Informational messages (WCAG AA: 4.65:1)"
+
+  def heading "Typography"
+    level 2
+
+  def table block_20
+    def row
+      def header
+        text Style
+      def header
+        text Font
+      def header
+        text Size/Weight/Height
+      def header
+        text Usage
+    def row
+      def cell
+        def paragraph "Display"
+      def cell
+        def paragraph "Inter"
+      def cell
+        def paragraph "48px / 800 / 56px"
+      def cell
+        def paragraph "Marketing headers, hero sections"
+    def row
+      def cell
+        def paragraph "H1"
+      def cell
+        def paragraph "Inter"
+      def cell
+        def paragraph "32px / 700 / 40px"
+      def cell
+        def paragraph "Page titles"
+    def row
+      def cell
+        def paragraph "H2"
+      def cell
+        def paragraph "Inter"
+      def cell
+        def paragraph "24px / 600 / 32px"
+      def cell
+        def paragraph "Section headers"
+    def row
+      def cell
+        def paragraph "Body"
+      def cell
+        def paragraph "Inter"
+      def cell
+        def paragraph "16px / 400 / 24px"
+      def cell
+        def paragraph "Body text, paragraphs"
+    def row
+      def cell
+        def paragraph "Small"
+      def cell
+        def paragraph "Inter"
+      def cell
+        def paragraph "14px / 400 / 20px"
+      def cell
+        def paragraph "Captions, labels"
+
+  def heading "Spacing Scale"
+    level 2
+
+  def paragraph "Base unit: 4px. All spacing values are multiples of 4."
+
+  def table block_26
+    def row
+      def header
+        text Token
+      def header
+        text Value
+      def header
+        text Usage
+    def row
+      def cell
+        def paragraph "space-1"
+      def cell
+        def paragraph "4px"
+      def cell
+        def paragraph "Tight spacing"
+    def row
+      def cell
+        def paragraph "space-2"
+      def cell
+        def paragraph "8px"
+      def cell
+        def paragraph "Small spacing"
+    def row
+      def cell
+        def paragraph "space-3"
+      def cell
+        def paragraph "12px"
+      def cell
+        def paragraph "Default spacing"
+    def row
+      def cell
+        def paragraph "space-4"
+      def cell
+        def paragraph "16px"
+      def cell
+        def paragraph "Medium spacing"
+    def row
+      def cell
+        def paragraph "space-6"
+      def cell
+        def paragraph "24px"
+      def cell
+        def paragraph "Large spacing"
+
+  def heading "Core Components"
+    level 2
+
+  def heading "Button"
+    level 3
+
+  def table block_29
+    def row
+      def header
+        text Variant
+      def header
+        text Use Case
+      def header
+        text Specs
+    def row
+      def cell
+        def paragraph "Primary"
+      def cell
+        def paragraph "Main CTAs, important actions"
+      def cell
+        def paragraph "Height: 40px, Padding: 16px 24px, Radius: 8px"
+    def row
+      def cell
+        def paragraph "Secondary"
+      def cell
+        def paragraph "Less prominent actions"
+      def cell
+        def paragraph "Border: 1px, Height: 40px, Padding: 16px 24px"
+    def row
+      def cell
+        def paragraph "Tertiary"
+      def cell
+        def paragraph "Subtle actions, links"
+      def cell
+        def paragraph "No background, underline on hover"
+    def row
+      def cell
+        def paragraph "Destructive"
+      def cell
+        def paragraph "Delete, remove actions"
+      def cell
+        def paragraph "Error color, requires confirmation"
+
+  def code
+    language typescript
+    text """// React component usage
+import { Button } from '@atlas/ui'
+
+<Button variant="primary" size="md">
+  Save Changes
+</Button>
+
+<Button variant="destructive" onClick={handleDelete}>
+  Delete Account
+</Button>"""
+
+  def heading "Input Field"
+    level 3
+
+  def paragraph "Text input with label, helper text, and validation states"
+
+  def code
+    language typescript
+    text """<TextField
+  label="Email Address"
+  placeholder="you@company.com"
+  helperText="We'll never share your email"
+  error={errors.email}
+  required
+/>"""
+
+  def heading "Accessibility Standards"
+    level 2
+
+  def list
+    items """✅ **WCAG 2.1 AA Compliant** - All color combinations meet 4.5:1 contrast minimum
+✅ **Keyboard Navigation** - Tab order, focus traps, escape handlers
+✅ **Screen Readers** - Semantic HTML, ARIA labels, live regions
+✅ **Focus Management** - Clear 2px focus rings, skip links
+✅ **Motion Reduced** - Respects prefers-reduced-motion"""
+
+  def heading "Design Tokens"
+    level 2
+
+  def paragraph "Our design tokens are platform-agnostic and compile to CSS, iOS, and Android formats"
+
+  def code
+    language json
+    text """{
+  "color": {
+    "primary": "#2563EB",
+    "primary-hover": "#1D4ED8",
+    "primary-active": "#1E40AF"
+  },
+  "spacing": {
+    "1": "4px",
+    "2": "8px",
+    "3": "12px",
+    "4": "16px"
+  },
+  "typography": {
+    "body": {
+      "font-family": "Inter",
+      "font-size": "16px",
+      "line-height": "24px"
+    }
+  }
+}"""
+
+  def heading "Resources & Tools"
+    level 2
+
+  def list
+    items """📐 Figma Library: figma.com/@atlas-design-system
+💻 NPM Package: `@atlas/ui` (React components)
+📱 iOS Framework: `AtlasUI.framework`
+🤖 Android Library: `com.atlas:design-system:2.0.0`
+📚 Storybook: storybook.atlas.design
+🐙 GitHub: github.com/company/atlas-design-system"""
+
+  def divider
+
+  def callout "✅ Adoption: 87% of product surfaces now use Atlas (up from 34% in v1.0). Average design-to-dev time reduced from 3 weeks to 4 days."
+    variant success

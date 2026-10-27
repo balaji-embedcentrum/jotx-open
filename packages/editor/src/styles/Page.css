@@ -1,0 +1,144 @@
+/**
+ * Page canvas - presents a note like a modern web page.
+ *
+ * Prose sits in a comfortable reading column; rich blocks (tables, diagrams,
+ * media, widgets, layouts) break out to the full page width, the way
+ * editorial sites and docs portals lay out content. Purely presentational:
+ * no editing behavior depends on anything here.
+ */
+
+/* ---- Ambient page backdrop ---- */
+.jotx-editor {
+  background:
+    radial-gradient(1200px 420px at 50% -180px, color-mix(in srgb, var(--jx-accent) 9%, transparent), transparent 72%),
+    var(--jx-bg);
+}
+
+/* ---- Reading column + breakout ---- */
+
+/* Registered so the em value resolves once, at the editor's font size,
+   instead of growing with every heading's font size. */
+@property --jx-measure {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 736px;
+}
+
+.jotx-editor .jotx-editor-content {
+  --jx-measure: 46em;
+}
+
+/* Doubled class: beats block rules such as `.jotx-editor-content div[data-type="callout"]` */
+.jotx-editor .jotx-editor-content.jotx-editor-content > * {
+  max-width: var(--jx-measure);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.jotx-editor .jotx-editor-content.jotx-editor-content > :is(
+  .tableWrapper,
+  table,
+  .jx-columns,
+  .node-mermaid,
+  .node-chart,
+  .node-imageBlock,
+  .node-videoBlock,
+  .node-gridcard,
+  .node-buttonstrip,
+  .node-kanban,
+  .node-habit,
+  .node-progress,
+  .node-countdown,
+  .node-timer,
+  .node-matrix,
+  .node-proscons,
+  .node-decision,
+  .node-steps,
+  .node-timeline,
+  .node-terminal,
+  .node-api,
+  .node-filetree,
+  .node-diff,
+  .node-palette,
+  .node-shortcuts
+) {
+  max-width: none;
+}
+
+/* ---- Hero: the note's opening heading and lead paragraph ---- */
+.jotx-editor .jotx-editor-content > h1:first-child {
+  margin-top: 0.35em;
+  margin-bottom: 0.3em;
+  font-size: 2.65em;
+  font-weight: 760;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.jotx-editor .jotx-editor-content > h1:first-child + p {
+  margin-bottom: 1.6em;
+  color: var(--jx-fg-muted);
+  font-size: 1.16em;
+  line-height: 1.6;
+}
+
+/* ---- Rhythm ---- */
+.jotx-editor .jotx-editor-content :is(h1, h2, h3, h4) {
+  text-wrap: balance;
+}
+
+.jotx-editor .jotx-editor-content p,
+.jotx-editor .jotx-editor-content li {
+  text-wrap: pretty;
+}
+
+.jotx-editor .jotx-editor-content > h2 {
+  margin-top: 2.1em;
+}
+
+.jotx-editor .jotx-editor-content > h2:not(:first-child)::before {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 3px;
+  margin-bottom: 0.7em;
+  border-radius: var(--jx-r-pill);
+  background: var(--jx-accent);
+  opacity: 0.85;
+}
+
+/* ---- Rich blocks lift gently on hover ---- */
+.jotx-editor .jotx-editor-content > .react-renderer > .jx-widget:not(.jx-widget--frameless):hover {
+  box-shadow: var(--jx-shadow-md);
+}
+
+/* ---- Scrollbars that stay out of the way ---- */
+.jotx-editor-container {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--jx-line-strong) transparent;
+}
+
+.jotx-editor-container::-webkit-scrollbar { width: 12px; height: 12px; }
+.jotx-editor-container::-webkit-scrollbar-track { background: transparent; }
+.jotx-editor-container::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 12px;
+  background: var(--jx-line-strong);
+  background-clip: content-box;
+}
+.jotx-editor-container::-webkit-scrollbar-thumb:hover {
+  background: var(--jx-fg-subtle);
+  background-clip: content-box;
+}
+
+/* ---- Narrow panes: a single fluid column ---- */
+@media (max-width: 720px) {
+  .jotx-editor .jotx-editor-content > h1:first-child { font-size: 2.1em; }
+}
+
+/* ---- Print / PDF: plain, ink-friendly ---- */
+@media print {
+  .jotx-editor { background: none; }
+  .jotx-editor .jotx-editor-content > h2:not(:first-child)::before { display: none; }
+}

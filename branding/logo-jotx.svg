@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="jotx logo" fill="none">
+  <!-- Monochrome, theme-invertable via currentColor -->
+  <rect x="36" y="36" width="184" height="184" rx="44" stroke="currentColor" stroke-width="18"/>
+  <text
+    x="128"
+    y="140"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    fill="currentColor"
+    font-size="124"
+    font-weight="700"
+    font-style="italic"
+    font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, &quot;Liberation Mono&quot;, &quot;Courier New&quot;, monospace"
+    transform="translate(128 140) skewX(-10) translate(-128 -140)"
+  >j</text>
+</svg>
+
+

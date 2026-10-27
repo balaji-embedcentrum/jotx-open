@@ -1,0 +1,164 @@
+/* Link / URL dialogs - command-palette style modal (shared by UrlInputDialog) */
+.jotx-link-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 18vh;
+  background: color-mix(in srgb, var(--jx-bg) 40%, rgba(0, 0, 0, 0.45));
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  animation: jotx-dialog-fade 140ms var(--jx-ease);
+}
+
+.jotx-link-dialog {
+  position: relative;
+  z-index: 100000;
+  width: 440px;
+  max-width: calc(100vw - 24px);
+  padding: 18px 18px 14px;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-xl);
+  background: color-mix(in srgb, var(--jx-elevated) 94%, transparent);
+  box-shadow: var(--jx-shadow-lg);
+  backdrop-filter: saturate(160%) blur(16px);
+  -webkit-backdrop-filter: saturate(160%) blur(16px);
+  color: var(--jx-fg);
+  font-family: var(--jx-font-sans);
+  animation: jotx-dialog-in 160ms var(--jx-ease);
+}
+
+@keyframes jotx-dialog-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes jotx-dialog-in {
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.jotx-link-dialog-title {
+  margin-bottom: 14px;
+  color: var(--jx-fg);
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.jotx-link-dialog-field {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.jotx-link-dialog-label {
+  margin-bottom: 6px;
+  color: var(--jx-fg-subtle);
+  font-size: var(--jx-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.jotx-link-dialog-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-md);
+  outline: none;
+  background: var(--jx-bg);
+  color: var(--jx-fg);
+  font: 400 13.5px/1.4 var(--jx-font-sans);
+  transition: border-color var(--jx-dur) var(--jx-ease), box-shadow var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-link-dialog-input::placeholder {
+  color: var(--jx-fg-subtle);
+}
+
+.jotx-link-dialog-input:hover {
+  border-color: var(--jx-line-strong);
+}
+
+.jotx-link-dialog-input:focus {
+  border-color: var(--jx-accent);
+  box-shadow: var(--jx-ring);
+}
+
+.jotx-link-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.jotx-link-dialog-btn {
+  height: 32px;
+  padding: 0 14px;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-md);
+  background: var(--jx-bg);
+  color: var(--jx-fg);
+  font: 550 13px/1 var(--jx-font-sans);
+  cursor: pointer;
+  transition: background var(--jx-dur) var(--jx-ease), border-color var(--jx-dur) var(--jx-ease), color var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-link-dialog-btn:hover {
+  border-color: var(--jx-line-strong);
+  background: var(--jx-surface);
+}
+
+.jotx-link-dialog-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--jx-ring);
+}
+
+.jotx-link-dialog-btn.ghost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--jx-fg-muted);
+}
+
+.jotx-link-dialog-btn.ghost:hover {
+  background: var(--jx-hover);
+  color: var(--jx-fg);
+}
+
+.jotx-link-dialog-btn.primary {
+  border-color: transparent;
+  background: var(--jx-accent);
+  color: var(--jx-on-accent);
+}
+
+.jotx-link-dialog-btn.primary:hover {
+  background: var(--jx-accent-strong);
+}
+
+.jotx-link-dialog-hint {
+  margin: 14px -18px -14px;
+  padding: 9px 18px;
+  border-top: 1px solid var(--jx-line);
+  border-radius: 0 0 var(--jx-r-xl) var(--jx-r-xl);
+  background: var(--jx-surface);
+  color: var(--jx-fg-subtle);
+  font-size: var(--jx-text-xs);
+}
+
+.jotx-link-dialog-hint kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border: 1px solid var(--jx-line);
+  border-bottom-width: 2px;
+  border-radius: var(--jx-r-xs);
+  background: var(--jx-bg);
+  color: var(--jx-fg-muted);
+  font: 600 10px/1 var(--jx-font-sans);
+}

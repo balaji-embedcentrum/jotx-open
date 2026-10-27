@@ -1,0 +1,20 @@
+# Test files
+**/__tests__
+**/*.test.ts
+**/*.test.js
+**/*.test.d.ts
+**/*.spec.ts
+**/*.spec.js
+
+# Source files (only publish dist)
+src/
+
+# Development files
+*.tsbuildinfo
+tsconfig.json
+jest.config.js
+.DS_Store
+
+# Verification scripts
+**/verify-*.ts
+**/verify-*.js

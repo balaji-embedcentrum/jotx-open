@@ -1,0 +1,101 @@
+/* Code reference — builds on the code block shell (CodeBlockNodeView.css) */
+
+.jotx-coderef-file {
+  min-width: 0;
+  margin-left: 4px;
+  overflow: hidden;
+  color: var(--jx-fg-muted);
+  font: 500 12.5px/1 var(--jx-font-mono);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.jotx-coderef-lines {
+  color: var(--jx-fg-subtle);
+}
+
+.jotx-coderef-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  margin-left: 6px;
+  padding: 0 7px;
+  border-radius: var(--jx-r-pill);
+  background: var(--jx-surface-2);
+  color: var(--jx-fg-subtle);
+  font: 650 10px/1 var(--jx-font-sans);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Keep the controls visible while configuring */
+.jotx-coderef:has(.jotx-coderef-config) .jotx-codeblock-actions {
+  opacity: 1;
+}
+
+.jotx-coderef-config {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 12px;
+  padding: 10px 14px 14px;
+}
+
+.jotx-coderef-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.jotx-coderef-field--wide,
+.jotx-coderef-actions {
+  grid-column: 1 / -1;
+}
+
+.jotx-coderef-label {
+  color: var(--jx-fg-subtle);
+  font: 650 10.5px/1.2 var(--jx-font-sans);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.jotx-coderef-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.jotx-coderef-body {
+  position: relative;
+}
+
+.jotx-coderef-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--jx-surface) 70%, transparent);
+  color: var(--jx-fg-muted);
+  font: 500 12px/1 var(--jx-font-sans);
+}
+
+.jotx-coderef-error {
+  padding: 12px 16px 16px;
+  color: var(--jx-danger);
+  font: 500 12.5px/1.5 var(--jx-font-sans);
+}
+
+.jotx-editor-content .jotx-codeblock .jotx-coderef-pre,
+.jotx-coderef-pre {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.jotx-coderef-spin {
+  animation: jotx-coderef-spin 0.9s linear infinite;
+}
+
+@keyframes jotx-coderef-spin {
+  to { transform: rotate(360deg); }
+}

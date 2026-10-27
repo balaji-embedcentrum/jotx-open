@@ -1,0 +1,178 @@
+/**
+ * EditorRibbon CSS
+ * Floating glass toolbar pill that stays pinned while you scroll.
+ */
+
+.editor-ribbon {
+    position: sticky;
+    top: 10px;
+    z-index: 900;
+    width: fit-content;
+    max-width: calc(100% - 16px);
+    margin: -28px auto 0;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--jx-elevated) 84%, transparent);
+    backdrop-filter: saturate(170%) blur(16px);
+    -webkit-backdrop-filter: saturate(170%) blur(16px);
+
+    /* Smooth slide animation */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.2s var(--jx-ease), opacity 0.15s var(--jx-ease), padding 0.2s var(--jx-ease), margin 0.2s var(--jx-ease);
+}
+
+.editor-ribbon.expanded {
+    max-height: 120px;
+    opacity: 1;
+    padding: 5px 6px;
+    margin-bottom: 36px;
+    border-color: var(--jx-line);
+    box-shadow: var(--jx-shadow-md);
+}
+
+.editor-ribbon-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+/* Section separator */
+.editor-ribbon-separator {
+    width: 1px;
+    height: 18px;
+    background: var(--jx-line);
+    flex-shrink: 0;
+}
+
+/* Section container */
+.editor-ribbon-section {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex-wrap: nowrap;
+}
+
+.editor-ribbon-section-label {
+    font-size: 10px;
+    color: var(--jx-fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-right: 6px;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+/* Button styles */
+.editor-ribbon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: none;
+    border-radius: var(--jx-r-sm);
+    background: transparent;
+    color: var(--jx-fg-muted);
+    cursor: pointer;
+    transition: background var(--jx-dur) var(--jx-ease), color var(--jx-dur) var(--jx-ease), opacity var(--jx-dur) var(--jx-ease);
+    flex-shrink: 0;
+}
+
+.editor-ribbon-btn:hover:not(:disabled) {
+    background: var(--jx-hover);
+    color: var(--jx-fg);
+}
+
+.editor-ribbon-btn svg {
+    pointer-events: none;
+}
+
+.editor-ribbon-btn:active:not(:disabled) {
+    background: color-mix(in srgb, var(--jx-accent) 20%, transparent);
+}
+
+/* Teal branding for active state */
+.editor-ribbon-btn.active {
+    background: var(--jx-accent-soft);
+    color: var(--jx-accent);
+}
+
+.editor-ribbon-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+/* Button group */
+.editor-ribbon-btn-group {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    border: none;
+    background: transparent;
+    border-radius: var(--jx-r-md);
+    padding: 0;
+}
+
+/* Color picker wrapper */
+.editor-ribbon-color-picker {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.editor-ribbon-color-picker input[type="color"] {
+    position: absolute;
+    opacity: 0;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+}
+
+.editor-ribbon-color-preview {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 8px;
+    height: 3px;
+    border-radius: 1px;
+}
+
+/* Level indicator chip - teal brand accent */
+.editor-ribbon-level-chip {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: var(--jx-r-pill);
+    background: var(--jx-accent-soft);
+    color: var(--jx-accent);
+    margin-right: 4px;
+}
+
+/* Responsive: stack on narrow widths */
+@media (max-width: 600px) {
+    .editor-ribbon {
+        margin-top: -16px;
+    }
+
+    .editor-ribbon.expanded {
+        max-height: 100px;
+    }
+
+    .editor-ribbon-content {
+        gap: 8px;
+    }
+
+    .editor-ribbon-separator {
+        display: none;
+    }
+}
+/* The pill is icon-only; section names live in tooltips */
+.editor-ribbon-section-label {
+    display: none;
+}

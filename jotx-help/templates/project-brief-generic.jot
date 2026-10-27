@@ -1,0 +1,238 @@
+hdef jotx ProjectBriefGeneric
+
+  type page
+  title Project Brief Template
+  icon 🎯
+  author ""
+  created 2025-01-01
+  tags "project", "planning", "brief"
+
+  def table block_1
+    columns Key, Value
+    rows """Project Status | Planning
+Project Owner | 
+Start Date | 
+Target Completion | 
+Budget | """
+
+  def heading "[Project Name]"
+
+  def paragraph "[One-sentence project description]"
+
+  def divider
+
+  def heading "Project Overview"
+    level 2
+
+  def paragraph "[Provide a high-level summary of what this project aims to accomplish and why it matters]"
+
+  def heading "Problem Statement"
+    level 2
+
+  def paragraph "[What problem are we solving? What is the current pain point or opportunity?]"
+
+  def heading "Objectives & Goals"
+    level 2
+
+  def list
+    listtype numbered
+    items """[Primary objective 1]
+[Primary objective 2]
+[Primary objective 3]"""
+
+  def heading "Success Metrics"
+    level 2
+
+  def table block_12
+    def row
+      def header
+        text Metric
+      def header
+        text Target
+    def row
+      def cell
+        def paragraph "[Metric 1]"
+      def cell
+        def paragraph "[Target value]"
+    def row
+      def cell
+        def paragraph "[Metric 2]"
+      def cell
+        def paragraph "[Target value]"
+
+  def heading "Scope"
+    level 2
+
+  def heading "In Scope"
+    level 3
+
+  def list
+    items """[Deliverable or feature 1]
+[Deliverable or feature 2]
+[Deliverable or feature 3]"""
+
+  def heading "Out of Scope"
+    level 3
+
+  def list
+    items """[Explicitly excluded item 1]
+[Explicitly excluded item 2]"""
+
+  def heading "Target Audience / Stakeholders"
+    level 2
+
+  def table block_19
+    def row
+      def header
+        text Stakeholder
+      def header
+        text Interest/Role
+    def row
+      def cell
+        def paragraph "[Stakeholder 1]"
+      def cell
+        def paragraph "[Their interest or role]"
+    def row
+      def cell
+        def paragraph "[Stakeholder 2]"
+      def cell
+        def paragraph "[Their interest or role]"
+
+  def heading "Project Team"
+    level 2
+
+  def table block_21
+    def row
+      def header
+        text Role
+      def header
+        text Name
+    def row
+      def cell
+        def paragraph "Project Lead"
+      def cell
+        def paragraph
+    def row
+      def cell
+        def paragraph "Designer"
+      def cell
+        def paragraph
+    def row
+      def cell
+        def paragraph "Developer"
+      def cell
+        def paragraph
+
+  def heading "Timeline & Milestones"
+    level 2
+
+  def table block_23
+    def row
+      def header
+        text Phase
+      def header
+        text Deliverables
+      def header
+        text Date
+    def row
+      def cell
+        def paragraph "Discovery"
+      def cell
+        def paragraph "[Research, requirements]"
+      def cell
+        def paragraph "[Date]"
+    def row
+      def cell
+        def paragraph "Design"
+      def cell
+        def paragraph "[Mockups, prototypes]"
+      def cell
+        def paragraph "[Date]"
+    def row
+      def cell
+        def paragraph "Development"
+      def cell
+        def paragraph "[Build, test]"
+      def cell
+        def paragraph "[Date]"
+    def row
+      def cell
+        def paragraph "Launch"
+      def cell
+        def paragraph "[Deploy, announce]"
+      def cell
+        def paragraph "[Date]"
+
+  def heading "Budget & Resources"
+    level 2
+
+  def paragraph "[Estimated budget and required resources]"
+
+  def table block_26
+    def row
+      def header
+        text Category
+      def header
+        text Amount
+    def row
+      def cell
+        def paragraph "Personnel"
+      def cell
+        def paragraph "$[amount]"
+    def row
+      def cell
+        def paragraph "Tools/Software"
+      def cell
+        def paragraph "$[amount]"
+    def row
+      def cell
+        def paragraph "External Services"
+      def cell
+        def paragraph "$[amount]"
+
+  def heading "Risks & Mitigation"
+    level 2
+
+  def table block_28
+    def row
+      def header
+        text Risk
+      def header
+        text Impact
+      def header
+        text Mitigation Strategy
+    def row
+      def cell
+        def paragraph "[Risk 1]"
+      def cell
+        def paragraph "[High/Medium/Low]"
+      def cell
+        def paragraph "[How we'll address it]"
+    def row
+      def cell
+        def paragraph "[Risk 2]"
+      def cell
+        def paragraph "[High/Medium/Low]"
+      def cell
+        def paragraph "[How we'll address it]"
+
+  def heading "Dependencies"
+    level 2
+
+  def list
+    items """[Dependency 1: e.g., API access from Team X]
+[Dependency 2: e.g., Design approval by Date Y]"""
+
+  def heading "Next Steps"
+    level 2
+
+  def checklist
+    def listitem "[Immediate action 1]"
+      checked "false"
+      priority high
+    def listitem "[Immediate action 2]"
+      checked "false"
+      priority high
+    def listitem "[Immediate action 3]"
+      checked "false"
+      priority medium

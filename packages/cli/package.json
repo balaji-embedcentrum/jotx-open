@@ -1,0 +1,35 @@
+{
+  "name": "@jotx-labs/cli",
+  "version": "3.1.0",
+  "files": [
+    "dist"
+  ],
+  "description": "jotx command-line interface",
+  "main": "dist/index.js",
+  "bin": {
+    "jotx": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "jotx",
+    "cli",
+    "notes",
+    "parser"
+  ],
+  "author": "Jotx Labs",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@jotx-labs/core": "file:../core",
+    "@jotx-labs/adapters": "file:../adapters",
+    "commander": "^11.0.0",
+    "@jotx-labs/standard-lib": "file:../standard-lib"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}

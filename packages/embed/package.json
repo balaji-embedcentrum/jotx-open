@@ -1,0 +1,44 @@
+{
+  "name": "@jotx-labs/embed",
+  "version": "3.1.0",
+  "description": "Show .jot documents in any web page with one script tag",
+  "main": "dist/jotx.min.js",
+  "unpkg": "dist/jotx.min.js",
+  "jsdelivr": "dist/jotx.min.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "webpack",
+    "typecheck": "tsc -p ."
+  },
+  "keywords": [
+    "jotx",
+    "jot",
+    "notes",
+    "web-component",
+    "embed",
+    "documents"
+  ],
+  "author": "Jotx Labs",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/balaji-embedcentrum/jotx-open.git",
+    "directory": "packages/embed"
+  },
+  "devDependencies": {
+    "@jotx-labs/adapters": "file:../adapters",
+    "@jotx-labs/core": "file:../core",
+    "@jotx-labs/standard-lib": "file:../standard-lib",
+    "css-loader": "^7.1.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.0.0",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4"
+  }
+}

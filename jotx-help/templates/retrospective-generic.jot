@@ -1,0 +1,130 @@
+hdef jotx RetrospectiveGeneric
+
+  type page
+  title Retrospective Template
+  icon 🔄
+  author ""
+  created 2025-01-01
+  tags "retrospective", "agile", "team", "improvement"
+
+  def table block_1
+    columns Key, Value
+    rows """Sprint/Period | 
+Facilitator | 
+Date | 
+Participants | """
+
+  def heading "Retrospective - [Sprint/Period]"
+
+  def divider
+
+  def heading "Meeting Info"
+    level 2
+
+  def table block_5
+    def row
+      def header
+        text Sprint/Period
+      def header
+        text "[Sprint number or time period]"
+    def row
+      def cell
+        def paragraph "Participants"
+      def cell
+        def paragraph "[Team members present]"
+    def row
+      def cell
+        def paragraph "Date"
+      def cell
+        def paragraph "[Date]"
+    def row
+      def cell
+        def paragraph "Duration"
+      def cell
+        def paragraph "[Time spent]"
+
+  def heading "✅ What Went Well"
+    level 2
+
+  def paragraph "[Things that were successful, positive outcomes, wins]"
+
+  def list
+    items """[Success 1]
+[Success 2]
+[Success 3]"""
+
+  def heading "❌ What Didn't Go Well"
+    level 2
+
+  def paragraph "[Challenges, problems, things that didn't work]"
+
+  def list
+    items """[Challenge 1]
+[Challenge 2]
+[Challenge 3]"""
+
+  def heading "💡 Ideas & Improvements"
+    level 2
+
+  def paragraph "[Suggestions for how to improve, new approaches to try]"
+
+  def list
+    items """[Idea 1]
+[Idea 2]
+[Idea 3]"""
+
+  def heading "📊 Key Metrics"
+    level 2
+
+  def table block_19
+    def row
+      def header
+        text Metric
+      def header
+        text Last Period
+      def header
+        text This Period
+    def row
+      def cell
+        def paragraph "[Metric 1]"
+      def cell
+        def paragraph "[Value]"
+      def cell
+        def paragraph "[Value]"
+    def row
+      def cell
+        def paragraph "[Metric 2]"
+      def cell
+        def paragraph "[Value]"
+      def cell
+        def paragraph "[Value]"
+
+  def heading "🎯 Action Items"
+    level 2
+
+  def paragraph "[Concrete actions the team commits to taking]"
+
+  def checklist
+    def listitem "[Action item 1] - Owner: [Name]"
+      checked "false"
+      priority high
+    def listitem "[Action item 2] - Owner: [Name]"
+      checked "false"
+      priority medium
+    def listitem "[Action item 3] - Owner: [Name]"
+      checked "false"
+      priority medium
+
+  def heading "🙏 Appreciation & Shoutouts"
+    level 2
+
+  def paragraph "[Recognize team members for great work]"
+
+  def list
+    items """[Shoutout 1]
+[Shoutout 2]"""
+
+  def heading "📝 Notes"
+    level 2
+
+  def paragraph "[Any additional notes, context, or observations]"

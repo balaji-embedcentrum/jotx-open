@@ -1,0 +1,95 @@
+/* Chart block — shell, header and controls live in RichBlocks.css */
+
+/* Chart type switcher: compact segmented control */
+.jotx-chart-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  margin-left: auto;
+  padding: 2px;
+  border-radius: var(--jx-r-md);
+  background: var(--jx-hover);
+}
+
+.jotx-chart-type .jotx-chart-type-btn {
+  width: 26px;
+  height: 24px;
+}
+
+.jotx-chart-type .jotx-chart-type-btn.active {
+  background: var(--jx-bg);
+  color: var(--jx-accent);
+  box-shadow: var(--jx-shadow-sm);
+}
+
+.jotx-chart-canvasWrap {
+  height: 260px;
+  margin: 0;
+  padding: 8px 16px 14px;
+  border: none;
+  background: transparent;
+}
+
+/* Radar needs more room for point labels */
+.jotx-chart[data-chart-type="radar"] .jotx-chart-canvasWrap {
+  height: 340px;
+  padding: 12px 16px 16px;
+}
+
+.jotx-chart-editor {
+  margin: 0 12px 12px;
+  padding: 10px;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-md);
+  background: var(--jx-bg);
+}
+
+.jotx-chart-editorHint {
+  margin-bottom: 6px;
+  color: var(--jx-fg-subtle);
+  font: 650 10.5px/1.2 var(--jx-font-sans);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.jotx-chart-editor textarea {
+  display: block;
+  width: 100%;
+  min-height: 160px;
+  padding: 10px;
+  resize: vertical;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-sm);
+  outline: none;
+  background: var(--jx-surface);
+  color: var(--jx-fg);
+  font-family: var(--jx-font-mono);
+  font-size: 12.5px;
+  line-height: 1.55;
+  transition: border-color var(--jx-dur) var(--jx-ease), box-shadow var(--jx-dur) var(--jx-ease);
+}
+
+.jotx-chart-editor textarea:focus {
+  border-color: var(--jx-accent);
+  box-shadow: var(--jx-ring);
+}
+
+/* ── Preview Mode: frameless, canvas only ────────────────────────────── */
+.jotx-chart--preview {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+.jotx-chart-canvas-preview {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.jotx-chart-canvas-preview canvas {
+  max-width: 100%;
+}

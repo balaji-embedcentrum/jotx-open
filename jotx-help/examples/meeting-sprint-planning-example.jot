@@ -1,0 +1,197 @@
+hdef jotx SprintPlanningExample
+
+  type meeting
+  title Sprint 24 Planning - Q1 2025
+  icon 🚀
+  author Scrum Master
+  created 2025-01-06
+  tags "sprint", "planning", "agile", "scrum"
+
+  def table block_1
+    columns Key, Value
+    rows """Meeting Type | Sprint Planning
+Date | 2025-01-06
+Duration | 2 hours
+Sprint | Sprint 24
+Sprint Duration | 2 weeks"""
+
+  def heading "Attendees"
+    level 2
+
+  def list
+    items """Sarah Chen - Product Owner
+Mike Rodriguez - Scrum Master
+Alex Kim - Senior Engineer
+Priya Sharma - Frontend Developer
+James Wilson - Backend Developer
+Emma Thompson - QA Engineer"""
+
+  def heading "Sprint Goal"
+    level 2
+
+  def callout "🎯 Complete the user authentication refactor and ship the new dashboard analytics feature to production."
+
+  def divider
+
+  def heading "Sprint Capacity"
+    level 2
+
+  def table block_8
+    rows """ |  | 
+Alex | 100% (10 days) | 13
+Priya | 80% (8 days - 2 days PTO) | 10
+James | 100% (10 days) | 13
+Emma | 100% (10 days) | 13
+Total | 38 developer days | 49 points"""
+
+  def callout "⚠️ Note: Team capacity reduced by 20% due to Priya's PTO. Adjusted sprint commitment accordingly."
+    variant warning
+
+  def divider
+
+  def heading "Sprint Backlog"
+    level 2
+
+  def heading "User Authentication Refactor (Priority 1)"
+    level 3
+
+  def paragraph "Migrate from legacy auth system to OAuth 2.0 with JWT tokens. This is a critical dependency for other features."
+
+  def list
+    items """AUTH-456: Implement OAuth 2.0 provider integration (8 points) - James
+AUTH-457: Migrate existing user sessions (5 points) - Alex
+AUTH-458: Update frontend auth flows (5 points) - Priya
+AUTH-459: Write migration documentation (3 points) - James
+AUTH-460: QA testing and security audit (5 points) - Emma"""
+
+  def heading "Dashboard Analytics Feature (Priority 2)"
+    level 3
+
+  def paragraph "New analytics dashboard showing user engagement metrics with real-time updates."
+
+  def list
+    items """DASH-123: Design analytics API endpoints (5 points) - James
+DASH-124: Build Chart.js integration (8 points) - Priya
+DASH-125: Implement real-time WebSocket updates (5 points) - Alex
+DASH-126: Add export to PDF functionality (3 points) - Priya
+DASH-127: End-to-end testing (5 points) - Emma"""
+
+  def heading "Bug Fixes & Tech Debt"
+    level 3
+
+  def list
+    items """BUG-789: Fix mobile menu overflow on iOS (2 points) - Priya
+TECH-234: Upgrade React to v18 (3 points) - Alex"""
+
+  def callout "📊 Total Commitment: 47 story points (within capacity of 49 points)"
+
+  def divider
+
+  def heading "Discussion Notes"
+    level 2
+
+  def heading "Dependencies & Risks"
+    level 3
+
+  def paragraph "Team identified several dependencies and potential risks that need monitoring:"
+
+  def list
+    items """AUTH refactor must complete before DASH can go to production
+OAuth provider (Auth0) quota limits - need to monitor usage
+Priya's PTO coincides with frontend-heavy work - Alex will provide backup
+Real-time features may need infrastructure scaling - DevOps team alerted"""
+
+  def heading "Technical Approach Discussion"
+    level 3
+
+  def paragraph "Team discussed the OAuth migration strategy. Consensus to use a phased rollout approach:"
+
+  def list
+    listtype numbered
+    items """Deploy OAuth alongside legacy auth (both systems active)
+Migrate 10% of users as canary test
+Monitor for 48 hours
+Full migration if no issues detected
+Decommission legacy auth system"""
+
+  def mermaid block_29
+    src """graph TD
+    A[Start Sprint] --> B[Auth Implementation]
+    B --> C[Migration Testing]
+    C --> D{Issues__?}
+    D -->|Yes| E[Rollback & Fix]
+    D -->|No| F[Canary Deployment]
+    F --> G[Monitor Metrics]
+    G --> H{Stable?}
+    H -->|Yes| I[Full Migration]
+    H -->|No| E
+    I --> J[Dashboard Development]
+    J --> K[Integration Testing]
+    K --> L[Sprint Review]"""
+    showsource true
+
+  def divider
+
+  def heading "Key Decisions"
+    level 2
+
+  def callout "✅ Decision: Use Auth0 as OAuth provider (approved by Sarah, Tech Lead buy-in from Alex)"
+    variant success
+
+  def callout "✅ Decision: Phased rollout approach for auth migration (unanimous team agreement)"
+    variant success
+
+  def callout "✅ Decision: Dashboard will use Chart.js instead of D3 (faster implementation, approved by Product)"
+    variant success
+
+  def divider
+
+  def heading "Action Items"
+    level 2
+
+  def checklist
+    def listitem "Set up Auth0 tenant and get API credentials - James (by EOD)"
+    def listitem "Create detailed migration runbook - James (by Wednesday)"
+    def listitem "Schedule infrastructure scaling review with DevOps - Mike (by Tuesday)"
+    def listitem "Design Chart.js component library - Priya (by Thursday)"
+    def listitem "Set up monitoring dashboards for OAuth metrics - Emma (by Friday)"
+    def listitem "Create test user accounts for QA - Emma (by Tuesday)"
+    def listitem "Document rollback procedure - Alex (by Wednesday)"
+
+  def divider
+
+  def heading "Questions & Parking Lot"
+    level 2
+
+  def list
+    items """Do we need legal review for Auth0 DPA? → Sarah to check with Legal
+Should we add rate limiting to new analytics endpoints? → Discuss in next architecture review
+Can we get early access to OAuth beta users for feedback? → Sarah to identify candidates"""
+
+  def divider
+
+  def heading "Definition of Done"
+    level 2
+
+  def list
+    items """Code reviewed and approved by at least one team member
+Unit tests written with 80%+ coverage
+Integration tests passing in staging environment
+QA sign-off from Emma
+Documentation updated (API docs, user guides, runbooks)
+Deployed to production and verified
+Product Owner acceptance"""
+
+  def divider
+
+  def heading "Next Steps"
+    level 2
+
+  def paragraph "Sprint 24 kicks off immediately. Daily standups at 9:30 AM. Sprint review scheduled for January 20th at 2:00 PM."
+
+  def callout "📅 Key Dates: Daily Standups (9:30 AM), Sprint Review (Jan 20, 2 PM), Sprint Retro (Jan 20, 3:30 PM)"
+
+  def callout "⚠️ Reminder: Priya OOO Jan 13-14. Alex is backup for frontend work during this period."
+    variant warning
+
+  def paragraph

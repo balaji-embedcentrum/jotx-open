@@ -1,0 +1,476 @@
+hdef jotx CustomerOnboardingS
+
+  type page
+  title SOP: Customer Onboarding Process
+  icon 👋
+  author Operations Team
+  created 2025-01-10
+  tags "process", "sop", "onboarding", "customer-success"
+
+  def table block_1
+    columns Key, Value
+    rows """Version | 2.1
+Owner | Customer Success Team
+Last Updated | 2025-01-10
+Review Cycle | Quarterly
+Compliance | ISO 9001, GDPR"""
+
+  def heading "SOP: New Customer Onboarding Process"
+
+  def callout "✅ Objective: Deliver exceptional first-week experience, achieve 95% activation rate, and set customers up for long-term success"
+    variant success
+
+  def divider
+
+  def heading "1. Purpose"
+    level 2
+
+  def paragraph "This SOP defines the standardized process for onboarding new enterprise customers from contract signature to successful activation. It ensures consistent, high-quality experiences that drive product adoption and customer satisfaction."
+
+  def list
+    items """Reduce time-to-value from 14 days to 7 days
+Achieve 95%+ customer activation rate within first week
+Establish foundation for long-term customer success
+Maintain NPS score above 70 during onboarding"""
+
+  def heading "2. Scope"
+    level 2
+
+  def paragraph "This SOP applies to all new enterprise customers (contract value > $25k/year)"
+
+  def table block_10
+    def row
+      def header
+        text In Scope
+      def header
+        text Out of Scope
+    def row
+      def cell
+        def paragraph "Enterprise customers ($25k+/year)"
+      def cell
+        def paragraph "Self-service/SMB customers (< $25k)"
+    def row
+      def cell
+        def paragraph "Initial account setup and configuration"
+      def cell
+        def paragraph "Ongoing customer success management"
+    def row
+      def cell
+        def paragraph "First 30 days of customer journey"
+      def cell
+        def paragraph "Renewal or expansion activities"
+
+  def heading "3. Definitions & Acronyms"
+    level 2
+
+  def table block_12
+    def row
+      def header
+        text Term
+      def header
+        text Definition
+    def row
+      def cell
+        def paragraph "CSM"
+      def cell
+        def paragraph "Customer Success Manager - primary point of contact"
+    def row
+      def cell
+        def paragraph "Kickoff Call"
+      def cell
+        def paragraph "Initial 60-min meeting to align on goals and timeline"
+    def row
+      def cell
+        def paragraph "Activation"
+      def cell
+        def paragraph "Customer has completed 3+ core workflows successfully"
+    def row
+      def cell
+        def paragraph "Champion"
+      def cell
+        def paragraph "Primary stakeholder driving adoption internally"
+    def row
+      def cell
+        def paragraph "TTV"
+      def cell
+        def paragraph "Time-to-Value - days from contract to first value realized"
+
+  def heading "4. Roles & Responsibilities"
+    level 2
+
+  def table block_14
+    def row
+      def header
+        text Role
+      def header
+        text Responsibilities
+    def row
+      def cell
+        def paragraph "Account Executive (AE)"
+      def cell
+        def paragraph "Warm handoff to CSM, share customer goals & pain points from sales process"
+    def row
+      def cell
+        def paragraph "Customer Success Manager (CSM)"
+      def cell
+        def paragraph "Lead onboarding, conduct kickoff, ensure activation, own customer relationship"
+    def row
+      def cell
+        def paragraph "Implementation Specialist"
+      def cell
+        def paragraph "Technical setup, data migration, integrations, custom configuration"
+    def row
+      def cell
+        def paragraph "Support Engineer"
+      def cell
+        def paragraph "Respond to technical issues, troubleshoot, escalate bugs to engineering"
+    def row
+      def cell
+        def paragraph "Customer (Champion)"
+      def cell
+        def paragraph "Attend sessions, complete training, drive internal adoption, provide feedback"
+
+  def heading "5. Prerequisites"
+    level 2
+
+  def paragraph "Before starting onboarding, verify:"
+
+  def checklist
+    def listitem "Contract is fully executed and signed by both parties"
+      checked "false"
+      priority critical
+    def listitem "Customer payment received or PO processed"
+      checked "false"
+      priority critical
+    def listitem "Customer account created in CRM (Salesforce)"
+      checked "false"
+      priority high
+    def listitem "CSM assigned and notified via email"
+      checked "false"
+      priority high
+    def listitem "AE completes handoff form with customer context"
+      checked "false"
+      priority high
+    def listitem "Customer receives welcome email with kickoff scheduling link"
+      checked "false"
+      priority medium
+
+  def heading "6. Procedure Steps"
+    level 2
+
+  def mermaid block_19
+    src """graph TD
+    A[Contract Signed] --> B[Day 0: Warm Handoff]
+    B --> C[Day 1-2: Kickoff Call]
+    C --> D[Day 3-5: Account Setup]
+    D --> E[Day 5-7: Training Sessions]
+    E --> F[Day 7-10: Guided Usage]
+    F --> G[Day 14: Business Review]
+    G --> H{Activated?}
+    H -->|Yes| I[Success - Handoff to Ongoing CSM]
+    H -->|No| J[Remediation Plan]
+    J --> F
+    
+    style A fill:#20B2AA,color:#0a0a0a
+    style I fill:#20B2AA,color:#0a0a0a"""
+
+  def heading "Phase 1: Warm Handoff (Day 0 - Within 24 hours of contract)"
+    level 3
+
+  def list
+    listtype numbered
+    items """AE completes handoff form in Salesforce (10 min)
+CSM reviews account history, contract terms, and customer goals (30 min)
+CSM sends personalized welcome email to customer champion (template: WEL-001)
+CSM schedules kickoff call within 48 hours using Calendly link"""
+
+  def callout "💡 Pro Tip: Review customer's website, LinkedIn, recent news to personalize your approach"
+
+  def heading "Phase 2: Kickoff Call (Day 1-2 - 60 minutes)"
+    level 3
+
+  def paragraph "Goal: Align on objectives, timeline, and success criteria"
+
+  def list
+    listtype numbered
+    items """Introductions and agenda review (5 min)
+Understand customer's business goals and pain points (15 min)
+Demonstrate platform capabilities relevant to their use case (20 min)
+Co-create success plan and define activation milestones (15 min)
+Schedule next 3 sessions (training, setup calls) (5 min)"""
+
+  def callout "⚠️ Critical: Document 3 specific use cases customer wants to achieve in first 30 days"
+    variant warning
+
+  def heading "Phase 3: Account Setup & Configuration (Day 3-5)"
+    level 3
+
+  def list
+    listtype numbered
+    items """Implementation Specialist provisions customer workspace (30 min)
+Configure SSO/SAML authentication if required (2 hours)
+Import customer data (CSV upload or API sync) (1-3 hours)
+Set up integrations (Slack, Salesforce, etc.) (1 hour each)
+Create custom templates based on customer workflows (1 hour)
+CSM sends setup completion email with login credentials"""
+
+  def heading "Phase 4: Training Sessions (Day 5-7)"
+    level 3
+
+  def paragraph "Deliver role-based training to customer team"
+
+  def table block_31
+    def row
+      def header
+        text Session
+      def header
+        text Duration
+      def header
+        text Attendees
+    def row
+      def cell
+        def paragraph "Admin Training"
+      def cell
+        def paragraph "90 min"
+      def cell
+        def paragraph "IT Admin, Champion"
+    def row
+      def cell
+        def paragraph "End User Training"
+      def cell
+        def paragraph "60 min"
+      def cell
+        def paragraph "All users (recorded)"
+    def row
+      def cell
+        def paragraph "Power User Training"
+      def cell
+        def paragraph "45 min"
+      def cell
+        def paragraph "5-10 key users"
+
+  def heading "Phase 5: Guided Usage & Support (Day 7-10)"
+    level 3
+
+  def list
+    listtype numbered
+    items """CSM checks in daily via Slack/Email to answer questions
+Monitor product usage analytics dashboard for adoption signals
+Proactively reach out if usage is below expected levels
+Share best practices and tips via customer Slack channel
+Resolve any blockers within 4 hours (P0) or 24 hours (P1)"""
+
+  def heading "Phase 6: Business Review (Day 14)"
+    level 3
+
+  def paragraph "30-minute call to review progress and next steps"
+
+  def list
+    listtype numbered
+    items """Review usage metrics and activation status
+Celebrate wins and quick wins achieved
+Identify remaining blockers or training needs
+Co-create 30-60-90 day success plan
+Transition to quarterly business reviews"""
+
+  def heading "7. Quality Control Checkpoints"
+    level 2
+
+  def table block_38
+    def row
+      def header
+        text Checkpoint
+      def header
+        text Timing
+      def header
+        text Pass Criteria
+    def row
+      def cell
+        def paragraph "Kickoff Scheduled"
+      def cell
+        def paragraph "Day 0"
+      def cell
+        def paragraph "Call booked within 48 hours of contract"
+    def row
+      def cell
+        def paragraph "Success Plan Created"
+      def cell
+        def paragraph "Day 2"
+      def cell
+        def paragraph "3+ use cases documented in CRM"
+    def row
+      def cell
+        def paragraph "Setup Complete"
+      def cell
+        def paragraph "Day 5"
+      def cell
+        def paragraph "Customer can log in, data imported"
+    def row
+      def cell
+        def paragraph "Training Delivered"
+      def cell
+        def paragraph "Day 7"
+      def cell
+        def paragraph "80%+ of users attended or watched recording"
+    def row
+      def cell
+        def paragraph "Activation Achieved"
+      def cell
+        def paragraph "Day 14"
+      def cell
+        def paragraph "3+ core workflows completed successfully"
+
+  def heading "8. Success Criteria / KPIs"
+    level 2
+
+  def table block_40
+    def row
+      def header
+        text Metric
+      def header
+        text Target
+      def header
+        text Measurement
+    def row
+      def cell
+        def paragraph "Time-to-Value (TTV)"
+      def cell
+        def paragraph "< 7 days"
+      def cell
+        def paragraph "Days from contract to activation"
+    def row
+      def cell
+        def paragraph "Activation Rate"
+      def cell
+        def paragraph "95%"
+      def cell
+        def paragraph "% of customers completing 3+ workflows"
+    def row
+      def cell
+        def paragraph "Onboarding NPS"
+      def cell
+        def paragraph "> 70"
+      def cell
+        def paragraph "Survey sent at Day 14"
+    def row
+      def cell
+        def paragraph "User Adoption"
+      def cell
+        def paragraph "75%"
+      def cell
+        def paragraph "% of licensed users active in first 30 days"
+    def row
+      def cell
+        def paragraph "CSM Capacity"
+      def cell
+        def paragraph "< 15 hours/customer"
+      def cell
+        def paragraph "Total CSM time spent on onboarding"
+
+  def heading "9. Troubleshooting Common Issues"
+    level 2
+
+  def table block_42
+    def row
+      def header
+        text Issue
+      def header
+        text Root Cause
+      def header
+        text Solution
+    def row
+      def cell
+        def paragraph "Customer not responding to kickoff invite"
+      def cell
+        def paragraph "Wrong contact, busy schedule"
+      def cell
+        def paragraph "Call AE for correct champion, try 3 time slots"
+    def row
+      def cell
+        def paragraph "Low user adoption after training"
+      def cell
+        def paragraph "Lack of internal communication"
+      def cell
+        def paragraph "Work with champion on change management plan"
+    def row
+      def cell
+        def paragraph "Data import fails"
+      def cell
+        def paragraph "CSV formatting issues"
+      def cell
+        def paragraph "Provide template, schedule data cleanup call"
+    def row
+      def cell
+        def paragraph "Customer requests custom features"
+      def cell
+        def paragraph "Misaligned expectations from sales"
+      def cell
+        def paragraph "Escalate to Product, find workaround, document for roadmap"
+    def row
+      def cell
+        def paragraph "Champion leaves company mid-onboarding"
+      def cell
+        def paragraph "Organizational change"
+      def cell
+        def paragraph "Identify new champion immediately, re-run kickoff"
+
+  def heading "10. Related Documents"
+    level 2
+
+  def list
+    items """Customer Success Playbook (CS-PLAY-001)
+Escalation Process (SOP-ESC-001)
+Handoff Form Template (FORM-HAND-001)
+Kickoff Deck Template (DECK-KICK-001)
+Training Video Library (internal KB)"""
+
+  def heading "11. Revision History"
+    level 2
+
+  def table block_46
+    def row
+      def header
+        text Version
+      def header
+        text Date
+      def header
+        text Changes
+      def header
+        text Author
+    def row
+      def cell
+        def paragraph "1.0"
+      def cell
+        def paragraph "2024-06-15"
+      def cell
+        def paragraph "Initial draft"
+      def cell
+        def paragraph "Sarah Chen"
+    def row
+      def cell
+        def paragraph "2.0"
+      def cell
+        def paragraph "2024-10-01"
+      def cell
+        def paragraph "Added Phase 6, updated KPIs"
+      def cell
+        def paragraph "Mike Rodriguez"
+    def row
+      def cell
+        def paragraph "2.1"
+      def cell
+        def paragraph "2025-01-10"
+      def cell
+        def paragraph "Added troubleshooting section, Mermaid diagram"
+      def cell
+        def paragraph "Emma Thompson"
+
+  def heading "12. Approvals"
+    level 2
+
+  def callout "✅ This SOP has been reviewed and approved by: VP Customer Success (Sarah Chen, 2025-01-10), Director of Implementation (Mike Rodriguez, 2025-01-10)"
+    variant success
+
+  def divider
+
+  def callout "📊 Results: Since implementing v2.0, we've reduced average TTV from 12 days to 6.8 days, and increased activation rate from 87% to 94%"

@@ -1,0 +1,111 @@
+/* BlockMenu - Block-level operations */
+
+.block-menu-handle {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  opacity: 0.55;
+  transition: opacity var(--jx-dur) var(--jx-ease), background var(--jx-dur) var(--jx-ease), color var(--jx-dur) var(--jx-ease);
+  color: var(--jx-fg-subtle);
+  border-radius: var(--jx-r-sm);
+  z-index: 100;
+  pointer-events: all;
+  padding: 8px; /* Bigger clickable area */
+}
+
+/* Extend hover zone with invisible pseudo-element */
+.block-menu-handle::before {
+  content: '';
+  position: absolute;
+  inset: -8px; /* Extend 8px in all directions */
+  pointer-events: all;
+}
+
+.block-menu-handle:hover {
+  opacity: 1;
+  color: var(--jx-fg);
+  background-color: var(--jx-hover);
+}
+
+.block-menu-handle:active {
+  opacity: 1;
+  cursor: grabbing;
+}
+
+.block-menu-popup {
+  position: absolute;
+  background: var(--jx-elevated);
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-lg);
+  padding: 4px;
+  min-width: 220px;
+  box-shadow: var(--jx-shadow-lg);
+  font-family: var(--jx-font-sans);
+  z-index: 1000;
+  animation: fadeIn 0.15s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.block-menu-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  background: transparent;
+  border: none;
+  border-radius: var(--jx-r-md);
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--jx-fg);
+  text-align: left;
+  transition: background var(--jx-dur) var(--jx-ease);
+}
+
+.block-menu-item:hover {
+  background: var(--jx-hover);
+}
+
+.block-menu-item.danger:hover {
+  background: color-mix(in srgb, var(--jx-danger) 12%, transparent);
+  color: var(--jx-danger);
+}
+
+.block-menu-icon {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.block-menu-item span:nth-child(2) {
+  flex: 1;
+}
+
+.block-menu-shortcut {
+  font-size: 11px;
+  color: var(--jx-fg-subtle);
+  font-family: var(--jx-font-mono);
+}
+
+.block-menu-divider {
+  height: 1px;
+  background: var(--jx-line);
+  margin: 4px 0;
+}
+
+

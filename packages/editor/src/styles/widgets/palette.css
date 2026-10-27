@@ -1,0 +1,94 @@
+.jx-palette {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+  gap: 12px;
+}
+
+.jx-palette__swatch {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-md);
+  background: var(--jx-bg);
+  transition: box-shadow var(--jx-dur) var(--jx-ease), transform var(--jx-dur) var(--jx-ease);
+}
+
+.jx-palette__swatch:hover { box-shadow: var(--jx-shadow-md); transform: translateY(-1px); }
+
+.jx-palette__chip {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 64px;
+  padding: 0;
+  border: none;
+  border-bottom: 1px solid var(--jx-line);
+  cursor: pointer;
+}
+
+.jx-palette__chip:focus-visible { outline: none; box-shadow: inset var(--jx-ring); }
+
+.jx-palette__copied {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font: 600 12px/1 var(--jx-font-sans);
+  opacity: 0;
+  transform: translateY(3px);
+  transition: opacity var(--jx-dur) var(--jx-ease), transform var(--jx-dur) var(--jx-ease);
+  pointer-events: none;
+}
+
+.jx-palette__copied.is-visible { opacity: 1; transform: none; }
+
+.jx-palette__meta { padding: 7px 10px 8px; min-width: 0; }
+
+.jx-palette__name {
+  overflow: hidden;
+  color: var(--jx-fg);
+  font-size: 12.5px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.jx-palette__value {
+  overflow: hidden;
+  color: var(--jx-fg-muted);
+  font: 400 11.5px/1.5 var(--jx-font-mono);
+  text-overflow: ellipsis;
+  text-transform: lowercase;
+  white-space: nowrap;
+}
+
+.jx-palette__remove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 22px;
+  height: 22px;
+  background: color-mix(in srgb, var(--jx-bg) 85%, transparent);
+  opacity: 0;
+}
+
+.jx-palette__swatch:hover .jx-palette__remove,
+.jx-palette__remove:focus-visible { opacity: 1; }
+
+.jx-palette__add { border-style: dashed; }
+.jx-palette__add:hover { transform: none; }
+
+.jx-palette__picker { opacity: 0.85; }
+.jx-palette__picker:hover { opacity: 1; }
+
+.jx-palette__picker input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.jx-palette__add-btn { height: 20px; margin-left: -6px; padding: 0 6px; }

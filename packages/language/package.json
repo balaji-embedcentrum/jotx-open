@@ -1,0 +1,33 @@
+{
+  "name": "@jotx-labs/language",
+  "version": "3.1.0",
+  "files": [
+    "dist"
+  ],
+  "description": "jotx language support - Syntax highlighting and diagnostics for VS Code and Monaco",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "jotx",
+    "language",
+    "syntax",
+    "highlighting",
+    "diagnostics",
+    "monaco",
+    "vscode"
+  ],
+  "dependencies": {
+    "@jotx-labs/core": "file:../core",
+    "@jotx-labs/registry": "file:../registry"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "license": "Apache-2.0"
+}

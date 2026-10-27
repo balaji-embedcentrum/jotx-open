@@ -1,0 +1,51 @@
+# Source files
+src/**
+node_modules/**
+.vscode/**
+.vscode-test/**
+
+# Build artifacts
+*.ts
+!out/**/*.js
+
+# Source maps - EXCLUDE from package
+**/*.map
+out/**/*.map
+
+# Config files
+tsconfig.json
+webpack.config.js
+.eslintrc.json
+.prettierrc
+.gitignore
+.DS_Store
+
+# Documentation
+.github/**
+docs/**
+media/screenshots/**
+
+# Build tooling
+scripts/**
+tailwind.config.ts
+postcss.config.js
+
+# Tests
+test/**
+**/*.test.ts
+**/*.spec.ts
+
+# Misc
+.env
+.env.*
+*.log
+coverage/**
+.nyc_output/**
+**/.DS_Store
+.DS_Store
+
+# Parent directories - DO NOT INCLUDE
+../**
+../../**
+../core/**
+../renderer/**

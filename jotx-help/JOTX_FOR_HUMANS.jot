@@ -1,0 +1,250 @@
+hdef jotx JotxUserGuide
+
+  title jotx User Guide
+  icon 📖
+  type root
+
+  def heading "Welcome to jotx"
+
+  def paragraph "**jotx** is a powerful knowledge management system that lives inside VS Code. Create beautiful, structured documents using slash commands while keeping your workflow in the editor you love. Your content is stored as clean, readable text files—perfect for version control and AI collaboration."
+
+  def callout "💡 This entire document demonstrates every feature! Scroll through to see live examples of all block types. Type / (slash) anywhere to open the command menu."
+    variant success
+
+  def heading "Quick Start"
+    level 2
+
+  def heading "Creating Your First Document"
+    level 3
+
+  def list
+    listtype numbered
+    items """Press Cmd+Shift+P (Mac) or Ctrl+Shift+P (Windows/Linux)
+Type 'jotx: Create New Note' and press Enter
+Choose a location and filename (use .jot extension)
+Start typing / anywhere to open the slash menu"""
+
+  def heading "File Extension"
+    level 3
+
+  def paragraph "jotx uses the **.jot** file extension. All documents start with `hdef jotx` header."
+
+  def divider
+
+  def heading "All Slash Commands"
+
+  def paragraph "Type `/` anywhere to open the command menu. Here's a complete reference:"
+
+  def table block_12
+    columns Command, Description
+    rows """/heading1 | Large section heading
+/heading2 | Medium section heading
+/heading3 | Small section heading
+/paragraph | Plain text block
+/bulletList | Bulleted list
+/orderedList | Numbered list
+/checklist | Interactive task list with checkboxes
+/quote | Blockquote
+/code | Code block with syntax highlighting
+/codeReference | Reference code from local files
+/math | LaTeX equations with live preview
+/mermaid | Flowcharts, sequence diagrams
+/chart | Bar, Pie, or Radar charts
+/image | Images with caption
+/floatImage | Floating image with text wrap
+/video | YouTube or local video
+/table | Rich tables with nested content
+/callout | Highlighted box (info/warning/success/danger)
+/toggle | Collapsible content
+/section | Collapsible section
+/datetime | Date/time picker
+/divider | Horizontal separator
+/link | External hyperlink
+/jotxlink | Internal link to another document or block
+/attach | File attachment
+/gridcard | Dashboard cards for navigation
+/button | Navigation button
+/useTemplate | Insert pre-built template"""
+
+  def divider
+
+  def heading "Block Examples"
+
+  def heading "Headings (3 Levels)"
+    level 2
+
+  def heading "Heading Level 1 - Main Topics"
+
+  def heading "Heading Level 2 - Subtopics"
+    level 2
+
+  def heading "Heading Level 3 - Details"
+    level 3
+
+  def heading "Lists"
+    level 2
+
+  def list
+    items """Bullet point one
+Bullet point two"""
+
+  def list
+    listtype numbered
+    items """First step
+Second step"""
+
+  def heading "Checklists"
+    level 2
+
+  def checklist
+    items """[ ] Click to toggle
+[x] Already done!"""
+
+  def heading "Code Blocks"
+    level 2
+
+  def code
+    language typescript
+    text """function greet(name: string): string {
+  return `Hello, ${name}!`;
+}"""
+
+  def heading "Math Equations"
+    level 2
+
+  def paragraph "Math blocks now support a **title** property for labeling equations:"
+
+  def math block_27 "Einstein's Equation"
+    src E = mc^2
+    display block
+
+  def heading "Mermaid Diagrams"
+    level 2
+
+  def paragraph "Mermaid blocks support a **title** property:"
+
+  def mermaid block_29 "Simple Flow"
+    src """flowchart TD
+    A[Start] --> B{Decision}
+    B -->|Yes| C[OK]
+    B -->|No| D[Fix]"""
+
+  def paragraph "💡 Click the eye icon to Show/Hide source code!"
+
+  def heading "Charts"
+    level 2
+
+  def paragraph "Charts support a **title** property:"
+
+  def chart block_32 "Monthly Stats"
+    data """Label | Events
+Jan | 12
+Feb | 39
+Mar | 8"""
+
+  def heading "Callouts"
+    level 2
+
+  def paragraph "Callouts have **4 variants** only: info, warning, success, danger"
+
+  def callout "ℹ️ Info - Tips and notes"
+
+  def callout "⚠️ Warning - Cautions"
+    variant warning
+
+  def callout "✅ Success - Confirmations"
+    variant success
+
+  def callout "🚨 Danger - Critical alerts"
+    variant danger
+
+  def heading "Toggle & Section"
+    level 2
+
+  def toggle "Click to expand"
+    collapsed false
+    def paragraph "Hidden content inside toggle."
+
+  def section "Collapsible Section"
+    collapsed false
+    def paragraph "Section content goes here."
+
+  def heading "Internal Links (jotxlink)"
+    level 2
+
+  def paragraph "Use /jotxlink to create links to other documents or blocks within your workspace. Click to navigate!"
+
+  def heading "Grid Cards"
+    level 2
+
+  def paragraph "Create dashboard-style navigation with /gridcard. Great for root documents!"
+
+  def gridcard
+    layout 2x2
+    def card c1
+      title Documents
+      icon 📄
+      color teal
+    def card c2
+      title Tasks
+      icon ✅
+      color teal
+    def card c3
+      title Stats
+      icon 📊
+      color teal
+
+  def heading "Buttons"
+    level 2
+
+  def paragraph "Add navigation buttons with /button:"
+
+  def button block_49
+    label Next Page
+    link ./next.jot
+    style primary
+    align left
+
+  def button block_50
+    label Go Back
+    link ./previous.jot
+    style outline
+    align left
+
+  def divider
+
+  def heading "Keyboard Shortcuts"
+
+  def table block_53
+    columns Shortcut, Action
+    rows """/ | Open slash menu
+Cmd/Ctrl + B | Bold text
+Cmd/Ctrl + I | Italic text
+Cmd/Ctrl + Z | Undo
+Cmd/Ctrl + Shift + Z | Redo"""
+
+  def divider
+
+  def heading "Why jotx?"
+
+  def list
+    items """**Git-Native** — Track changes with version control
+**AI-Friendly** — LLMs can read and generate jotx files directly
+**Future-Proof** — Plain text is always accessible
+**Portable** — No vendor lock-in"""
+
+  def heading "Pro Tips"
+    level 2
+
+  def list
+    items """Use gridcard blocks for root/dashboard documents
+Add title property to mermaid, chart, and math blocks
+Use jotxlink for internal navigation
+Right-click .jot file → 'Open With' → 'Text Editor' to see the source"""
+
+  def divider
+
+  def callout "🎉 You're ready! Type / to start creating. Your content stays clean, portable, and version-controllable."
+    variant success
+
+  def paragraph "Made with ❤️ by jotx-labs. January 2026"
