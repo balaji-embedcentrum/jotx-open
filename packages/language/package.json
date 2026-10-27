@@ -29,5 +29,9 @@
     "@types/node": "^20.0.0",
     "typescript": "^5.0.0"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Jotx Labs",
+    "email": "support@jotx.dev"
+  }
 }

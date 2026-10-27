@@ -16,7 +16,10 @@
     "standard-lib",
     "blocks"
   ],
-  "author": "Jotx Labs",
+  "author": {
+    "name": "Jotx Labs",
+    "email": "support@jotx.dev"
+  },
   "license": "Apache-2.0",
   "dependencies": {
     "@jotx-labs/registry": "file:../registry"

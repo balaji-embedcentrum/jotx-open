@@ -20,7 +20,10 @@
     "notes",
     "parser"
   ],
-  "author": "Jotx Labs",
+  "author": {
+    "name": "Jotx Labs",
+    "email": "support@jotx.dev"
+  },
   "license": "Apache-2.0",
   "dependencies": {
     "@jotx-labs/core": "file:../core",
