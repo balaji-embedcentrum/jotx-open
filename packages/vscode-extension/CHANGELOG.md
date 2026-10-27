@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [3.1.1] - 2026-10-27
 
 jotx goes public: documents can now be shown on any web page, and the project has a website built from a `.jot` file.
 

@@ -7,7 +7,7 @@
 import { Command } from 'commander'
 import * as fs from 'fs/promises'
 import * as path from 'path'
-import { parseAndValidate, jotToMarkdown, markdownToJot, ValidationError, convertSyntax, type SyntaxStyle } from '@jotx-labs/core'
+import { parseAndValidate, jotToMarkdown, markdownToJot, ValidationError, convertSyntax, VERSION, type SyntaxStyle } from '@jotx-labs/core'
 import { registerStandardBlocks } from '@jotx-labs/standard-lib'
 import { HTMLRenderer } from '@jotx-labs/adapters'
 
@@ -20,7 +20,7 @@ const program = new Command()
 program
   .name('jotx')
   .description('jotx CLI - Parse, validate, and convert jotx files')
-  .version('3.1.0')
+  .version(VERSION)
 
 // Parse command
 program

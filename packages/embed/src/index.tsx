@@ -1,7 +1,7 @@
 /**
  * @jotx-labs/embed — show .jot documents in any web page.
  *
- *   <script src="https://cdn.jsdelivr.net/npm/@jotx-labs/embed@3.1.0/dist/jotx.min.js"></script>
+ *   <script src="https://cdn.jsdelivr.net/npm/@jotx-labs/embed@3.1.1/dist/jotx.min.js"></script>
  *   <jotx-doc src="notes/plan.jot"></jotx-doc>
  *
  * or inline:

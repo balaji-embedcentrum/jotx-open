@@ -41,6 +41,7 @@ export { NodeManager, INDEXED_BLOCK_TYPES, type IndexedBlockType, type NodeEdge,
  */
 export { detectSyntaxStyle, COMPACT_ID_TYPES, type SyntaxStyle, type SerializeOptions } from './parser/serializer'
 export { sameContent } from './parser/compare'
+export { VERSION } from './version'
 import { SyntaxStyle, SerializeOptions } from './parser/serializer'
 import { sameContent } from './parser/compare'
 

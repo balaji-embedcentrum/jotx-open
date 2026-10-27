@@ -31,4 +31,4 @@ body:
     attributes:
       label: Versions
       description: jotx version, and VS Code version or browser
-      placeholder: jotx 3.1.0, VS Code 1.105, macOS
+      placeholder: jotx 3.1.1, VS Code 1.105, macOS
