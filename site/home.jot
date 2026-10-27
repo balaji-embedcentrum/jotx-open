@@ -8,7 +8,7 @@ hdef jotx jotx_home
   def paragraph "jotx is a block editor for plain-text notes. Write in VS Code with `/` commands and live widgets, keep everything as readable `.jot` files next to your code, and publish them on any website with one script tag. **This page is a .jot file.**"
 
   def badges
-    items """version | 3.1.1 | teal
+    items """version | 3.1.2 | teal
 license | Apache-2.0 | slate
 editor | VS Code | blue
 format | plain text | green"""
@@ -23,7 +23,7 @@ format | plain text | green"""
 
   def code
     language html
-    text """<script src="https://cdn.jsdelivr.net/npm/@jotx-labs/embed@3.1.1/dist/jotx.min.js"></script>
+    text """<script src="https://cdn.jsdelivr.net/npm/@jotx-labs/embed@3.1.2/dist/jotx.min.js"></script>
 
 <jotx-doc src="notes/launch-plan.jot"></jotx-doc>"""
 

@@ -1,6 +1,6 @@
 {
   "name": "@jotx-labs/embed",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "Show .jot documents in any web page with one script tag",
   "main": "dist/jotx.min.js",
   "unpkg": "dist/jotx.min.js",

@@ -14,7 +14,9 @@ interface Logger {
 }
 
 const createLogger = (): Logger => {
-    const isProduction = typeof process !== 'undefined' && process.env?.NODE_ENV === 'production'
+    // Bundlers replace process.env.NODE_ENV with a literal; browsers have no process, hence the try
+    let isProduction = false
+    try { isProduction = process.env.NODE_ENV === 'production' } catch { /* no process object */ }
 
     const logFn = (level: LogLevel) => (...args: any[]) => {
         if (isProduction && (level === 'debug' || level === 'log')) {

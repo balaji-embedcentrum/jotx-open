@@ -42,7 +42,7 @@
   </section>
 
   <main id="drop">
-    <jotx-doc id="doc"></jotx-doc>
+    <jotx-doc id="doc"><p class="boot">Loading…</p></jotx-doc>
   </main>
 
   <script>
@@ -121,6 +121,25 @@
     window.addEventListener('popstate', () => show(new URLSearchParams(location.search).get('src'), false))
 
     show(new URLSearchParams(location.search).get('src') || 'examples/widgets-showcase-example.jot', false)
+  </script>
+  <script>
+    // If jotx.min.js cannot start (blocked, failed to download, or an unsupported browser), say so instead of showing an empty page
+    (function () {
+      var problem = ''
+      addEventListener('error', function (e) {
+        if (!(window.customElements && customElements.get('jotx-doc'))) problem = e.message || 'the script could not be downloaded'
+      }, true)
+      addEventListener('load', function () {
+        setTimeout(function () {
+          if (window.customElements && customElements.get('jotx-doc')) return
+          var text = 'jotx could not start in this browser' + (problem ? ': ' + problem.replace(/\.?$/, '.') : '.') + ' Try reloading, or open the page in another browser.'
+          document.querySelectorAll('jotx-doc').forEach(function (el) {
+            var p = document.createElement('p'); p.className = 'boot is-error'; p.textContent = text
+            el.replaceChildren(p)
+          })
+        }, 1500)
+      })
+    })()
   </script>
 </body>
 </html>

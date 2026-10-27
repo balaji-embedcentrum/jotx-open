@@ -46,3 +46,7 @@ main { max-width: 1160px; margin: 0 auto; }
 [hidden] { display: none !important; }
 .hint { margin: 0; color: var(--muted); font-size: 13px; }
 #drop.is-drop { outline: 2px dashed var(--accent); outline-offset: -8px; border-radius: 12px; }
+
+/* Shown until <jotx-doc> starts, or if it cannot */
+.boot { margin: 48px auto; padding: 0 max(16px, 3vw); max-width: 760px; color: var(--muted); }
+.boot.is-error { color: #dc2626; }

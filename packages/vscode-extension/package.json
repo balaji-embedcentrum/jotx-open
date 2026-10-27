@@ -2,7 +2,7 @@
   "name": "jotx",
   "displayName": "jotx",
   "description": "Notes that live in your repo. A beautiful block editor for VS Code with 19 live widgets — Kanban, timelines, diffs, terminals and more — stored as git-friendly, AI-friendly text.",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "license": "Apache-2.0",
   "publisher": "balaji-embedcentrum",
   "homepage": "https://jotx.dev",

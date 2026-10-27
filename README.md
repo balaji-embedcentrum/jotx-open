@@ -109,7 +109,7 @@ def checklist
 One script tag turns any `.jot` file into a page, on GitHub Pages, a blog or any static site. [The jotx website](https://balaji-embedcentrum.github.io/jotx-open/) is itself a `.jot` file rendered this way, and its [viewer](https://balaji-embedcentrum.github.io/jotx-open/view.html) opens any `.jot` file you give it.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@jotx-labs/embed@3.1.1/dist/jotx.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@jotx-labs/embed@3.1.2/dist/jotx.min.js"></script>
 
 <jotx-doc src="notes/launch-plan.jot"></jotx-doc>
 ```

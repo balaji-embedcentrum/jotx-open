@@ -1,7 +1,7 @@
 /**
  * @jotx-labs/embed — show .jot documents in any web page.
  *
- *   <script src="https://cdn.jsdelivr.net/npm/@jotx-labs/embed@3.1.1/dist/jotx.min.js"></script>
+ *   <script src="https://cdn.jsdelivr.net/npm/@jotx-labs/embed@3.1.2/dist/jotx.min.js"></script>
  *   <jotx-doc src="notes/plan.jot"></jotx-doc>
  *
  * or inline:
@@ -164,21 +164,47 @@ export class JotxDocElement extends HTMLElement {
     }
     this.dispatchEvent(new CustomEvent('jotx:load', { detail: { title: doc.title, errors: doc.errors } }))
     this.root!.render(
-      <EditorModeProvider initialMode="preview">
-        <JotxEditor
-          key={`${this.loadToken}`}
-          documentId={doc.id}
-          documentType="page"
-          tiptapDoc={doc.tiptapDoc}
-          ribbonExpanded={false}
-          outline={this.hasAttribute('outline')}
-        />
-      </EditorModeProvider>
+      <RenderGuard key={`${this.loadToken}`}>
+        <EditorModeProvider initialMode="preview">
+          <JotxEditor
+            documentId={doc.id}
+            documentType="page"
+            tiptapDoc={doc.tiptapDoc}
+            ribbonExpanded={false}
+            outline={this.hasAttribute('outline')}
+          />
+        </EditorModeProvider>
+      </RenderGuard>
     )
   }
 
   private renderMessage(message: string, isError = false) {
     this.root!.render(<div className={`jotx-embed-message${isError ? ' is-error' : ''}`} role={isError ? 'alert' : 'status'}>{message}</div>)
+  }
+}
+
+/**
+ * Without this, an exception in any block unmounts the whole document and leaves an empty
+ * space. Show the error instead, so readers and authors can see what went wrong.
+ */
+class RenderGuard extends React.Component<{ children: React.ReactNode }, { error: Error | null }> {
+  state = { error: null as Error | null }
+
+  static getDerivedStateFromError(error: Error) {
+    return { error }
+  }
+
+  componentDidCatch(error: Error) {
+    console.error('[jotx] The document could not be shown:', error)
+  }
+
+  render() {
+    if (!this.state.error) return this.props.children
+    return (
+      <div className="jotx-embed-message is-error" role="alert">
+        This document could not be shown in this browser. {this.state.error.message}
+      </div>
+    )
   }
 }
 
