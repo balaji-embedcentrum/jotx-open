@@ -1,7 +1,7 @@
 /**
  * @jotx-labs/embed — show .jot documents in any web page.
  *
- *   <script src="https://cdn.jsdelivr.net/npm/@jotx-labs/embed@3.1.3/dist/jotx.min.js"></script>
+ *   <script src="https://cdn.jsdelivr.net/npm/@jotx-labs/embed@3.1.4/dist/jotx.min.js"></script>
  *   <jotx-doc src="notes/plan.jot"></jotx-doc>
  *
  * or inline:
@@ -97,6 +97,11 @@ export class JotxDocElement extends HTMLElement {
   }
 
   connectedCallback() {
+    if (!this.mount && !this.getAttribute('src') && document.readyState === 'loading') {
+      // When the script loads first, the element connects before the parser has added its inline text
+      document.addEventListener('DOMContentLoaded', () => { if (this.isConnected) this.connectedCallback() }, { once: true })
+      return
+    }
     if (!this.mount) {
       // Inline source: <script type="text/jot"> keeps quotes and indentation intact
       const script = this.querySelector('script[type="text/jot"]')

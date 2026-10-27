@@ -1,15 +1,12 @@
 {
   "name": "@jotx-labs/core",
-  "version": "3.1.3",
+  "version": "3.1.4",
   "files": [
     "dist"
   ],
   "description": "jotx core - modular parser, blocks, and document system",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "bin": {
-    "jotx": "./dist/cli/index.js"
-  },
   "scripts": {
     "build": "tsc",
     "test": "jest",

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.4] - 2026-10-27
+
+### Fixed
+- `<jotx-doc>` with the jot text written inside it showed an empty document when the script tag came before the element, as in the documented example.
+- The web script could fail to start on pages that do not declare a character set; it is now plain ASCII.
+- Publishing `@jotx-labs/core` warned about a `jotx` command it does not ship; the command comes from `@jotx-labs/cli`.
+
 ## [3.1.3] - 2026-10-27
 
 jotx goes public: documents can now be shown on any web page, and the project has a website built from a `.jot` file.

@@ -1,1 +1,1 @@
-export const JOTX_VERSION = "3.1.3";
+export const JOTX_VERSION = "3.1.4";

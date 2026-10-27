@@ -54,7 +54,8 @@ module.exports = {
       new TerserPlugin({
         extractComments: false,
         // Keep React component names so a render error can say which block failed
-        terserOptions: { keep_fnames: /^[A-Z]/, keep_classnames: /^[A-Z]/ }
+        // ASCII output runs the same whatever charset the host page or server declares
+        terserOptions: { keep_fnames: /^[A-Z]/, keep_classnames: /^[A-Z]/, format: { ascii_only: true } }
       })
     ]
   },
