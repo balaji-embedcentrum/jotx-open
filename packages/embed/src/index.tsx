@@ -1,7 +1,7 @@
 /**
  * @jotx-labs/embed — show .jot documents in any web page.
  *
- *   <script src="https://cdn.jsdelivr.net/npm/@jotx-labs/embed@3.1.2/dist/jotx.min.js"></script>
+ *   <script src="https://cdn.jsdelivr.net/npm/@jotx-labs/embed@3.1.3/dist/jotx.min.js"></script>
  *   <jotx-doc src="notes/plan.jot"></jotx-doc>
  *
  * or inline:
@@ -185,24 +185,38 @@ export class JotxDocElement extends HTMLElement {
 
 /**
  * Without this, an exception in any block unmounts the whole document and leaves an empty
- * space. Show the error instead, so readers and authors can see what went wrong.
+ * space. A failure that depends on timing gets one fresh attempt; after that, show the error
+ * and the component it came from, so readers and authors can see what went wrong.
  */
-class RenderGuard extends React.Component<{ children: React.ReactNode }, { error: Error | null }> {
-  state = { error: null as Error | null }
+class RenderGuard extends React.Component<
+  { children: React.ReactNode },
+  { error: Error | null; where: string; attempt: number }
+> {
+  state = { error: null as Error | null, where: '', attempt: 0 }
 
   static getDerivedStateFromError(error: Error) {
     return { error }
   }
 
-  componentDidCatch(error: Error) {
-    console.error('[jotx] The document could not be shown:', error)
+  componentDidCatch(error: Error, info: React.ErrorInfo) {
+    console.error('[jotx] The document could not be shown:', error, info.componentStack)
+    const where = /at (\w+)/.exec(info.componentStack || '')?.[1] || ''
+    if (this.state.attempt === 0) {
+      // Remount the whole document once, on a clean tick
+      setTimeout(() => this.setState({ error: null, where: '', attempt: 1 }), 50)
+    } else {
+      this.setState({ where })
+    }
   }
 
   render() {
-    if (!this.state.error) return this.props.children
+    const { error, where, attempt } = this.state
+    if (!error) return <React.Fragment key={attempt}>{this.props.children}</React.Fragment>
+    if (attempt === 0) return null
     return (
       <div className="jotx-embed-message is-error" role="alert">
-        This document could not be shown in this browser. {this.state.error.message}
+        This document could not be shown in this browser. {error.message}
+        {where && ` (in ${where})`}
       </div>
     )
   }

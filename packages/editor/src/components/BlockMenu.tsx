@@ -9,6 +9,7 @@ import { hasBlockInClipboard } from '../extensions/BlockOpsExtension'
 import '../styles/BlockMenu.css'
 import { logger } from '../utils/logger'
 import { useEditorMode } from '../contexts/EditorModeContext'
+import { useEditorDom } from '../utils/editorDom'
 
 interface BlockMenuProps {
   editor: Editor | null
@@ -29,15 +30,15 @@ export function BlockMenu({ editor }: BlockMenuProps) {
   // Store the block position for when we need to select it
   const blockPosRef = useRef<{ from: number; to: number } | null>(null)
   const showMenuRef = useRef(false)
+  const editorElement = useEditorDom(editor)
 
   useEffect(() => {
     showMenuRef.current = showMenu
   }, [showMenu])
 
   useEffect(() => {
-    if (!editor) return
+    if (!editor || !editorElement) return
 
-    const editorElement = editor.view.dom
     let currentHoverElement: HTMLElement | null = null
     let hideTimeout: NodeJS.Timeout | null = null
     let isHandleHovered = false
@@ -214,7 +215,7 @@ export function BlockMenu({ editor }: BlockMenuProps) {
       editorElement.removeEventListener('mousemove', handleMouseMove)
       editorElement.removeEventListener('mouseleave', handleMouseLeave)
     }
-  }, [editor])
+  }, [editor, editorElement])
 
   // Close menu when clicking outside
   useEffect(() => {

@@ -7,6 +7,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import type { Editor } from '@tiptap/react'
 import '../styles/OutlineRail.css'
+import { useEditorDom } from '../utils/editorDom'
 
 interface OutlineItem {
   pos: number
@@ -43,6 +44,7 @@ function scrollParent(el: HTMLElement | null): HTMLElement | null {
 
 export function OutlineRail({ editor }: { editor: Editor }) {
   const [items, setItems] = useState<OutlineItem[]>(() => collect(editor))
+  const contentDom = useEditorDom(editor)
   const [active, setActive] = useState(0)
   const [progress, setProgress] = useState(0)
   const [left, setLeft] = useState<number | null>(null)
@@ -55,7 +57,8 @@ export function OutlineRail({ editor }: { editor: Editor }) {
   }, [editor])
 
   useEffect(() => {
-    const content = editor.view.dom as HTMLElement
+    const content = contentDom
+    if (!content) return
     const scroller = scrollParent(content)
     const target: HTMLElement | Window = scroller || window
 
@@ -87,7 +90,7 @@ export function OutlineRail({ editor }: { editor: Editor }) {
       target.removeEventListener('scroll', measure)
       window.removeEventListener('resize', measure)
     }
-  }, [editor, items])
+  }, [editor, items, contentDom])
 
   if (items.length < 3 || left === null) return null
 

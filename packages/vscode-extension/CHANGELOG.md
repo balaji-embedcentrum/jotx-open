@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [3.1.2] - 2026-10-27
+## [3.1.3] - 2026-10-27
 
 jotx goes public: documents can now be shown on any web page, and the project has a website built from a `.jot` file.
 
@@ -19,6 +19,7 @@ jotx goes public: documents can now be shown on any web page, and the project ha
 - Mermaid diagrams in read-only mode could mix light and dark colours.
 - The guide's quick-start list had a step nested under the one before it.
 - Web pages showed nothing when a document failed to render or the script could not start; they now show the reason. The web build no longer prints debug logs.
+- On some machines a document failed with "The editor view is not available" because parts of the editor read the page before the editor was attached; they now wait for it, and a document that fails once is retried.
 
 ### Removed
 - About 80 source files and 75 dependencies left over from the pre-3.0 interface; the extension installs and builds with far fewer packages.

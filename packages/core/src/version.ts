@@ -4,4 +4,4 @@
  * Run `npm run sync-versions` at the root to sync versions
  */
 
-export const VERSION = '3.1.2';
+export const VERSION = '3.1.3';

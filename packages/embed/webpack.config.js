@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const TerserPlugin = require('terser-webpack-plugin')
 const { version } = require('./package.json')
 
 const root = path.resolve(__dirname, '../..')
@@ -48,6 +49,15 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({ __JOTX_VERSION__: JSON.stringify(version) })
   ],
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false,
+        // Keep React component names so a render error can say which block failed
+        terserOptions: { keep_fnames: /^[A-Z]/, keep_classnames: /^[A-Z]/ }
+      })
+    ]
+  },
   performance: { hints: false },
   devtool: false
 }

@@ -86,6 +86,7 @@ import '../styles/Page.css'
 import '../styles/ImageVideoBlocks.css'
 import { openExternal, pickAttachmentFile, savePastedImage } from '../bridge/bridge-utils'
 import { logger } from '../utils/logger'
+import { editorDom, useEditorDom } from '../utils/editorDom'
 import { EditorModeProvider, useEditorMode, useHasEditorModeProvider } from '../contexts/EditorModeContext'
 import { LinkDialog } from './LinkDialog'
 import { TableToolbar } from './TableToolbar'
@@ -392,6 +393,7 @@ function JotxEditorInner({
       onChange?.(JSON.stringify(json))
     }
   })
+  const editorElement = useEditorDom(editor)
 
   // Update search state from plugin
   const updateSearchState = () => {
@@ -461,7 +463,7 @@ function JotxEditorInner({
     editor.setEditable(!isPreview)
     // A selected block would keep its edit ring while reading
     const { state } = editor
-    if (isPreview && state.selection instanceof NodeSelection) {
+    if (isPreview && editorDom(editor) && state.selection instanceof NodeSelection) {
       editor.view.dispatch(state.tr.setSelection(TextSelection.atStart(state.doc)))
     }
   }, [editor, isPreview])
@@ -1119,8 +1121,8 @@ function JotxEditorInner({
 
   // Open links externally (VS Code) instead of navigating inside the webview
   useEffect(() => {
-    if (!editor) return
-    const el = editor.view.dom
+    const el = editorElement
+    if (!editor || !el) return
     const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null
       const a = target?.closest?.('a[href]') as HTMLAnchorElement | null
@@ -1133,7 +1135,7 @@ function JotxEditorInner({
     }
     el.addEventListener('click', onClick)
     return () => el.removeEventListener('click', onClick)
-  }, [editor])
+  }, [editor, editorElement])
 
   // Close link dialog on Escape
   useEffect(() => {
