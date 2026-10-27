@@ -49,25 +49,25 @@ Release Date | """
   def paragraph "[If any breaking changes, list them here with migration instructions]"
 
   def list
-    items "[Breaking change 1] - How to migrate"
+    items """[Breaking change 1] - How to migrate"""
 
   def heading "🔒 Security"
     level 3
 
   def list
-    items "[Security update 1] - Description"
+    items """[Security update 1] - Description"""
 
   def heading "📚 Documentation"
     level 3
 
   def list
-    items "[Documentation update 1]"
+    items """[Documentation update 1]"""
 
   def heading "🗑️ Deprecated"
     level 3
 
   def list
-    items "[Deprecated feature 1] - Reason and replacement"
+    items """[Deprecated feature 1] - Reason and replacement"""
 
   def divider
 
@@ -78,13 +78,13 @@ Release Date | """
     level 3
 
   def list
-    items "[Previous version features...]"
+    items """[Previous version features...]"""
 
   def heading "🐛 Bug Fixes"
     level 3
 
   def list
-    items "[Previous version fixes...]"
+    items """[Previous version fixes...]"""
 
   def divider
 

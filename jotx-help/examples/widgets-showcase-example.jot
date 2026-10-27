@@ -91,7 +91,7 @@ Works offline"""
 Extension | Tiptap JSON becomes jot blocks
 Serializer | Written in compact syntax
 Disk | Saved as plain text, ready for git"""
-    speed 1.6
+    speed "1.6"
 
   def heading "Developer"
     level 2

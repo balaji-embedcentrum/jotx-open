@@ -1,50 +1,51 @@
 hdef jotx jotx_home
+
   title jotx
   type root
 
-def heading "Notes that live in your repo"
+  def heading "Notes that live in your repo"
 
-def paragraph "jotx is a block editor for plain-text notes. Write in VS Code with `/` commands and live widgets, keep everything as readable `.jot` files next to your code, and publish them on any website with one script tag. **This page is a .jot file.**"
+  def paragraph "jotx is a block editor for plain-text notes. Write in VS Code with `/` commands and live widgets, keep everything as readable `.jot` files next to your code, and publish them on any website with one script tag. **This page is a .jot file.**"
 
-def badges
-  items """version | 3.1.1 | teal
+  def badges
+    items """version | 3.1.1 | teal
 license | Apache-2.0 | slate
 editor | VS Code | blue
 format | plain text | green"""
 
-def heading "Put a .jot file on any web page"
-  level 2
+  def heading "Put a .jot file on any web page"
+    level 2
 
-def steps "Three steps"
-  steps """[ ] Add the script | One script tag, served from a free CDN
+  def steps "Three steps"
+    steps """[ ] Add the script | One script tag, served from a free CDN
 [ ] Add a jotx-doc element | Point src at a .jot file, or write jot inside the element
 [ ] Publish | GitHub Pages, Netlify, your blog: any static site works"""
 
-def code
-  language html
-  text """<script src="https://cdn.jsdelivr.net/npm/@jotx-labs/embed@3.1.1/dist/jotx.min.js"></script>
+  def code
+    language html
+    text """<script src="https://cdn.jsdelivr.net/npm/@jotx-labs/embed@3.1.1/dist/jotx.min.js"></script>
 
 <jotx-doc src="notes/launch-plan.jot"></jotx-doc>"""
 
-def callout "Documents render read-only, in light or dark to match the reader. A .jot file is pure data with no code inside, so showing one on your site cannot run anything."
+  def callout "Documents render read-only, in light or dark to match the reader. A .jot file is pure data with no code inside, so showing one on your site cannot run anything."
 
-def heading "What a note can hold"
-  level 2
+  def heading "What a note can hold"
+    level 2
 
-def columns
-  def column
-    def list
-      items """Headings, lists, checklists, quotes and callouts
+  def columns
+    def column
+      def list
+        items """Headings, lists, checklists, quotes and callouts
 Tables, code, math and Mermaid diagrams
 Charts, images and video"""
-  def column
-    def list
-      items """Kanban boards, timelines and progress
+    def column
+      def list
+        items """Kanban boards, timelines and progress
 Decision records, steps and priority matrices
 Terminals, API endpoints, file trees and diffs"""
 
-def kanban "Example: a launch board"
-  board """[Todo]
+  def kanban "Example: a launch board"
+    board """[Todo]
 Pricing page copy
 Status page alerts
 [In progress]
@@ -52,34 +53,34 @@ Offline sync
 [Done]
 Load test at 5x traffic"""
 
-def animation "How a note reaches this page"
-  steps """VS Code | You write with / commands and widgets
+  def animation "How a note reaches this page"
+    steps """VS Code | You write with / commands and widgets
 Git | The note is saved as a plain .jot file
 GitHub Pages | The file is published with the site
 Browser | jotx.min.js renders it, like this page"""
 
-def heading "Get started"
-  level 2
+  def heading "Get started"
+    level 2
 
-def terminal "Use jotx"
-  commands """$ code --install-extension balaji-embedcentrum.jotx
+  def terminal "Use jotx"
+    commands """$ code --install-extension balaji-embedcentrum.jotx
 $ npx @jotx-labs/cli migrate notes/ --to compact --check"""
 
-def gridcard
-  layout 2x2
-  def card viewer
-    title Open a .jot file
-    icon 📄
-    link view.html
-  def card examples
-    title Browse examples
-    icon 🗂️
-    link view.html?src=examples/widgets-showcase-example.jot
-  def card syntax
-    title Syntax guide
-    icon ✍️
-    link view.html?src=examples/JOTX_FOR_AI.jot
-  def card source
-    title Source on GitHub
-    icon 💻
-    link https://github.com/balaji-embedcentrum/jotx-open
+  def gridcard
+    layout 2x2
+    def card viewer
+      title Open a .jot file
+      icon 📄
+      link view.html
+    def card examples
+      title Browse examples
+      icon 🗂️
+      link view.html?src=examples/widgets-showcase-example.jot
+    def card syntax
+      title Syntax guide
+      icon ✍️
+      link view.html?src=examples/JOTX_FOR_AI.jot
+    def card source
+      title Source on GitHub
+      icon 💻
+      link https://github.com/balaji-embedcentrum/jotx-open

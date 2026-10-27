@@ -12,7 +12,8 @@ jotx goes public: documents can now be shown on any web page, and the project ha
 - Contributing guide, code of conduct, security policy, issue templates, and CI that builds, tests and validates every shipped `.jot` file.
 
 ### Fixed
-- The CLI failed to start on Node 18 and 20; `jotx validate` reported an error for every file.
+- The CLI failed to start on Node 18 and 20; `jotx validate` reported an error for every file, and `jotx convert` crashed.
+- `@jotx-labs/language` did not include its syntax-highlighting grammar.
 - Empty paragraphs (blank lines) were reported as missing their text.
 - In read-only mode, a block could keep its selection ring.
 - Mermaid diagrams in read-only mode could mix light and dark colours.

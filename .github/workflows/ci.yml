@@ -28,3 +28,5 @@ jobs:
         run: |
           find jotx-help site docs -name '*.jot' -print0 |
             xargs -0 -n1 node packages/cli/dist/cli.js validate > /dev/null
+      - name: Shipped .jot files use compact syntax
+        run: node packages/cli/dist/cli.js migrate jotx-help site --to compact --check

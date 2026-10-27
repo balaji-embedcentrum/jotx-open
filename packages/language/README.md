@@ -17,7 +17,7 @@ export function activate(context: vscode.ExtensionContext) {
 }
 ```
 
-The grammar ships at `src/grammar/jotx.tmLanguage.json`; reference it from your extension's `contributes.grammars`.
+The grammar ships at `@jotx-labs/language/dist/grammar/jotx.tmLanguage.json` (also exported as `GRAMMAR_PATH`, relative to `dist/`); reference it from your extension's `contributes.grammars`.
 
 ## Monaco
 

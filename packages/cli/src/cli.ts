@@ -93,15 +93,11 @@ program
       }
 
       // Render to HTML
-      const html = renderer.render({
-        id: result.ast.document.id,
-        type: result.ast.document.type,
-        metadata: result.ast.document.metadata,
-        blocks: result.ast.document.blocks as any
-      } as any)
+      const html = renderer.render(result.ast.document.blocks as any)
 
       // Wrap in full HTML document
-      const title = (result.ast.document.metadata as any)?.title || 'jotx Document'
+      const title = String((result.ast.document.metadata as any)?.title || 'jotx Document')
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
       const fullHtml = `<!DOCTYPE html>
 <html lang="en">
 <head>

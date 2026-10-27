@@ -8,7 +8,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && mkdir -p dist/grammar && cp src/grammar/jotx.tmLanguage.json dist/grammar/",
     "test": "jest",
     "clean": "rm -rf dist"
   },
