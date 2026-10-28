@@ -1,0 +1,7 @@
+hdef jotx blog
+
+  title Blog
+
+  def heading "Blog"
+
+  def paragraph "News and longer articles."

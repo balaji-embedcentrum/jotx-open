@@ -1,0 +1,31 @@
+hdef jotx requirements
+
+  title Writing requirements
+  description How to write requirements that can be tested.
+  tags requirements, quality
+
+  def heading "Writing requirements"
+
+  def paragraph "Good requirements are testable. This page uses tabs for the three views."
+
+  def tab "Overview"
+    icon 📋
+    def paragraph "A requirement states one need, in one sentence, that a test can prove."
+    def heading "Patterns"
+      level 2
+    def list
+      items """Ubiquitous: The system shall …
+Event-driven: When …, the system shall …"""
+
+  def tab "Examples"
+    def table examples "Examples"
+      columns ID, Requirement, Test
+      rows """REQ-1 | The pump shall stop within 200 ms of a stop command. | Timed stop test
+REQ-2 | When the door opens, the oven shall switch off its heater. | Door switch test"""
+
+  def tab "Checklist"
+    def checklist
+      items """[x] One need per requirement
+[ ] A test exists for each requirement"""
+
+  def paragraph "Next: [Safety analysis](safety.jot)."

@@ -1,8 +1,9 @@
 {
   "name": "@jotx-labs/cli",
-  "version": "3.1.4",
+  "version": "3.2.0",
   "files": [
-    "dist"
+    "dist",
+    "assets"
   ],
   "description": "jotx command-line interface",
   "main": "dist/index.js",
@@ -26,10 +27,11 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@jotx-labs/core": "file:../core",
     "@jotx-labs/adapters": "file:../adapters",
+    "@jotx-labs/core": "file:../core",
+    "@jotx-labs/standard-lib": "file:../standard-lib",
     "commander": "^11.0.0",
-    "@jotx-labs/standard-lib": "file:../standard-lib"
+    "pagefind": "^1.5.2"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

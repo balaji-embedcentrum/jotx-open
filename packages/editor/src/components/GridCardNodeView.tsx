@@ -51,11 +51,7 @@ export function GridCardNodeView({ node, updateAttributes }: GridCardNodeViewPro
             <div
                 className="gridcard"
                 data-layout={layout}
-                style={{
-                    display: 'grid',
-                    gridTemplateColumns: `repeat(${cols}, 1fr)`,
-                    gap: '12px'
-                }}
+                style={{ '--jx-grid-cols': cols } as React.CSSProperties}
             >
                 <NodeViewContent className="gridcard-content" />
             </div>

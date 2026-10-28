@@ -111,7 +111,7 @@ export class MonacoLanguageProvider {
         'heading1', 'heading2', 'heading3', 'paragraph', 'quote',
         'code', 'codeReference', 'list', 'checklist', 'table', 'image', 'link',
         'attach', 'callout', 'toggle', 'divider', 'datetime',
-        'math', 'mermaid', 'chart', 'linkCard', 'custom'
+        'math', 'mermaid', 'chart', 'linkCard', 'custom', 'tab'
       ],
 
       properties: [

@@ -80,7 +80,8 @@ export const WIDGET_BLOCK_TYPES = [
   'palette',
   'badges',
   'shortcuts',
-  'animation'
+  'animation',
+  'menu'
 ] as const
 
 export type WidgetBlockType = typeof WIDGET_BLOCK_TYPES[number]
@@ -111,7 +112,7 @@ export const DOCUMENT_SCHEMAS: Record<DocumentType, readonly BlockType[]> = {
     // Navigation blocks
     'gridcard', 'card', 'button', 'buttonstrip',
     // Layout blocks
-    'columns', 'column',
+    'columns', 'column', 'tab',
     // Widgets (attribute-only blocks, see WIDGET_BLOCK_TYPES)
     ...WIDGET_BLOCK_TYPES
   ] as const
@@ -193,6 +194,7 @@ export type BlockType =
   // Layout blocks
   | 'columns'
   | 'column'
+  | 'tab'
   // Widgets
   | WidgetBlockType
 
@@ -236,6 +238,7 @@ export const BLOCK_TYPES: readonly BlockType[] = [
   // Layout blocks
   'columns',
   'column',
+  'tab',
   // Widgets
   ...WIDGET_BLOCK_TYPES
 ] as const

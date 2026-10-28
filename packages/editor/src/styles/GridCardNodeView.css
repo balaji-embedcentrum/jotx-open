@@ -4,6 +4,7 @@
   position: relative;
   margin: 1.1em 0;
   font-family: var(--jx-font-sans);
+  container-type: inline-size;
 }
 
 /* Layout Controls - Show on hover */
@@ -49,10 +50,19 @@
 
 .gridcard {
   display: grid;
+  /* minmax(0, ...) lets columns shrink below their content instead of overflowing the page */
+  grid-template-columns: repeat(var(--jx-grid-cols, 2), minmax(0, 1fr));
   gap: 12px;
   padding: 0;
   align-items: stretch;
   /* Make all cards same height */
+}
+
+/* Narrow pages and phones: one card per row */
+@container (max-width: 520px) {
+  .gridcard {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 /* CRITICAL: Make NodeViewContent and card wrappers work with CSS Grid */

@@ -1,7 +1,7 @@
 /**
  * @jotx-labs/embed — show .jot documents in any web page.
  *
- *   <script src="https://cdn.jsdelivr.net/npm/@jotx-labs/embed@3.1.4/dist/jotx.min.js"></script>
+ *   <script src="https://cdn.jsdelivr.net/npm/@jotx-labs/embed@3.2.0/dist/jotx.min.js"></script>
  *   <jotx-doc src="notes/plan.jot"></jotx-doc>
  *
  * or inline:
@@ -68,7 +68,7 @@ export interface RenderResult {
 /** Parse jot text into the editor document; throws with a readable message on syntax errors. */
 export function toDocument(text: string, base = document.baseURI) {
   const ast = parse(withHeader(text))
-  const tiptapDoc = { type: 'doc', content: ast.document.blocks.map(b => adapter.blockToTiptap(b)) }
+  const tiptapDoc = { type: 'doc', content: adapter.blocksToTiptap(ast.document.blocks) }
   resolveMedia(tiptapDoc, base)
   const errors = validate(ast.document).filter((e: any) => e.severity === 'error').map((e: any) => ({ message: e.message, line: e.line }))
   return { id: ast.document.id, title: ast.document.metadata?.title as string | undefined, tiptapDoc, errors }
@@ -86,6 +86,8 @@ export class JotxDocElement extends HTMLElement {
 
   private root: Root | null = null
   private mount: HTMLDivElement | null = null
+  /** Pre-rendered HTML (a .jotx-static child) shown until the live view is ready */
+  private fallback: HTMLElement | null = null
   private inlineText: string | null = null
   private loadToken = 0
   private onSchemeChange = () => this.applyTheme()
@@ -105,10 +107,14 @@ export class JotxDocElement extends HTMLElement {
     if (!this.mount) {
       // Inline source: <script type="text/jot"> keeps quotes and indentation intact
       const script = this.querySelector('script[type="text/jot"]')
-      this.inlineText = script ? script.textContent || '' : (this.getAttribute('src') ? null : this.textContent || '')
-      this.textContent = ''
+      this.fallback = this.querySelector(':scope > .jotx-static')
+      this.inlineText = script ? script.textContent || '' : (this.getAttribute('src') ? null : this.fallback ? '' : this.textContent || '')
+      if (this.fallback) script?.remove()
+      else this.textContent = ''
       this.mount = document.createElement('div')
       this.mount.className = 'jotx-embed jx-scope'
+      // With a pre-rendered page, the live view stays hidden until it has drawn
+      if (this.fallback) this.mount.hidden = true
       this.appendChild(this.mount)
       this.root = createRoot(this.mount)
       // Clicks decide which document "open file" links belong to
@@ -168,6 +174,7 @@ export class JotxDocElement extends HTMLElement {
       return
     }
     this.dispatchEvent(new CustomEvent('jotx:load', { detail: { title: doc.title, errors: doc.errors } }))
+    if (this.fallback) this.revealWhenDrawn()
     this.root!.render(
       <RenderGuard key={`${this.loadToken}`}>
         <EditorModeProvider initialMode="preview">
@@ -177,6 +184,7 @@ export class JotxDocElement extends HTMLElement {
             tiptapDoc={doc.tiptapDoc}
             ribbonExpanded={false}
             outline={this.hasAttribute('outline')}
+            documentTitle={doc.title}
           />
         </EditorModeProvider>
       </RenderGuard>
@@ -184,7 +192,27 @@ export class JotxDocElement extends HTMLElement {
   }
 
   private renderMessage(message: string, isError = false) {
+    // A pre-rendered page stays as it is rather than showing loading text or an error
+    if (this.fallback) return
     this.root!.render(<div className={`jotx-embed-message${isError ? ' is-error' : ''}`} role={isError ? 'alert' : 'status'}>{message}</div>)
+  }
+
+  /** Swap the pre-rendered page for the live view once the editor has drawn the document. */
+  private revealWhenDrawn() {
+    const mount = this.mount!
+    const swap = () => {
+      observer.disconnect()
+      requestAnimationFrame(() => {
+        if (mount.querySelector('.jotx-embed-message.is-error')) return
+        mount.hidden = false
+        this.fallback?.remove()
+        this.fallback = null
+      })
+    }
+    const observer = new MutationObserver(() => {
+      if (mount.querySelector('.jotx-editor-content > *')) swap()
+    })
+    observer.observe(mount, { childList: true, subtree: true })
   }
 }
 

@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.2.0] - 2026-10-27
+
+Tabs and menus turn one note into several pages, and a folder of notes becomes a website.
+
+### Added
+- **Tabs**: `def tab "Overview"` holds ordinary blocks, and consecutive tabs share one tab bar under the title. Add, rename, reorder, give an icon to and delete tabs from the bar; tabs inside a tab become a compact card. Links such as `#tasks` open a tab, the outline lists tabs with their headings, and search opens the tab that holds a match. Markdown export turns each tab into a heading; printing shows every tab.
+- **One-file sites**: a note that starts with tabs uses them as its top navigation, with the note's title, dropdowns for tabs inside tabs, the links of a menu block placed just before them, and search. Each tab is a full page; on narrow screens the navigation becomes a Menu button. Example: `mbse-site-example.jot`.
+- **Menu block**: a navigation bar of links to notes and web pages, with dropdowns from indented lines, that folds into one Menu button on narrow pages.
+- **`jotx site build` and `jotx site serve`**: publish a folder of `.jot` files as a website with clean addresses, a site menu and footer from `site.jot`, folder and tag pages, an RSS feed, a sitemap, a not-found page and Pagefind search. Pages are complete HTML; pages with diagrams, charts, maths or widgets load the jotx script, which takes over once it has drawn.
+- Blog home pages: dated posts appear on the home page as cards, newest first; folder pages list their posts as cards. `jotx site build notes.jot` publishes a one-file site; `--script` loads the jotx script from your own copy.
+- `jotx convert` writes a styled, self-contained page with working tabs.
+- Cards are clickable as a whole while reading, and links such as `#safety` on cards, buttons and menus open a tab.
+
+### Changed
+- Text, tables, diagrams and widgets share one column, so every block lines up on both edges. The page width setting controls all of them.
+
+### Fixed
+- **Saving no longer loses content.** Opening a note and saving it could empty table cells written as `text` values, turn header cells into ordinary cells, split column names containing a comma, drop table titles, turn checklist items into bullets (losing their ticks and priorities), drop `showsource`, and add default values to images, videos and cards. Every shipped note now opens and saves without change, and a test keeps it that way.
+- **Saving no longer writes your local folders into notes.** An attached image shown in VS Code was saved with the address VS Code uses to display it, which contains the full path on your machine; it is saved as `attachments/…` again.
+- **Blocks the editor cannot edit are kept as written.** Link cards, and blocks from a newer version of jotx, were replaced by an empty paragraph when a note was opened, and lost on save. Link cards now show as cards; other blocks show a note and are saved back unchanged.
+- A toggle without a `collapsed` setting opened expanded and was saved that way; toggles are closed unless the file says otherwise.
+- Videos without a `controls` setting opened with their controls hidden.
+- Links from one note to another (such as `[next](next.jot)`) did nothing; they now open the note in jotx, and on the web they open the published page.
+- Grid cards overflowed the screen on phones; they now shrink and stack.
+- Embedded documents could scroll sideways on pages that do not set `box-sizing`.
+
 ## [3.1.4] - 2026-10-27
 
 ### Fixed

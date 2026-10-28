@@ -1,0 +1,27 @@
+hdef jotx home
+
+  title Systems Notes
+  description Practical notes on requirements, safety and architecture.
+
+  def heading "Systems Notes"
+
+  def paragraph "Practical notes on requirements, safety and architecture, written in jotx and published with **jotx site**."
+
+  def gridcard
+    layout 2x2
+    def card guides
+      title Guides
+      icon 📘
+      link guides/requirements.jot
+    def card blog
+      title Blog
+      icon ✍️
+      link blog/index.jot
+
+  def callout "Every page here is a .jot file. See [the requirements guide](guides/requirements.jot) to start."
+
+  def image
+    src attachments/logo.svg
+    alt jotx logo
+    width 64
+    caption Images keep working at the page's new address.

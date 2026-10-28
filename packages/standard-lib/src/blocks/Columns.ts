@@ -31,3 +31,23 @@ export const ColumnBlock: BlockDefinition = {
         icon: 'columns'
     }
 };
+
+/** One tab of a tab bar. Consecutive tab blocks form a single bar; each holds regular blocks. */
+export const TabBlock: BlockDefinition = {
+    type: 'tab',
+    syntax: {
+        primary: 'title',
+        keyword: 'tab',
+        hasChildren: true
+    },
+    schema: {
+        properties: {
+            title: { type: 'string', required: true, description: 'Tab label' },
+            icon: { type: 'string', required: false, description: 'Emoji shown before the label' }
+        }
+    },
+    ui: {
+        label: 'Tab',
+        icon: 'panel-top'
+    }
+};

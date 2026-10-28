@@ -1,0 +1,23 @@
+hdef jotx safety
+
+  title Safety analysis
+  tags safety
+
+  def heading "Safety analysis"
+
+  def paragraph "A hazard analysis starts with the functions and how they can fail."
+
+  def mermaid flow "From function to safety goal"
+    src """flowchart LR
+  F[Function] --> M[Malfunction]
+  M --> H[Hazard]
+  H --> G[Safety goal]"""
+
+  def decision "Use HARA before FMEA"
+    status accepted
+    date 2026-10-01
+    context FMEA needs the safety goals as input.
+    decision Run the HARA first.
+    consequences One more review step.
+
+  def paragraph "Back to [requirements](requirements.jot)."

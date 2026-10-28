@@ -170,6 +170,19 @@ def columns
 
 def divider"""
 
+  def paragraph "Tabs: consecutive tab blocks form one tab bar, and each tab holds ordinary blocks. The quoted value is the label; icon is optional. Tabs inside a tab form their own, compact bar."
+
+  def paragraph "One-file site: when a document starts with tabs (optionally after one menu block), the tabs become its top navigation and each tab is a page. Start each page with a level-1 heading and a lead paragraph. Link to a page with #slug, the tab's label in lowercase with dashes (#safety, #review-checklist)."
+
+  def code
+    language jotx
+    text """"def tab "Overview"
+  icon 📋
+  def paragraph "Shown when the Overview tab is open."
+def tab "Tasks"
+  def checklist
+    items """[ ] Review"""""""
+
   def heading "Navigation, links and dates"
     level 2
 
@@ -393,6 +406,17 @@ version | 3.1.0 | blue"""""""
     text """"def shortcuts "Editor keys"
   items """Cmd+K | Insert link
 / | Block menu"""""""
+
+  def heading "menu"
+    level 3
+
+  def code
+    language jotx
+    text """"def menu "Docs"
+  items """Home | index.jot
+Guides | guides/index.jot
+  Getting started | guides/start.jot
+GitHub | https://github.com/example/docs"""""""
 
   def heading "Checklist before you answer"
     level 2

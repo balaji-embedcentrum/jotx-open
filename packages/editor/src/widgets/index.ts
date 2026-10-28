@@ -29,6 +29,7 @@ import { paletteWidget } from './kinds/Palette'
 import { badgesWidget } from './kinds/Badges'
 import { shortcutsWidget } from './kinds/Shortcuts'
 import { animationWidget } from './kinds/Animation'
+import { menuWidget } from './kinds/Menu'
 
 export const WIDGETS: WidgetSpec[] = [
   kanbanWidget,
@@ -50,7 +51,8 @@ export const WIDGETS: WidgetSpec[] = [
   paletteWidget,
   badgesWidget,
   shortcutsWidget,
-  animationWidget
+  animationWidget,
+  menuWidget
 ]
 
 export const WIDGET_CATEGORY_LABELS: Record<WidgetCategory, string> = {

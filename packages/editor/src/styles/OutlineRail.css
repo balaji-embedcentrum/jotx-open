@@ -86,3 +86,9 @@
 @media print {
   .jx-outline { display: none; }
 }
+
+/* Tabs in the outline: the page's sections, with their headings indented below */
+.jx-outline__item.is-tab {
+  color: var(--jx-fg);
+  font-weight: 600;
+}

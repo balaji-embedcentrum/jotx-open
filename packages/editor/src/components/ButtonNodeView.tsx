@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import '../styles/ButtonNodeView.css'
 import { getVSCodeAPI } from '../bridge/vscode-api'
+import { followLink } from '../utils/followLink'
 import { logger } from '../utils/logger'
 
 const vscode = getVSCodeAPI()
@@ -75,13 +76,8 @@ export function ButtonNodeView({ node, updateAttributes, selected }: ButtonNodeV
     // Navigate only when clicking the button directly (not in edit mode)
     const handleButtonClick = (e: React.MouseEvent) => {
         e.stopPropagation()
-        if (link) {
-            // Send to extension - it handles :previous specially
-            vscode.postMessage({
-                type: 'openFile',
-                path: link
-            })
-        }
+        // :previous goes back (the extension handles it); #name opens a tab in this note
+        followLink(link)
     }
 
     // Hide button if label is empty (per user request for buttonstrip behavior)

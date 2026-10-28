@@ -1,10 +1,9 @@
 /**
  * Page canvas - presents a note like a modern web page.
  *
- * Prose sits in a comfortable reading column; rich blocks (tables, diagrams,
- * media, widgets, layouts) break out to the full page width, the way
- * editorial sites and docs portals lay out content. Purely presentational:
- * no editing behavior depends on anything here.
+ * Every block shares one column, so text, tables, diagrams, media and widgets
+ * line up on both edges at the page width the reader chooses. Purely
+ * presentational: no editing behavior depends on anything here.
  */
 
 /* ---- Ambient page backdrop ---- */
@@ -12,57 +11,6 @@
   background:
     radial-gradient(1200px 420px at 50% -180px, color-mix(in srgb, var(--jx-accent) 9%, transparent), transparent 72%),
     var(--jx-bg);
-}
-
-/* ---- Reading column + breakout ---- */
-
-/* Registered so the em value resolves once, at the editor's font size,
-   instead of growing with every heading's font size. */
-@property --jx-measure {
-  syntax: '<length>';
-  inherits: true;
-  initial-value: 736px;
-}
-
-.jotx-editor .jotx-editor-content {
-  --jx-measure: 46em;
-}
-
-/* Doubled class: beats block rules such as `.jotx-editor-content div[data-type="callout"]` */
-.jotx-editor .jotx-editor-content.jotx-editor-content > * {
-  max-width: var(--jx-measure);
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.jotx-editor .jotx-editor-content.jotx-editor-content > :is(
-  .tableWrapper,
-  table,
-  .jx-columns,
-  .node-mermaid,
-  .node-chart,
-  .node-imageBlock,
-  .node-videoBlock,
-  .node-gridcard,
-  .node-buttonstrip,
-  .node-kanban,
-  .node-habit,
-  .node-progress,
-  .node-countdown,
-  .node-timer,
-  .node-matrix,
-  .node-proscons,
-  .node-decision,
-  .node-steps,
-  .node-timeline,
-  .node-terminal,
-  .node-api,
-  .node-filetree,
-  .node-diff,
-  .node-palette,
-  .node-shortcuts
-) {
-  max-width: none;
 }
 
 /* ---- Hero: the note's opening heading and lead paragraph ---- */

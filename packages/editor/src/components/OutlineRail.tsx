@@ -6,6 +6,8 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import type { Editor } from '@tiptap/react'
+import type { Node as PMNode } from '@tiptap/pm/model'
+import { TextSelection } from '@tiptap/pm/state'
 import '../styles/OutlineRail.css'
 import { useEditorDom } from '../utils/editorDom'
 
@@ -13,6 +15,7 @@ interface OutlineItem {
   pos: number
   level: number
   text: string
+  tab?: boolean
 }
 
 const RAIL_WIDTH = 220
@@ -20,15 +23,23 @@ const GAP = 28
 
 function collect(editor: Editor): OutlineItem[] {
   const out: OutlineItem[] = []
-  editor.state.doc.descendants((node, pos) => {
-    if (node.type.name === 'heading') {
-      const level = Number(node.attrs.level) || 1
-      const text = node.textContent.trim()
-      if (level <= 3 && text) out.push({ pos, level, text })
-      return false
-    }
-    return true
-  })
+  // Tabs are listed like headings, with the headings inside them one level deeper
+  const walk = (parent: PMNode, start: number, depth: number) => {
+    parent.forEach((node, offset) => {
+      const pos = start + offset
+      if (node.type.name === 'heading') {
+        const level = Number(node.attrs.level) || 1
+        const text = node.textContent.trim()
+        if (level <= 3 && text) out.push({ pos, level: level + depth, text })
+      } else if (node.type.name === 'tab') {
+        out.push({ pos, level: 2 + depth, text: [node.attrs.icon, node.attrs.title].filter(Boolean).join(' '), tab: true })
+        walk(node, pos + 1, depth + 1)
+      } else if (!node.isTextblock && node.childCount) {
+        walk(node, pos + 1, depth)
+      }
+    })
+  }
+  walk(editor.state.doc, 0, 0)
   return out
 }
 
@@ -78,7 +89,8 @@ export function OutlineRail({ editor }: { editor: Editor }) {
       let current = 0
       items.forEach((item, i) => {
         const dom = editor.view.nodeDOM(item.pos) as HTMLElement | null
-        if (dom && dom.getBoundingClientRect().top - viewTop < 140) current = i
+        // Headings in closed tabs have no layout and must not count as passed
+        if (dom && dom.offsetParent !== null && dom.getBoundingClientRect().top - viewTop < 140) current = i
       })
       setActive(current)
     }
@@ -96,9 +108,16 @@ export function OutlineRail({ editor }: { editor: Editor }) {
 
   const minLevel = Math.min(...items.map(i => i.level))
 
-  const jump = (pos: number) => {
-    const dom = editor.view.nodeDOM(pos) as HTMLElement | null
-    dom?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  const jump = (item: OutlineItem) => {
+    // Moving the cursor there first opens the tab that holds the heading
+    const { state } = editor
+    editor.view.dispatch(state.tr.setSelection(TextSelection.near(state.doc.resolve(item.pos + 1))))
+    requestAnimationFrame(() => {
+      const dom = editor.view.nodeDOM(item.pos) as HTMLElement | null
+      // A tab scrolls to its tab bar, a heading to itself
+      const target = item.tab ? (dom?.closest('.jx-tabs') as HTMLElement | null) : dom
+      target?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
   }
 
   return (
@@ -113,8 +132,8 @@ export function OutlineRail({ editor }: { editor: Editor }) {
           <button
             key={`${item.pos}-${i}`}
             type="button"
-            className={`jx-outline__item jx-outline__item--l${item.level - minLevel + 1}${i === active ? ' is-active' : ''}`}
-            onClick={() => jump(item.pos)}
+            className={`jx-outline__item jx-outline__item--l${Math.min(3, item.level - minLevel + 1)}${item.tab ? ' is-tab' : ''}${i === active ? ' is-active' : ''}`}
+            onClick={() => jump(item)}
             title={item.text}
           >
             {item.text}

@@ -1,4 +1,4 @@
-# jotx 3.1
+# jotx 3.2
 
 **Notes that live in your repo — and read like a beautifully designed web page.**
 
@@ -7,6 +7,15 @@ jotx is a block editor for VS Code. Write with `/` commands, drop in live widget
 ![jotx 3 — a note in dark mode](https://raw.githubusercontent.com/balaji-embedcentrum/jotx-open/main/packages/vscode-extension/media/screenshots/hero-dark.png)
 
 ---
+
+## What's new in 3.2
+
+- **Tabs.** Split a note into pages under one tab bar: an overview, tasks and decisions in one file. Type `/tabs`, click **+** to add a tab, double-click a label to rename it, and use **⋯** to move a tab, give it an icon or delete it. Search and the outline find what is inside hidden tabs.
+- **One-file sites.** A note that starts with tabs becomes a whole site in one file: the tabs are its top navigation, with dropdowns, menu links and search. Try `examples/mbse-site-example.jot` from **jotx: Open Help Files**.
+- **Menus.** A navigation bar that links notes and web pages, with dropdowns. Type `/menu`.
+- **Links between notes open in jotx.** A link such as `[next](next.jot)` opens that note in the jotx editor.
+- **One column.** Text, tables, diagrams and widgets now share the same left and right edges at the page width you choose.
+- **Publish a folder as a website** with `npx @jotx-labs/cli site build`: clean addresses, a menu, tag pages, RSS, a sitemap and search.
 
 ## What's new in 3.1
 
@@ -54,6 +63,8 @@ Type `/` or press **Insert** on the toolbar.
 | | Shortcuts | Keyboard cheat sheet with keycaps |
 | | Animated flow | A token travels step by step between labelled nodes |
 | **Layout** | Columns | 2 or 3 side-by-side columns of any blocks |
+| | Tabs | Pages of any blocks under one tab bar |
+| | Menu | Navigation bar with dropdowns, linking notes and web pages |
 
 Each widget keeps its data as readable text, so it diffs cleanly and AI assistants can write it:
 

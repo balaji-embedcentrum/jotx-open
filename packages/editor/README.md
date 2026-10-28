@@ -19,7 +19,7 @@ const adapter = new TiptapAdapter()
 
 function Note({ text }: { text: string }) {
   const ast = parse(text)
-  const doc = { type: 'doc', content: ast.document.blocks.map(b => adapter.blockToTiptap(b)) }
+  const doc = { type: 'doc', content: adapter.blocksToTiptap(ast.document.blocks) }
   return (
     <EditorModeProvider initialMode="edit">
       <JotxEditor

@@ -58,6 +58,7 @@ import { JotxLinkNode } from '../extensions/JotxLinkNode'
 import { ImageNode } from '../extensions/ImageNode'
 import { ImageBlockNode } from '../extensions/ImageBlockNode'
 import { getVSCodeAPI } from '../bridge/vscode-api'
+import { DocumentInfoContext } from '../contexts/DocumentInfoContext'
 import { FloatImageBlockNode } from '../extensions/FloatImageBlockNode'
 import { VideoBlockNode } from '../extensions/VideoBlockNode'
 import { CodeBlockNode } from '../extensions/CodeBlockNode'
@@ -77,6 +78,8 @@ import { ToggleNode } from '../extensions/ToggleNode'
 import { UrlInputDialog } from './UrlInputDialog'
 import { SectionNode } from '../extensions/SectionNode'
 import { ColumnsNode, ColumnNode, columnsInsertContent } from '../extensions/ColumnsNode'
+import { TabsNode, TabNode, tabsInsertContent } from '../extensions/TabsNode'
+import { PreservedBlockNode } from '../extensions/PreservedBlockNode'
 import { WidgetExtensions, WIDGET_NAMES, widgetInsertContent } from '../widgets'
 import { SlashMenu } from './SlashMenu'
 import { OutlineRail } from './OutlineRail'
@@ -105,6 +108,7 @@ export interface JotxEditorProps {
   onChange?: (tiptapJson: string) => void  // Sends Tiptap JSON string
   ribbonExpanded?: boolean  // Ribbon toolbar visibility
   outline?: boolean  // "On this page" rail beside wide pages (off for embeds inside other sites)
+  documentTitle?: string  // Shown in the top navigation when the note starts with tabs
 }
 
 function JotxEditorInner({
@@ -159,9 +163,9 @@ function JotxEditorInner({
 
   // Initialize Generic Adapter
   const genericAdapter = new GenericTiptapAdapter()
-  // Hand-written nodes (columns, widgets) replace the registry's generic placeholders
+  // Hand-written nodes (columns, tabs, widgets) replace the registry's generic placeholders
   const genericExtensions = genericAdapter.getExtensions()
-    .filter((ext: any) => !WIDGET_NAMES.has(ext.name) && ext.name !== 'columns' && ext.name !== 'column')
+    .filter((ext: any) => !WIDGET_NAMES.has(ext.name) && !['columns', 'column', 'tab'].includes(ext.name))
 
   const editor = useEditor({
     content: tiptapDoc || { type: 'doc', content: [] },
@@ -197,7 +201,19 @@ function JotxEditorInner({
       FloatImageBlockNode,
       VideoBlockNode,
       TaskList.configure({}),
-      TaskItem.configure({
+      // Tasks keep their priority from the file (critical, high, ...)
+      TaskItem.extend({
+        addAttributes() {
+          return {
+            ...this.parent?.(),
+            priority: {
+              default: null,
+              parseHTML: (el: HTMLElement) => el.getAttribute('data-priority'),
+              renderHTML: (attrs: Record<string, any>) => (attrs.priority ? { 'data-priority': attrs.priority } : {})
+            }
+          }
+        }
+      }).configure({
         nested: true
       }),
       // Custom table nodes so we can persist filter/sort state as data attributes
@@ -225,6 +241,9 @@ function JotxEditorInner({
       ButtonStripNode,
       ColumnsNode,
       ColumnNode,
+      TabsNode,
+      TabNode,
+      PreservedBlockNode,
       ...WidgetExtensions,
       Placeholder.configure({
         placeholder: ({ node }) => {
@@ -479,30 +498,42 @@ function JotxEditorInner({
     const currentMatch = pluginState.matches[pluginState.currentIndex]
     if (!currentMatch) return
 
-    try {
-      // Find the DOM node at the current match position
-      const view = editor.view
-      const domAtPos = view.domAtPos(currentMatch.from)
+    // Selecting the match opens the tab that holds it; scroll once that tab is showing
+    editor.view.dispatch(state.tr.setSelection(TextSelection.create(state.doc, currentMatch.from, currentMatch.to)))
+    requestAnimationFrame(() => {
+      try {
+        // Find the DOM node at the current match position
+        const view = editor.view
+        const domAtPos = view.domAtPos(currentMatch.from)
 
-      if (domAtPos.node) {
-        // Get the element (either the node itself or its parent if it's a text node)
-        const element = domAtPos.node.nodeType === Node.TEXT_NODE
-          ? domAtPos.node.parentElement
-          : domAtPos.node as HTMLElement
+        if (domAtPos.node) {
+          // Get the element (either the node itself or its parent if it's a text node)
+          const element = domAtPos.node.nodeType === Node.TEXT_NODE
+            ? domAtPos.node.parentElement
+            : domAtPos.node as HTMLElement
 
-        if (element && element instanceof HTMLElement) {
-          // Scroll the element into view with smooth behavior
-          element.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center',
-            inline: 'nearest'
-          })
+          if (element && element instanceof HTMLElement) {
+            // Scroll the element into view with smooth behavior
+            element.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center',
+              inline: 'nearest'
+            })
+          }
         }
+      } catch (error) {
+        logger.warn('Failed to scroll to match:', error)
       }
-    } catch (error) {
-      logger.warn('Failed to scroll to match:', error)
-    }
+    })
   }
+
+  // Blocks such as the tab navigation open search through the editor
+  useEffect(() => {
+    if (!editor) return
+    const open = () => setShowSearchBar(true)
+    ;(editor as any).on('jotx:openSearch', open)
+    return () => { (editor as any).off('jotx:openSearch', open) }
+  }, [editor])
 
   // Keyboard shortcuts for search
   useEffect(() => {
@@ -594,6 +625,9 @@ function JotxEditorInner({
       case 'columns2':
       case 'columns3':
         editor.chain().focus().insertContent(columnsInsertContent(command === 'columns2' ? 2 : 3)).run()
+        break
+      case 'tabs':
+        editor.chain().focus().insertContent(tabsInsertContent()).run()
         break
       case 'heading1':
         logger.log('📝 Setting Heading 1')
@@ -1119,7 +1153,7 @@ function JotxEditorInner({
     }
   }, [editor])
 
-  // Open links externally (VS Code) instead of navigating inside the webview
+  // Web links open in the browser; links to other notes open them in jotx
   useEffect(() => {
     const el = editorElement
     if (!editor || !el) return
@@ -1128,10 +1162,11 @@ function JotxEditorInner({
       const a = target?.closest?.('a[href]') as HTMLAnchorElement | null
       if (!a) return
       const href = a.getAttribute('href') || ''
-      if (!href) return
+      if (!href || href.startsWith('#')) return
       e.preventDefault()
       e.stopPropagation()
-      openExternal(href).catch(() => { })
+      if (/^[a-z][a-z0-9+.-]*:/i.test(href)) openExternal(href).catch(() => { })
+      else getVSCodeAPI().postMessage({ type: 'openFile', path: href })
     }
     el.addEventListener('click', onClick)
     return () => el.removeEventListener('click', onClick)
@@ -1306,14 +1341,13 @@ function JotxEditorInner({
 }
 
 export function JotxEditor(props: JotxEditorProps) {
-  // Share the host's mode (e.g. the header lock toggle) when one is provided
-  if (useHasEditorModeProvider()) {
-    return <JotxEditorInner {...props} />
-  }
-  return (
-    <EditorModeProvider>
+  const inner = (
+    <DocumentInfoContext.Provider value={{ title: props.documentTitle }}>
       <JotxEditorInner {...props} />
-    </EditorModeProvider>
+    </DocumentInfoContext.Provider>
   )
+  // Share the host's mode (e.g. the header lock toggle) when one is provided
+  if (useHasEditorModeProvider()) return inner
+  return <EditorModeProvider>{inner}</EditorModeProvider>
 }
 

@@ -49,7 +49,7 @@
     "def": {
       "patterns": [
         {
-          "match": "^\\s*(def)\\s+(codereference|buttonstrip|attachment|floatimage|properties|animation|checklist|countdown|paragraph|shortcuts|blockref|datetime|decision|filetree|gridcard|jotxlink|linkcard|listitem|progress|proscons|taskitem|terminal|timeline|callout|columns|divider|heading|mermaid|palette|section|attach|badges|button|column|header|kanban|matrix|rating|toggle|chart|habit|image|quote|steps|table|timer|video|card|cell|code|diff|item|link|list|math|prop|api|row|toc)\\b(?:\\s+([A-Za-z0-9_\\-#]+))?(?:\\s+(\".*\"))?\\s*$",
+          "match": "^\\s*(def)\\s+(codereference|buttonstrip|attachment|floatimage|properties|animation|checklist|countdown|paragraph|shortcuts|blockref|datetime|decision|filetree|gridcard|jotxlink|linkcard|listitem|progress|proscons|taskitem|terminal|timeline|callout|columns|divider|heading|mermaid|palette|section|attach|badges|button|column|header|kanban|matrix|rating|toggle|chart|habit|image|quote|steps|table|timer|video|card|cell|code|diff|item|link|list|math|menu|prop|api|row|tab|toc)\\b(?:\\s+([A-Za-z0-9_\\-#]+))?(?:\\s+(\".*\"))?\\s*$",
           "captures": {
             "1": {
               "name": "keyword.control.def.jotx"

@@ -1,0 +1,460 @@
+/**
+ * Tabs - a tab bar over consecutive tab blocks.
+ *
+ * Page tabs (directly on the page) sit under the title as an underlined bar that sticks to
+ * the top while you read. Tabs inside other blocks are a compact card. Only the open tab's
+ * panel is shown; the node view adds that rule (see TabsNodeView).
+ */
+
+.jx-tabs {
+  --jx-tabs-gap: 2px;
+  position: relative;
+  margin: 1.6em 0 1.2em;
+}
+
+/* Every panel is hidden until the node view shows the open one */
+.jx-tabs > .jx-tabs__panels > * > .jx-tab {
+  display: none;
+  animation: jx-tab-in 240ms var(--jx-ease) both;
+}
+
+.jx-tabs__panels > * > .jx-tab > :first-child { margin-top: 0; }
+.jx-tabs__panels > * > .jx-tab > :last-child { margin-bottom: 0; }
+
+@keyframes jx-tab-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---- Bar ---- */
+
+.jx-tabs__bar {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  font-family: var(--jx-font-sans);
+  user-select: none;
+}
+
+.jx-tabs__strip {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: var(--jx-tabs-gap);
+  overflow-x: auto;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+
+.jx-tabs__strip::-webkit-scrollbar { display: none; }
+
+/* Soft fades show that more tabs are hidden to the side */
+.jx-tabs__bar.can-scroll-start .jx-tabs__strip { mask-image: linear-gradient(to right, transparent, #000 32px); }
+.jx-tabs__bar.can-scroll-end .jx-tabs__strip { mask-image: linear-gradient(to left, transparent, #000 32px); }
+.jx-tabs__bar.can-scroll-start.can-scroll-end .jx-tabs__strip {
+  mask-image: linear-gradient(to right, transparent, #000 32px, #000 calc(100% - 32px), transparent);
+}
+
+.jx-tabs__tab {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 10px 14px 12px;
+  border: 0;
+  border-radius: var(--jx-r-md) var(--jx-r-md) 0 0;
+  background: transparent;
+  color: var(--jx-fg-muted);
+  font: 500 0.95em/1.2 var(--jx-font-sans);
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--jx-dur) var(--jx-ease), background var(--jx-dur) var(--jx-ease);
+}
+
+.jx-tabs__tab:hover { color: var(--jx-fg); background: var(--jx-hover); }
+
+.jx-tabs__tab.is-active { color: var(--jx-fg); font-weight: 620; }
+
+.jx-tabs__tab:focus-visible {
+  outline: none;
+  background: var(--jx-hover);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--jx-accent) 60%, transparent);
+}
+
+.jx-tabs__icon {
+  font-size: 1.05em;
+  line-height: 1;
+  filter: saturate(0.85);
+  transition: transform var(--jx-dur) var(--jx-ease);
+}
+
+.jx-tabs__tab.is-active .jx-tabs__icon { filter: none; transform: scale(1.08); }
+
+/* The underline slides between tabs */
+.jx-tabs__indicator {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2.5px;
+  border-radius: var(--jx-r-pill);
+  background: var(--jx-accent);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--jx-accent) 55%, transparent);
+  transition: transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1), width 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+}
+
+.jx-tabs__rename {
+  min-width: 4ch;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+}
+
+.jx-tabs__tab.is-renaming {
+  background: var(--jx-hover);
+  box-shadow: inset 0 0 0 1.5px var(--jx-accent);
+  cursor: text;
+}
+
+/* ---- Editing actions ---- */
+
+.jx-tabs__actions {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 2px;
+  padding-bottom: 6px;
+  opacity: 0.55;
+  transition: opacity var(--jx-dur) var(--jx-ease);
+}
+
+.jx-tabs:hover .jx-tabs__actions,
+.jx-tabs:focus-within .jx-tabs__actions { opacity: 1; }
+
+.jx-tabs__action {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--jx-r-sm);
+  background: transparent;
+  color: var(--jx-fg-muted);
+  cursor: pointer;
+}
+
+.jx-tabs__action:hover { background: var(--jx-hover); color: var(--jx-fg); }
+.jx-tabs__action:focus-visible { outline: none; box-shadow: var(--jx-ring); }
+
+.jx-tabs__menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 30;
+  display: grid;
+  gap: 1px;
+  width: 236px;
+  padding: 6px;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-lg);
+  background: var(--jx-elevated);
+  box-shadow: var(--jx-shadow-lg);
+  animation: jx-tab-in 160ms var(--jx-ease) both;
+}
+
+.jx-tabs__menu-title {
+  overflow: hidden;
+  padding: 6px 8px 8px;
+  color: var(--jx-fg);
+  font: 620 var(--jx-text-sm)/1.2 var(--jx-font-sans);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.jx-tabs__menu > button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 8px;
+  border: 0;
+  border-radius: var(--jx-r-sm);
+  background: transparent;
+  color: var(--jx-fg);
+  font: 500 var(--jx-text-sm)/1.2 var(--jx-font-sans);
+  text-align: left;
+  cursor: pointer;
+}
+
+.jx-tabs__menu > button:hover:not(:disabled) { background: var(--jx-hover); }
+.jx-tabs__menu > button:disabled { color: var(--jx-fg-subtle); cursor: default; }
+.jx-tabs__menu > button.is-danger { margin-top: 4px; color: var(--jx-danger); }
+
+.jx-tabs__menu-label {
+  padding: 8px 8px 4px;
+  color: var(--jx-fg-subtle);
+  font: 600 var(--jx-text-xs)/1 var(--jx-font-sans);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.jx-tabs__icons {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  padding: 0 4px 4px;
+}
+
+.jx-tabs__icons > button {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  border-radius: var(--jx-r-sm);
+  background: transparent;
+  color: var(--jx-fg-muted);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.jx-tabs__icons > button:hover { background: var(--jx-hover); }
+.jx-tabs__icons > button.is-on { background: var(--jx-accent-soft); box-shadow: inset 0 0 0 1.5px var(--jx-accent); }
+
+/* ---- Page tabs: under the title, sticking to the top while you read ---- */
+
+.jx-tabs--page > .jx-tabs__bar {
+  position: sticky;
+  top: var(--jx-tabs-sticky-top, 0px);
+  z-index: 6;
+  margin-bottom: 1.6em;
+  border-bottom: 1px solid var(--jx-line);
+  background: color-mix(in srgb, var(--jx-bg) 84%, transparent);
+  backdrop-filter: blur(12px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+}
+
+.jx-tabs--page > .jx-tabs__bar .jx-tabs__indicator { bottom: -1px; }
+
+/* An open menu must float above later tab bars, which stick at the same level */
+.jx-tabs__bar.is-menu-open { z-index: 40; }
+
+/* ---- Tabs inside a block: a compact card ---- */
+
+.jx-tabs--inline {
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-lg);
+  background: var(--jx-bg);
+}
+
+.jx-tabs--inline > .jx-tabs__bar {
+  padding: 4px 6px 0;
+  border-radius: calc(var(--jx-r-lg) - 1px) calc(var(--jx-r-lg) - 1px) 0 0;
+  border-bottom: 1px solid var(--jx-line);
+  background: var(--jx-surface);
+}
+
+.jx-tabs--inline .jx-tabs__tab { padding: 8px 12px 10px; font-size: 0.9em; }
+.jx-tabs--inline > .jx-tabs__bar .jx-tabs__indicator { bottom: -1px; }
+.jx-tabs--inline > .jx-tabs__panels { padding: 14px 18px 16px; }
+.jx-tabs--inline .jx-tabs__actions { padding-bottom: 4px; }
+
+/* ---- Phones ---- */
+
+@media (max-width: 600px) {
+  .jx-tabs__tab { padding: 9px 11px 11px; font-size: 0.92em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jx-tabs > .jx-tabs__panels > * > .jx-tab,
+  .jx-tabs__menu { animation: none; }
+  .jx-tabs__indicator { transition: none; }
+}
+
+/* ---- Print: every tab, one after another, each under its label ---- */
+
+@media print {
+  .jx-tabs__bar { display: none; }
+  .jx-tabs > .jx-tabs__panels > * > .jx-tab { display: block !important; animation: none; }
+  .jx-tabs > .jx-tabs__panels > * > .jx-tab::before {
+    content: attr(data-title);
+    display: block;
+    margin: 1.2em 0 0.5em;
+    font-size: 1.25em;
+    font-weight: 700;
+  }
+}
+
+/* ---- Top navigation: a note that starts with tabs is a one-file site ---- */
+
+.jx-tabs--nav { container-type: inline-size; margin-top: 0; }
+
+.jx-tabs--nav > .jx-tabs__bar {
+  /* Wider than the text column, like a site header, but never wider than the window */
+  --jx-nav-width: min(calc(100vw - 40px), calc(100% + 440px));
+  width: var(--jx-nav-width);
+  margin-left: calc((100% - var(--jx-nav-width)) / 2);
+  align-items: stretch;
+  gap: 4px;
+  min-height: 56px;
+  margin-bottom: 2.6em;
+}
+
+.jx-tabs--nav > .jx-tabs__bar > .jx-tabs__strip { align-items: stretch; }
+.jx-tabs--nav > .jx-tabs__bar .jx-tabs__tab { padding: 0 11px; border-radius: var(--jx-r-md) var(--jx-r-md) 0 0; }
+
+.jx-tabs__brand {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  margin: 12px 10px 12px 0;
+  padding-right: 14px;
+  border-right: 1px solid var(--jx-line);
+  color: var(--jx-fg);
+  font: 720 1.02em/1.2 var(--jx-font-sans);
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+}
+
+.jx-tabs__chevron {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  margin-right: -6px;
+  border-radius: var(--jx-r-xs);
+  opacity: 0.6;
+}
+
+.jx-tabs__chevron:hover { background: var(--jx-hover); opacity: 1; }
+
+.jx-tabs__dropdown {
+  position: absolute;
+  top: 100%;
+  z-index: 40;
+  display: grid;
+  gap: 1px;
+  min-width: 220px;
+  margin-top: 6px;
+  padding: 6px;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-lg);
+  background: var(--jx-elevated);
+  box-shadow: var(--jx-shadow-lg);
+  animation: jx-tab-in 160ms var(--jx-ease) both;
+}
+
+.jx-tabs__dropdown::before { content: ""; position: absolute; inset: -8px 0 auto; height: 8px; }
+
+.jx-tabs__dropdown > button {
+  padding: 8px 10px;
+  border: 0;
+  border-radius: var(--jx-r-sm);
+  background: transparent;
+  color: var(--jx-fg);
+  font: 500 var(--jx-text-md)/1.25 var(--jx-font-sans);
+  text-align: left;
+  cursor: pointer;
+}
+
+.jx-tabs__dropdown > button:hover { background: var(--jx-hover); }
+.jx-tabs__dropdown > button.is-overview { margin-bottom: 4px; padding-bottom: 10px; border-bottom: 1px solid var(--jx-line); border-radius: var(--jx-r-sm) var(--jx-r-sm) 0 0; font-weight: 620; }
+
+.jx-tabs__extras {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 2px;
+  margin-left: auto;
+  padding-left: 8px;
+}
+
+.jx-tabs__extras a.jx-tabs__extra {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 10px;
+  border-radius: var(--jx-r-md);
+  color: var(--jx-fg-muted);
+  font: 500 0.93em/1.2 var(--jx-font-sans);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.jx-tabs__extras a.jx-tabs__extra:hover { background: var(--jx-hover); color: var(--jx-fg); }
+.jx-tabs__extras a.jx-tabs__extra svg { opacity: 0.5; }
+
+.jx-tabs__search {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin-left: 4px;
+  padding: 0;
+  border: 1px solid var(--jx-line);
+  border-radius: var(--jx-r-md);
+  background: var(--jx-surface);
+  color: var(--jx-fg-muted);
+  cursor: pointer;
+}
+
+.jx-tabs__search:hover { border-color: var(--jx-line-strong); color: var(--jx-fg); }
+.jx-tabs__search:focus-visible { outline: none; box-shadow: var(--jx-ring); }
+
+.jx-tabs__navtoggle {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--jx-r-md);
+  background: var(--jx-hover);
+  color: var(--jx-fg);
+  font: 600 0.92em/1 var(--jx-font-sans);
+  cursor: pointer;
+}
+
+/* Each page opens with its own hero, like the first heading of a note */
+.jx-tabs--nav > .jx-tabs__panels > * > .jx-tab > h1:first-child {
+  margin: 0.2em 0 0.3em;
+  font-size: 2.65em;
+  font-weight: 760;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.jx-tabs--nav > .jx-tabs__panels > * > .jx-tab > h1:first-child + p {
+  margin-bottom: 1.6em;
+  color: var(--jx-fg-muted);
+  font-size: 1.16em;
+  line-height: 1.6;
+}
+
+/* The menu block that feeds the navigation's links shows only while editing */
+.jotx-editor-content[contenteditable="false"] > .node-menu:has(+ .node-tabs .jx-tabs--nav) { display: none; }
+
+/* Pages that only just fit: no icons, tighter spacing */
+.jx-tabs--nav.is-dense > .jx-tabs__bar .jx-tabs__icon { display: none; }
+.jx-tabs--nav.is-dense > .jx-tabs__bar .jx-tabs__tab { padding: 0 9px; }
+
+/* When the pages do not fit beside the title and links (measured by the node view): a Menu button */
+.jx-tabs--nav.is-compact > .jx-tabs__bar { flex-wrap: wrap; }
+.jx-tabs--nav.is-compact > .jx-tabs__bar > .jx-tabs__navtoggle { display: inline-flex; }
+.jx-tabs--nav.is-compact > .jx-tabs__bar > .jx-tabs__strip { display: none; flex-basis: 100%; order: 10; flex-direction: column; padding: 4px 0 8px; overflow: visible; mask-image: none !important; }
+.jx-tabs--nav.is-compact.is-nav-open > .jx-tabs__bar > .jx-tabs__strip { display: flex; }
+.jx-tabs--nav.is-compact > .jx-tabs__bar .jx-tabs__tab { padding: 10px 12px; border-radius: var(--jx-r-md); }
+.jx-tabs--nav.is-compact > .jx-tabs__bar .jx-tabs__tab.is-active { background: var(--jx-accent-soft); }
+.jx-tabs--nav.is-compact > .jx-tabs__bar .jx-tabs__indicator { display: none; }
+.jx-tabs--nav.is-compact > .jx-tabs__bar .jx-tabs__extra { display: none; }
+.jx-tabs--nav.is-compact > .jx-tabs__bar > .jx-tabs__brand { border-right: 0; }
+.jx-tabs--nav.is-compact a.jx-tabs__listlink { margin-top: 4px; border-top: 1px solid var(--jx-line); border-radius: 0; color: var(--jx-fg-muted); text-decoration: none; }
+.jx-tabs--nav.is-compact .jx-tabs__listlink + .jx-tabs__listlink { margin-top: 0; border-top: 0; }

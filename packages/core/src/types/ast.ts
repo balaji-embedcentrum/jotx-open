@@ -462,6 +462,11 @@ export const BLOCK_PROPERTY_SCHEMAS: Record<Exclude<BlockType, WidgetBlockType>,
   column: {
     width: { type: 'string', required: false, description: 'Relative column width (e.g. 1, 2)' }
     // nested blocks handled as children
+  },
+  tab: {
+    title: { type: 'string', required: true, description: 'Tab label' },
+    icon: { type: 'string', required: false, description: 'Emoji shown before the label' }
+    // nested blocks handled as children
   }
 }
 

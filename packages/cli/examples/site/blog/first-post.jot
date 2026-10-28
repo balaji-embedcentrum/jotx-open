@@ -1,0 +1,10 @@
+hdef jotx first_post
+
+  title Why we write notes in jotx
+  date 2026-10-20
+  tags tooling
+  description Plain text, real blocks, and a site from the same files.
+
+  def heading "Why we write notes in jotx"
+
+  def paragraph "Plain text files in the repo, readable diffs, and now a website from the same files."

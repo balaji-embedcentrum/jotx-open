@@ -231,9 +231,9 @@ describe('TiptapAdapter - jotx 2.0', () => {
 
       expect(result.type).toBe('checklist')
       expect(result.children).toHaveLength(2)
-      expect(result.children?.[0].properties?.checked).toBe('true')
+      expect(result.children?.[0].properties?.checked).toBe(true)
       expect(result.children?.[0].properties?.text).toBe('Task 1')
-      expect(result.children?.[1].properties?.checked).toBe('false')
+      expect(result.children?.[1].properties?.checked).toBe(false)
       expect(result.children?.[1].properties?.text).toBe('Task 2')
     })
   })

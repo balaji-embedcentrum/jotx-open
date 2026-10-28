@@ -107,6 +107,10 @@ const WIDGETS: Record<string, WidgetSpec> = {
     shortcuts: {
         label: 'Shortcuts', icon: 'keyboard', description: 'Keyboard shortcut cheat sheet',
         props: { title: 'Title', items: 'Lines: "Cmd+K | Description"' }
+    },
+    menu: {
+        label: 'Menu', icon: 'menu', description: 'Navigation bar linking notes and web pages, with dropdowns',
+        props: { title: 'Optional title shown at the left', items: 'Lines: "Label | link"; indent two spaces for a dropdown entry' }
     }
 };
 

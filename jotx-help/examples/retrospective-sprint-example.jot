@@ -29,9 +29,7 @@ Sprint Goal Met | Yes - 85%"""
       def header
         text Sprint
       def header
-        text Sprint 26 (Jan 6-19
-      def header
-        text 2025)
+        text Sprint 26 (Jan 6-19, 2025)
     def row
       def cell
         def paragraph "Participants"

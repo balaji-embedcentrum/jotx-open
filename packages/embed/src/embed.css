@@ -10,6 +10,14 @@ jotx-doc {
   display: block;
 }
 
+/* Padding stays inside each box whatever the host page sets, so documents never overflow a phone screen */
+:where(.jotx-embed),
+:where(.jotx-embed) *,
+:where(.jotx-embed) *::before,
+:where(.jotx-embed) *::after {
+  box-sizing: border-box;
+}
+
 :where(.jotx-embed) {
   --jotx-background: #ffffff;
   --jotx-backgroundSecondary: #f5f6f7;
@@ -25,7 +33,7 @@ jotx-doc {
   --jotx-warning: #d97706;
   --jotx-error: #dc2626;
   --jotx-info: #2563eb;
-  --jotx-editor-maxWidth: 1080px;
+  --jotx-editor-maxWidth: 880px;
   color-scheme: light;
   color: var(--jotx-text);
   background: var(--jotx-background);

@@ -274,6 +274,7 @@ export function App() {
                   tiptapDoc={tiptapDoc}
                   onChange={handleContentChange}
                   ribbonExpanded={ribbonExpanded}
+                  documentTitle={document?.metadata?.title}
                 />
               </EditorNodeManagerBridge>
             </div>

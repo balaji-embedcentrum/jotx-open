@@ -2,6 +2,7 @@ import { NodeViewWrapper } from '@tiptap/react'
 import { useState, useEffect } from 'react'
 import '../styles/GridCardNodeView.css'
 import { getVSCodeAPI } from '../bridge/vscode-api'
+import { followLink } from '../utils/followLink'
 
 const vscode = getVSCodeAPI()
 
@@ -18,9 +19,10 @@ interface CardNodeViewProps {
     }
     updateAttributes: (attrs: Record<string, any>) => void
     selected: boolean
+    editor?: { isEditable: boolean }
 }
 
-export function CardNodeView({ node, updateAttributes, selected }: CardNodeViewProps) {
+export function CardNodeView({ node, updateAttributes, selected, editor }: CardNodeViewProps) {
     const { title, value, icon, color, link } = node.attrs
     const [isEditing, setIsEditing] = useState(false)
     const [jotFiles, setJotFiles] = useState<string[]>([])
@@ -46,12 +48,7 @@ export function CardNodeView({ node, updateAttributes, selected }: CardNodeViewP
     // Navigate only when clicking the link indicator
     const handleLinkClick = (e: React.MouseEvent) => {
         e.stopPropagation()
-        if (link) {
-            vscode.postMessage({
-                type: 'openFile',
-                path: link
-            })
-        }
+        followLink(link)
     }
 
     const handleDoubleClick = (e: React.MouseEvent) => {
@@ -64,6 +61,9 @@ export function CardNodeView({ node, updateAttributes, selected }: CardNodeViewP
             className={`card card-color-${color || 'teal'} ${selected ? 'card-selected' : ''}`}
             data-has-link={!!link}
             onDoubleClick={handleDoubleClick}
+            // While reading, the whole card is the link, like a card on a website
+            onClick={!editor?.isEditable && link && !isEditing ? handleLinkClick : undefined}
+            style={!editor?.isEditable && link ? { cursor: 'pointer' } : undefined}
         >
             {isEditing ? (
                 <div className="card-edit-form" onClick={(e) => e.stopPropagation()}>
@@ -135,7 +135,7 @@ export function CardNodeView({ node, updateAttributes, selected }: CardNodeViewP
                             onClick={handleLinkClick}
                             title="Click to navigate"
                         >
-                            → {link}
+                            {link.startsWith('#') ? 'Open →' : `→ ${link}`}
                         </div>
                     )}
                 </>

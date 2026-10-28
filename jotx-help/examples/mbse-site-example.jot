@@ -1,0 +1,150 @@
+hdef jotx mbse_site
+
+  title MBSE Notes
+  type page
+  description A one-file site about model-based systems engineering: requirements, architecture, safety and testing.
+
+  def menu
+    items """Blog | https://mbse.dev
+GitHub | https://github.com/balaji-embedcentrum/jotx-open"""
+
+  def tab "Home"
+    icon 🏠
+    def heading "Model-based systems engineering, in practice"
+    def paragraph "Short, practical notes on writing requirements, shaping architecture, analysing safety and proving it all with tests. This whole site is one .jot file: each tab above is a page."
+    def gridcard
+      layout 3x2
+      def card 5i1h7gks
+        title Requirements
+        icon 📋
+        link "#requirements"
+      def card zfcradct
+        title Architecture
+        icon 🧭
+        link "#architecture"
+      def card gut52mf2
+        title Safety
+        icon 🛡️
+        link "#safety"
+    def callout "New here? Start with [Requirements](#requirements): every other activity traces back to them."
+    def heading "Latest notes"
+      level 2
+    def timeline
+      events """2026-10-20 | EARS patterns for automotive requirements | done | Five sentence templates that remove ambiguity
+2026-10-24 | HARA in an afternoon | done | Severity, exposure and controllability, worked through
+2026-10-27 | Tracing tests to safety goals | done | From ASIL to test case in one table
+2026-11-10 | Variants without the spreadsheet | planned | Feature models for product lines"""
+
+  def tab "Requirements"
+    icon 📋
+    def heading "Requirements"
+    def paragraph "A requirement states one need, in one sentence, that a test can prove. The pages below cover how to write them, examples, and a review checklist."
+    def tab "Patterns"
+      def paragraph "EARS (Easy Approach to Requirements Syntax) gives five templates. Pick the one that matches when the requirement applies."
+      def table ears "EARS patterns"
+        columns Pattern, Template, Example
+        rows """Ubiquitous | The <system> shall <response> | The pump shall report its speed.
+Event-driven | When <trigger>, the <system> shall <response> | When the door opens, the oven shall switch off its heater.
+State-driven | While <state>, the <system> shall <response> | While charging, the vehicle shall prevent driving away.
+Unwanted behaviour | If <condition>, then the <system> shall <response> | If the sensor fails, then the controller shall enter safe state.
+Optional feature | Where <feature>, the <system> shall <response> | Where heated seats are fitted, the seat shall reach 30 °C in 5 minutes."""
+    def tab "Examples"
+      def table examples "Requirements for a brake-by-wire pedal"
+        columns ID, Requirement, Verified by
+        rows """REQ-101 | When the driver presses the pedal, the controller shall request braking within 20 ms. | Timing test on HIL rig
+REQ-102 | If both pedal sensors disagree by more than 5 %, then the controller shall use the lower value and set a fault. | Fault injection test
+REQ-103 | While the vehicle is stationary, the controller shall hold the brake until the driver accelerates. | Hill-hold test"""
+    def tab "Review checklist"
+      def checklist
+        items """[x] One need per requirement
+[x] Uses an EARS pattern
+[ ] Has a unique ID
+[ ] Has a test or analysis that verifies it
+[ ] Traces to a parent need or safety goal"""
+
+  def tab "Architecture"
+    icon 🧭
+    def heading "Architecture"
+    def paragraph "Architecture splits the system into parts with clear interfaces, so each part can be built and verified on its own."
+    def mermaid context "System context: brake-by-wire"
+      src """flowchart LR
+  Pedal[Pedal sensors] --> ECU[Brake controller]
+  ECU --> Act[Brake actuators]
+  ECU <--> CAN[(Vehicle CAN)]
+  CAN <--> ESC[Stability control]"""
+    def decision "Two independent pedal sensors"
+      status accepted
+      date 2026-10-12
+      context A single sensor failure must not cause unintended braking or loss of braking (ASIL D).
+      decision Fit two sensors with different measuring principles and compare them in the controller.
+      consequences More wiring and a plausibility check, but no single point of failure in the pedal path.
+    def table interfaces "Interfaces"
+      columns From, To, Signal, Cycle
+      rows """Pedal sensors | Brake controller | Pedal position (2 channels) | 5 ms
+Brake controller | Brake actuators | Clamp force request | 5 ms
+Brake controller | Vehicle CAN | Brake status, faults | 20 ms"""
+
+  def tab "Safety"
+    icon 🛡️
+    def heading "Functional safety"
+    def paragraph "ISO 26262 starts with a hazard analysis and risk assessment (HARA), sets safety goals with an ASIL, and then checks failures bottom-up with an FMEA."
+    def tab "HARA"
+      def paragraph "Each hazardous event is rated for severity (S0–S3), exposure (E0–E4) and controllability (C0–C3). Together they give the ASIL, from QM to D."
+      def table hara "Hazard analysis"
+        columns Hazardous event, S, E, C, ASIL
+        rows """Unintended full braking on the motorway | S3 | E4 | C3 | D
+No braking when the driver presses the pedal | S3 | E4 | C3 | D
+Brake light does not switch on | S2 | E4 | C2 | B"""
+    def tab "Safety goals"
+      def list
+        listtype numbered
+        items """Avoid unintended braking (ASIL D)
+Avoid loss of braking on driver demand (ASIL D)
+Signal braking to following traffic (ASIL B)"""
+    def tab "FMEA"
+      def table fmea "Failure modes of the pedal path"
+        columns Part, Failure mode, Effect, Detection
+        rows """Pedal sensor A | Stuck at full travel | Unintended braking request | Plausibility check against sensor B
+Pedal sensor B | Signal lost | Single-channel operation | Missing-signal timeout
+Controller | Software hang | No brake request | Watchdog resets to safe state"""
+
+  def tab "Testing"
+    icon 🧪
+    def heading "Verification and validation"
+    def paragraph "The V-model pairs every design level with a test level, so each requirement is proven where it was written."
+    def steps "The V-model, right side"
+      steps """[x] Unit tests | Each software unit against its detailed design
+[x] Integration tests | Units together against the architecture
+[ ] System tests | The whole system against the requirements
+[ ] Acceptance | The vehicle against the stakeholder needs"""
+    def progress "Coverage"
+      items """Requirements with a test | 46 | 52
+Statement coverage | 91
+MC/DC on ASIL D units | 78"""
+
+  def tab "Standards"
+    icon 📚
+    def heading "Standards at a glance"
+    def table standards "Where each standard applies"
+      columns Standard, Domain, What it covers
+      rows """ISO 26262 | Road vehicles | Functional safety across the lifecycle, rated by ASIL A–D
+ISO/SAE 21434 | Road vehicles | Cybersecurity engineering and threat analysis (TARA)
+Automotive SPICE | Road vehicles | Process capability of suppliers, levels 0–5
+DO-178C | Aircraft | Software assurance, levels A–E
+ISO 13485 | Medical devices | Quality management for design and manufacture"""
+    def badges
+      items """ISO 26262 | 2nd edition | teal
+ISO/SAE 21434 | 2021 | violet
+ASPICE | 4.0 | blue"""
+
+  def tab "About"
+    icon 👋
+    def heading "About this site"
+    def paragraph "MBSE Notes is an example of a one-file site written in jotx. Open it in VS Code to edit any page, or publish it with jotx site build."
+    def button awfj00ue
+      label Back to the home page
+      link "#home"
+      style primary
+      align left
+
+  def paragraph

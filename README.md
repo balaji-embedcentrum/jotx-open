@@ -1,4 +1,4 @@
-# jotx 3.1
+# jotx 3.2
 
 **Notes that live in your repo — and read like a beautifully designed web page.**
 
@@ -7,6 +7,14 @@ jotx is a block editor for VS Code. Write with `/` commands, drop in live widget
 ![jotx 3 — a note in dark mode](packages/vscode-extension/media/screenshots/hero-dark.png)
 
 ---
+
+## What's new in 3.2
+
+- **Tabs.** Split a note into pages under one tab bar: an overview, tasks and decisions in one file. Each `def tab` holds ordinary blocks; tabs inside a tab become a compact card. Links such as `#tasks` open a tab, and search and the outline find what is inside hidden tabs.
+- **One-file sites.** A note that starts with tabs becomes a whole site in one file: the tabs are its top navigation, with dropdowns, menu links and search. Try `examples/mbse-site-example.jot` from **jotx: Open Help Files**.
+- **Menus.** A navigation bar that links notes and web pages, with dropdowns, and a single Menu button on narrow screens.
+- **Publish a folder as a website.** `jotx site build` turns `.jot` files into a site with clean addresses, a menu, topic and tag pages, RSS, a sitemap and search. Pages are finished HTML, so search engines see everything; pages with diagrams or widgets come alive with the jotx script. See [packages/cli](packages/cli/README.md#publishing-a-site).
+- **One column.** Text, tables, diagrams and widgets now share the same left and right edges at the page width you choose.
 
 ## What's new in 3.1
 
@@ -54,6 +62,8 @@ Type `/` or press **Insert** on the toolbar.
 | | Shortcuts | Keyboard cheat sheet with keycaps |
 | | Animated flow | A token travels step by step between labelled nodes |
 | **Layout** | Columns | 2 or 3 side-by-side columns of any blocks |
+| | Tabs | Pages of any blocks under one tab bar |
+| | Menu | Navigation bar with dropdowns, linking notes and web pages |
 
 Each widget keeps its data as readable text, so it diffs cleanly and AI assistants can write it:
 
@@ -109,12 +119,19 @@ def checklist
 One script tag turns any `.jot` file into a page, on GitHub Pages, a blog or any static site. [The jotx website](https://balaji-embedcentrum.github.io/jotx-open/) is itself a `.jot` file rendered this way, and its [viewer](https://balaji-embedcentrum.github.io/jotx-open/view.html) opens any `.jot` file you give it.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@jotx-labs/embed@3.1.4/dist/jotx.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@jotx-labs/embed@3.2.0/dist/jotx.min.js"></script>
 
 <jotx-doc src="notes/launch-plan.jot"></jotx-doc>
 ```
 
 Documents render read-only and follow the reader's light or dark setting. Mermaid, Chart.js and KaTeX load only when a document uses them. See [packages/embed](packages/embed/README.md) for attributes, events and styling.
+
+To publish a whole folder of notes as a website, with a menu, search and a page for every file, use the CLI:
+
+```bash
+npx @jotx-labs/cli site serve notes/   # preview with live reload
+npx @jotx-labs/cli site build notes/   # static files in notes/_site
+```
 
 ---
 

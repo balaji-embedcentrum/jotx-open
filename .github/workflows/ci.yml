@@ -26,7 +26,12 @@ jobs:
         run: npm test
       - name: Validate every shipped .jot file
         run: |
-          find jotx-help site docs -name '*.jot' -print0 |
+          find jotx-help site docs packages/cli/examples -name '*.jot' -print0 |
             xargs -0 -n1 node packages/cli/dist/cli.js validate > /dev/null
       - name: Shipped .jot files use compact syntax
-        run: node packages/cli/dist/cli.js migrate jotx-help site --to compact --check
+        run: node packages/cli/dist/cli.js migrate jotx-help site packages/cli/examples --to compact --check
+      - name: Build the example site
+        run: |
+          node packages/cli/dist/cli.js site build packages/cli/examples/site --out "$RUNNER_TEMP/example-site"
+          test -f "$RUNNER_TEMP/example-site/guides/requirements/index.html"
+          test -f "$RUNNER_TEMP/example-site/pagefind/pagefind-ui.js"

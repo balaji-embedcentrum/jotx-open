@@ -1,0 +1,13 @@
+hdef jotx second_post
+
+  title Publishing with jotx site
+  date 2026-10-27
+  tags tooling, publishing
+
+  def heading "Publishing with jotx site"
+
+  def paragraph "One command builds every page, the feed, the sitemap and search."
+
+  def code
+    language bash
+    text jotx site build

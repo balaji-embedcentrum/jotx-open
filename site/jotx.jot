@@ -1,0 +1,613 @@
+hdef jotx jotx_website
+
+  title jotx
+  type page
+  description jotx is a block editor for plain-text notes in VS Code, and a one-line script that shows .jot files on any website.
+
+  def menu
+    items """Viewer | view.html
+GitHub | https://github.com/balaji-embedcentrum/jotx-open"""
+
+  def tab "Home"
+    icon 🏠
+    def heading "Notes that live in your repo, and read like a web page"
+    def paragraph "jotx is a block editor for VS Code. Write with `/` commands, drop in live widgets such as Kanban boards, timelines and decision records, and keep everything as clean, diff-friendly text files next to your code. The same files become web pages with one script tag."
+    def badges
+      items """version | 3.2.0 | teal
+license | Apache-2.0 | slate
+VS Code | extension | blue
+web | one script tag | violet"""
+    def gridcard
+      layout 3x2
+      def card jnwb1k9x
+        title Every block
+        icon 🧱
+        link "#blocks"
+      def card wrq95583
+        title 21 live widgets
+        icon 🧩
+        link "#widgets"
+      def card utj3nrkg
+        title On the web
+        icon 🌐
+        link "#web"
+    def callout "This website is a single .jot file. Each tab above is a page, and every example on it is a live jotx block. Open it in VS Code with jotx installed to edit any page."
+      variant success
+    def heading "Start in a minute"
+      level 2
+    def steps "Getting started"
+      steps """[ ] Install jotx | From the VS Code Marketplace, or a .vsix from the GitHub releases
+[ ] Create a note | Command Palette → jotx: Create New Note, or make any .jot file
+[ ] Type / | Pick a block or widget from the menu; it saves as plain text"""
+    def heading "Why plain text"
+      level 2
+    def columns
+      def column
+        def heading "In your repo"
+          level 3
+        def paragraph "Notes sit next to the code they describe. They are reviewed in pull requests, branch with your work, and diff line by line."
+      def column
+        def heading "Readable without jotx"
+          level 3
+        def paragraph "A .jot file is indented text with one block per line. You can read it in any editor, grep it, and generate it from scripts."
+      def column
+        def heading "Made for AI"
+          level 3
+        def paragraph "Compact syntax uses about 40% fewer tokens than the classic form, so assistants write, read and edit notes cheaply and correctly."
+
+  def tab "Features"
+    icon ✨
+    def heading "What jotx does"
+    def paragraph "An editor that feels like a modern docs page, a file format built for version control, and tools to publish it all."
+    def tab "Editor"
+      def list
+        items """**Slash menu and insert gallery**: type / or use the floating toolbar to add any block or widget
+**Page design**: a hero for the opening heading and lead, one aligned column, and an On this page outline
+**Tabs**: split a note into pages; tabs inside a tab become a compact card
+**Preview mode**: lock a note to read it without accidental edits
+**Search**: Cmd/Ctrl+F finds text in every block, including inside closed tabs
+**Follows your theme**: light, dark, high contrast and custom VS Code themes"""
+    def tab "Files"
+      def list
+        items """**One file per note**: .jot, with .meet for meetings and .jotx for older notes
+**Two syntaxes**: compact (the default for new files) and classic; jotx reads both and converts either way
+**Safe saving**: opening and saving a note never changes what it shows
+**Attachments**: images and files in an attachments folder next to the note"""
+    def tab "Links and graph"
+      def list
+        items """**Links between notes**: [next](next.jot) opens the note in jotx
+**jotx links**: link to another note or to a single block inside it
+**Graph view**: the whole workspace, or the notes around the current one
+**Cards and buttons**: navigation tiles that open notes, pages or tabs"""
+    def tab "AI"
+      def paragraph "jotx ships a syntax guide written for AI models, JOTX_FOR_AI.jot. Give it to your assistant and it writes valid notes with tables, diagrams and widgets. Compact syntax keeps the files short, and jotx validate checks the result."
+      def terminal "Check what an assistant wrote"
+        shell zsh
+        commands """$ npx @jotx-labs/cli validate plan.jot
+✅ plan.jot is valid!"""
+    def tab "Export"
+      def table export "Getting notes out"
+        columns Format, How
+        rows """Markdown | jotx: Export to Markdown, or jotx convert in the CLI
+Word and PDF | The export menu in the editor
+HTML page | jotx convert notes.jot -o notes.html
+Website | jotx site build"""
+
+  def tab "Blocks"
+    icon 🧱
+    def heading "Every block"
+    def paragraph "Blocks are the building pieces of a note. Each one is a def line in the file; the quoted value is its main text or title."
+    def tab "Text"
+      def heading "Headings and paragraphs"
+        level 2
+      def paragraph "Paragraphs take **bold**, *italic*, ~~strike~~, ==highlight==, `code` and [links](https://github.com/balaji-embedcentrum/jotx-open)."
+      def code
+        language jotx
+        text """def heading "Goals"
+  level 2
+
+def paragraph "Text with **bold**, `code` and [links](https://jotx.dev).""""
+      def heading "Lists and checklists"
+        level 2
+      def columns
+        def column
+          def list
+            items """Write the plan
+Review it
+Ship it"""
+        def column
+          def checklist
+            items """[x] Security review
+[ ] Launch post"""
+      def code
+        language jotx
+        text """"def list
+  items """Write the plan
+Review it"""
+
+def checklist
+  items """[x] Security review
+[ ] Launch post"""""""
+      def heading "Quotes and callouts"
+        level 2
+      def quote "Simplicity is a prerequisite for reliability."
+      def callout "Callouts come in four variants: info, success, warning and danger."
+      def callout "Scope is frozen for this release."
+        variant warning
+      def code
+        language jotx
+        text """def callout "Scope is frozen for this release."
+  variant warning"""
+    def tab "Tables"
+      def table plans "Plans"
+        columns Plan, Price, Seats
+        rows """Free | 0 | 1
+Team | 8 | 10
+Business | 20 | Unlimited"""
+      def code
+        language jotx
+        text """"def table plans "Plans"
+  columns Plan, Price, Seats
+  rows """Free | 0 | 1
+Team | 8 | 10"""""""
+      def paragraph "In the editor, tables have a toolbar to add rows and columns, and a filter and sort for each column."
+    def tab "Code and maths"
+      def code
+        language typescript
+        text """export function greet(name: string): string {
+  return `Hello, ${name}`
+}"""
+      def math energy "Mass–energy equivalence"
+        src E = mc^2
+      def code
+        language jotx
+        text """def code
+  language typescript
+  text export const answer = 42
+
+def math energy "Mass–energy equivalence"
+  src E = mc^2"""
+      def paragraph "A code reference (def codereference with a path and lines) shows live code from a file in your workspace, in VS Code."
+    def tab "Diagrams and charts"
+      def mermaid sync "How a note becomes a page"
+        src """flowchart LR
+  A[.jot file] --> B[jotx parser]
+  B --> C[Editor in VS Code]
+  B --> D[jotx-doc on a web page]
+  B --> E[jotx site build]"""
+      def chart weekly "Weekly active workspaces"
+        charttype line
+        data """Label | Workspaces
+W1 | 120
+W2 | 210
+W3 | 340
+W4 | 420"""
+      def code
+        language jotx
+        text """"def mermaid sync "How a note becomes a page"
+  src """flowchart LR
+  A[.jot file] --> B[jotx parser]"""
+
+def chart weekly "Weekly active workspaces"
+  charttype line
+  data """Label | Workspaces
+W1 | 120
+W2 | 210"""""""
+      def paragraph "Chart types: bar (the default), line, pie, doughnut, radar and polar."
+    def tab "Media and links"
+      def image
+        src assets/logo-jotx.svg
+        alt The jotx logo
+        width 96
+        caption Images live in an attachments folder next to the note.
+      def linkcard
+        url https://github.com/balaji-embedcentrum/jotx-open
+        title jotx on GitHub
+        description Source code, issues and releases.
+        sitename github.com
+      def code
+        language jotx
+        text """def image
+  src attachments/diagram.png
+  alt Architecture diagram
+  caption The sync pipeline
+
+def video
+  src https://www.youtube.com/watch?v=dQw4w9WgXcQ
+
+def attach
+  path attachments/spec.pdf
+  text Specification (PDF)
+
+def link
+  url https://jotx.dev
+  text jotx website"""
+    def tab "Layout"
+      def heading "Columns"
+        level 2
+      def columns
+        def column
+          def callout "Left column"
+        def column
+          width "2"
+          def callout "Right column, twice as wide"
+            variant success
+      def heading "Toggles and sections"
+        level 2
+      def toggle "Click to open"
+        def paragraph "Hidden until opened. Good for details, spoilers and long logs."
+      def section "A collapsible section"
+        def paragraph "Sections group blocks under a title you can fold away."
+      def heading "Tabs"
+        level 2
+      def paragraph "Tabs next to each other share one bar. This website is built from them: a note that starts with tabs uses them as its top navigation."
+      def tab "macOS"
+        def code
+          language bash
+          text brew install node
+      def tab "Windows"
+        def code
+          language powershell
+          text winget install OpenJS.NodeJS
+      def tab "Linux"
+        def code
+          language bash
+          text sudo apt install nodejs
+      def code
+        language jotx
+        text """def tab "macOS"
+  def code
+    language bash
+    text brew install node
+def tab "Windows"
+  def paragraph "Use winget.""""
+      def heading "Cards and buttons"
+        level 2
+      def gridcard
+        layout 2x2
+        def card sa7aujya
+          title Widgets
+          icon 🧩
+          link "#widgets"
+        def card 9at1nhl5
+          title Publishing
+          icon 🚀
+          link "#web"
+      def button mrn3hpsz
+        label Open the viewer
+        link view.html
+
+  def tab "Widgets"
+    icon 🧩
+    def heading "Live widgets"
+    def paragraph "Widgets are interactive blocks whose data is readable text: one item per line, fields separated by |. Edit them visually in VS Code or as text; both stay in sync."
+    def tab "Planning"
+      def kanban "Launch board"
+        board """[Todo]
+Pricing page copy
+Status page alerts
+[In progress]
+Offline sync
+[Done]
+Load test at 5x traffic"""
+      def timeline "Roadmap"
+        events """2026-10-27 | Tabs and sites | done | jotx 3.2
+2026-12-01 | Public launch | planned | Website and docs
+2027-02-01 | Team spaces | planned"""
+      def decision "Use CRDTs for sync"
+        status accepted
+        date 2026-08-04
+        context Last-write-wins lost edits when two people changed the same note.
+        decision Merge changes with CRDTs.
+        consequences Larger payloads, and no lost edits.
+      def matrix "This week"
+        dofirst Fix data loss bug
+        schedule Write the launch post
+        delegate Reply to partners
+        eliminate Tidy old notes
+      def proscons "Adopt SQLite?"
+        pros """Zero operations
+Fast for one user"""
+        cons """Migration effort
+No shared writes"""
+      def steps "Release checklist"
+        steps """[x] Build and test | npm run build && npm test
+[x] Package | vsce package
+[ ] Publish | npm and the Marketplace"""
+      def code
+        language jotx
+        text """"def kanban "Launch board"
+  board """[Todo]
+Pricing page copy
+[Done]
+Load test"""
+
+def decision "Use CRDTs for sync"
+  status accepted
+  date 2026-08-04
+  context Last-write-wins lost edits.
+  decision Merge changes with CRDTs.
+  consequences Larger payloads, no lost edits.""""
+    def tab "Productivity"
+      def progress "Release 3.2"
+        items """Design | 100
+Docs | 8 | 10
+Tests | 92"""
+      def habit "This week"
+        habits """Exercise | 1010100
+Read | 1111010
+Write | 1101101"""
+      def countdown "Public launch"
+        target 2026-12-01T09:00
+      def timer "Focus"
+        minutes "25"
+        breakminutes "5"
+      def rating "Developer experience"
+        value "4"
+        max "5"
+      def code
+        language jotx
+        text """"def progress "Release 3.2"
+  items """Design | 100
+Docs | 8 | 10"""
+
+def countdown "Public launch"
+  target 2026-12-01T09:00""""
+    def tab "Developer"
+      def terminal "Getting started"
+        shell zsh
+        commands """$ npm install -g @jotx-labs/cli
+added 42 packages
+$ jotx site serve notes/
+Preview at http://localhost:4000"""
+      def api
+        method POST
+        path /api/v1/notes/{id}/blocks
+        summary Append a block to a note
+        request "{"type": "kanban", "title": "Sprint 12"}"
+        response "{"id": "blk_42", "ok": true}"
+      def filetree "jotx"
+        tree """packages/
+  core/  // parser and serializer
+  editor/  // the block editor
+  embed/  // the web script
+  cli/  // validate, convert, site
+README.md"""
+      def diff "Fix the off-by-one"
+        language typescript
+        before for (let i = 0; i <= items.length; i++)
+        after for (let i = 0; i < items.length; i++)
+      def palette "jotx colours"
+        colors """Teal | #0d9488
+Ink | #1f2328
+Mist | #f5f6f7
+Violet | #7c3aed"""
+      def shortcuts "Editor keys"
+        items """/ | Block menu
+Cmd+B | Bold
+Cmd+I | Italic
+Cmd+F | Search the note
+Cmd+Z | Undo"""
+      def animation "Saving a note"
+        steps """Editor | You type
+Webview | Changes are batched
+Extension | The note is serialized
+Disk | The .jot file is written"""
+        speed "1.6"
+    def tab "Navigation"
+      def menu "Docs"
+        items """Home | index.jot
+Guides | guides/index.jot
+  Getting started | guides/start.jot
+  Writing notes | guides/notes.jot
+GitHub | https://github.com/balaji-embedcentrum/jotx-open"""
+      def toc "Contents of this page"
+        depth "2"
+      def code
+        language jotx
+        text """"def menu "Docs"
+  items """Home | index.jot
+Guides | guides/index.jot
+  Getting started | guides/start.jot"""""""
+      def paragraph "Indent a menu line with two spaces to put it in the dropdown of the line above. A table of contents lists the headings of the note."
+
+  def tab "Syntax"
+    icon 📝
+    def heading "The .jot format"
+    def paragraph "A .jot file is a header and then blocks, one def line each. Indentation is two spaces; properties and child blocks sit under their block."
+    def code
+      language jotx
+      text """"hdef jotx release_plan
+
+  title Release plan
+  type page
+
+  def heading "Shipping 3.2"
+
+  def paragraph "Plain text with **bold** and `code`."
+
+  def checklist
+    items """[x] Tabs
+[ ] Launch post"""""""
+    def table rules "Rules"
+      columns Rule, Example
+      rows """Two spaces of indentation | properties and children under their def line
+The quoted value is the main text or title | def heading "Goals"
+One property per line | language bash
+Multi-line values go in triple quotes | items followed by three quotes
+Ids only where something links to the block | def table risks "Risks"
+Leave out defaults | heading level 1, list bulleted, chart bar"""
+    def heading "Compact and classic"
+      level 2
+    def paragraph "Compact is the default for new files and uses about 40% fewer tokens. Classic puts every value on its own line and gives every block an id. jotx reads both; convert a file or the whole workspace from the Command Palette, or with the CLI."
+    def terminal "Convert"
+      shell zsh
+      commands """$ jotx migrate notes/ --to compact
+12 of 12 files converted to compact syntax (38% smaller)."""
+    def heading "For AI assistants"
+      level 2
+    def paragraph "JOTX_FOR_AI.jot is the complete syntax reference in a form models follow well. It ships with the extension (jotx: Open Help Files)."
+
+  def tab "VS Code"
+    icon 💻
+    def heading "jotx in VS Code"
+    def paragraph "Every .jot file opens in the jotx editor. Right-click a file and choose Open With → Text Editor to edit the text directly, with syntax highlighting, completions and hover help."
+    def table commands "Commands"
+      columns Command, What it does
+      rows """jotx: Create New Note | A new .jot file from a template
+jotx: Open Help Files | The guides, examples and templates
+Show Graph View | Every note and link in the workspace
+Show Local Graph | The notes around the current one
+jotx: Export to Markdown | Save the note as Markdown
+jotx: Import from Markdown | Turn a Markdown file into a note
+Convert Workspace Syntax… | Rewrite every note in compact or classic syntax
+Show Output Logs | The jotx output channel, for troubleshooting"""
+    def table settings "Settings"
+      columns Setting, Default, Meaning
+      rows """jotx.syntax | preserve | The syntax jotx writes when it saves: preserve, compact or classic
+jotx.spellCheck.enabled | false | Spell checking in the editor
+jotx.nodeManager.excludeFolders | jotx-help, node_modules, .git | Folders left out of the graph and links"""
+    def shortcuts "Keyboard"
+      items """/ | Block and widget menu
+Cmd+B | Bold
+Cmd+I | Italic
+Cmd+F | Search the note, including closed tabs
+Cmd+Z | Undo
+Cmd+Shift+Z | Redo"""
+
+  def tab "Web"
+    icon 🌐
+    def heading "jotx on the web"
+    def paragraph "Show one note on any page with a script tag, or publish a folder of notes as a complete website."
+    def tab "Embed a note"
+      def code
+        language html
+        text """<script src="https://cdn.jsdelivr.net/npm/@jotx-labs/embed@3.2.0/dist/jotx.min.js"></script>
+
+<jotx-doc src="notes/launch-plan.jot"></jotx-doc>"""
+      def table attributes "Attributes"
+        columns Attribute, Meaning
+        rows """src | The .jot file to show, relative to the page
+theme | auto (the default), light or dark
+outline | Show the On this page rail beside wide pages"""
+      def paragraph "Documents render read-only and follow the reader's light or dark setting. Mermaid, Chart.js and KaTeX load only when a document uses them. A .jot file is data with no code inside, so showing one on your site cannot run anything."
+    def tab "One-file sites"
+      def paragraph "A note that starts with tabs is a whole website: the tabs become its top navigation, a tab that holds tabs gets a dropdown, and a menu block just before the tabs adds its links on the right. This page is one."
+      def code
+        language jotx
+        text """def menu
+  items "GitHub | https://github.com/example"
+
+def tab "Home"
+  def heading "My product"
+def tab "Docs"
+  def heading "Documentation"
+  def tab "Install"
+    def paragraph "..."
+  def tab "Configure"
+    def paragraph "...""""
+      def paragraph "Link to a page with its name: #docs, or #install for a page inside Docs. On narrow screens the navigation folds into a Menu button."
+    def tab "Publish a site"
+      def paragraph "jotx site build turns a folder of .jot files into a static website: a page for every file at a clean address, a menu, folder and tag pages, an RSS feed, a sitemap and search. Dated posts appear on the home page as cards."
+      def terminal "Build and preview"
+        shell zsh
+        commands """$ jotx site serve notes/
+Preview at http://localhost:4000, reloads on save
+$ jotx site build notes/
+✅ Built 24 pages and a search index in notes/_site"""
+      def filetree "A site"
+        tree """notes/
+  site.jot  // title, address, menu, footer
+  index.jot  // home page
+  guides/start.jot  // /guides/start/
+  blog/first-post.jot  // dated, tagged post
+  attachments/logo.svg"""
+      def paragraph "The output is plain files: upload them to GitHub Pages, Netlify, Cloudflare Pages or any web server. No Node.js is needed on the server."
+    def tab "CLI"
+      def table cli "jotx command line"
+        columns Command, What it does
+        rows """jotx validate notes.jot | Check a file; exits with 1 on errors
+jotx migrate notes/ --to compact | Convert files to compact or classic syntax
+jotx convert notes.jot -o notes.html | One self-contained HTML page
+jotx site build notes/ | Build a website into _site
+jotx site serve notes/ | Preview with live reload
+jotx parse notes.jot | The syntax tree as JSON"""
+      def code
+        language bash
+        text npm install -g @jotx-labs/cli
+
+  def tab "Examples"
+    icon 📚
+    def heading "Examples"
+    def paragraph "Real documents written in jotx. Each opens in the viewer; the same files ship with the extension under jotx: Open Help Files."
+    def gridcard
+      layout 3x3
+      def card qdn8n76k
+        title Widget showcase
+        icon 🧩
+        link view.html?src=examples/widgets-showcase-example.jot
+      def card z05r5gbd
+        title MBSE site
+        icon 🛰️
+        link view.html?src=examples/mbse-site-example.jot
+      def card g1wki6wz
+        title Product requirements
+        icon 📋
+        link view.html?src=examples/prd-ai-assistant-example.jot
+      def card m0q0qqvk
+        title Technical spec
+        icon ⚙️
+        link view.html?src=examples/technical-spec-websocket-example.jot
+      def card 1lnmht3h
+        title Sprint planning
+        icon 🗓️
+        link view.html?src=examples/meeting-sprint-planning-example.jot
+      def card esj8u3l8
+        title Retrospective
+        icon 🔁
+        link view.html?src=examples/retrospective-sprint-example.jot
+      def card r801rwgl
+        title Status report
+        icon 📈
+        link view.html?src=examples/status-report-weekly-update-example.jot
+      def card yp1hwkiy
+        title Design system
+        icon 🎨
+        link view.html?src=examples/design-system-example.jot
+      def card 53tivg4l
+        title Release notes
+        icon 🚀
+        link view.html?src=examples/changelog-release-notes-example.jot
+    def heading "Guides"
+      level 2
+    def list
+      items """[jotx for humans](view.html?src=examples/JOTX_FOR_HUMANS.jot): every block, with examples
+[jotx for AI](view.html?src=examples/JOTX_FOR_AI.jot): the syntax reference for assistants"""
+
+  def tab "FAQ"
+    icon ❓
+    def heading "Questions"
+    def tab "Using jotx"
+      def toggle "Do I need VS Code?"
+        def paragraph "To edit visually, yes. A .jot file is plain text, so any editor can open it, and the web script and CLI work without VS Code."
+      def toggle "Can I still use Markdown?"
+        def paragraph "Import a Markdown file with jotx: Import from Markdown, and export any note back to Markdown."
+      def toggle "Where are images stored?"
+        def paragraph "In an attachments folder next to the note. Paste or drop an image into the editor and jotx saves it there."
+      def toggle "Will saving change my file?"
+        def paragraph "Only what you edit. Opening and saving a note keeps everything it shows, and jotx keeps the syntax you chose (see the jotx.syntax setting)."
+    def tab "On the web"
+      def toggle "Does my web server need Node.js?"
+        def paragraph "No. jotx site build writes plain HTML, CSS and JavaScript files. Any web server or static host can serve them."
+      def toggle "Why does a page not open when I double-click the HTML file?"
+        def paragraph "Browsers do not let a page opened from disk read other files next to it. Preview with jotx site serve, or publish the folder to a host such as GitHub Pages."
+      def toggle "Is it safe to show .jot files from others?"
+        def paragraph "Yes. A .jot file is data: the web script renders it read-only, escapes all text and only follows web and relative links."
+    def tab "Project"
+      def toggle "What does jotx cost?"
+        def paragraph "Nothing. jotx is open source under the Apache-2.0 licence."
+      def toggle "How do I report a bug or ask for a feature?"
+        def paragraph "Open an issue on GitHub. Security issues go through GitHub's private vulnerability reporting."
+      def button 24nug85r
+        label jotx on GitHub
+        link https://github.com/balaji-embedcentrum/jotx-open

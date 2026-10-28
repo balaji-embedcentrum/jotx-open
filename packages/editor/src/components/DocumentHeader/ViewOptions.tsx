@@ -8,7 +8,7 @@ import '../../styles/ViewOptions.css'
 
 const LS_FONT_SIZE = 'jotx_view_fontSize'
 const LS_MAX_WIDTH = 'jotx_view_maxWidth'
-// Page width; prose keeps its own reading measure inside it (see Page.css)
+// Page width; every block, text included, uses the full width (see Page.css)
 const DEFAULT_MAX_WIDTH = 1080
 
 export function ViewOptions() {

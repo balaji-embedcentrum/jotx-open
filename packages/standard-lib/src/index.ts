@@ -34,7 +34,7 @@ import { GridCardBlock } from './blocks/GridCard';
 import { CardBlock } from './blocks/Card';
 import { ButtonBlock } from './blocks/Button';
 import { ButtonStripBlock } from './blocks/ButtonStrip';
-import { ColumnsBlock, ColumnBlock } from './blocks/Columns';
+import { ColumnsBlock, ColumnBlock, TabBlock } from './blocks/Columns';
 import { WidgetBlocks } from './blocks/Widgets';
 
 export function registerStandardBlocks() {
@@ -93,6 +93,7 @@ export function registerStandardBlocks() {
     // Layout blocks
     registry.register(ColumnsBlock);
     registry.register(ColumnBlock);
+    registry.register(TabBlock);
 
     // Widgets
     WidgetBlocks.forEach(def => registry.register(def));

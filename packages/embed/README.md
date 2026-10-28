@@ -3,7 +3,7 @@
 Show `.jot` documents on any web page with one script tag. Every block and widget renders the way it does in the jotx editor for VS Code, read-only, in light or dark.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@jotx-labs/embed@3.1.4/dist/jotx.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@jotx-labs/embed@3.2.0/dist/jotx.min.js"></script>
 
 <jotx-doc src="notes/launch-plan.jot"></jotx-doc>
 ```

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * jotx CLI - Demonstrates platform independence
+ * jotx CLI - check, convert and migrate .jot files, and publish folders of them as websites.
  * Uses @jotx-labs/core and @jotx-labs/adapters
  */
 
@@ -9,11 +9,11 @@ import * as fs from 'fs/promises'
 import * as path from 'path'
 import { parseAndValidate, jotToMarkdown, markdownToJot, ValidationError, convertSyntax, VERSION, type SyntaxStyle } from '@jotx-labs/core'
 import { registerStandardBlocks } from '@jotx-labs/standard-lib'
-import { HTMLRenderer } from '@jotx-labs/adapters'
+import { StaticRenderer } from '@jotx-labs/adapters'
+import { buildSite } from './site/build'
+import { serveSite } from './site/serve'
 
 registerStandardBlocks()
-
-const renderer = new HTMLRenderer()
 
 const program = new Command()
 
@@ -92,30 +92,26 @@ program
         process.exit(1)
       }
 
-      // Render to HTML
-      const html = renderer.render(result.ast.document.blocks as any)
-
-      // Wrap in full HTML document
+      // Render to HTML, styled like a published jotx page; styles and the tab script are inlined
+      const html = new StaticRenderer().render(result.ast.document.blocks)
       const title = String((result.ast.document.metadata as any)?.title || 'jotx Document')
         .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      const fullHtml = `<!DOCTYPE html>
+      const assets = path.resolve(__dirname, '../assets')
+      const css = await fs.readFile(path.join(assets, 'jotx-site.css'), 'utf-8')
+      const js = await fs.readFile(path.join(assets, 'jotx-site.js'), 'utf-8')
+      const fullHtml = `<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${title}</title>
-  <style>
-    body { font-family: system-ui, -apple-system, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
-    h1 { font-size: 2em; margin-bottom: 0.5em; }
-    h2 { font-size: 1.5em; margin-top: 1.5em; }
-    h3 { font-size: 1.2em; margin-top: 1.2em; }
-    code { background: #f5f5f5; padding: 2px 6px; border-radius: 3px; }
-    pre { background: #f5f5f5; padding: 16px; border-radius: 6px; overflow-x: auto; }
-    blockquote { border-left: 4px solid #ddd; padding-left: 16px; margin-left: 0; color: #666; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${title}</title>
+<style>${css}</style>
 </head>
 <body>
+<main class="jx-site-main"><div class="jx-site-wrap"><article class="jx-page">
 ${html}
+</article></div></main>
+<script>${js}</script>
 </body>
 </html>`
 
@@ -214,6 +210,44 @@ program
     console.log(`${changed} of ${files.length} files ${verb} to ${style} syntax${pct > 0 ? ` (${pct}% smaller)` : ''}${failed ? `; ${failed} could not be converted safely` : ''}.`)
     if (opts.check && (changed || failed)) process.exit(1)
     if (failed) process.exit(1)
+  })
+
+// Site commands
+const site = program
+  .command('site')
+  .description('Publish a folder of .jot files as a website')
+
+site
+  .command('build [folder]')
+  .description('Build the site into a folder of static files (default: _site). A single .jot file is a whole site.')
+  .option('-o, --out <folder>', 'Output folder', '_site')
+  .option('--base <path>', 'Address the site is served from, e.g. /docs/ (default: the path of url in site.jot)')
+  .option('--drafts', 'Include pages marked draft true')
+  .option('--no-search', 'Skip the search index')
+  .option('--script <url>', 'Where the jotx script comes from (default: jsDelivr, or script in site.jot)')
+  .action(async (folder: string | undefined, opts: { out: string; base?: string; drafts?: boolean; search: boolean; script?: string }) => {
+    const root = folder || '.'
+    const isFile = (await fs.stat(root)).isFile()
+    const out = path.resolve(isFile ? path.dirname(root) : root, opts.out)
+    try {
+      const result = await buildSite(root, { out, base: opts.base, drafts: opts.drafts, search: opts.search, script: opts.script })
+      for (const w of result.warnings) console.warn(`! ${w}`)
+      console.log(`✅ Built ${result.pages} ${result.pages === 1 ? 'page' : 'pages'}${result.searchIndexed ? ' and a search index' : ''} in ${path.relative(process.cwd(), out) || '.'}`)
+    } catch (error) {
+      console.error(`❌ ${error instanceof Error ? error.message : error}`)
+      process.exit(1)
+    }
+  })
+
+site
+  .command('serve [folder]')
+  .description('Preview the site, rebuilding and reloading on every save. A single .jot file is a whole site.')
+  .option('-p, --port <port>', 'Port', '4000')
+  .option('--drafts', 'Include pages marked draft true')
+  .option('--no-search', 'Skip the search index')
+  .option('--script <url>', 'Where the jotx script comes from (default: jsDelivr, or script in site.jot)')
+  .action(async (folder: string | undefined, opts: { port: string; drafts?: boolean; search: boolean; script?: string }) => {
+    await serveSite(folder || '.', { port: Number(opts.port) || 4000, drafts: opts.drafts, search: opts.search, script: opts.script })
   })
 
 program.parse()

@@ -25,6 +25,9 @@ export interface TiptapDocument {
 /**
  * jotx 2.0 TiptapAdapter - Updated for consistent property-based syntax
  */
+/** .jot files hold true/false as booleans (from the parser) or as text (older files). */
+const isTrue = (value: unknown) => value === true || value === 'true'
+
 export class TiptapAdapter {
 
   /**
@@ -231,7 +234,7 @@ export class TiptapAdapter {
         return {
           type: listType,
           attrs: { blockId: block.id },
-          content: (block.children || []).map(b => this.blockToTiptap(b))
+          content: this.blocksToTiptap(block.children || [])
         }
 
       case 'listitem':
@@ -241,27 +244,30 @@ export class TiptapAdapter {
           content: [{
             type: 'paragraph',
             content: this.parseFormattedText(text)
-          }, ...(block.children || []).map(b => this.blockToTiptap(b))]
+          }, ...this.blocksToTiptap(block.children || [])]
         }
 
       case 'checklist':
         return {
           type: 'taskList',
           attrs: { blockId: block.id },
-          content: (block.children || []).map(b => this.blockToTiptap(b))
+          // Items may be written as taskitem or listitem; both are tasks here
+          content: (block.children || []).map(child =>
+            this.blockToTiptap(child.type === 'listitem' ? { ...child, type: 'taskitem' as any } : child))
         }
 
       case 'taskitem':
         return {
           type: 'taskItem',
           attrs: {
-            checked: block.properties?.checked === true || block.properties?.checked === 'true',
+            checked: isTrue(block.properties?.checked),
+            priority: (block.properties?.priority as string) || null,
             blockId: block.id
           },
           content: [{
             type: 'paragraph',
             content: this.parseFormattedText(text)
-          }, ...(block.children || []).map(b => this.blockToTiptap(b))]
+          }, ...this.blocksToTiptap(block.children || [])]
         }
 
       case 'paragraph':
@@ -321,7 +327,7 @@ export class TiptapAdapter {
           attrs: {
             title: (block.properties?.title as string) || '',
             src: (block.properties?.src as string) || '',
-            showSource: block.properties?.showsource === 'true',
+            showSource: isTrue(block.properties?.showsource),
             blockId: block.id
           }
         }
@@ -333,7 +339,7 @@ export class TiptapAdapter {
             title: (block.properties?.title as string) || '',
             chartType: (block.properties?.charttype as string) || 'bar',
             json: (block.properties?.json as string) || '',
-            showSource: block.properties?.showsource === 'true',
+            showSource: isTrue(block.properties?.showsource),
             blockId: block.id
           }
         }
@@ -364,7 +370,7 @@ export class TiptapAdapter {
             siteName: block.properties?.sitename || '',
             blockId: block.id
           },
-          content: (block.children || []).map(child => this.blockToTiptap(child))
+          content: this.blocksToTiptap(block.children || [])
         }
 
       case 'jotxlink':
@@ -398,10 +404,11 @@ export class TiptapAdapter {
             type: block.properties?.type || 'youtube',
             width: block.properties?.width || 800,
             height: block.properties?.height || 450,
-            controls: block.properties?.controls === 'true' ? 'true' : 'false',
-            autoplay: block.properties?.autoplay === 'true' ? 'true' : 'false',
-            muted: block.properties?.muted === 'true' ? 'true' : 'false',
-            loop: block.properties?.loop === 'true' ? 'true' : 'false',
+            // Controls are on unless the file turns them off
+            controls: block.properties?.controls === undefined || isTrue(block.properties.controls) ? 'true' : 'false',
+            autoplay: isTrue(block.properties?.autoplay) ? 'true' : 'false',
+            muted: isTrue(block.properties?.muted) ? 'true' : 'false',
+            loop: isTrue(block.properties?.loop) ? 'true' : 'false',
             blockId: block.id
           }
         }
@@ -430,7 +437,7 @@ export class TiptapAdapter {
             text: (block.properties?.text as string) || (block.properties?.name as string) || '',
             blockId: block.id
           },
-          content: (block.children || []).map(child => this.blockToTiptap(child))
+          content: this.blocksToTiptap(block.children || [])
         }
 
 
@@ -454,10 +461,11 @@ export class TiptapAdapter {
           type: 'toggle',
           attrs: {
             title: block.properties?.title || 'Toggle',
-            collapsed: block.properties?.collapsed === 'true',
+            // A toggle is closed unless the file says otherwise
+            collapsed: block.properties?.collapsed === undefined ? true : isTrue(block.properties.collapsed),
             blockId: block.id
           },
-          content: (block.children || []).map(child => this.blockToTiptap(child))
+          content: this.blocksToTiptap(block.children || [])
         }
 
       case 'section':
@@ -465,10 +473,10 @@ export class TiptapAdapter {
           type: 'section',
           attrs: {
             title: block.properties?.title || 'Section',
-            collapsed: block.properties?.collapsed === 'true',
+            collapsed: isTrue(block.properties?.collapsed),
             blockId: block.id
           },
-          content: (block.children || []).map(child => this.blockToTiptap(child))
+          content: this.blocksToTiptap(block.children || [])
         }
 
       case 'callout':
@@ -488,50 +496,44 @@ export class TiptapAdapter {
         }
 
       // ========== TABLE (complex nested structure) ==========
-      case 'table':
-        // Parse column names from the columns property
-        const columnNames = (block.properties?.columns || '')
+      case 'table': {
+        const columnNames = String(block.properties?.columns || '')
           .split(',')
           .map((c: string) => c.trim())
           .filter(Boolean)
 
-        // Create header row with bold, capitalized column names
-        const headerRow = {
+        // Header row from `columns`: names exactly as written, so saving never changes them
+        const headerRow = columnNames.length ? [{
           type: 'tableRow',
           content: columnNames.map((name: string) => ({
             type: 'tableHeader',
-            content: [{
-              type: 'paragraph',
-              content: [{
-                type: 'text',
-                text: name.charAt(0).toUpperCase() + name.slice(1),
-                marks: [{ type: 'bold' }]
-              }]
-            }]
+            content: [{ type: 'paragraph', content: [{ type: 'text', text: name, marks: [{ type: 'bold' }] }] }]
           }))
-        }
+        }] : []
 
-        // Convert data rows
-        const dataRows = (block.children || []).map(row => ({
+        const dataRows = (block.children || []).filter(row => row.type === 'row').map(row => ({
           type: 'tableRow',
           attrs: { blockId: row.id },
           content: (row.children || []).map(cell => {
-            // Convert cell children, ensure at least one paragraph
-            const cellContent = (cell.children || []).map(b => this.blockToTiptap(b))
-            return {
-              type: 'tableCell',
-              attrs: { blockId: cell.id },
-              // tableCell must have at least one paragraph
-              content: cellContent.length > 0 ? cellContent : [{ type: 'paragraph', content: [] }]
-            }
+            // A cell holds blocks, or (classic syntax) a text property
+            const blocks = this.blocksToTiptap(cell.children || [])
+            const text = cell.properties?.text as string | undefined
+            const content = blocks.length ? blocks : [{ type: 'paragraph', content: text ? this.parseFormattedText(String(text)) : [] }]
+            const attrs: Record<string, any> = { blockId: cell.id }
+            if (Number(cell.properties?.colspan) > 1) attrs.colspan = Number(cell.properties!.colspan)
+            if (Number(cell.properties?.rowspan) > 1) attrs.rowspan = Number(cell.properties!.rowspan)
+            return { type: (cell.type as string) === 'header' ? 'tableHeader' : 'tableCell', attrs, content }
           })
-        }))
+        })).filter(row => row.content.length > 0)
 
+        const rows = [...headerRow, ...dataRows]
         return {
           type: 'table',
-          attrs: { blockId: block.id },
-          content: [headerRow, ...dataRows]
+          attrs: { blockId: block.id, title: (block.properties?.title as string) || null },
+          // A table needs at least one cell to edit
+          content: rows.length ? rows : [{ type: 'tableRow', content: [{ type: 'tableCell', content: [{ type: 'paragraph', content: [] }] }] }]
         }
+      }
 
       // ========== NAVIGATION BLOCKS ==========
       case 'gridcard':
@@ -541,7 +543,7 @@ export class TiptapAdapter {
             layout: block.properties?.layout || '2x2',
             blockId: block.id
           },
-          content: (block.children || []).map(child => this.blockToTiptap(child))
+          content: this.blocksToTiptap(block.children || [])
         }
 
       case 'buttonstrip':
@@ -550,7 +552,7 @@ export class TiptapAdapter {
           attrs: {
             blockId: block.id
           },
-          content: (block.children || []).map(child => this.blockToTiptap(child))
+          content: this.blocksToTiptap(block.children || [])
         }
 
       // ========== LAYOUT BLOCKS ==========
@@ -564,7 +566,7 @@ export class TiptapAdapter {
       }
 
       case 'column': {
-        const children = (block.children || []).map(child => this.blockToTiptap(child))
+        const children = this.blocksToTiptap(block.children || [])
         return {
           type: 'column',
           attrs: {
@@ -575,6 +577,10 @@ export class TiptapAdapter {
           content: children.length > 0 ? children : [{ type: 'paragraph', content: [] }]
         }
       }
+
+      case 'tab':
+        // A tab on its own still needs the tab bar around it; blocksToTiptap groups neighbours
+        return { type: 'tabs', attrs: {}, content: [this.tabToTiptap(block)] }
 
       case 'card':
         return {
@@ -602,12 +608,8 @@ export class TiptapAdapter {
         }
 
       default:
-        // Fallback: render as paragraph
-        return {
-          type: 'paragraph',
-          attrs: { blockId: block.id },
-          content: text ? [{ type: 'text', text }] : []
-        }
+        // No editing view (a link card, or a block from a newer jotx): keep it exactly as written
+        return { type: 'preservedBlock', attrs: { block: JSON.stringify(block) } }
     }
   }
 
@@ -621,9 +623,6 @@ export class TiptapAdapter {
     const blockId = node.attrs?.blockId || generateBlockId()
     const attrs = node.attrs || {}
     const content = node.content || []
-
-    // DEBUG: Log node type for tracing serialization issues
-    console.log(`[TiptapAdapter] tiptapToBlock: type="${node.type}", attrs=`, attrs)
 
     // Widgets: attributes map 1:1 back to properties; empty values are omitted to keep files clean
     if (isWidgetBlockType(node.type)) {
@@ -705,7 +704,7 @@ export class TiptapAdapter {
             src: this.convertWebviewUriToRelativePath(attrs.src || ''),
             alt: attrs.alt || '',
             width: attrs.width || 800,
-            height: attrs.height || 'auto',
+            ...(attrs.height && attrs.height !== 'auto' ? { height: attrs.height } : {}),
             align: attrs.align || 'center',
             caption: attrs.caption || ''
           },
@@ -721,7 +720,7 @@ export class TiptapAdapter {
             src: this.convertWebviewUriToRelativePath(attrs.src || ''),
             alt: attrs.alt || '',
             width: attrs.width || 400,
-            height: attrs.height || 'auto',
+            ...(attrs.height && attrs.height !== 'auto' ? { height: attrs.height } : {}),
             float: attrs.float || 'left',
             caption: attrs.caption || '',
             title: attrs.title || '',
@@ -729,7 +728,7 @@ export class TiptapAdapter {
             image: attrs.image || '',
             sitename: attrs.siteName || ''
           },
-          children: content.map(child => this.tiptapToBlock(child)) || []
+          children: this.nodesToBlocks(content)
         }
 
       case 'videoBlock':
@@ -742,10 +741,10 @@ export class TiptapAdapter {
             title: attrs.title || '',
             width: attrs.width || 800,
             height: attrs.height || 450,
-            controls: attrs.controls || 'true',
-            autoplay: attrs.autoplay || 'false',
-            muted: attrs.muted || 'false',
-            loop: attrs.loop || 'false'
+            ...(attrs.controls === 'false' ? { controls: false } : {}),
+            ...(isTrue(attrs.autoplay) ? { autoplay: true } : {}),
+            ...(isTrue(attrs.muted) ? { muted: true } : {}),
+            ...(isTrue(attrs.loop) ? { loop: true } : {})
           },
           children: undefined
         }
@@ -779,22 +778,18 @@ export class TiptapAdapter {
         return {
           id: blockId,
           type: 'toggle' as any,
-          properties: {
-            title: attrs.title || 'Toggle',
-            collapsed: attrs.collapsed ? 'true' : 'false'
-          },
-          children: content.map((child, i) => this.tiptapToBlock(child))
+          // Closed is the default, so only an open toggle is written
+          properties: attrs.collapsed ? { title: attrs.title || 'Toggle' } : { title: attrs.title || 'Toggle', collapsed: false },
+          children: this.nodesToBlocks(content)
         }
 
       case 'section':
         return {
           id: blockId,
           type: 'section' as any,
-          properties: {
-            title: attrs.title || 'Section',
-            collapsed: attrs.collapsed ? 'true' : 'false'
-          },
-          children: content.map((child, i) => this.tiptapToBlock(child))
+          // Open is the default, so only a folded section is written
+          properties: attrs.collapsed ? { title: attrs.title || 'Section', collapsed: true } : { title: attrs.title || 'Section' },
+          children: this.nodesToBlocks(content)
         }
 
       // ========== LIST BLOCKS (write to children in jotx 2.0) ==========
@@ -806,7 +801,7 @@ export class TiptapAdapter {
           properties: {
             listtype: node.type === 'orderedList' ? 'numbered' : 'bulleted'
           },
-          children: content.map(child => this.tiptapToBlock(child))
+          children: this.nodesToBlocks(content)
         }
 
       case 'listItem':
@@ -842,7 +837,7 @@ export class TiptapAdapter {
           type: 'checklist',
           id: blockId,
           properties: {},
-          children: content.map(child => this.tiptapToBlock(child))
+          children: this.nodesToBlocks(content)
         }
 
       case 'taskItem':
@@ -866,8 +861,9 @@ export class TiptapAdapter {
           type: 'taskitem',
           id: blockId,
           properties: {
-            checked: attrs.checked ? 'true' : 'false',
-            text: taskText
+            text: taskText,
+            checked: !!attrs.checked,
+            ...(attrs.priority ? { priority: String(attrs.priority) } : {})
           },
           children: taskChildren.length > 0 ? taskChildren : undefined
         }
@@ -899,7 +895,7 @@ export class TiptapAdapter {
             path: attrs.path || '',
             text: this.extractText(node)
           },
-          children: content.map(child => this.tiptapToBlock(child))
+          children: this.nodesToBlocks(content)
         }
 
       // ========== RICH / INTERACTIVE BLOCKS ==========
@@ -910,7 +906,7 @@ export class TiptapAdapter {
           properties: {
             title: attrs.title || '',
             src: attrs.src || this.extractText(node),
-            showsource: attrs.showSource ? 'true' : 'false'
+            ...(attrs.showSource ? { showsource: true } : {})
           },
           children: undefined
         }
@@ -923,7 +919,7 @@ export class TiptapAdapter {
             title: attrs.title || '',
             charttype: attrs.chartType || 'bar',
             json: attrs.json || this.extractText(node),
-            showsource: attrs.showSource ? 'true' : 'false'
+            ...(attrs.showSource ? { showsource: true } : {})
           },
           children: undefined
         }
@@ -965,43 +961,42 @@ export class TiptapAdapter {
         }
 
       // ========== TABLE (complex nested structure) ==========
-      case 'table':
-        const allRows = content
-        const headerRow = allRows[0]
-        const dataRows = allRows.slice(1) // Skip header row
+      case 'table': {
+        const allRows = content.filter(row => row.type === 'tableRow')
+        const plainText = (cell: TiptapNode) => (cell.content?.[0]?.content || []).map(n => n.text || '').join('').trim()
 
-        // Extract column names from header row
-        const columnNames = (headerRow?.content || []).map(cell => {
-          // Extract text from the first paragraph in the cell
-          const firstPara = cell.content?.[0]
-          const text = firstPara?.content?.[0]?.text || ''
-          return text.trim()
-        }).filter(Boolean)
+        // A first row of header cells, each one plain line without commas, is the `columns` line
+        const first = allRows[0]
+        const firstCells = first?.content || []
+        const isColumnsRow = firstCells.length > 0 && firstCells.every(cell =>
+          cell.type === 'tableHeader' && (cell.content || []).length === 1 && cell.content![0].type === 'paragraph' &&
+          (cell.content![0].content || []).every(n => n.type === 'text') && !plainText(cell).includes(',') &&
+          !(Number(cell.attrs?.colspan) > 1) && !(Number(cell.attrs?.rowspan) > 1))
+        const columns = isColumnsRow ? firstCells.map(plainText).join(', ') : ''
+        const bodyRows = isColumnsRow ? allRows.slice(1) : allRows
 
-        // Regular table
-        const columns = columnNames.join(', ')
-
-        // Convert data rows to jotx 2.0 structure (rows/cells as children)
-        const rows = dataRows.map((rowNode, i) => ({
+        const rows = bodyRows.map((rowNode, i) => ({
           type: 'row' as any,
           id: rowNode.attrs?.blockId || `row_${i + 1}`,
           properties: {},
-          children: (rowNode.content || []).map((cellNode, j) => ({
-            type: 'cell' as any,
-            id: cellNode.attrs?.blockId || `cell_${j + 1}`,
-            properties: {},
-            children: (cellNode.content || []).map((b) => this.tiptapToBlock(b))
-          }))
+          children: (rowNode.content || []).map((cellNode, j) => {
+            const span: Record<string, string> = {}
+            if (Number(cellNode.attrs?.colspan) > 1) span.colspan = String(cellNode.attrs!.colspan)
+            if (Number(cellNode.attrs?.rowspan) > 1) span.rowspan = String(cellNode.attrs!.rowspan)
+            return {
+              type: (cellNode.type === 'tableHeader' ? 'header' : 'cell') as any,
+              id: cellNode.attrs?.blockId || `cell_${j + 1}`,
+              properties: span,
+              children: this.nodesToBlocks(cellNode.content || [])
+            }
+          })
         }))
 
-        return {
-          id: blockId,
-          type: 'table',
-          properties: {
-            columns
-          },
-          children: rows
-        }
+        const properties: Record<string, any> = {}
+        if (attrs.title) properties.title = String(attrs.title)
+        if (columns) properties.columns = columns
+        return { id: blockId, type: 'table', properties, children: rows }
+      }
 
       // ========== NAVIGATION BLOCKS ==========
       case 'gridcard':
@@ -1011,7 +1006,7 @@ export class TiptapAdapter {
           properties: {
             layout: node.attrs?.layout || '2x2'
           },
-          children: content.map(child => this.tiptapToBlock(child))
+          children: this.nodesToBlocks(content)
         }
 
       // ========== LAYOUT BLOCKS ==========
@@ -1020,7 +1015,7 @@ export class TiptapAdapter {
           id: blockId,
           type: 'columns',
           properties: {},
-          children: content.map(child => this.tiptapToBlock(child))
+          children: this.nodesToBlocks(content)
         }
 
       case 'column': {
@@ -1030,17 +1025,38 @@ export class TiptapAdapter {
           id: blockId,
           type: 'column',
           properties: columnProps,
-          children: content.map(child => this.tiptapToBlock(child))
+          children: this.nodesToBlocks(content)
         }
       }
 
+      case 'preservedBlock':
+        try {
+          return JSON.parse(attrs.block)
+        } catch {
+          return { id: blockId, type: 'paragraph', properties: { text: '' }, children: undefined }
+        }
+
+      case 'tab': {
+        const tabProps: Record<string, string> = { title: attrs.title || 'Tab' }
+        if (attrs.icon) tabProps.icon = String(attrs.icon)
+        return {
+          id: blockId,
+          type: 'tab',
+          properties: tabProps,
+          children: this.nodesToBlocks(content)
+        }
+      }
+
+      case 'tabs':
+        // Only the tabs themselves are saved; nodesToBlocks flattens every tab, this keeps the first
+        return this.nodesToBlocks([node])[0]
+
       case 'buttonstrip':
-        console.log('[TiptapAdapter] Serializing buttonstrip:', blockId, content.length)
         return {
           id: blockId,
           type: 'buttonstrip',
           properties: {},
-          children: content.map(child => this.tiptapToBlock(child))
+          children: this.nodesToBlocks(content)
         }
 
 
@@ -1052,7 +1068,7 @@ export class TiptapAdapter {
             title: node.attrs?.title || '',
             value: node.attrs?.value || '',
             icon: node.attrs?.icon || '',
-            color: node.attrs?.color || 'teal',
+            ...(node.attrs?.color && node.attrs.color !== 'teal' ? { color: node.attrs.color } : {}),
             link: node.attrs?.link || ''
           },
           children: undefined
@@ -1088,7 +1104,53 @@ export class TiptapAdapter {
    * Convert Tiptap document to BlockNodes
    */
   tiptapToBlocks(doc: TiptapDocument): BlockNode[] {
-    return (doc.content || []).map((node) => this.tiptapToBlock(node))
+    return this.nodesToBlocks(doc.content || [])
+  }
+
+  /**
+   * Convert sibling blocks to Tiptap nodes. In .jot files tabs are plain sibling blocks;
+   * the editor needs consecutive tabs wrapped in one tabs node to draw a single tab bar.
+   */
+  blocksToTiptap(blocks: BlockNode[]): TiptapNode[] {
+    const nodes: TiptapNode[] = []
+    for (const block of blocks) {
+      if (block.type === 'tab') {
+        const last = nodes[nodes.length - 1]
+        if (last?.type === 'tabs' && last.attrs?.open) last.content!.push(this.tabToTiptap(block))
+        else nodes.push({ type: 'tabs', attrs: { open: true }, content: [this.tabToTiptap(block)] })
+      } else {
+        nodes.push(this.blockToTiptap(block))
+      }
+    }
+    for (const node of nodes) if (node.type === 'tabs') node.attrs = {}
+    return nodes
+  }
+
+  /** Convert sibling Tiptap nodes to BlockNodes, unwrapping tab bars back into their tabs. */
+  private nodesToBlocks(nodes: TiptapNode[]): BlockNode[] {
+    const blocks: BlockNode[] = []
+    for (const node of nodes) {
+      if (node.type === 'tabs') {
+        for (const tab of node.content || []) if (tab.type === 'tab') blocks.push(this.tiptapToBlock(tab))
+      } else {
+        blocks.push(this.tiptapToBlock(node))
+      }
+    }
+    return blocks
+  }
+
+  private tabToTiptap(block: BlockNode): TiptapNode {
+    const children = this.blocksToTiptap(block.children || [])
+    return {
+      type: 'tab',
+      attrs: {
+        title: (block.properties?.title as string) || 'Tab',
+        icon: (block.properties?.icon as string) || '',
+        blockId: block.id
+      },
+      // A tab must always hold at least one block
+      content: children.length > 0 ? children : [{ type: 'paragraph', content: [] }]
+    }
   }
 
   /**
@@ -1155,6 +1217,13 @@ export class TiptapAdapter {
 
     // Already a relative path? Return as-is
     if (uri.startsWith('attachments/')) return uri
+
+    // VS Code shows files through https://file+.vscode-resource.vscode-cdn.net/<absolute path> (and older
+    // vscode-webview:// forms). These must never reach the file: they hold the author's local folders.
+    if (/vscode-(resource|webview|cdn)/i.test(uri)) {
+      const match = decodeURIComponent(uri).match(/\/attachments\/([^?#]+)/)
+      if (match) return `attachments/${match[1]}`
+    }
 
     // External URL (http/https)? Return as-is
     if (uri.startsWith('http://') || uri.startsWith('https://')) return uri

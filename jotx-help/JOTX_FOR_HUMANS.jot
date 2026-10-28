@@ -57,6 +57,8 @@ Start typing / anywhere to open the slash menu"""
 /callout | Highlighted box (info/warning/success/danger)
 /toggle | Collapsible content
 /section | Collapsible section
+/tabs | Pages of content under a tab bar
+/menu | Navigation bar linking notes and web pages
 /datetime | Date/time picker
 /divider | Horizontal separator
 /link | External hyperlink
@@ -168,6 +170,44 @@ Mar | 8"""
   def section "Collapsible Section"
     collapsed false
     def paragraph "Section content goes here."
+
+  def heading "Tabs"
+    level 2
+
+  def paragraph "Tabs split a note into pages under one tab bar: an overview, tasks and decisions in one file. Type `/tabs`, click **+** to add a tab, double-click a label to rename it, and use **⋯** to move a tab, give it an icon or delete it. Links can open a tab by name, such as `#tasks`. A note that *starts* with tabs becomes a one-file site: the tabs are its top navigation. See `examples/mbse-site-example.jot`."
+
+  def tab "Overview"
+    icon 📋
+    def paragraph "Each tab holds ordinary blocks: text, tables, diagrams and widgets."
+
+  def tab "Tasks"
+    icon ✅
+    def checklist
+      items """[x] Write the overview
+[ ] Review with the team"""
+
+  def tab "Install"
+    def paragraph "Tabs inside a tab become a compact card, handy for alternatives:"
+    def tab "macOS"
+      def code
+        language bash
+        text brew install node
+    def tab "Windows"
+      def code
+        language powershell
+        text winget install OpenJS.NodeJS
+
+  def heading "Menus"
+    level 2
+
+  def paragraph "A menu is a navigation bar that links notes together. Each line is a label and a link; indent a line with two spaces to put it in the dropdown of the line above. On a narrow page it folds into one Menu button."
+
+  def menu "My notes"
+    items """jotx website | https://balaji-embedcentrum.github.io/jotx-open/
+Guides | JOTX_FOR_HUMANS.jot
+  For humans | JOTX_FOR_HUMANS.jot
+  For AI | JOTX_FOR_AI.jot
+jotx on GitHub | https://github.com/balaji-embedcentrum/jotx-open"""
 
   def heading "Internal Links (jotxlink)"
     level 2

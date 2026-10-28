@@ -1,0 +1,17 @@
+hdef jotx site
+
+  title Systems Notes
+  url https://example.github.io/notes/
+  description Practical notes on requirements, safety and architecture.
+  logo attachments/logo.svg
+  accent "#6d28d9"
+
+  def menu
+    items """Home | index.jot
+Guides | guides/index.jot
+  Requirements | guides/requirements.jot
+  Safety | guides/safety.jot
+Blog | blog/index.jot
+GitHub | https://github.com"""
+
+  def paragraph "Notes by the Systems team. Text is CC BY 4.0."

@@ -1,7 +1,7 @@
 /**
  * Build the GitHub Pages site into _site/
  *
- *   site/            pages, home.jot and assets
+ *   site/            pages, jotx.jot (the whole website, one .jot file) and assets
  *   embed/           packages/embed/dist (jotx.min.js and its lazy chunks)
  *   examples/        the help files, examples and templates that ship with the extension
  *

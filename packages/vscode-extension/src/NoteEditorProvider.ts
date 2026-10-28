@@ -113,7 +113,7 @@ export class NoteEditorProvider implements vscode.CustomTextEditorProvider {
     // Convert blocks to Tiptap format for editor
     const tiptapDoc = {
       type: 'doc',
-      content: ast.document.blocks.map(b => this.tiptapAdapter.blockToTiptap(b))
+      content: this.tiptapAdapter.blocksToTiptap(ast.document.blocks)
     }
 
     // DEBUG: Log blocks from parser and tiptap conversion
@@ -737,6 +737,10 @@ export class NoteEditorProvider implements vscode.CustomTextEditorProvider {
                 break
               }
 
+              // A link such as other.jot#tasks names a tab or heading; the file is the part before #
+              filePath = filePath.split('#')[0]
+              if (!filePath) break
+
               // Resolve relative paths based on current document location
               if (!path.isAbsolute(filePath)) {
                 const docDir = path.dirname(document.uri.fsPath)
@@ -1243,7 +1247,7 @@ export class NoteEditorProvider implements vscode.CustomTextEditorProvider {
             // Convert blocks to Tiptap JSON (excluding header)
             const tiptapBlocks = {
               type: 'doc',
-              content: templateAst.document.blocks.map(b => this.tiptapAdapter.blockToTiptap(b))
+              content: this.tiptapAdapter.blocksToTiptap(templateAst.document.blocks)
             }
 
             this.outputChannel.appendLine(`✅ Template parsed: ${templateAst.document.blocks.length} blocks`)
@@ -1278,7 +1282,7 @@ export class NoteEditorProvider implements vscode.CustomTextEditorProvider {
         // Convert to Tiptap and send to webview
         const tiptapDoc = {
           type: 'doc',
-          content: ast.document.blocks.map(b => this.tiptapAdapter.blockToTiptap(b))
+          content: this.tiptapAdapter.blocksToTiptap(ast.document.blocks)
         }
 
         webviewPanel.webview.postMessage({

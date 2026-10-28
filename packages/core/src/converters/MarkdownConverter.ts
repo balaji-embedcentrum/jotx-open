@@ -178,6 +178,17 @@ function blockToMarkdown(block: BlockNode, nestLevel: number): string {
       return result.join('\n')
     }
 
+    case 'tab': {
+      // Markdown has no tabs: each tab becomes a heading with its content below
+      const label = [props.icon, props.title || 'Tab'].filter(Boolean).join(' ')
+      const lines = [`## ${label}`, '']
+      for (const child of block.children || []) {
+        const childMd = blockToMarkdown(child, nestLevel)
+        if (childMd) lines.push(childMd, '')
+      }
+      return lines.join('\n').trim()
+    }
+
     case 'toggle': {
       // HTML details tag (widely supported)
       const title = props.title || 'Toggle'

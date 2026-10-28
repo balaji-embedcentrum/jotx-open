@@ -10,16 +10,9 @@
   <script src="embed/jotx.min.js" defer></script>
 </head>
 <body>
-  <header class="bar">
-    <a class="brand" href="./"><img src="assets/logo-jotx.svg" alt="" width="22" height="22"> jotx</a>
-    <nav>
-      <a href="view.html?src=examples/widgets-showcase-example.jot">Examples</a>
-      <a href="view.html">Viewer</a>
-      <a href="https://github.com/balaji-embedcentrum/jotx-open">GitHub</a>
-    </nav>
-  </header>
-  <main>
-    <jotx-doc src="home.jot"><p class="boot">Loading…</p></jotx-doc>
+  <!-- The whole website is site/jotx.jot: its tabs are the navigation -->
+  <main class="site">
+    <jotx-doc src="jotx.jot"><p class="boot">Loading…</p></jotx-doc>
   </main>
   <footer class="foot">Apache-2.0 · <a href="https://github.com/balaji-embedcentrum/jotx-open">jotx on GitHub</a></footer>
   <script>

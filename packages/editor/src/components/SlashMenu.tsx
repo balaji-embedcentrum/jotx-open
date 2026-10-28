@@ -342,6 +342,15 @@ export const ALL_COMMANDS: SlashMenuItem[] = [
     keywords: ['columns', 'layout', 'grid', 'three'],
     allowedIn: ['page', 'meeting']
   },
+  {
+    id: 'tabs',
+    group: 'layout',
+    label: 'Tabs',
+    description: 'Pages of content under a tab bar',
+    icon: <PanelTop size={18} />,
+    keywords: ['tabs', 'pages', 'menu', 'sections', 'switch', 'layout'],
+    allowedIn: ['page', 'meeting']
+  },
   ...WIDGETS.map((w): SlashMenuItem => ({
     id: w.name,
     group: w.category,
@@ -400,7 +409,7 @@ export function SlashMenu({
     if (inPropertiesTable) return cmd.id === 'paragraph'
 
     // Table cell: disallow headings, table, properties and layout-level blocks
-    if (inTableCell && (['heading1', 'heading2', 'heading3', 'table', 'divider', 'columns2', 'columns3'].includes(cmd.id) || WIDGETS.some(w => w.name === cmd.id))) {
+    if (inTableCell && (['heading1', 'heading2', 'heading3', 'table', 'divider', 'columns2', 'columns3', 'tabs'].includes(cmd.id) || WIDGETS.some(w => w.name === cmd.id))) {
       return false
     }
 

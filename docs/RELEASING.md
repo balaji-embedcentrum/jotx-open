@@ -6,7 +6,7 @@ A release ships three things from the same version number: the VS Code extension
 
 1. Change `JOTX_VERSION` in `version.ts`.
 2. Run `npm run sync-versions`. This updates every `package.json`, including `packages/embed`.
-3. Update the version shown in `site/home.jot` (badge and CDN snippet), `README.md` and `packages/embed/README.md`.
+3. Update the version shown in `site/jotx.jot` (badge and CDN snippet), `README.md` and `packages/embed/README.md`.
 4. Add the release notes to `packages/vscode-extension/CHANGELOG.md`.
 
 ## 2. Check
